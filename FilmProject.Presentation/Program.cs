@@ -1,4 +1,4 @@
-using FilmProject.Domain.Data;
+using FilmProject.Infrastructure.Data;
 using FilmProject.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

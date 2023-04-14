@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace FilmProject.Domain.Migrations
+namespace FilmProject.Infrastructure.Migrations
 {
     public partial class firstinit : Migration
     {

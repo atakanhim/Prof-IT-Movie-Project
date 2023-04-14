@@ -10,4 +10,8 @@
     <ProjectReference Include="..\FilmProject.Domain\FilmProject.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
 </Project>
