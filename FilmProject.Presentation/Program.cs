@@ -50,7 +50,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapAreaControllerRoute(
      name: "Inspinia",
      areaName: "Inspinia",
-     pattern: "Inspinia/{controller=Home}/{action=Index}"
+     pattern: "Inspinia/{controller=Dashboards}/{action=Dashboard_1}"
  );
 });
 app.MapRazorPages();
