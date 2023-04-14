@@ -17,6 +17,14 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("InspiniaPolicy", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        
+    });
+});
 
 var app = builder.Build();
 
@@ -51,7 +59,7 @@ app.UseEndpoints(endpoints =>
      name: "Inspinia",
      areaName: "Inspinia",
      pattern: "Inspinia/{controller=Dashboards}/{action=Dashboard_1}"
- );
+ ).RequireAuthorization("InspiniaPolicy"); ;
 });
 app.MapRazorPages();
 
