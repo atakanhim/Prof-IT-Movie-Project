@@ -1,4 +1,5 @@
 ﻿using FilmProject.Domain.Entities;
+using FilmProject.Infrastructure.Data;
 using FilmProject.Infrastructure.Repository.Abstract;
 using System;
 using System.Collections.Generic;
@@ -9,35 +10,17 @@ using System.Threading.Tasks;
 
 namespace FilmProject.Infrastructure.Repository.Concrete
 {
-    public class MovieRepository : IMovieRepository
+    public class MovieRepository : EntityRepository<Movie>, IMovieRepository
     {
-        public void Add(Movie entity)
+        private readonly ApplicationDbContext _context;
+        public MovieRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
-            throw new NotImplementedException();
+            _context = dbContext;
         }
 
         public bool ChangeOneCikar(int id)
         {
-            throw new NotImplementedException(); // one cikar senecegi degisitrielecek true false
-        }
-
-        public void Delete(Movie entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Movie?> GetAsync(Expression<Func<Movie, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Movie>> GetListAsync(Expression<Func<Movie, bool>>? filter = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Movie entity)
-        {
+            
             throw new NotImplementedException();
         }
     }
