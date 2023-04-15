@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FilmProject.Domain.Entities.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,10 +8,13 @@ using System.Threading.Tasks;
 
 namespace FilmProject.Domain.Entities
 {
-    public class Comment
+    public class Comment:BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
+        public string Content { get; set; }
+        public int LikeCount { get; set; }
+        public bool IsConfirm { get; set; } = true;
+        public bool IsDeleted { get; set; } = false;
+
         public int MovieId { get; set; }
         public Movie Movie { get; set; }
 

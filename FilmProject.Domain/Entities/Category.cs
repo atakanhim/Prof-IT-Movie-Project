@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FilmProject.Domain.Entities.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace FilmProject.Domain.Entities
 {
-    public class Category
+    public class Category:BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
+   
         public string CategoryName { get; set; }
 
-        public ICollection<Movie> CategoryMovies { get; set; }
+        public ICollection<MovieCategoryMap> MovieCategories { get; set; }
     }
 }
