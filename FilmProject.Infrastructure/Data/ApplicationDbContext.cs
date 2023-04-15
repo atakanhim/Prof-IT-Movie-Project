@@ -13,15 +13,12 @@ namespace FilmProject.Infrastructure.Data
         DbSet<Movie> Movies { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<Comment> Comments { get; set; }
+        DbSet<MovieCategoryMap> MovieCategoryMaps { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Movie>()
-                .HasOne<Category>(o => o.MovieCategory)
-                .WithMany(c => c.CategoryMovies)
-                .HasForeignKey(b => b.CategoryId);
 
 
             modelBuilder.Entity<Comment>()
@@ -33,6 +30,19 @@ namespace FilmProject.Infrastructure.Data
                 .HasOne<ApplicationUser>(o => o.AppUser)
                 .WithMany()
                 .HasForeignKey(b => b.userId);
+
+            modelBuilder.Entity<MovieCategoryMap>()
+                        .HasKey(bc => new { bc.MovieId, bc.CategoryId });
+
+            modelBuilder.Entity<MovieCategoryMap>()
+                .HasOne(bc => bc.Movie)
+                .WithMany(b => b.MovieCategories)
+                .HasForeignKey(bc => bc.MovieId);
+
+            modelBuilder.Entity<MovieCategoryMap>()
+                .HasOne(bc => bc.Category)
+                .WithMany(c => c.MovieCategories)
+                .HasForeignKey(bc => bc.CategoryId);
 
 
         }

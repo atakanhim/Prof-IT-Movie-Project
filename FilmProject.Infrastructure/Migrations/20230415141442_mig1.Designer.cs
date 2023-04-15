@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230413192006_first-init")]
-    partial class firstinit
+    [Migration("20230415141442_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,6 +104,9 @@ namespace FilmProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
@@ -116,6 +119,22 @@ namespace FilmProject.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsConfirm")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LikeCount")
+                        .HasColumnType("int");
 
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
@@ -141,18 +160,31 @@ namespace FilmProject.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DirectorName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MovieDescription")
+                    b.Property<string>("ImdbUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsHighLighted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("MovieName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MoviePoint")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MoviePointCounter")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MovieSummary")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -163,14 +195,33 @@ namespace FilmProject.Infrastructure.Migrations
                     b.Property<DateTime>("PublishYear")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Rating")
+                    b.Property<int>("RatingAge")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("FilmProject.Domain.Entities.MovieCategoryMap", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("MovieId", "CategoryId");
+
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Movies");
+                    b.ToTable("MovieCategoryMaps");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -325,15 +376,23 @@ namespace FilmProject.Infrastructure.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("FilmProject.Domain.Entities.Movie", b =>
+            modelBuilder.Entity("FilmProject.Domain.Entities.MovieCategoryMap", b =>
                 {
-                    b.HasOne("FilmProject.Domain.Entities.Category", "MovieCategory")
-                        .WithMany("CategoryMovies")
+                    b.HasOne("FilmProject.Domain.Entities.Category", "Category")
+                        .WithMany("MovieCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("MovieCategory");
+                    b.HasOne("FilmProject.Domain.Entities.Movie", "Movie")
+                        .WithMany("MovieCategories")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -389,12 +448,14 @@ namespace FilmProject.Infrastructure.Migrations
 
             modelBuilder.Entity("FilmProject.Domain.Entities.Category", b =>
                 {
-                    b.Navigation("CategoryMovies");
+                    b.Navigation("MovieCategories");
                 });
 
             modelBuilder.Entity("FilmProject.Domain.Entities.Movie", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("MovieCategories");
                 });
 #pragma warning restore 612, 618
         }

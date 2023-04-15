@@ -10,4 +10,9 @@
     <ProjectReference Include="..\FilmProject.Infrastructure\FilmProject.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts\" />
+    <Folder Include="Mappings\" />
+  </ItemGroup>
+
 </Project>

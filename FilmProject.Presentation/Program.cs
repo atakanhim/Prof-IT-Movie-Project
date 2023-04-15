@@ -2,7 +2,10 @@ using FilmProject.Infrastructure.Data;
 using FilmProject.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using FilmProject.Application.Interfaces;
+using FilmProject.Application.Services;
+using FilmProject.Infrastructure.Repository.Abstract;
+using FilmProject.Infrastructure.Repository.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();
 
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthorization(options =>
 {
@@ -25,6 +29,18 @@ builder.Services.AddAuthorization(options =>
         
     });
 });
+// connection helperss
+#region connection-helpers
+//services
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+    //repositories
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IMovieCategoryMapRepository, MovieCategoryMapRepository>();
+#endregion 
+
 
 var app = builder.Build();
 
