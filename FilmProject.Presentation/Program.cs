@@ -6,6 +6,9 @@ using FilmProject.Application.Interfaces;
 using FilmProject.Application.Services;
 using FilmProject.Infrastructure.Repository.Abstract;
 using FilmProject.Infrastructure.Repository.Concrete;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.VisualStudio.Web.CodeGeneration;
+using QRCoder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +17,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();
@@ -39,6 +43,8 @@ builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddSingleton(new QRCodeService(new QRCodeGenerator()));
 #endregion 
 
 
