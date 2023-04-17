@@ -25,5 +25,6 @@ namespace FilmProject.Domain.Entities
 
         public ICollection<Comment> Comments { get; set; }
         public ICollection<MovieCategoryMap> MovieCategories { get; set; }
+        public ICollection<Favorite> WhoFavorited { get; set; }
     }
 }

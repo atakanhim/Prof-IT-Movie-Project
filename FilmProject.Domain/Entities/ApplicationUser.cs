@@ -10,5 +10,6 @@ namespace FilmProject.Domain.Entities
     public class ApplicationUser : IdentityUser
     {
         public int Age { get; set; }
+        public ICollection<Favorite> Favorite { get; set; }
     }
 }
