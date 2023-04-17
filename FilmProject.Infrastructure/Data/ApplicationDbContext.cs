@@ -45,6 +45,20 @@ namespace FilmProject.Infrastructure.Data
                 .HasForeignKey(bc => bc.CategoryId);
 
 
+            modelBuilder.Entity<Favorite>()
+                        .HasKey(bc => new { bc.MovieId, bc.UserId });
+
+            modelBuilder.Entity<Favorite>()
+                .HasOne(bc => bc.Movie)
+                .WithMany(b => b.WhoFavorited)
+                .HasForeignKey(bc => bc.MovieId);
+
+            modelBuilder.Entity<Favorite>()
+                .HasOne(bc => bc.User)
+                .WithMany(c => c.Favorite)
+                .HasForeignKey(bc => bc.UserId);
+
+
         }
     }
 }
