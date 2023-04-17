@@ -1,0 +1,84 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>E-Posta Doğrulama</title>
+    <style>
+        /* Temel stiller */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            color: #0078D4;
+        }
+        /* Ana stiller */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 2rem;
+            color: #0078D4;
+        }
+
+        .cta {
+            background-color: #0078D4;
+            color: #fff;
+            padding: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            .cta:hover {
+                background-color: #005A9E;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                Film Projesi
+            </div>
+        </div>
+        <h2>E-Posta Doğrulama</h2>
+        <p>Merhaba,</p>
+        <p>Üyeliğinizin tamamlanabilmesi için e-posta adresinizi doğrulamanız gerekiyor. Aşağıdaki düğmeye tıklayarak e-posta adresinizi doğrulayabilirsiniz:</p>
+        <p><a href="{verificationLink}" style="color:white;" class="cta">E-Posta Adresimi Doğrula</a></p>
+        <p>Doğrulama işlemi ile ilgili herhangi bir sorunuz varsa, lütfen bizimle <a href="https://www.filmprojesi.com/iletisim">iletişime geçin</a>.</p>
+        <p>Saygılarımızla,<br>Film Projesi Ekibi</p>
+    </div>
+</body>
+</html>
