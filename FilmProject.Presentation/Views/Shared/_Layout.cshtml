@@ -24,10 +24,11 @@
 </head>
 <body>
 
-    <div style="margin:0;padding:0;width:100%; height:100vh">
-        <div class="d-flex" >
-            <div class=" h-100" style="width:20%;">
-                <div class="position-fixed md-width" style="width:17%;">
+    <div class="d-flex" style="margin:0;padding:0;width:100%; height:100vh">
+
+        <!-- Header -->
+            <div class="h-100" style="width:20%;">
+                <div class="position-fixed md-width" style="min-width:15%;">
                     <div class="c-header">
                         <div class="header-top">
                           <div class="header-top-logo">L O G O</div>
@@ -36,13 +37,13 @@
                               <p class="custom-p1">Ozellikler</p>
                                <ul>
                                     <li>
-                                      <i class="fa-sharp fa-light fa-house"></i> <a> En Çok Beğeni Alan Filmler</a> 
+                                     <a class="custom-p2"> En Çok Beğeni Alan Filmler</a>  <i class="fa-sharp fa-light fa-house"></i> 
                                     </li>
                                        <li>
-                                      <i class="fa-sharp fa-light fa-house"></i> <a> En Çok Yorum Alan Filmler</a> 
+                                    <a class="custom-p2"> En Çok Yorum Alan Filmler</a>    <i class="fa-sharp fa-light fa-house"></i>
                                     </li>
                                      <li>
-                                      <i class="fa-sharp fa-light fa-house"></i> <a> En Son Yüklenen Filmler</a> 
+                                      <a class="custom-p2"> En Son Yüklenen Filmler</a>  <i class="fa-sharp fa-light fa-house"></i>
                                     </li>
                                 </ul>
                                   <div class="ortala"> <div class="cizgi"></div></div>
@@ -52,39 +53,47 @@
                         </div>
 
                         <div class="header-middle">
-                            <p>Kategoriler</p>
+                            <p class="custom-p1">Kategoriler</p>
                             <ul>
                                 <li>
-                                    <i class="fa-sharp fa-light fa-house"></i> <a> Korku</a> 
+                                   <a class="custom-p2"> Korku</a>  <i class="fa-sharp fa-light fa-house"></i> 
                                 </li>
                                   <li>
-                                    <i class="fa-sharp fa-light fa-house"></i> <a>Drama</a> 
+                                    <a class="custom-p2">Drama</a>  <i class="fa-sharp fa-light fa-house"></i>
                                 </li>
                                   <li>
-                                    <i class="fa-sharp fa-light fa-house"></i> <a>Bilim Kurgu</a> 
+                                    <a class="custom-p2">Bilim Kurgu</a>  <i class="fa-sharp fa-light fa-house"></i>
                                 </li>
                                   <li>
-                                    <i class="fa-sharp fa-light fa-house"></i> <a>Aksiyon</a> 
+                                   <a class="custom-p2">Aksiyon</a>  <i class="fa-sharp fa-light fa-house"></i>
                                 </li>
                             </ul>
-                         <div class="cizgi"></div>
+                        <div class="ortala"> <div class="cizgi"></div></div>
                      
                         </div>
+
+
                         <div class="header-bottom">
-                            <div> <i class="fa-sharp fa-light fa-house"></i> <a>LOG OUT</a> </div>
+                             <a>LOG OUT</a> <i class="fa-sharp fa-light fa-house">icon</i> 
                         </div>
                     </div>
                 </div>
             </div>
+                 <!-- Header Bitiş -->
 
-            <div class="  h-100 c-main" style="width:83%;">
+
+                    <!-- Main -->
+            <div class="  h-100 c-main" style="width:80%;margin-right:0px;">
                 <main role="main">
                 @RenderBody()
                 </main>
             </div>
+
+            
+                    <!-- Main Bitiş -->
         </div>
  
-    </div>
+
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
