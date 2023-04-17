@@ -23,14 +23,21 @@
     <link rel="stylesheet" href="~/FilmProject.Presentation.styles.css" asp-append-version="true" />
 </head>
 <body>
+     
+      <div class="menu-btn">
+               <div class="menu-btn__burger">
+              </div>
+       </div>
 
     <div class="d-flex" style="margin:0;padding:0;width:100%; height:100vh">
 
         <!-- Header -->
-            <div class="h-100" style="width:20%;">
-                <div class="position-fixed md-width" style="min-width:15%;">
-                    <div class="c-header">
+            <div class="h-100 c-header">
+                <div class="position-fixed">
+             
+                    <div class="header-main">
                         <div class="header-top">
+
                           <div class="header-top-logo">L O G O</div>
                          
                           <div class="header-top-list">
@@ -39,9 +46,11 @@
                                     <li>
                                      <a class="custom-p2"> En Çok Beğeni Alan Filmler</a>  <i class="fa-sharp fa-light fa-house"></i> 
                                     </li>
-                                       <li>
+
+                                    <li>
                                     <a class="custom-p2"> En Çok Yorum Alan Filmler</a>    <i class="fa-sharp fa-light fa-house"></i>
                                     </li>
+
                                      <li>
                                       <a class="custom-p2"> En Son Yüklenen Filmler</a>  <i class="fa-sharp fa-light fa-house"></i>
                                     </li>
@@ -50,7 +59,7 @@
                              
                           </div>
                        
-                        </div>
+                     </div>
 
                         <div class="header-middle">
                             <p class="custom-p1">Kategoriler</p>
@@ -83,7 +92,7 @@
 
 
                     <!-- Main -->
-            <div class="  h-100 c-main" style="width:80%;margin-right:0px;">
+            <div class="h-100 c-main">
                 <main role="main">
                 @RenderBody()
                 </main>
@@ -99,7 +108,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     <script src="~/js/player.js"></script>
     <script src="~/js/jquery.nice-select.min.js"></script>
 
