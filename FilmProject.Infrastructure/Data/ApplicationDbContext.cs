@@ -14,6 +14,7 @@ namespace FilmProject.Infrastructure.Data
         DbSet<Category> Categories { get; set; }
         DbSet<Comment> Comments { get; set; }
         DbSet<MovieCategoryMap> MovieCategoryMaps { get; set; }
+        DbSet<Favorite> Favorite { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

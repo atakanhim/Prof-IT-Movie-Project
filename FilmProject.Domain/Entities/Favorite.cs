@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FilmProject.Domain.Entities
 {
-    public class Favorite : BaseEntity
+    public class Favorite
     {
        
         public int MovieId { get; set; }

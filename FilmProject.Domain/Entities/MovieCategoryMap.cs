@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FilmProject.Domain.Entities
 {
-    public class MovieCategoryMap:BaseEntity
+    public class MovieCategoryMap
     {
         public int MovieId { get; set; }
         public Movie Movie { get; set; }
