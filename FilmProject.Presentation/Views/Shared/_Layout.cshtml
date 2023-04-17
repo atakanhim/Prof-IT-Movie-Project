@@ -4,47 +4,97 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FilmProject.Presentation</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+      <!-- Anasayfa Font -->
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/sitil.css" type="text/css">
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FilmProject.Presentation.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FilmProject.Presentation</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
+
+    <div style="margin:0;padding:0;width:100%; height:100vh">
+        <div class="d-flex" >
+            <div class=" h-100" style="width:20%;">
+                <div class="position-fixed md-width" style="width:17%;">
+                    <div class="c-header">
+                        <div class="header-top">
+                          <div class="header-top-logo">L O G O</div>
+                         
+                          <div class="header-top-list">
+                              <p class="custom-p1">Ozellikler</p>
+                               <ul>
+                                    <li>
+                                      <i class="fa-sharp fa-light fa-house"></i> <a> En Çok Beğeni Alan Filmler</a> 
+                                    </li>
+                                       <li>
+                                      <i class="fa-sharp fa-light fa-house"></i> <a> En Çok Yorum Alan Filmler</a> 
+                                    </li>
+                                     <li>
+                                      <i class="fa-sharp fa-light fa-house"></i> <a> En Son Yüklenen Filmler</a> 
+                                    </li>
+                                </ul>
+                                  <div class="ortala"> <div class="cizgi"></div></div>
+                             
+                          </div>
+                       
+                        </div>
+
+                        <div class="header-middle">
+                            <p>Kategoriler</p>
+                            <ul>
+                                <li>
+                                    <i class="fa-sharp fa-light fa-house"></i> <a> Korku</a> 
+                                </li>
+                                  <li>
+                                    <i class="fa-sharp fa-light fa-house"></i> <a>Drama</a> 
+                                </li>
+                                  <li>
+                                    <i class="fa-sharp fa-light fa-house"></i> <a>Bilim Kurgu</a> 
+                                </li>
+                                  <li>
+                                    <i class="fa-sharp fa-light fa-house"></i> <a>Aksiyon</a> 
+                                </li>
+                            </ul>
+                         <div class="cizgi"></div>
+                     
+                        </div>
+                        <div class="header-bottom">
+                            <div> <i class="fa-sharp fa-light fa-house"></i> <a>LOG OUT</a> </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+            <div class="  h-100 c-main" style="width:83%;">
+                <main role="main">
+                @RenderBody()
+                </main>
+            </div>
+        </div>
+ 
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - FilmProject.Presentation - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
