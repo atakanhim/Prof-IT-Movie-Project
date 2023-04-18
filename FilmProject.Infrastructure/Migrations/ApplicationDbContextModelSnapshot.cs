@@ -30,8 +30,8 @@ namespace FilmProject.Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -158,12 +158,6 @@ namespace FilmProject.Infrastructure.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.HasKey("MovieId", "UserId");
 
                     b.HasIndex("UserId");
@@ -192,6 +186,10 @@ namespace FilmProject.Infrastructure.Migrations
 
                     b.Property<bool>("IsHighLighted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("MovieLanguage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MovieName")
                         .IsRequired()
@@ -228,12 +226,6 @@ namespace FilmProject.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.HasKey("MovieId", "CategoryId");

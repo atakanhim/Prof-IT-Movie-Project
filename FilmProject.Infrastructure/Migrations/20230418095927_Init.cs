@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FilmProject.Infrastructure.Migrations
 {
-    public partial class mig1 : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace FilmProject.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Age = table.Column<int>(type: "int", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -79,6 +79,7 @@ namespace FilmProject.Infrastructure.Migrations
                     PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsHighLighted = table.Column<bool>(type: "bit", nullable: false),
                     ImdbUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MovieLanguage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -224,13 +225,35 @@ namespace FilmProject.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Favorite",
+                columns: table => new
+                {
+                    MovieId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Favorite", x => new { x.MovieId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_Favorite_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Favorite_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MovieCategoryMaps",
                 columns: table => new
                 {
                     MovieId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -299,6 +322,11 @@ namespace FilmProject.Infrastructure.Migrations
                 column: "userId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Favorite_UserId",
+                table: "Favorite",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MovieCategoryMaps_CategoryId",
                 table: "MovieCategoryMaps",
                 column: "CategoryId");
@@ -323,6 +351,9 @@ namespace FilmProject.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Favorite");
 
             migrationBuilder.DropTable(
                 name: "MovieCategoryMaps");

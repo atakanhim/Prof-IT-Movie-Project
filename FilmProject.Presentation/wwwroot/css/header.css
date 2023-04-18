@@ -95,7 +95,7 @@
             color: whitesmoke;
         }
 /*header bottom*/
-.header-bottom {
+.header-bottom form{
     width: 50%;
     display: flex;
     padding: 10px 5px;
@@ -106,7 +106,7 @@
     font-size: small;
 }
 
-    .header-bottom:hover {
+    .header-bottom form:hover {
         cursor: pointer;
         font-size: 14px;
         color: whitesmoke;

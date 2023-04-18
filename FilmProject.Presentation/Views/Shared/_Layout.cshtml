@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using FilmProject.Domain.Entities
+@inject SignInManager<ApplicationUser> SignInManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -44,15 +47,15 @@
                               <p class="custom-p1">Ozellikler</p>
                                <ul>
                                     <li>
-                                     <a class="custom-p2"> En Çok Beğeni Alan Filmler</a>  <i class="fa-sharp fa-light fa-house"></i> 
+                                     <a class="custom-p2"> En Çok Beğeni Alan Filmler</a>  <i class="fa fa-heart" aria-hidden="true"></i> 
                                     </li>
 
                                     <li>
-                                    <a class="custom-p2"> En Çok Yorum Alan Filmler</a>    <i class="fa-sharp fa-light fa-house"></i>
+                                    <a class="custom-p2"> En Çok Yorum Alan Filmler</a>    <i class="fa fa-film" aria-hidden="true"></i>
                                     </li>
 
                                      <li>
-                                      <a class="custom-p2"> En Son Yüklenen Filmler</a>  <i class="fa-sharp fa-light fa-house"></i>
+                                      <a class="custom-p2"> En Son Yüklenen Filmler</a>  <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </li>
                                 </ul>
                                   <div class="ortala"> <div class="cizgi"></div></div>
@@ -81,9 +84,23 @@
                      
                         </div>
 
-
-                        <div class="header-bottom">
-                             <a>LOG OUT</a> <i class="fa-sharp fa-light fa-house">icon</i> 
+                    
+                    <div class="header-bottom">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button  type="submit" >LOG OUT</button> <i class="fa fa-sign-out" aria-hidden="true"></i>
+                             </form>
+                            
+                        }
+                        else
+                        {
+                            <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" >SIGN IN <i class="fa fa-sign-in" aria-hidden="true"></i></button> 
+                             </form>
+                            
+                        }
+                        
                         </div>
                     </div>
                 </div>
