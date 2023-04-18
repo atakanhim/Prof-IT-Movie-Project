@@ -19,9 +19,14 @@ namespace FilmProject.Application.Services
         }
 
 
-        public  async Task<List<Movie>> GetAllAsync()
+        public async Task<List<Movie>> GetAllAsync()
         {
             return await _repository.GetListAsync();
+        }
+
+        public async Task<List<Movie>> GetLastMoviesAsync(int number)
+        {
+            return await _repository.GetLastMovieAsync(number);
         }
 
         public async Task<int> GetMovieCountAsync()

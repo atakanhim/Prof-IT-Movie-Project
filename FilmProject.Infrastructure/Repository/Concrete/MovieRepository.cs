@@ -19,15 +19,22 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             _context = dbContext;
         }
 
-        public async Task<int> GetMovieCountAsync() 
+        public async Task<int> GetMovieCountAsync()
         {
             return await _context.Movies.CountAsync();
         }
 
         public bool ChangeOneCikar(int id)
         {
-            
+
             throw new NotImplementedException();
+        }
+
+        public async Task<List<Movie>> GetLastMovieAsync(int number)
+        {
+
+            return  await _context.Movies.OrderByDescending(x => x.Created).Take(number).ToListAsync();
+
         }
     }
 }
