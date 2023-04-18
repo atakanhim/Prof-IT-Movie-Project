@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yeni Film Eklendi!</title>
+    <style>
+        /* Email body */
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Main email container */
+        .email-container {
+            background-color: #ffffff;
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        /* Email header */
+        .email-header {
+            background-color: #8c52ff;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Movie image */
+        .movie-image {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+        }
+
+        /* Movie details */
+        .movie-details {
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        /* Movie detail labels */
+        .movie-detail-label {
+            font-weight: bold;
+        }
+
+        /* Movie detail values */
+        .movie-detail-value {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <h1>Yeni Film Eklendi!</h1>
+        </div>
+        <img src="{MovieImage}" alt="{MovieName}" class="movie-image" />
+        <div class="movie-details">
+            <p><span class="movie-detail-label">Film Adı:</span><span class="movie-detail-value">{MovieName}</span></p>
+            <p><span class="movie-detail-label">Özet:</span><span class="movie-detail-value">{MovieSummary}</span></p>
+            <p><span class="movie-detail-label">Yönetmen:</span><span class="movie-detail-value">{DirectorName}</span></p>
+            <p><span class="movie-detail-label">Yaş Sınırı:</span><span class="movie-detail-value">{RatingAge}</span></p>
+            <p><span class="movie-detail-label">Yayın Yılı:</span><span class="movie-detail-value">{PublishYear}</span></p>
+            <p><span class="movie-detail-label">Film Dili:</span><span class="movie-detail-value">{Language}</span></p>
+        </div>
+    </div>
+</body>
+</html>
