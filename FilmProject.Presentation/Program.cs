@@ -42,7 +42,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-
+builder.Services.AddScoped<IEmailService, EmailSender>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddSingleton(new QRCodeService(new QRCodeGenerator()));
 #endregion 
