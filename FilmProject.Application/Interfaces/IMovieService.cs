@@ -10,5 +10,6 @@ namespace FilmProject.Application.Interfaces
     public interface IMovieService
     {
         Task<List<Movie>> GetAllAsync();
+        Task<int> GetMovieCountAsync();
     }
 }

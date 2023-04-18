@@ -23,5 +23,10 @@ namespace FilmProject.Application.Services
         {
             return await _repository.GetListAsync();
         }
+
+        public async Task<int> GetMovieCountAsync()
+        {
+            return await _repository.GetMovieCountAsync();
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace FilmProject.Infrastructure.Repository.Abstract
     public interface IMovieRepository : IEntityRepository<Movie>
     {
         bool ChangeOneCikar(int id);
+        Task<int> GetMovieCountAsync();
     }
 }
