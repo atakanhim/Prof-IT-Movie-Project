@@ -36,5 +36,13 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             return  await _context.Movies.OrderByDescending(x => x.Created).Take(number).ToListAsync();
 
         }
+
+        public async Task<List<Movie>> GetListWithCategoryAsync()
+        {
+
+
+            return await _context.Movies.Include(x=>x.MovieCategories).ThenInclude(xc=>xc.Category).ToListAsync();
+         
+        }
     }
 }
