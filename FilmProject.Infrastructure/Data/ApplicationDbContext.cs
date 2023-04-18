@@ -10,11 +10,11 @@ namespace FilmProject.Infrastructure.Data
         {
         }
 
-        DbSet<Movie> Movies { get; set; }
-        DbSet<Category> Categories { get; set; }
-        DbSet<Comment> Comments { get; set; }
-        DbSet<MovieCategoryMap> MovieCategoryMaps { get; set; }
-        DbSet<Favorite> Favorite { get; set; }
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<MovieCategoryMap> MovieCategoryMaps { get; set; }
+        public DbSet<Favorite> Favorite { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

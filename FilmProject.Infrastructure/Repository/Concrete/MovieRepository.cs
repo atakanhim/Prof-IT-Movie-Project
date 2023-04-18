@@ -1,6 +1,7 @@
 ﻿using FilmProject.Domain.Entities;
 using FilmProject.Infrastructure.Data;
 using FilmProject.Infrastructure.Repository.Abstract;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,11 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         public MovieRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _context = dbContext;
+        }
+
+        public async Task<int> GetMovieCountAsync() 
+        {
+            return await _context.Movies.CountAsync();
         }
 
         public bool ChangeOneCikar(int id)
