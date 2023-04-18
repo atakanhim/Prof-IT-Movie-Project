@@ -1,0 +1,230 @@
+﻿.c-header {
+    width: 20%;
+    transition: all ease-in-out 0.3s;
+}
+
+.c-main {
+    width: 80%;
+    margin-right: 0px;
+    transition: all ease-in-out 0.3s;
+}
+
+/*header main*/
+.header-main {
+    background-color: #0F0F0F;
+    color: gray;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+/*header top*/
+.header-top-logo {
+    margin-top: 15px;
+}
+
+.header-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 99%;
+}
+
+.header-top-list {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+    .header-top-list p {
+        margin-left: 10px;
+    }
+
+    .header-top-list ul li {
+        padding: 10px;
+        border-left: 3px solid transparent;
+        transition: all ease-in-out 0.3s;
+        display: flex;
+        justify-content: start;
+        gap: 10px;
+    }
+
+        .header-top-list ul li:hover {
+            border-left: 3px solid red;
+            cursor: pointer;
+            color: whitesmoke;
+        }
+/*header middle*/
+.header-middle {
+    margin-top: -55px;
+    width: 100%;
+}
+
+    .header-middle ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        gap: 10px
+    }
+
+    .header-middle p {
+        margin-left: 10px;
+    }
+
+    .header-middle ul li {
+        padding: 5px;
+        border-left: 3px solid transparent;
+        transition: all ease-in-out 0.3s;
+        display: flex;
+        justify-content: start;
+    }
+
+        .header-middle ul li a {
+            margin-left: 15px;
+        }
+
+        .header-middle ul li:hover {
+            border-left: 3px solid red;
+            cursor: pointer;
+            color: whitesmoke;
+        }
+/*header bottom*/
+.header-bottom {
+    width: 50%;
+    display: flex;
+    padding: 10px 5px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    transition: all ease-in-out 0.3s;
+    font-size: small;
+}
+
+    .header-bottom:hover {
+        cursor: pointer;
+        font-size: 14px;
+        color: whitesmoke;
+    }
+
+
+
+
+.menu-btn {
+    position: fixed;
+    top:15px;
+    left:10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    z-index: 100;
+    display: none;
+}
+
+.menu-btn__burger {
+    width: 40px;
+    height: 3px;
+    background-color: #0F0F0F;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(255,101,47,.2);
+    transition: all .5s ease-in-out;
+}
+
+    .menu-btn__burger::before, .menu-btn__burger::after {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 3px;
+        background-color: #0F0F0F;
+        border-radius: 5px;
+        box-shadow: 0px 2px 5px rgba(255,101,47,.2);
+        transition: all .5s ease-in-out;
+    }
+
+    .menu-btn__burger::before {
+        transform: translateY(-16px);
+    }
+
+    .menu-btn__burger::after {
+        transform: translateY(16px);
+    }
+
+/* animation */
+
+
+.menu-btn.open .menu-btn__burger {
+    background: transparent;
+    transform: translateX(-50px);
+    box-shadow: none;
+}
+
+    .menu-btn.open .menu-btn__burger::before {
+        transform: rotate(45deg) translate(35px, -35px);
+        background-color: #fff;
+    }
+
+    .menu-btn.open .menu-btn__burger::after {
+        transform: rotate(-45deg) translate(35px, 35px);
+        background-color: #fff;
+    }
+
+
+@media screen and (max-width: 1200px) {
+    .c-main {
+        width: 100%;
+    }
+
+    .c-header {
+       
+        position:fixed;
+        transform: translate(-200px,0);
+        z-index: 99;
+        width: 280px;
+    }
+
+        .c-header.show {
+            transform: translate(0px,0);
+        }
+
+    .menu-btn {
+        display: block;
+        top: 20px;
+        transform: translate(0,0);
+    }
+    
+}
+
+
+
+
+
+
+.cizgi {
+    width: 70%;
+    margin-top: 30px;
+    border-top: 1px solid #46140c;
+}
+
+.ortala {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-p1 {
+    font-size: x-large;
+}
+
+.custom-p2 {
+    font-size: small;
+}
