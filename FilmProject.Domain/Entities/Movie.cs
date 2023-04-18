@@ -21,7 +21,7 @@ namespace FilmProject.Domain.Entities
         public string PhotoPath { get; set; }
         public bool IsHighLighted { get; set; }
         public string ImdbUrl { get; set; }
-
+        public string MovieLanguage { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
         public ICollection<MovieCategoryMap> MovieCategories { get; set; }
