@@ -4,6 +4,7 @@ using FilmProject.Infrastructure.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,9 +25,19 @@ namespace FilmProject.Application.Services
             return await _repository.GetListAsync();
         }
 
+        public async Task<Movie?> GetAsync(Expression<Func<Movie, bool>> filter)
+        {
+            return await _repository.GetAsync(filter);
+        }
+
         public async Task<List<Movie>> GetLastMoviesAsync(int number)
         {
             return await _repository.GetLastMovieAsync(number);
+        }
+
+        public async Task<List<Movie>> GetListWithCategoryAsync()// 
+        {
+            return await _repository.GetListWithCategoryAsync();
         }
 
         public async Task<int> GetMovieCountAsync()

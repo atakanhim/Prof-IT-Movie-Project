@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace FilmProject.Infrastructure.Repository.Abstract
     {
         bool ChangeOneCikar(int id);
         Task<int> GetMovieCountAsync();
-
+        Task<List<Movie>> GetListWithCategoryAsync();
         Task<List<Movie>> GetLastMovieAsync(int number);
     }
 }
