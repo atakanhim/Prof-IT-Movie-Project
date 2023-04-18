@@ -11,5 +11,7 @@ namespace FilmProject.Infrastructure.Repository.Abstract
     {
         bool ChangeOneCikar(int id);
         Task<int> GetMovieCountAsync();
+
+        Task<List<Movie>> GetLastMovieAsync(int number);
     }
 }
