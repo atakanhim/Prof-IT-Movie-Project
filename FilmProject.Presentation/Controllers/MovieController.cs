@@ -48,6 +48,33 @@ namespace FilmProject.Presentation.Controllers
                 });
             }
         }
+
+        [HttpGet]
+        [Route("GetMostCommentedMovie")]
+        //[Authorize(Roles ="Admin")]
+        public async Task<IActionResult> GetMostCommentedMovieAsync() // en çok yoruma sahip filmi çeken fonksiyon.
+        {
+            try
+            {
+                var movies = await _movieService.GetListWithCategoryAsync();
+                var topRatedMovie = movies.OrderByDescending(m => m.Comments.Count).FirstOrDefault();
+
+                var settings = new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                };
+                var json = JsonConvert.SerializeObject(topRatedMovie, settings);
+
+                return Ok(json);
+            }
+            catch
+            {
+                return Ok(new
+                {
+                    mesaj = "Geçersiz Sorgu "
+                });
+            }
+        }
         [HttpGet]
         [Route("Movie/{id}")]
         //[Authorize(Roles ="Admin")]

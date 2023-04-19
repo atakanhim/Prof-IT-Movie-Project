@@ -41,7 +41,7 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         {
 
 
-            return await _context.Movies.Include(x=>x.MovieCategories).ThenInclude(xc=>xc.Category).ToListAsync();
+            return await _context.Movies.Include(y=>y.Comments).Include(x=>x.MovieCategories).ThenInclude(xc=>xc.Category).ToListAsync();
          
         }
 
