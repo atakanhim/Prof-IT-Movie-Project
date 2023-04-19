@@ -23,6 +23,10 @@ namespace FilmProject.Application.Services
         {
             _repository.Add(movie);
         }
+        public void Update(Movie movie)
+        {
+            _repository.Update(movie);
+        }
 
         public async Task<List<Movie>> GetAllAsync()
         {
@@ -58,5 +62,7 @@ namespace FilmProject.Application.Services
         {
             return await _repository.GetMovieCountAsync();
         }
+
+     
     }
 }

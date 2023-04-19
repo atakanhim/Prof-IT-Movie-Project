@@ -35,7 +35,7 @@ namespace FilmProject.Presentation.Controllers
         public async Task<IActionResult> GetMovieAsync(int id) // tek bir film , id ile . Detay sayfası için 
         {
             // burda include yapmadan çekiyoruz categorisiz, Yorumsuz ,favorileri alanlar hariç listeleniyor 
-                // daha sonra istersek bu id le o listelerde filtreleme yapabilriz.
+            // daha sonra istersek bu id le o listelerde filtreleme yapabilriz.
             try
             {
                 var movies = await _movieService.GetAsync(x => x.Id == id);
@@ -89,7 +89,7 @@ namespace FilmProject.Presentation.Controllers
 
         [HttpGet]
         [Route("GetLanguages")]
-        public async Task<IActionResult> GetAllLanguagesAsync() 
+        public async Task<IActionResult> GetAllLanguagesAsync()
         {
             var languages = await _movieService.GetAllLanguagesAsync();
             var result = new { LanguagesList = languages };
@@ -102,7 +102,7 @@ namespace FilmProject.Presentation.Controllers
             // Burada eğer herhangi bir dil parametresi gönderilmediyse Movies sayfasına yönlendirilip filmlerin hepsi listelenmiştir.
             // Veritabanında kayıtlı filmlerde olmayan bir dilde ise boş liste ve dil ismi gönderilip jquery kontrolü yapılması amaçlandı.
             // Veri bulunması halinde hem liste hem de dil ismi gönderilmiştir.
-            if (language == null) 
+            if (language == null)
             {
                 return RedirectToAction("Movies", "Movie");
             }
@@ -120,6 +120,33 @@ namespace FilmProject.Presentation.Controllers
             model.Created = DateTime.UtcNow;
             _movieService.Add(model);
             return Ok(model);
+        }
+        [HttpPut]
+        [Route("Update")]
+        public async Task<IActionResult> UpdateMovie([FromBody] Movie model) // Film Ekleme fonksiyonu 
+        {
+            Movie? oldmovie = await _movieService.GetAsync(x => x.Id == model.Id);
+            if (oldmovie != null)
+            {
+                try
+                {
+                    oldmovie.MovieSummary = model.MovieSummary;
+                    _movieService.Update(oldmovie);
+                }
+                catch (Exception ex)
+                {
+                    //Loglama yapılabilir.hee
+                    return BadRequest(ex.Message);
+                }
+            }
+            else
+            {
+                return Ok(new
+                {
+                    mesaj = "Film Bulunamadı "
+                });
+            }
+            return Ok(oldmovie);
         }
     }
 }
