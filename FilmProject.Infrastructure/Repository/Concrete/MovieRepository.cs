@@ -44,5 +44,12 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             return await _context.Movies.Include(x=>x.MovieCategories).ThenInclude(xc=>xc.Category).ToListAsync();
          
         }
+
+        public async Task<List<string>> GetAllLanguagesAsync()
+        {
+            return await _context.Movies.Select(m => m.MovieLanguage).Distinct().ToListAsync();
+        }
+
+        
     }
 }

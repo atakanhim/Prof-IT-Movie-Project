@@ -10,5 +10,7 @@ namespace FilmProject.Application.Interfaces
     public interface ICategoryService
     {
         Task<List<Movie>> GetAllAsync();
+        void AddCategory(Category Category);
+        Task UpdateCategoryAsync(Category category);
     }
 }

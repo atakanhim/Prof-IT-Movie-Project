@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace FilmProject.Infrastructure.Repository.Abstract
 {
-    public interface ICategoryRepository : IEntityRepository<Category>
+    public interface IFavoriteRepository
     {
-        bool isExist(string CategoryName);
+        Task AddFavoriteMovie(Favorite favorite);
     }
 }

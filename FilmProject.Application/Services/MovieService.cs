@@ -29,6 +29,11 @@ namespace FilmProject.Application.Services
             return await _repository.GetListAsync();
         }
 
+        public async Task<List<string>> GetAllLanguagesAsync()
+        {
+            return await _repository.GetAllLanguagesAsync();
+        }
+
         public async Task<Movie?> GetAsync(Expression<Func<Movie, bool>> filter)
         {
             return await _repository.GetAsync(filter);
@@ -39,9 +44,14 @@ namespace FilmProject.Application.Services
             return await _repository.GetLastMovieAsync(number);
         }
 
-        public async Task<List<Movie>> GetListWithCategoryAsync()// 
+        public async Task<List<Movie>> GetListWithCategoryAsync()//
         {
             return await _repository.GetListWithCategoryAsync();
+        }
+
+        public async Task<List<Movie>> GetMovieByLanguageAsync(string language)
+        {
+            return await _repository.GetListAsync(m => m.MovieLanguage == language);
         }
 
         public async Task<int> GetMovieCountAsync()
