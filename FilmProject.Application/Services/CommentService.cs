@@ -1,8 +1,10 @@
 ﻿using FilmProject.Application.Interfaces;
+using FilmProject.Domain.Entities;
 using FilmProject.Infrastructure.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +16,11 @@ namespace FilmProject.Application.Services
         public CommentService(ICommentRepository commentRepository)
         {
             _commentRepository = commentRepository;
+        }
+
+        public async Task<IEnumerable<Comment>> GetAllAsync(Expression<Func<Movie, bool>>? filter = null)
+        {
+            return await _commentRepository.GetListAsync();
         }
 
         public async Task<int> GetCountOfTotalComment()

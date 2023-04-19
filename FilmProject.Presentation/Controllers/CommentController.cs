@@ -26,5 +26,25 @@ namespace FilmProject.Presentation.Controllers
             var result = new { Count = count };
             return Json(result);
         }
+        [HttpGet]
+        [Route("LastComments")]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetLastComments() // yorumlar son eklenen olarak sıralanıp listeleniyor.
+        {
+            var comments = await _commentService.GetAllAsync();
+            var result = comments.OrderByDescending(x=>x.Created).ToList();
+      
+            return Json(result);
+        }
+        [HttpGet]
+        [Route("MostLikedComment")]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> MostLikedComment() // yorumlar son eklenen olarak sıralanıp listeleniyor.
+        {
+            var comments = await _commentService.GetAllAsync();
+            var result = comments.OrderByDescending(x => x.LikeCount).FirstOrDefault();
+
+            return Json(result);
+        }
     }
 }
