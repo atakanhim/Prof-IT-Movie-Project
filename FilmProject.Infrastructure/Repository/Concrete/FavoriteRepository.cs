@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 
 namespace FilmProject.Infrastructure.Repository.Concrete
 {
-    public class CategoryRepository : EntityRepository<Category>, ICategoryRepository
+    public class FavoriteRepository : IFavoriteRepository
     {
         private readonly ApplicationDbContext _context;
-        public CategoryRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public FavoriteRepository(ApplicationDbContext dbContext)
         {
             _context = dbContext;
         }
 
-        public bool isExist(string CategoryName)
+        public async Task AddFavoriteMovie(Favorite favorite)
         {
-            return _context.Categories.Any(c => c.CategoryName == CategoryName);
+            _context.Add(favorite);
+            await _context.SaveChangesAsync();
         }
     }
 }
