@@ -19,6 +19,10 @@ namespace FilmProject.Application.Services
             _repository = repository;
         }
 
+        public void Add(Movie movie)
+        {
+            _repository.Add(movie);
+        }
 
         public async Task<List<Movie>> GetAllAsync()
         {

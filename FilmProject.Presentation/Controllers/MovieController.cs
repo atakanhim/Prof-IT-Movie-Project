@@ -1,4 +1,5 @@
 ﻿using FilmProject.Application.Interfaces;
+using FilmProject.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -19,7 +20,7 @@ namespace FilmProject.Presentation.Controllers
         }
 
         [HttpGet]
-        [Route("MovieCount")]
+        [Route("GetCount")]
         //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetMovieCountAsync() // film sayısı
         {
@@ -47,9 +48,6 @@ namespace FilmProject.Presentation.Controllers
                     mesaj = "Geçersiz Id Değeri "
                 });
             }
-
-
-       
         }
 
         [HttpGet]
@@ -57,6 +55,8 @@ namespace FilmProject.Presentation.Controllers
         //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetMoviesAsync() // tum filmler 
         {
+
+
             var movies = await _movieService.GetAllAsync();
 
             return Json(movies);
@@ -88,5 +88,14 @@ namespace FilmProject.Presentation.Controllers
         }
 
 
+
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult CreateMovie([FromBody] Movie model) // Film Ekleme fonksiyonu 
+        {
+            model.Created = DateTime.UtcNow;
+            _movieService.Add(model);
+            return Ok(model);
+        }
     }
 }

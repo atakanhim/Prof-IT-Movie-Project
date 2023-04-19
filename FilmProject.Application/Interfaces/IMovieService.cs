@@ -16,5 +16,9 @@ namespace FilmProject.Application.Interfaces
         Task<List<Movie>> GetLastMoviesAsync(int number); // son eklenen filmler doner
         Task<int> GetMovieCountAsync(); // toplam film sayısı
         Task<List<Movie>> GetListWithCategoryAsync(); // category ile map edip dondurdum
+
+
+
+        void Add(Movie movie);
     }
 }
