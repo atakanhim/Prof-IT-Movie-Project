@@ -46,6 +46,7 @@ builder.Services.AddAuthorization(options =>
 //services
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
     //repositories
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();

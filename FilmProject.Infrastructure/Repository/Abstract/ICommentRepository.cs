@@ -9,5 +9,6 @@ namespace FilmProject.Infrastructure.Repository.Abstract
 {
     public interface ICommentRepository : IEntityRepository<Comment>
     {
+        Task<int> GetCountOfTotalComment();
     }
 }

@@ -11,8 +11,15 @@ namespace FilmProject.Infrastructure.Repository.Concrete
 {
     public class CategoryRepository : EntityRepository<Category>, ICategoryRepository
     {
+        private readonly ApplicationDbContext _context;
         public CategoryRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
+            _context = dbContext;
+        }
+
+        public bool isExist(string CategoryName)
+        {
+            return _context.Categories.Any(c => c.CategoryName == CategoryName);
         }
     }
 }

@@ -87,6 +87,30 @@ namespace FilmProject.Presentation.Controllers
             return Json(movies);
         }
 
+        [HttpGet]
+        [Route("GetLanguages")]
+        public async Task<IActionResult> GetAllLanguagesAsync() 
+        {
+            var languages = await _movieService.GetAllLanguagesAsync();
+            var result = new { LanguagesList = languages };
+            return Json(result);
+        }
+        [HttpGet]
+        [Route("GetLanguage/{language?}")]
+        public async Task<IActionResult> GetMovieByLanguageAsync(string language)
+        {
+            // Burada eğer herhangi bir dil parametresi gönderilmediyse Movies sayfasına yönlendirilip filmlerin hepsi listelenmiştir.
+            // Veritabanında kayıtlı filmlerde olmayan bir dilde ise boş liste ve dil ismi gönderilip jquery kontrolü yapılması amaçlandı.
+            // Veri bulunması halinde hem liste hem de dil ismi gönderilmiştir.
+            if (language == null) 
+            {
+                return RedirectToAction("Movies", "Movie");
+            }
+            var movies = await _movieService.GetMovieByLanguageAsync(language);
+            var result = new { Movies = movies, Language = language };
+            return Json(result);
+        }
+
 
     }
 }
