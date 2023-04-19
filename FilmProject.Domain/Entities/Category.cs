@@ -13,6 +13,6 @@ namespace FilmProject.Domain.Entities
    
         public string CategoryName { get; set; }
 
-        public ICollection<MovieCategoryMap> MovieCategories { get; set; }
+       
     }
 }

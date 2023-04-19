@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230418095927_Init")]
-    partial class Init
+    [Migration("20230419180730_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -411,7 +411,7 @@ namespace FilmProject.Infrastructure.Migrations
             modelBuilder.Entity("FilmProject.Domain.Entities.MovieCategoryMap", b =>
                 {
                     b.HasOne("FilmProject.Domain.Entities.Category", "Category")
-                        .WithMany("MovieCategories")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -481,11 +481,6 @@ namespace FilmProject.Infrastructure.Migrations
             modelBuilder.Entity("FilmProject.Domain.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("Favorite");
-                });
-
-            modelBuilder.Entity("FilmProject.Domain.Entities.Category", b =>
-                {
-                    b.Navigation("MovieCategories");
                 });
 
             modelBuilder.Entity("FilmProject.Domain.Entities.Movie", b =>

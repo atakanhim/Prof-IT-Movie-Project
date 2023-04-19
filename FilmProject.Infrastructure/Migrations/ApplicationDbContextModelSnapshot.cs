@@ -409,7 +409,7 @@ namespace FilmProject.Infrastructure.Migrations
             modelBuilder.Entity("FilmProject.Domain.Entities.MovieCategoryMap", b =>
                 {
                     b.HasOne("FilmProject.Domain.Entities.Category", "Category")
-                        .WithMany("MovieCategories")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -479,11 +479,6 @@ namespace FilmProject.Infrastructure.Migrations
             modelBuilder.Entity("FilmProject.Domain.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("Favorite");
-                });
-
-            modelBuilder.Entity("FilmProject.Domain.Entities.Category", b =>
-                {
-                    b.Navigation("MovieCategories");
                 });
 
             modelBuilder.Entity("FilmProject.Domain.Entities.Movie", b =>
