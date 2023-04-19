@@ -165,7 +165,6 @@ namespace FilmProject.Presentation.Controllers
         [Route("Create")]
         public IActionResult CreateMovie([FromBody] Movie model) // Film Ekleme fonksiyonu 
         {
-            model.Created = DateTime.UtcNow;
             _movieService.Add(model);
             return Ok(model);
         }

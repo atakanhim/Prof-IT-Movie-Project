@@ -1,4 +1,6 @@
 ﻿using FilmProject.Application.Interfaces;
+using FilmProject.Application.Services;
+using FilmProject.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +47,38 @@ namespace FilmProject.Presentation.Controllers
             var result = comments.OrderByDescending(x => x.LikeCount).FirstOrDefault();
 
             return Json(result);
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult CreateComment([FromBody] Comment model) // Yorum Ekleme fonksiyonu 
+        {
+           
+            _commentService.Add(model);
+            return Ok(model);
+        }
+        [HttpPut]
+        [Route("Delete/{id}")]
+        public async Task<IActionResult> DeleteComment(int id) // Yorum Delete Statusu Degistirme fonksiyonu 
+        {
+            try
+            {
+                var comment = await _commentService.GetAsync(x => x.Id == id);
+                if (comment != null)
+                {
+                    comment.IsDeleted = true;
+                    _commentService.Update(comment);
+                    return Ok(comment);
+                }
+                return Ok(new
+                {
+                    mesaj = "Yorum Bulunamadı "
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

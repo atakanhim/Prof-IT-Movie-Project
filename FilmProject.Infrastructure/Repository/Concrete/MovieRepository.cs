@@ -50,6 +50,9 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             return await _context.Movies.Select(m => m.MovieLanguage).Distinct().ToListAsync();
         }
 
-        
+        public bool isExist(string MovieName)
+        {
+            return _context.Movies.Any(c => c.MovieName == MovieName);
+        }
     }
 }

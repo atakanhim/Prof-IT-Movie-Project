@@ -10,8 +10,13 @@ namespace FilmProject.Application.Interfaces
 {
     public interface ICommentService
     {
-        Task<IEnumerable<Comment>> GetAllAsync(Expression<Func<Movie, bool>>? filter = null); // tum filmleri doner
-
+        Task<Comment?> GetAsync(Expression<Func<Comment, bool>> filter);
+        Task<IEnumerable<Comment>> GetAllAsync(Expression<Func<Comment, bool>>? filter = null); // tum filmleri doner
+   
         Task<int> GetCountOfTotalComment();
+
+
+        void Add(Comment comment);
+        void Update(Comment comment);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FilmProject.Application.Interfaces;
 using FilmProject.Domain.Entities;
 using FilmProject.Infrastructure.Repository.Abstract;
+using FilmProject.Infrastructure.Repository.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,16 @@ namespace FilmProject.Application.Services
 
         public void Add(Movie movie)
         {
-            _repository.Add(movie);
+            // Veritabanında bu isimle bir kategori var mı kontrolü yapıldı.
+            if (_repository.isExist(movie.MovieName))
+            {
+                throw new InvalidOperationException("This movie is already exists.");
+            }
+            else
+            {
+                 _repository.Add(movie);
+            }
+           
         }
         public void Update(Movie movie)
         {

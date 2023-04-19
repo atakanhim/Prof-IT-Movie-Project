@@ -18,14 +18,29 @@ namespace FilmProject.Application.Services
             _commentRepository = commentRepository;
         }
 
-        public async Task<IEnumerable<Comment>> GetAllAsync(Expression<Func<Movie, bool>>? filter = null)
+        public void Add(Comment comment)
+        {
+             _commentRepository.Add(comment);
+        }
+        public void Update(Comment comment)
+        {
+            _commentRepository.Update(comment);
+        }
+        public async Task<IEnumerable<Comment>> GetAllAsync(Expression<Func<Comment, bool>>? filter = null)
         {
             return await _commentRepository.GetListAsync();
+        }
+
+        public async Task<Comment?> GetAsync(Expression<Func<Comment, bool>> filter)
+        {
+            return await _commentRepository.GetAsync(filter);
         }
 
         public async Task<int> GetCountOfTotalComment()
         {
             return await _commentRepository.GetCountOfTotalComment();
         }
+
+ 
     }
 }
