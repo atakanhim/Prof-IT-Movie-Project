@@ -28,7 +28,26 @@ namespace FilmProject.Presentation.Controllers
             var result = new { Count = count };
             return Json(result);
         }
+        [HttpGet]
+        [Route("GetMostPopular")]
+        //[Authorize(Roles ="Admin")]
+        public async Task<IActionResult> GetMostPopularMovieAsync() // en yuksek puana sahip filmi çeken kod
+        {
+            try
+            {
+                var movies = await _movieService.GetAllAsync();
+                var topRatedMovie = movies.OrderByDescending(m => m.MoviePoint).FirstOrDefault();
 
+                return Json(topRatedMovie);
+            }
+            catch
+            {
+                return Ok(new
+                {
+                    mesaj = "Geçersiz Id Değeri "
+                });
+            }
+        }
         [HttpGet]
         [Route("Movie/{id}")]
         //[Authorize(Roles ="Admin")]
@@ -39,6 +58,7 @@ namespace FilmProject.Presentation.Controllers
             try
             {
                 var movies = await _movieService.GetAsync(x => x.Id == id);
+        
                 return Json(movies);
             }
             catch
@@ -89,12 +109,13 @@ namespace FilmProject.Presentation.Controllers
 
         [HttpGet]
         [Route("GetLanguages")]
-        public async Task<IActionResult> GetAllLanguagesAsync()
+
+        public async Task<IActionResult> GetAllLanguagesAsync()// veritabanında kayıtlı filmlere ait diller
         {
             var languages = await _movieService.GetAllLanguagesAsync();
             var result = new { LanguagesList = languages };
             return Json(result);
-        }
+        } 
         [HttpGet]
         [Route("GetLanguage/{language?}")]
         public async Task<IActionResult> GetMovieByLanguageAsync(string language)
@@ -121,6 +142,7 @@ namespace FilmProject.Presentation.Controllers
             _movieService.Add(model);
             return Ok(model);
         }
+
         [HttpPut]
         [Route("Update")]
         public async Task<IActionResult> UpdateMovie([FromBody] Movie model) // Film Ekleme fonksiyonu 

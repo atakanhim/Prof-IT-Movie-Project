@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FilmProject.Infrastructure.Repository.Concrete
 {
-    public class EntityRepository<T> : IEntityRepository<T> where T : class,new()
+    public class EntityRepository<T> : IEntityRepository<T> where T : class, new()
 
     {
         private readonly ApplicationDbContext context;
@@ -42,6 +42,12 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             if (x == null)
                 return null;
             return x;
+        }
+
+        public async Task<IEnumerable<T>> GetIEnumerableListAsync(Expression<Func<T, bool>>? filter = null)
+        { 
+            return filter == null ? await context.Set<T>().ToListAsync() :
+                                   await context.Set<T>().Where(filter).ToListAsync();
         }
 
         public async Task<List<T>> GetListAsync(Expression<Func<T, bool>>? filter = null)

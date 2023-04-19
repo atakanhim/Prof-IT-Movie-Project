@@ -12,16 +12,18 @@ namespace FilmProject.Application.Interfaces
     {
         Task<Movie?> GetAsync(Expression<Func<Movie, bool>> filter);
 
-        Task<List<Movie>> GetAllAsync(); // tum filmleri doner
-        Task<List<Movie>> GetLastMoviesAsync(int number); // son eklenen filmler doner
+        Task<IEnumerable<Movie>> GetAllAsync(Expression<Func<Movie, bool>>? filter = null); // tum filmleri doner
+
+
+        Task<IEnumerable<Movie>> GetLastMoviesAsync(int number); // son eklenen filmler doner
         Task<int> GetMovieCountAsync(); // toplam film sayısı
-        Task<List<Movie>> GetListWithCategoryAsync(); // category ile map edip dondurdum
+        Task<IEnumerable<Movie>> GetListWithCategoryAsync(); // category ile map edip dondurdum
 
         void Add(Movie movie); // film ekleme
         void Update(Movie movie); // film gncelleme
 
-        Task<List<string>> GetAllLanguagesAsync(); // kayıtlı filmlerin dillerini listeler
-        Task<List<Movie>> GetMovieByLanguageAsync(string language);
+        Task<IEnumerable<string>> GetAllLanguagesAsync(); // kayıtlı filmlerin dillerini listeler
+        Task<IEnumerable<Movie>> GetMovieByLanguageAsync(string language);
 
     }
 }

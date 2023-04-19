@@ -16,6 +16,7 @@ namespace FilmProject.Infrastructure.Repository.Abstract
         Task<List<Movie>> GetLastMovieAsync(int number);
         Task<List<string>> GetAllLanguagesAsync();
 
+
         
     }
 }

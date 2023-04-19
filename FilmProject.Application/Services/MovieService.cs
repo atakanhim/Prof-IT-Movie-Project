@@ -28,12 +28,12 @@ namespace FilmProject.Application.Services
             _repository.Update(movie);
         }
 
-        public async Task<List<Movie>> GetAllAsync()
+        public async Task<IEnumerable<Movie>> GetAllAsync(Expression<Func<Movie, bool>>? filter = null)
         {
             return await _repository.GetListAsync();
         }
-
-        public async Task<List<string>> GetAllLanguagesAsync()
+     
+        public async Task<IEnumerable<string>> GetAllLanguagesAsync()
         {
             return await _repository.GetAllLanguagesAsync();
         }
@@ -43,17 +43,21 @@ namespace FilmProject.Application.Services
             return await _repository.GetAsync(filter);
         }
 
-        public async Task<List<Movie>> GetLastMoviesAsync(int number)
+        public async Task<IEnumerable<Movie>> GetLastMoviesAsync(int number)
         {
             return await _repository.GetLastMovieAsync(number);
         }
 
-        public async Task<List<Movie>> GetListWithCategoryAsync()//
+        public async Task<IEnumerable<Movie>> GetListWithCategoryAsync()//
         {
-            return await _repository.GetListWithCategoryAsync();
+            var result = await _repository.GetListWithCategoryAsync();
+
+            //_mapper.Map<Source, Dest>(result);
+
+            return result;
         }
 
-        public async Task<List<Movie>> GetMovieByLanguageAsync(string language)
+        public async Task<IEnumerable<Movie>> GetMovieByLanguageAsync(string language)
         {
             return await _repository.GetListAsync(m => m.MovieLanguage == language);
         }
@@ -62,7 +66,7 @@ namespace FilmProject.Application.Services
         {
             return await _repository.GetMovieCountAsync();
         }
-
-     
+  
+       
     }
 }
