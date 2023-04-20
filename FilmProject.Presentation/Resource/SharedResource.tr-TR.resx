@@ -117,7 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="test_value" xml:space="preserve">
-    <value>Test Dil Türkçe</value>
+  <data name="category_action" xml:space="preserve">
+    <value>Aksiyon</value>
+  </data>
+  <data name="category_dram" xml:space="preserve">
+    <value>Drama</value>
+  </data>
+  <data name="category_header" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
+  <data name="category_horror" xml:space="preserve">
+    <value>Korku</value>
+  </data>
+  <data name="category_sci-fi" xml:space="preserve">
+    <value>Bilim Kurgu</value>
+  </data>
+  <data name="features_header" xml:space="preserve">
+    <value>Özellikler</value>
+  </data>
+  <data name="last_uploaded" xml:space="preserve">
+    <value>En Son Yüklenen Filmler</value>
+  </data>
+  <data name="log_in" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
+  <data name="log_out" xml:space="preserve">
+    <value>Çıkış Yap</value>
+  </data>
+  <data name="most_commented" xml:space="preserve">
+    <value>En Çok Yorum Alan Filmler</value>
+  </data>
+  <data name="top_rated" xml:space="preserve">
+    <value>En Çok Beğeni Alan Filmler</value>
   </data>
 </root>
