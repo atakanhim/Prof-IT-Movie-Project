@@ -1,4 +1,10 @@
-﻿
+﻿@using Microsoft.Extensions.Localization;
+
+@inject IStringLocalizer<SharedResource> localizer;
+
+@*    <h2>Localization test</h2>
+    <h3>@localizer["test_value"]</h3>*@
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>

@@ -10,6 +10,11 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.VisualStudio.Web.CodeGeneration;
 using QRCoder;
 using Serilog;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.Extensions.Options;
+using System.Reflection;
+using Microsoft.AspNetCore.Localization.Routing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +37,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
     .AddDefaultTokenProviders();
 
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization();
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("InspiniaPolicy", policy =>
@@ -41,7 +47,7 @@ builder.Services.AddAuthorization(options =>
         
     });
 });
-// connection helperss
+
 #region connection-helpers
 //services
 builder.Services.AddScoped<IMovieService, MovieService>();
@@ -56,6 +62,40 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddSingleton(new QRCodeService(new QRCodeGenerator()));
 #endregion 
 
+#region Localization
+builder.Services.AddLocalization(opt => { opt.ResourcesPath = "Resource"; });
+
+builder.Services.Configure<RequestLocalizationOptions>(opt =>
+{
+    //Supported Language packets were created 
+    var supportedCultures = new List<CultureInfo>
+    {
+        new CultureInfo("en-US"),
+        new CultureInfo("tr-TR"),
+    };
+
+    //Localization configurations were declared
+    opt.DefaultRequestCulture = new RequestCulture("tr-TR");
+    opt.SupportedCultures = supportedCultures;
+    opt.SupportedUICultures = supportedCultures;
+
+    //Localization passing ways were created
+    opt.RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new QueryStringRequestCultureProvider(),
+        new CookieRequestCultureProvider(),
+        new AcceptLanguageHeaderRequestCultureProvider()
+    };
+
+    //    opt.RequestCultureProviders = new[]
+    //{
+    //            new RouteDataRequestCultureProvider()
+    //            {
+    //                Options=opt
+    //            }
+    //    };
+});
+#endregion
 
 var app = builder.Build();
 
@@ -78,6 +118,9 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+app.UseRequestLocalization(options.Value);
 
 app.UseEndpoints(endpoints =>
 {
