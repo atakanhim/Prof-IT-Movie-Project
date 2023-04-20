@@ -115,7 +115,9 @@ namespace FilmProject.Presentation.Controllers
         {
             List<float> ortalamalar = new List<float>();
             RenderMoviesViewModel model = new RenderMoviesViewModel();
+
             var movies = await _movieService.GetListWithCategoryAsync();
+            
          
            foreach (var movie in movies)
             {
