@@ -1,7 +1,9 @@
 ﻿using FilmProject.Application.Interfaces;
 using FilmProject.Domain.Entities;
+using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace FilmProject.Presentation.Controllers
@@ -102,8 +104,6 @@ namespace FilmProject.Presentation.Controllers
         //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetMoviesAsync() // tum filmler 
         {
-
-
             var movies = await _movieService.GetAllAsync();
 
             return Json(movies);
@@ -113,15 +113,24 @@ namespace FilmProject.Presentation.Controllers
         //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetMoviesWithCategoryAsync() // tum filmler , categoriler ile birlikte.
         {
+            List<float> ortalamalar = new List<float>();
+            RenderMoviesViewModel model = new RenderMoviesViewModel();
             var movies = await _movieService.GetListWithCategoryAsync();
-            var settings = new JsonSerializerSettings
+         
+           foreach (var movie in movies)
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            };
-            var json = JsonConvert.SerializeObject(movies, settings);
+                if(movie == null) continue;
+                if(movie.MoviePointCounter == 0) continue;
 
+                float x = movie.MoviePoint / movie.MoviePointCounter;
+                ortalamalar.Add(x);
+            }
 
-            return Ok(json);
+            model.Movies = movies;
+       
+            model.OrtalamaList = ortalamalar;
+            return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", model);
+
         }
 
         [HttpGet]
