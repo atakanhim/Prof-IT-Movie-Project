@@ -1,4 +1,6 @@
-﻿using FilmProject.Application.Interfaces;
+﻿using AutoMapper;
+using FilmProject.Application.Contracts.Movie;
+using FilmProject.Application.Interfaces;
 using FilmProject.Domain.Entities;
 using FilmProject.Infrastructure.Repository.Abstract;
 using FilmProject.Infrastructure.Repository.Concrete;
@@ -14,9 +16,10 @@ namespace FilmProject.Application.Services
     public class MovieService : IMovieService
     {
         private IMovieRepository _repository;
-
-        public MovieService(IMovieRepository repository)
+        private IMapper _mapper;
+        public MovieService(IMovieRepository repository, IMapper mapper)
         {
+            _mapper = mapper;
             _repository = repository;
         }
 
@@ -58,13 +61,13 @@ namespace FilmProject.Application.Services
             return await _repository.GetLastMovieAsync(number);
         }
 
-        public async Task<IEnumerable<Movie>> GetListWithCategoryAsync()//
+        public async Task<IEnumerable<MovieDto>> GetListWithCategoryAsync()//
         {
-            var result = await _repository.GetListWithCategoryAsync();
+            var movies = await _repository.GetListWithCategoryAsync();
 
-            //_mapper.Map<Source, Dest>(result);
+            List<MovieDto> movieDto = _mapper.Map< List<Movie>, List<MovieDto> >(movies);
 
-            return result;
+            return movieDto;
         }
 
         public async Task<IEnumerable<Movie>> GetMovieByLanguageAsync(string language)

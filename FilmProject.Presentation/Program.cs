@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.VisualStudio.Web.CodeGeneration;
 using QRCoder;
 using Serilog;
+using FilmProject.Application.Contracts.Movie;
+using FilmProject.Application.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
     .AddDefaultUI()
     .AddDefaultTokenProviders();
 
+//auto mapper 
+builder.Services.AddAutoMapper(typeof(MovieProfile));
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthorization(options =>
