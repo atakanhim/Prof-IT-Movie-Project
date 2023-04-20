@@ -16,7 +16,8 @@ namespace FilmProject.Application.Mappings
             CreateMap<Movie,MovieDto>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Favorite, FavoriteDto>().ReverseMap();
-            CreateMap<Comment, MovieDto>().ReverseMap();
+            CreateMap<Comment, CommentDto>().ReverseMap();
+            CreateMap<MovieCategoryMap, MovieCategoryMapDto>().ReverseMap();
         }
     }
 }

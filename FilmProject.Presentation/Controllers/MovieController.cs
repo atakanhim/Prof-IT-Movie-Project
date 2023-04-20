@@ -1,4 +1,6 @@
-﻿using FilmProject.Application.Interfaces;
+﻿using AutoMapper;
+using FilmProject.Application.Contracts.Movie;
+using FilmProject.Application.Interfaces;
 using FilmProject.Domain.Entities;
 using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -12,8 +14,10 @@ namespace FilmProject.Presentation.Controllers
     public class MovieController : Controller
     {
         private readonly IMovieService _movieService;
-        public MovieController(IMovieService movieService)
+        private IMapper _mapper;
+        public MovieController(IMovieService movieService,IMapper mapper)
         {
+            _mapper = mapper;
             _movieService = movieService;
         }
         public IActionResult Index()
@@ -111,14 +115,14 @@ namespace FilmProject.Presentation.Controllers
         [HttpGet]
         [Route("MoviesWithCategory")]
         //[Authorize(Roles ="Admin")]
-        public async Task<IActionResult> GetMoviesWithCategoryAsync() // tum filmler , categoriler ile birlikte.
+        public async Task<IActionResult> GetMoviesWithCategoryAsync() // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
         {
             List<float> ortalamalar = new List<float>();
             RenderMoviesViewModel model = new RenderMoviesViewModel();
 
             var movies = await _movieService.GetListWithCategoryAsync();
             
-         
+          // bu kısımda ufak sorun var eger daha once like atılmadıysa count 0 daysa dizi sırası bozuluyor .
            foreach (var movie in movies)
             {
                 if(movie == null) continue;
@@ -134,7 +138,22 @@ namespace FilmProject.Presentation.Controllers
             return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", model);
 
         }
+        [HttpGet]
+        [Route("MoviesWithCategoryJson")]
+        //[Authorize(Roles ="Admin")]
+        public async Task<IActionResult> GetMoviesWithCategoryJsonAsync() // tum filmler , categoriler ile birlikte doner bunu json olarak gonderir.
+        {
+            var movies = await _movieService.GetListWithCategoryAsync();
+            var settings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+            var json = JsonConvert.SerializeObject(movies, settings);
 
+
+            return Ok(json);
+
+        }
         [HttpGet]
         [Route("GetLastMovies/{number}")]
         //[Authorize(Roles ="Admin")]
@@ -174,22 +193,28 @@ namespace FilmProject.Presentation.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public IActionResult CreateMovie([FromBody] Movie model) // Film Ekleme fonksiyonu 
+        public IActionResult CreateMovie([FromBody] MovieViewModel MovieViewModel) // Film Ekleme fonksiyonu 
         {
-            _movieService.Add(model);
-            return Ok(model);
+             MovieDto movie = _mapper.Map<MovieViewModel, MovieDto>(MovieViewModel);
+
+            _movieService.Add(movie);
+
+            return Ok(movie);
         }
 
         [HttpPut]
         [Route("Update")]
-        public async Task<IActionResult> UpdateMovie([FromBody] Movie model) // Film Ekleme fonksiyonu 
+        public async Task<IActionResult> UpdateMovie([FromBody] MovieViewModel MovieViewModel) // Film Ekleme fonksiyonu 
         {
-            Movie? oldmovie = await _movieService.GetAsync(x => x.Id == model.Id);
+            MovieDto newmovie = _mapper.Map<MovieViewModel, MovieDto>(MovieViewModel);
+
+
+            MovieDto? oldmovie = await _movieService.GetAsync(x => x.Id == newmovie.Id);
             if (oldmovie != null)
             {
                 try
                 {
-                    oldmovie.MovieSummary = model.MovieSummary;
+                    oldmovie.MovieSummary = newmovie.MovieSummary;
                     _movieService.Update(oldmovie);
                 }
                 catch (Exception ex)

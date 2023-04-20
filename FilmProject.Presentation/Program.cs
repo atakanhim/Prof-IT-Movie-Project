@@ -12,6 +12,7 @@ using QRCoder;
 using Serilog;
 using FilmProject.Application.Contracts.Movie;
 using FilmProject.Application.Mappings;
+using FilmProject.Presentation.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
 
 //auto mapper 
 builder.Services.AddAutoMapper(typeof(MovieProfile));
+builder.Services.AddAutoMapper(typeof(PresentationMovieProfile));
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthorization(options =>
