@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using FilmProject.Domain.Entities
+@using Microsoft.Extensions.Localization;
 @inject SignInManager<ApplicationUser> SignInManager
+@inject IStringLocalizer<SharedResource> localizer;
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,18 +46,18 @@
                           <div class="header-top-logo">L O G O</div>
                          
                           <div class="header-top-list">
-                              <p class="custom-p1">Ozellikler</p>
+                            <p class="custom-p1">@localizer["features_header"]</p>
                                <ul>
                                     <li>
-                                     <a class="custom-p2"> En Çok Beğeni Alan Filmler</a>  <i class="fa fa-heart" aria-hidden="true"></i> 
-                                    </li>
+                                    <a class="custom-p2">@localizer["top_rated"] </a>  <i class="fa fa-heart" aria-hidden="true"></i>
+                                </li>
 
                                     <li>
-                                    <a class="custom-p2"> En Çok Yorum Alan Filmler</a>    <i class="fa fa-film" aria-hidden="true"></i>
+                                    <a class="custom-p2">@localizer["most_commented"] </a>    <i class="fa fa-film" aria-hidden="true"></i>
                                     </li>
 
                                      <li>
-                                      <a class="custom-p2"> En Son Yüklenen Filmler</a>  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    <a class="custom-p2">@localizer["last_uploaded"]</a>  <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </li>
                                 </ul>
                                   <div class="ortala"> <div class="cizgi"></div></div>
@@ -65,19 +67,19 @@
                      </div>
 
                         <div class="header-middle">
-                            <p class="custom-p1">Kategoriler</p>
+                        <p class="custom-p1">@localizer["category_header"]</p>
                             <ul>
                                 <li>
-                                   <a class="custom-p2"> Korku</a>  <i class="fa-sharp fa-light fa-house"></i> 
+                                <a class="custom-p2">@localizer["category_horror"] </a>  <i class="fa-sharp fa-light fa-house"></i>
+                            </li>
+                                  <li>
+                                <a class="custom-p2">@localizer["category_dram"] </a>  <i class="fa-sharp fa-light fa-house"></i>
                                 </li>
                                   <li>
-                                    <a class="custom-p2">Drama</a>  <i class="fa-sharp fa-light fa-house"></i>
+                                <a class="custom-p2">@localizer["category_sci-fi"]</a>  <i class="fa-sharp fa-light fa-house"></i>
                                 </li>
                                   <li>
-                                    <a class="custom-p2">Bilim Kurgu</a>  <i class="fa-sharp fa-light fa-house"></i>
-                                </li>
-                                  <li>
-                                   <a class="custom-p2">Aksiyon</a>  <i class="fa-sharp fa-light fa-house"></i>
+                                <a class="custom-p2">@localizer["category_action"]</a>  <i class="fa-sharp fa-light fa-house"></i>
                                 </li>
                             </ul>
                         <div class="ortala"> <div class="cizgi"></div></div>
@@ -89,15 +91,15 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button  type="submit" >LOG OUT</button> <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                <button type="submit">@localizer["log_out"]</button> <i class="fa fa-sign-out" aria-hidden="true"></i>
                              </form>
                             
                         }
                         else
                         {
                             <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button type="submit" >SIGN IN <i class="fa fa-sign-in" aria-hidden="true"></i></button> 
-                             </form>
+                                <button type="submit">@localizer["log_in"]<i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                            </form>
                             
                         }
                         

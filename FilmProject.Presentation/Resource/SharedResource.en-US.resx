@@ -117,7 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="test_value" xml:space="preserve">
-    <value>Test Language English</value>
+  <data name="category_action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="category_dram" xml:space="preserve">
+    <value>Dram</value>
+  </data>
+  <data name="category_header" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="category_horror" xml:space="preserve">
+    <value>Horror</value>
+  </data>
+  <data name="category_sci-fi" xml:space="preserve">
+    <value>Sci-Fi</value>
+  </data>
+  <data name="features_header" xml:space="preserve">
+    <value>Features</value>
+  </data>
+  <data name="last_uploaded" xml:space="preserve">
+    <value>Last Uploaded</value>
+  </data>
+  <data name="log_in" xml:space="preserve">
+    <value>LOG IN</value>
+  </data>
+  <data name="log_out" xml:space="preserve">
+    <value>LOG OUT</value>
+  </data>
+  <data name="most_commented" xml:space="preserve">
+    <value>Most Commented</value>
+  </data>
+  <data name="top_rated" xml:space="preserve">
+    <value>Top Rated Movies</value>
   </data>
 </root>
