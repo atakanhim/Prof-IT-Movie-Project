@@ -4,6 +4,9 @@
     ViewData["Title"] = "Log in";
     //Layout = null;
 }
+@using Microsoft.Extensions.Localization;
+
+@inject IStringLocalizer<FilmProject.Presentation.SharedResource> localizer;
 
 @*<h1>@ViewData["Title"]</h1>*@
 <!-- Normal Breadcrumb Begin -->
@@ -31,7 +34,7 @@
     <div class="col-lg-6">
         <section class="login__form">
             <form id="account" method="post">
-                <h3>Login</h3>
+                <h3>@localizer["login"]</h3>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating" style="margin-bottom:20px">
@@ -76,7 +79,7 @@
         </section>
     </div>
     <div class="col-lg-6">
-        <section class="login__form">
+                <section class="login__register">
                     <h3>Dont’t Have An Account?</h3>
                     <hr />
                     <button class="site-btn"> <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a></button>

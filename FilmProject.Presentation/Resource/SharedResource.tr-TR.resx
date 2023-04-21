@@ -147,6 +147,9 @@
   <data name="last_uploaded" xml:space="preserve">
     <value>En Son Yüklenen Filmler</value>
   </data>
+  <data name="login" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
   <data name="log_in" xml:space="preserve">
     <value>Giriş Yap</value>
   </data>
