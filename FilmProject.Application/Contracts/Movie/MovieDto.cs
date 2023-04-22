@@ -21,9 +21,8 @@ namespace FilmProject.Application.Contracts.Movie
         public bool IsHighLighted { get; set; }
         public string ImdbUrl { get; set; }
         public string MovieLanguage { get; set; }
-
+        public ICollection<CategoryDto> MovieCategories { get; set; }
         public ICollection<CommentDto> Comments { get; set; }
-        public ICollection<MovieCategoryMapDto> MovieCategories { get; set; }
         public ICollection<FavoriteDto> WhoFavorited { get; set; }
     }
 }

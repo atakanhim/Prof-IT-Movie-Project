@@ -13,7 +13,11 @@ namespace FilmProject.Application.Mappings
     {
         public MovieProfile()
         {
-            CreateMap<Movie,MovieDto>().ReverseMap();
+            CreateMap<Movie, MovieDto>()
+        .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments))
+        .ForMember(dest => dest.MovieCategories, opt => opt.MapFrom(src => src.MovieCategories.Select(x => x.Category)))
+        .ForMember(dest => dest.WhoFavorited, opt => opt.MapFrom(src => src.WhoFavorited));
+
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Favorite, FavoriteDto>().ReverseMap();
             CreateMap<Comment, CommentDto>().ReverseMap();
