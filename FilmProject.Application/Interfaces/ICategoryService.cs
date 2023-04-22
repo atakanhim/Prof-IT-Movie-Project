@@ -1,4 +1,5 @@
-﻿using FilmProject.Domain.Entities;
+﻿using FilmProject.Application.Contracts.Movie;
+using FilmProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace FilmProject.Application.Interfaces
 {
     public interface ICategoryService
     {
-        Task<List<Movie>> GetAllAsync();
-        void AddCategory(Category Category);
-        Task UpdateCategoryAsync(Category category);
+        Task<List<CategoryDto>> GetAllAsync();
+        void AddCategory(CategoryDto Category);
+        Task UpdateCategoryAsync(CategoryDto category);
     }
 }

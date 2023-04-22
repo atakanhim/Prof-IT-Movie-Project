@@ -16,7 +16,7 @@ namespace FilmProject.Presentation.Models
         public bool IsHighLighted { get; set; }
         public string ImdbUrl { get; set; }
         public string MovieLanguage { get; set; }
-
+        public float Ortalama { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<MovieCategoryMap> MovieCategories { get; set; }
         public ICollection<Favorite> WhoFavorited { get; set; }

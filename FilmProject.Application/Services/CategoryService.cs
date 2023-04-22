@@ -1,4 +1,6 @@
-﻿using FilmProject.Application.Interfaces;
+﻿using AutoMapper;
+using FilmProject.Application.Contracts.Movie;
+using FilmProject.Application.Interfaces;
 using FilmProject.Domain.Entities;
 using FilmProject.Infrastructure.Repository.Abstract;
 using System;
@@ -12,33 +14,39 @@ namespace FilmProject.Application.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
-        public CategoryService(ICategoryRepository categoryRepository)
+        private IMapper _mapper;
+
+        public CategoryService(ICategoryRepository categoryRepository ,IMapper mapper)
         {
+            _mapper = mapper;
             _categoryRepository = categoryRepository;
         }
-        public Task<List<Movie>> GetAllAsync()
+        public Task<List<CategoryDto>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public void AddCategory(Category Category)
+        public void AddCategory(CategoryDto categoryDto)
         {
+            Category category = _mapper.Map<CategoryDto, Category>(categoryDto);
+
             // validation kontrolleri yapılacak.
 
             // Veritabanında bu isimle bir kategori var mı kontrolü yapıldı.
-            if (_categoryRepository.isExist(Category.CategoryName))
+            if (_categoryRepository.isExist(category.CategoryName))
             {
                 throw new InvalidOperationException("This category is already exists.");
             }
             else 
             {
-                _categoryRepository.Add(Category);
+                _categoryRepository.Add(category);
             }
  
         }
 
-        public async Task UpdateCategoryAsync(Category NewCategory)
+        public async Task UpdateCategoryAsync(CategoryDto categoryDto)
         {
+            Category NewCategory = _mapper.Map<CategoryDto, Category>(categoryDto);
             // Bu id değerine sahip kategori kontrolü yapıldı.
             Category oldCategory = await _categoryRepository.GetAsync(x => x.Id == NewCategory.Id);
             if (oldCategory == null)

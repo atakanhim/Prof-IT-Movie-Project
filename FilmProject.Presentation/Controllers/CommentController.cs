@@ -1,6 +1,9 @@
-﻿using FilmProject.Application.Interfaces;
+﻿using AutoMapper;
+using FilmProject.Application.Contracts.Movie;
+using FilmProject.Application.Interfaces;
 using FilmProject.Application.Services;
 using FilmProject.Domain.Entities;
+using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +13,11 @@ namespace FilmProject.Presentation.Controllers
     public class CommentController : Controller
     {
         private readonly ICommentService _commentService;
-        public CommentController(ICommentService commentService)
+        private IMapper _mapper;
+
+        public CommentController(ICommentService commentService, IMapper mapper)
         {
+            _mapper = mapper;
             _commentService = commentService;
         }
         public IActionResult Index()
@@ -36,12 +42,13 @@ namespace FilmProject.Presentation.Controllers
             var comments = await _commentService.GetAllAsync();
             var result = comments.OrderByDescending(x=>x.Created).ToList();
       
+
             return Json(result);
         }
         [HttpGet]
         [Route("MostLikedComment")]
         //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> MostLikedComment() // yorumlar son eklenen olarak sıralanıp listeleniyor.
+        public async Task<IActionResult> MostLikedComment() // en çok begenilen yorum listeleniyor
         {
             var comments = await _commentService.GetAllAsync();
             var result = comments.OrderByDescending(x => x.LikeCount).FirstOrDefault();
@@ -51,11 +58,13 @@ namespace FilmProject.Presentation.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public IActionResult CreateComment([FromBody] Comment model) // Yorum Ekleme fonksiyonu 
+        public IActionResult CreateComment([FromBody] CommentViewModel commentViewModel) // Yorum Ekleme fonksiyonu 
         {
-           
-            _commentService.Add(model);
-            return Ok(model);
+
+            CommentDto comment = _mapper.Map<CommentViewModel, CommentDto>(commentViewModel);
+
+            _commentService.Add(comment);
+            return Json(comment);
         }
         [HttpPut]
         [Route("Delete/{id}")]
@@ -63,12 +72,12 @@ namespace FilmProject.Presentation.Controllers
         {
             try
             {
-                var comment = await _commentService.GetAsync(x => x.Id == id);
+                var comment = await _commentService.GetAsync(x => x.Id == id && x.IsDeleted==false) ;
                 if (comment != null)
                 {
-                    comment.IsDeleted = true;
+                    comment.IsDeleted = !comment.IsDeleted;
                     _commentService.Update(comment);
-                    return Ok(comment);
+                    return Json(comment);
                 }
                 return Ok(new
                 {

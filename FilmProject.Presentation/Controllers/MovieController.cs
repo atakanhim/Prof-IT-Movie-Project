@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using FilmProject.Application.Contracts.Movie;
 using FilmProject.Application.Interfaces;
+using FilmProject.Application.Services;
 using FilmProject.Domain.Entities;
 using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Collections;
 
 namespace FilmProject.Presentation.Controllers
 {
@@ -117,25 +119,13 @@ namespace FilmProject.Presentation.Controllers
         //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetMoviesWithCategoryAsync() // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
         {
-            List<float> ortalamalar = new List<float>();
-            RenderMoviesViewModel model = new RenderMoviesViewModel();
+            IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync();
 
-            var movies = await _movieService.GetListWithCategoryAsync();
-            
-          // bu kısımda ufak sorun var eger daha once like atılmadıysa count 0 daysa dizi sırası bozuluyor .
-           foreach (var movie in movies)
-            {
-                if(movie == null) continue;
-                if(movie.MoviePointCounter == 0) continue;
+            IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
 
-                float x = movie.MoviePoint / movie.MoviePointCounter;
-                ortalamalar.Add(x);
-            }
-
-            model.Movies = movies;
+          
        
-            model.OrtalamaList = ortalamalar;
-            return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", model);
+            return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
 
         }
         [HttpGet]
@@ -143,12 +133,16 @@ namespace FilmProject.Presentation.Controllers
         //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetMoviesWithCategoryJsonAsync() // tum filmler , categoriler ile birlikte doner bunu json olarak gonderir.
         {
-            var movies = await _movieService.GetListWithCategoryAsync();
+          
+            IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync();
+
+            IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
+         
             var settings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
-            var json = JsonConvert.SerializeObject(movies, settings);
+            var json = JsonConvert.SerializeObject(movieViewModel, settings);
 
 
             return Ok(json);
@@ -193,9 +187,9 @@ namespace FilmProject.Presentation.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public IActionResult CreateMovie([FromBody] MovieViewModel MovieViewModel) // Film Ekleme fonksiyonu 
+        public IActionResult CreateMovie([FromBody] MovieViewModel movieViewModel) // Film Ekleme fonksiyonu 
         {
-             MovieDto movie = _mapper.Map<MovieViewModel, MovieDto>(MovieViewModel);
+             MovieDto movie = _mapper.Map<MovieViewModel, MovieDto>(movieViewModel);
 
             _movieService.Add(movie);
 
