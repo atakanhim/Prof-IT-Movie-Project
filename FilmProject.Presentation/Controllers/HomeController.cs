@@ -30,6 +30,12 @@ namespace FilmProject.Presentation.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Profil()
+        {
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

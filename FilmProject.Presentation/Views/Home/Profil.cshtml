@@ -1,0 +1,247 @@
+﻿@{
+    Layout = null;
+}
+@using Microsoft.AspNetCore.Identity
+@using FilmProject.Domain.Entities
+@using Microsoft.Extensions.Localization;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject IStringLocalizer<SharedResource> localizer;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+@{
+        Layout = null;
+}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FilmProject.Presentation</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <!-- Anasayfa Font -->
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/profile-sidebar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FilmProject.Presentation.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/sitil.css" type="text/css">
+</head>
+<body>
+
+@*    <div class="menu-btn">
+        <div class="menu-btn__burger">
+        </div>
+    </div>*@
+
+    <div class="y-container">
+        <!-- Sidebar  -->
+        <div class="y-sidebar">
+            <div class="position-fixed">
+                <div class="sidebar">
+
+                    <div class="sidebar__header">
+                        
+                        <img src="cinqueterre.jpg" class="rounded-circle" alt="Cinque Terre" width="230" height="230">
+                        <div class="header__logo">YUSUF BOZ</div>
+                            <div class="row"> 
+                                <div class="col-lg-4">
+                                    <div>
+                                        48
+                                    </div>
+                                    <div>
+                                        Comment
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div>
+                                        120
+                                    </div>
+                                    <div>
+                                        To Scored
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div>
+                                        560
+                                    </div>
+                                    <div>
+                                        Score
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="header__features">
+                            <p class="sidebar__custom-header">Bio</p>
+                            <div class="line"></div>
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            </p>
+
+                        </div>
+
+                    </div>
+                    @*Footer Start*@
+                    <div class="sidebar__categories">
+
+                    
+                    </div>
+                    @*Footer End*@
+
+                </div>
+            </div>
+        </div>
+        <!-- Header Bitiş -->
+        <!-- Main -->
+        <div class=" y-content">
+            <div class="container">
+                <div class="header__image">
+                <section class=" normal-breadcrumb set-bg" data-setbg="img/sidebar/tv-2.jpg">
+                    <div class="container">
+                        @*<div class="row">
+                            <div class="col-lg-12 text-center">
+                                <div class="normal__breadcrumb__text">
+                                    <h2>Login</h2>
+                                    <p>Welcome to the official Anime blog.</p>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+                </section>
+                </div>
+                @*normal__breadcrumb__text*@
+                <section class="header__bio">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <h1>PHOTO</h1>                                  
+                                    </div>
+                                    <div class="col-lg-8 container">
+                                        <h2>Yusuf Boz</h2>
+                                        <h3>Bio</h3>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambl</p>
+                                    </div>
+                                    <div class="row flex-nowrap">
+                                        <div class="col-lg-4">
+                                            <div>
+                                                48
+                                            </div>
+                                            <div>
+                                                Comments
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div>
+                                                120
+                                            </div>
+                                            <div>
+                                                To Scored
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div>
+                                                560
+                                            </div>
+                                            <div>
+                                                Movie Score
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </section>
+
+                <div class="col-lg-12">
+                    <div class="blog__details__content">
+
+
+                        <div class="blog__details__tags">
+                            <a href="#">Healthfood</a>
+                            <a href="#">Sport</a>
+                            <a href="#">Game</a>
+                        </div>
+                        <div class="blog__details__btns">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="blog__details__btns__item">
+                                        <h5>
+                                            <a href="#"><span class="arrow_left"></span> Building a Better LiA...</a>
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="blog__details__btns__item next__btn">
+                                        <h5>
+                                            <a href="#">
+                                                Mugen no Juunin: Immortal – 21 <span class="arrow_right"></span>
+                                            </a>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog__details__comment">
+                            <h4>3 Comments</h4>
+                            <div class="blog__details__comment__item">
+                                <div class="blog__details__comment__item__pic">
+                                    <img src="img/blog/details/comment-1.png" alt="">
+                                </div>
+                                <div class="blog__details__comment__item__text">
+                                    <span>Sep 08, 2020</span>
+                                    <h5>John Smith</h5>
+                                    <p>
+                                        Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                                        adipisci velit, sed quia non numquam eius modi
+                                    </p>
+                                    <a href="#">Like</a>
+                                    <a href="#">Reply</a>
+                                </div>
+                            </div>
+                            <div class="blog__details__comment__item">
+                                <div class="blog__details__comment__item__pic">
+                                    <img src="img/blog/details/comment-3.png" alt="">
+                                </div>
+                                <div class="blog__details__comment__item__text">
+                                    <span>Sep 08, 2020</span>
+                                    <h5>Adrian Coleman</h5>
+                                    <p>
+                                        Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                                        adipisci velit, sed quia non numquam eius modi
+                                    </p>
+                                    <a href="#">Like</a>
+                                    <a href="#">Reply</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+             
+
+        </div>
+        <!-- Main Bitiş -->
+
+
+    </div>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+
+
+</body>
+</html>
