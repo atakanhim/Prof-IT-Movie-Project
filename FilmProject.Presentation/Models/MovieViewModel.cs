@@ -1,4 +1,5 @@
-﻿using FilmProject.Domain.Entities;
+﻿using FilmProject.Application.Contracts.Movie;
+using FilmProject.Domain.Entities;
 using FilmProject.Domain.Enums;
 
 namespace FilmProject.Presentation.Models
@@ -17,8 +18,8 @@ namespace FilmProject.Presentation.Models
         public string ImdbUrl { get; set; }
         public string MovieLanguage { get; set; }
         public float Ortalama { get; set; }
-        public ICollection<Comment> Comments { get; set; }
-        public ICollection<MovieCategoryMap> MovieCategories { get; set; }
-        public ICollection<Favorite> WhoFavorited { get; set; }
+        public ICollection<CommentDto> Comments { get; set; }
+        public ICollection<CategoryDto> MovieCategories { get; set; }
+        public ICollection<FavoriteDto> WhoFavorited { get; set; }
     }
 }

@@ -9,7 +9,6 @@ namespace FilmProject.Application.Contracts.Movie
 {
     public class MovieCategoryMapDto
     {
-
         public int MovieId { get; set; }
         public MovieDto Movie { get; set; }
         public int CategoryId { get; set; }

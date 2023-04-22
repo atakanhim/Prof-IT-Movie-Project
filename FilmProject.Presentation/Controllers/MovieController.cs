@@ -120,13 +120,8 @@ namespace FilmProject.Presentation.Controllers
         public async Task<IActionResult> GetMoviesWithCategoryAsync() // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
         {
             IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync();
-
-            IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
-
-          
-       
+            IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);        
             return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
-
         }
         [HttpGet]
         [Route("MoviesWithCategoryJson")]
