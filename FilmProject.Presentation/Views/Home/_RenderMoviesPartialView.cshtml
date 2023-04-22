@@ -1,0 +1,29 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using FilmProject.Presentation.Models
+@model IEnumerable<MovieViewModel>
+
+ @foreach (var item in Model)
+{
+     <div class="col-lg-4 col-md-6 col-sm-6">
+                   <div class="product__item">
+                                        <div class="product__item__pic set-bg" style="background-image:url('@item.PhotoPath')">
+                                            <div class="ep">@item.Ortalama</div>
+                                            <div class="comment"><i class="fa fa-comments"></i> @item.Comments.Count</div>
+                                            <div class="view"><i class="fa fa-heart"></i>0</div>     @*Buraya kaç kişi bunu favorilerine eklemiş o listenebilir*@
+                                       
+                                        </div>
+                                        <div class="product__item__text">
+                                            <ul>
+                                                @foreach (var x in item.MovieCategories){
+                                                    <li>@x.Category.CategoryName</li>
+                                                }
+                                            </ul>
+                                            <h5><a href="#">@item.MovieName</a></h5>
+                                        </div>
+                </div>
+     </div>
+ }
+

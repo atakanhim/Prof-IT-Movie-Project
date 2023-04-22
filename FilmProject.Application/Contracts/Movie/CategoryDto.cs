@@ -1,18 +1,16 @@
-﻿using FilmProject.Domain.Entities.Common;
+﻿using FilmProject.Domain.Entities;
+using FilmProject.Domain.Entities.Common;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FilmProject.Domain.Entities
+namespace FilmProject.Application.Contracts.Movie
 {
-    public class Category:BaseEntity
+    public class CategoryDto:BaseEntity
     {
-   
         public string CategoryName { get; set; }
-
-       
+  
     }
 }

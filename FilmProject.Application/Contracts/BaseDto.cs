@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FilmProject.Domain.Entities.Common
+namespace FilmProject.Application.Contracts
 {
-    public class BaseEntity
+    public class BaseDto
     {
         public int Id { get; set; }
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } 
     }
 }

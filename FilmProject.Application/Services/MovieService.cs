@@ -1,6 +1,10 @@
-﻿using FilmProject.Application.Interfaces;
+﻿using AutoMapper;
+using AutoMapper.Execution;
+using FilmProject.Application.Contracts.Movie;
+using FilmProject.Application.Interfaces;
 using FilmProject.Domain.Entities;
 using FilmProject.Infrastructure.Repository.Abstract;
+using FilmProject.Infrastructure.Repository.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,50 +17,90 @@ namespace FilmProject.Application.Services
     public class MovieService : IMovieService
     {
         private IMovieRepository _repository;
-
-        public MovieService(IMovieRepository repository)
+        private IMapper _mapper;
+        public MovieService(IMovieRepository repository, IMapper mapper)
         {
+            _mapper = mapper;
             _repository = repository;
         }
 
-        public void Add(Movie movie)
+        public void Add(MovieDto movieDto)
         {
-            _repository.Add(movie);
+            // Veritabanında bu isimle bir film var mı kontrolü yapıldı.
+            Movie movie = _mapper.Map<MovieDto, Movie>(movieDto);
+
+            if (_repository.isExist(movie.MovieName))
+            {
+                throw new InvalidOperationException("This movie is already exists.");
+            }
+            else
+            {          
+                _repository.Add(movie);              
+            }
+        }
+        public void Update(MovieDto movieDto)
+        {
+            Movie movie = _mapper.Map<MovieDto, Movie>(movieDto);
+            _repository.Update(movie);
         }
 
-        public async Task<List<Movie>> GetAllAsync()
+        public async Task<IEnumerable<MovieDto>> GetAllAsync(Expression<Func<Movie, bool>>? filter = null)
         {
-            return await _repository.GetListAsync();
+            var movies = await _repository.GetListAsync();
+            List<MovieDto> moviesDto = _mapper.Map<List<Movie>, List<MovieDto>>(movies);
+
+            return moviesDto;
+
         }
 
-        public async Task<List<string>> GetAllLanguagesAsync()
+        public async Task<IEnumerable<string>> GetAllLanguagesAsync()
         {
             return await _repository.GetAllLanguagesAsync();
         }
 
-        public async Task<Movie?> GetAsync(Expression<Func<Movie, bool>> filter)
+        public async Task<MovieDto?> GetAsync(Expression<Func<Movie, bool>> filter)
         {
-            return await _repository.GetAsync(filter);
+            var movie = await _repository.GetAsync(filter);
+            MovieDto movieDto = _mapper.Map<Movie,MovieDto>(movie);
+
+            return movieDto;
+       
         }
 
-        public async Task<List<Movie>> GetLastMoviesAsync(int number)
+        public async Task<IEnumerable<MovieDto>> GetLastMoviesAsync(int number)
         {
-            return await _repository.GetLastMovieAsync(number);
+            var movies = await _repository.GetLastMovieAsync(number);
+            List<MovieDto> moviesDto = _mapper.Map<List<Movie>, List<MovieDto>>(movies);
+
+            return moviesDto;
+
         }
 
-        public async Task<List<Movie>> GetListWithCategoryAsync()//
+        public async Task<IEnumerable<MovieDto>> GetListWithCategoryAsync()//
         {
-            return await _repository.GetListWithCategoryAsync();
+            var movies = await _repository.GetListWithCategoryAsync();
+
+            List<MovieDto> moviesDto = _mapper.Map<List<Movie>, List<MovieDto>>(movies);
+
+            return moviesDto;
         }
 
-        public async Task<List<Movie>> GetMovieByLanguageAsync(string language)
+        public async Task<IEnumerable<MovieDto>> GetMovieByLanguageAsync(string language)
         {
-            return await _repository.GetListAsync(m => m.MovieLanguage == language);
+            var movies = await _repository.GetListAsync(m => m.MovieLanguage == language);
+
+            List<MovieDto> moviesDto = _mapper.Map<List<Movie>, List<MovieDto>>(movies);
+
+            return moviesDto;
+
+           
         }
 
         public async Task<int> GetMovieCountAsync()
         {
             return await _repository.GetMovieCountAsync();
         }
+
+
     }
 }

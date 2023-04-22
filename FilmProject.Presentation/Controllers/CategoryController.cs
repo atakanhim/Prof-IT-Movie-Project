@@ -1,5 +1,8 @@
-﻿using FilmProject.Application.Interfaces;
+﻿using AutoMapper;
+using FilmProject.Application.Contracts.Movie;
+using FilmProject.Application.Interfaces;
 using FilmProject.Domain.Entities;
+using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,8 +12,10 @@ namespace FilmProject.Presentation.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
-        public CategoryController(ICategoryService categoryService)
+        private IMapper _mapper;
+        public CategoryController(ICategoryService categoryService,IMapper mapper)
         {
+            _mapper = mapper;
             _categoryService = categoryService;
         }
         public IActionResult Index()
@@ -20,8 +25,9 @@ namespace FilmProject.Presentation.Controllers
         [HttpPost]
         [Route("CreateCategory")]
         //[Authorize(Roles = "Admin")]
-        public IActionResult AddCategory([FromBody]Category category)
+        public IActionResult AddCategory([FromBody] CategoryViewModel categoryViewModel)
         {
+            CategoryDto category = _mapper.Map<CategoryViewModel, CategoryDto>(categoryViewModel);
             try
             {
                 _categoryService.AddCategory(category);
@@ -38,8 +44,9 @@ namespace FilmProject.Presentation.Controllers
         [HttpPost]
         [Route("UpdateCategory")]
         //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateCategory([FromBody] Category category)
+        public async Task<IActionResult> UpdateCategory([FromBody] CategoryViewModel categoryViewModel)
         {
+            CategoryDto category = _mapper.Map<CategoryViewModel, CategoryDto>(categoryViewModel);
             try
             {
                 await _categoryService.UpdateCategoryAsync(category);

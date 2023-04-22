@@ -1,4 +1,5 @@
-﻿using FilmProject.Domain.Entities;
+﻿using FilmProject.Application.Contracts.Movie;
+using FilmProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,20 @@ namespace FilmProject.Application.Interfaces
 {
     public interface IMovieService
     {
-        Task<Movie?> GetAsync(Expression<Func<Movie, bool>> filter);
+        Task<MovieDto?> GetAsync(Expression<Func<Movie, bool>> filter);
 
-        Task<List<Movie>> GetAllAsync(); // tum filmleri doner
-        Task<List<Movie>> GetLastMoviesAsync(int number); // son eklenen filmler doner
+        Task<IEnumerable<MovieDto>> GetAllAsync(Expression<Func<Movie, bool>>? filter = null); // tum filmleri doner
+
+
+        Task<IEnumerable<MovieDto>> GetLastMoviesAsync(int number); // son eklenen filmler doner
         Task<int> GetMovieCountAsync(); // toplam film sayısı
-        Task<List<Movie>> GetListWithCategoryAsync(); // category ile map edip dondurdum
-        void Add(Movie movie);
-        
-        Task<List<string>> GetAllLanguagesAsync(); // kayıtlı filmlerin dillerini listeler
-        Task<List<Movie>> GetMovieByLanguageAsync(string language);
+        Task<IEnumerable<MovieDto>> GetListWithCategoryAsync(); // category ile map edip dondurdum
+
+        void Add(MovieDto movie); // film ekleme
+        void Update(MovieDto movie); // film gncelleme
+
+        Task<IEnumerable<string>> GetAllLanguagesAsync(); // kayıtlı filmlerin dillerini listeler
+        Task<IEnumerable<MovieDto>> GetMovieByLanguageAsync(string language);
 
     }
 }
