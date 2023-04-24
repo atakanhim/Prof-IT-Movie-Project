@@ -10,6 +10,7 @@ namespace FilmProject.Presentation.Mappings
             CreateMap<MovieViewModel, MovieDto>().ReverseMap().ForMember(dest => dest.Ortalama, opt => opt.MapFrom(src => src.MoviePointCounter == 0 ? 1 : Math.Round((float)src.MoviePoint / src.MoviePointCounter, 1)));
             CreateMap<CommentViewModel, CommentDto>().ReverseMap();
             CreateMap<CategoryViewModel, CategoryDto>().ReverseMap();
+            CreateMap<FavoriteViewModel, FavoriteDto>().ReverseMap();
         }
 
     }

@@ -62,10 +62,12 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IFavoriteService, FavoriteService>();
     //repositories
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
 builder.Services.AddScoped<IEmailService, EmailSender>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddSingleton(new QRCodeService(new QRCodeGenerator()));

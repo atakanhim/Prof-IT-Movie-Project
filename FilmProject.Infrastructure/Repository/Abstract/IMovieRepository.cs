@@ -17,6 +17,7 @@ namespace FilmProject.Infrastructure.Repository.Abstract
         Task<List<string>> GetAllLanguagesAsync();
 
         bool isExist(string MovieName);
+        public bool isExistById(int MovieId);
 
     }
 }

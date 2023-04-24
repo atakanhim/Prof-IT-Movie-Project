@@ -49,10 +49,12 @@ namespace FilmProject.Application.Services
             Category NewCategory = _mapper.Map<CategoryDto, Category>(categoryDto);
             // Bu id değerine sahip kategori kontrolü yapıldı.
             Category oldCategory = await _categoryRepository.GetAsync(x => x.Id == NewCategory.Id);
-            if (oldCategory == null)
+
+            bool exists = _categoryRepository.isExist(categoryDto.CategoryName);
+            if (oldCategory == null || exists)
             {
                 // Kategori bulunmuyorsa hata mesajı dönüldü
-                throw new InvalidOperationException("There is no category with this id");
+                throw new InvalidOperationException("There is no category with this id or there is a category with the same name.");
             }
             else 
             {
