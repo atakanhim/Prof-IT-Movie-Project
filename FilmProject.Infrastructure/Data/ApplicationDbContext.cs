@@ -41,9 +41,9 @@ namespace FilmProject.Infrastructure.Data
                 .HasForeignKey(bc => bc.MovieId);
 
             modelBuilder.Entity<MovieCategoryMap>()
-                .HasOne(bc => bc.Category)
-                .WithMany(c => c.MovieCategories)
-                .HasForeignKey(bc => bc.CategoryId);
+              .HasOne(bc => bc.Category)
+              .WithMany(b => b.MovieCategories)
+              .HasForeignKey(bc => bc.CategoryId);
 
 
             modelBuilder.Entity<Favorite>()

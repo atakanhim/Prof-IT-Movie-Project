@@ -41,7 +41,7 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         {
 
 
-            return await _context.Movies.Include(x=>x.MovieCategories).ThenInclude(xc=>xc.Category).ToListAsync();
+            return await _context.Movies.Include(y=>y.Comments).Include(x=>x.MovieCategories).ThenInclude(xc=>xc.Category).ToListAsync();
          
         }
 
@@ -50,6 +50,9 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             return await _context.Movies.Select(m => m.MovieLanguage).Distinct().ToListAsync();
         }
 
-        
+        public bool isExist(string MovieName)
+        {
+            return _context.Movies.Any(c => c.MovieName == MovieName);
+        }
     }
 }
