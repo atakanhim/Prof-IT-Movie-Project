@@ -54,5 +54,10 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         {
             return _context.Movies.Any(c => c.MovieName == MovieName);
         }
+
+        public bool isExistById(int MovieId)
+        {
+            return _context.Movies.Any(c => c.Id == MovieId);
+        }
     }
 }
