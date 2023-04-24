@@ -145,12 +145,16 @@ namespace FilmProject.Presentation.Controllers
         }
         [HttpGet]
         [Route("GetLastMovies/{number}")]
-        //[Authorize(Roles ="Admin")]
-        public async Task<IActionResult> GetLastMoviesAsync(int number) // son yuklenen 
-        {
-            var movies = await _movieService.GetLastMoviesAsync(number);
 
-            return Json(movies);
+        public async Task<IActionResult> GetLastMoviesAsync(int number=1) // son yuklenen 
+        {
+
+            IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync();
+            movies = movies.OrderByDescending(x => x.Created).Take(number);
+            IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
+            return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
+           
+
         }
 
         [HttpGet]

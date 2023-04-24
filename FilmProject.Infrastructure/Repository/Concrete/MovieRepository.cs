@@ -33,7 +33,7 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         public async Task<List<Movie>> GetLastMovieAsync(int number)
         {
 
-            return  await _context.Movies.OrderByDescending(x => x.Created).Take(number).ToListAsync();
+            return  await _context.Movies.Include(y => y.Comments).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).OrderByDescending(x => x.Created).Take(number).ToListAsync();
 
         }
 
