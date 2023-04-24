@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using FilmProject.Domain.Entities
+@using Microsoft.Extensions.Localization;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject IStringLocalizer<SharedResource> localizer;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FilmProject.Presentation</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <!-- Anasayfa Font -->
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FilmProject.Presentation.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/sitil.css" type="text/css">
+</head>
+<body>
+
+
+
+   
+     
+
+        <!-- Header Bitiş -->
+        <!-- Main -->
+        <div class=" y-content">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+        <!-- Main Bitiş -->
+
+
+ 
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/player.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

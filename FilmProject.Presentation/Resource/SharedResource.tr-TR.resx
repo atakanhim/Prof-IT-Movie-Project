@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="add_my_list" xml:space="preserve">
+    <value>Listeme Ekle</value>
+  </data>
+  <data name="aired_day" xml:space="preserve">
+    <value>Tarih</value>
+  </data>
   <data name="category_action" xml:space="preserve">
     <value>Aksiyon</value>
   </data>
@@ -132,11 +138,17 @@
   <data name="category_sci-fi" xml:space="preserve">
     <value>Bilim Kurgu</value>
   </data>
+  <data name="comment_placeholder" xml:space="preserve">
+    <value>Sizin Yorumunuz</value>
+  </data>
   <data name="features_header" xml:space="preserve">
     <value>Özellikler</value>
   </data>
   <data name="last_uploaded" xml:space="preserve">
     <value>En Son Yüklenen Filmler</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Giriş Yap</value>
   </data>
   <data name="log_in" xml:space="preserve">
     <value>Giriş Yap</value>
@@ -147,7 +159,49 @@
   <data name="most_commented" xml:space="preserve">
     <value>En Çok Yorum Alan Filmler</value>
   </data>
+  <data name="movie_categories" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
+  <data name="movie_duration" xml:space="preserve">
+    <value>Süre</value>
+  </data>
+  <data name="movie_language" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="movie_quality" xml:space="preserve">
+    <value>Kalite</value>
+  </data>
+  <data name="movie_rating_age" xml:space="preserve">
+    <value>İzleyici Kitlesi</value>
+  </data>
+  <data name="movie_recommendation" xml:space="preserve">
+    <value>Sizin için seçtiklerimiz</value>
+  </data>
+  <data name="movie_scores" xml:space="preserve">
+    <value>Puan</value>
+  </data>
+  <data name="movie_views" xml:space="preserve">
+    <value>İzlenme</value>
+  </data>
+  <data name="rent_movie" xml:space="preserve">
+    <value>Kirala</value>
+  </data>
+  <data name="reviews" xml:space="preserve">
+    <value>Yorumlar</value>
+  </data>
+  <data name="sent_comment" xml:space="preserve">
+    <value>Gönder</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="top_rated" xml:space="preserve">
     <value>En Çok Beğeni Alan Filmler</value>
+  </data>
+  <data name="votes" xml:space="preserve">
+    <value>Oy</value>
+  </data>
+  <data name="write_comment" xml:space="preserve">
+    <value>Yorum Ekle</value>
   </data>
 </root>

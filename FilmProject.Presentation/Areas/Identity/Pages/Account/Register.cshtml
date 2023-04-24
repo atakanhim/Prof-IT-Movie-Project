@@ -3,37 +3,81 @@
 @{
     ViewData["Title"] = "Register";
 }
-
-<h1>@ViewData["Title"]</h1>
-
-<div class="row">
-    <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+<!-- Normal Breadcrumb Begin -->
+<section class="normal-breadcrumb set-bg" data-setbg="img/normal-breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="normal__breadcrumb__text">
+                    <h2>Sign Up</h2>
+                    <p>Welcome to the official Anime blog.</p>
+                </div>
             </div>
-            <div class="form-floating">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-                
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
+        </div>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+</section>
+<!-- Normal Breadcrumb End -->
+
+
+<div class="signup spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login__form">
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <h3>Create a new account.</h3>
+                        <hr />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-floating" style="margin-bottom:20px">
+                            <div class="input__item" style="margin-bottom:5px">
+                                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Mail"/>
+                                <span class="icon_mail"></span>
+                            </div>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating" style="margin-bottom:20px">
+                            <div class="input__item" style="margin-bottom:5px">
+                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password"/>
+                                <span class="icon_lock"></span>
+                            </div>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating" style="margin-bottom:20px">
+                            <div class="input__item" style="margin-bottom:5px">
+                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Check Password" />
+                                <span class="icon_lock"></span>
+                            </div>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <button id="registerSubmit" type="submit" class="site-btn">Register</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="login__social__links">
+                    <h3>Login With:</h3>
+                        <hr />
+                    <ul>
+                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i> Sign in With Facebook</a></li>
+                        <li><a href="#" class="google"><i class="fa fa-google"></i> Sign in With Google</a></li>
+                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i> Sign in With Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+@*<div class="col-md-6 col-md-offset-2">
         <section>
             <h3>Use another service to register.</h3>
             <hr />
@@ -62,9 +106,4 @@
                 }
             }
         </section>
-    </div>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+    </div>*@

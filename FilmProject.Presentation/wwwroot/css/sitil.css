@@ -193,6 +193,11 @@ ol {
 	padding: 12px 30px;
 }
 
+.site-btn a {
+	color: #ffffff !important;
+	text-decoration: none !important;
+}
+
 /* Preloder */
 
 #preloder {
@@ -1745,8 +1750,8 @@ ol {
 
 .login__form form .input__item {
 	position: relative;
-	width: 370px;
-	margin-bottom: 20px;
+	/*width: 370px;*/
+	margin-bottom: 5px !important ;
 }
 
 .login__form form .input__item:before {

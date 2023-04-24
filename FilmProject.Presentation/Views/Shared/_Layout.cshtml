@@ -20,12 +20,13 @@
     <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
     <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="~/css/sitil.css" type="text/css">
+
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FilmProject.Presentation.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/sitil.css" type="text/css">
 </head>
 <body>
      
@@ -34,40 +35,39 @@
               </div>
        </div>
 
-    <div class="d-flex" style="margin:0;padding:0;width:100%; height:100vh">
-
-        <!-- Header -->
-            <div class="h-100 c-header">
+    <div class="y-container">
+        <!-- Sidebar  -->
+            <div class="y-sidebar">
                 <div class="position-fixed">
-             
-                    <div class="header-main">
-                        <div class="header-top">
-
-                          <div class="header-top-logo">L O G O</div>
-                         
-                          <div class="header-top-list">
-                            <p class="custom-p1">@localizer["features_header"]</p>
-                               <ul>
+                    <div class="sidebar">
+  
+                        <div class="sidebar__header">
+                        <div class="header__logo">L O G O</div>
+                        <div class="header__features">
+                            <p class="sidebar__custom-header">@localizer["features_header"]</p>
+                            <div class="line"></div>
+                                <ul>
                                     <li>
-                                    <a class="custom-p2">@localizer["top_rated"] </a>  <i class="fa fa-heart" aria-hidden="true"></i>
-                                </li>
+                                        <a class="custom-p2">@localizer["top_rated"] </a>  <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </li>
 
                                     <li>
-                                    <a class="custom-p2">@localizer["most_commented"] </a>    <i class="fa fa-film" aria-hidden="true"></i>
+                                        <a class="custom-p2">@localizer["most_commented"] </a>    <i class="fa fa-film" aria-hidden="true"></i>
                                     </li>
 
                                      <li>
-                                    <a class="custom-p2">@localizer["last_uploaded"]</a>  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <a class="custom-p2">@localizer["last_uploaded"]</a>  <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </li>
                                 </ul>
-                                  <div class="ortala"> <div class="cizgi"></div></div>
-                             
-                          </div>
+                                
+                            </div>
                        
-                     </div>
+                        </div>
 
-                        <div class="header-middle">
-                        <p class="custom-p1">@localizer["category_header"]</p>
+                    <div class="sidebar__categories">
+                        
+                        <p class="sidebar__custom-header">@localizer["category_header"]</p>
+                        <div class="line"></div>
                             <ul>
                                 <li>
                                 <a class="custom-p2">@localizer["category_horror"] </a>  <i class="fa-sharp fa-light fa-house"></i>
@@ -82,7 +82,7 @@
                                 <a class="custom-p2">@localizer["category_action"]</a>  <i class="fa-sharp fa-light fa-house"></i>
                                 </li>
                             </ul>
-                        <div class="ortala"> <div class="cizgi"></div></div>
+                      
                      
                         </div>
 
@@ -91,14 +91,14 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button type="submit">@localizer["log_out"]</button> <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                <button class="btn btn-link sidebar__bottom" type="submit">@localizer["log_out"] </button> <i class="fa fa-sign-out" aria-hidden="true"></i>
                              </form>
                             
                         }
                         else
                         {
                             <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button type="submit">@localizer["log_in"]<i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                                <button class="btn btn-link sidebar__bottom" type="submit">@localizer["log_in"] <i class="fa fa-sign-in" aria-hidden="true"></i></button>
                             </form>
                             
                         }
@@ -107,20 +107,19 @@
                     </div>
                 </div>
             </div>
-                 <!-- Header Bitiş -->
+            <!-- Header Bitiş -->
 
 
-                    <!-- Main -->
-            <div class="h-100 c-main">
+             <!-- Main -->
+            <div class=" y-content">
                 <main role="main">
                 @RenderBody()
                 </main>
             </div>
+             <!-- Main Bitiş -->
 
-            
-                    <!-- Main Bitiş -->
-        </div>
- 
+
+    </div>
 
 
 
@@ -129,6 +128,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/player.js"></script>
     <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
 
 
     @await RenderSectionAsync("Scripts", required: false)

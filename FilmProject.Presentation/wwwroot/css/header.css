@@ -1,39 +1,81 @@
-﻿.c-header {
-    width: 20%;
+﻿*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+.y-container{
+    display: flex;
+    /*height:100vh;*/
+    background-color: black;
+}
+/*max-height*/
+.y-sidebar {
+    height:100vh;
+    width: 300px;
+    background-color: red;
+}
+
+.y-content {
+    width: 100%;
     transition: all ease-in-out 0.3s;
 }
 
-.c-main {
-    width: 80%;
-    margin-right: 0px;
-    transition: all ease-in-out 0.3s;
-}
-
-/*header main*/
-.header-main {
+/*Sidebar*/
+.sidebar {
     background-color: #0F0F0F;
     color: gray;
     height: 100vh;
-    width: 100%;
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    align-content:center;
+    justify-content: space-between;
+}
+
+.sidebar__custom-header {
+    font-size: 1.6rem;
+    margin-left: 10px;
+}
+
+.sidebar p {
+    margin-left: 20px;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    border-left: 3px solid transparent;
+    transition: all ease-in-out 0.3s;
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+}
+
+.sidebar ul li a {
+    margin-left: 15px;
+    font-size: 1rem;
+}
+
+.sidebar ul li:hover {
+    border-left: 3px solid red;
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+
+/*Sidebar Header*/
+.sidebar__header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-}
-/*header top*/
-.header-top-logo {
-    margin-top: 15px;
+    width: 90%;
 }
 
-.header-top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 99%;
+.header__logo {
+    font-size:2rem;
 }
 
-.header-top-list {
+/*Sidebar Features*/
+.header__features {
     margin-top: 50px;
     width: 100%;
     display: flex;
@@ -41,59 +83,19 @@
     justify-content: space-between;
 }
 
-    .header-top-list p {
-        margin-left: 10px;
-    }
 
-    .header-top-list ul li {
-        padding: 10px;
-        border-left: 3px solid transparent;
-        transition: all ease-in-out 0.3s;
-        display: flex;
-        justify-content: start;
-        gap: 10px;
-    }
-
-        .header-top-list ul li:hover {
-            border-left: 3px solid red;
-            cursor: pointer;
-            color: whitesmoke;
-        }
-/*header middle*/
-.header-middle {
-    margin-top: -55px;
-    width: 100%;
+/*Sidebar Categories*/
+.sidebar__categories {
+/*    margin-top: -55px;*/
+    width: 90%;
 }
 
-    .header-middle ul {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 100%;
-        gap: 10px
-    }
+.sidebar__bottom {
+    color: white ;
+    font-size: 1rem ;
+}
 
-    .header-middle p {
-        margin-left: 10px;
-    }
 
-    .header-middle ul li {
-        padding: 5px;
-        border-left: 3px solid transparent;
-        transition: all ease-in-out 0.3s;
-        display: flex;
-        justify-content: start;
-    }
-
-        .header-middle ul li a {
-            margin-left: 15px;
-        }
-
-        .header-middle ul li:hover {
-            border-left: 3px solid red;
-            cursor: pointer;
-            color: whitesmoke;
-        }
 /*header bottom*/
 .header-bottom form{
     width: 50%;
@@ -106,12 +108,9 @@
     font-size: small;
 }
 
-    .header-bottom form:hover {
-        cursor: pointer;
-        font-size: 14px;
-        color: whitesmoke;
-    }
-
+.sidebar__bottom:hover {
+    color: whitesmoke;
+}
 
 
 
@@ -139,16 +138,16 @@
     transition: all .5s ease-in-out;
 }
 
-    .menu-btn__burger::before, .menu-btn__burger::after {
-        content: "";
-        position: absolute;
-        width: 40px;
-        height: 3px;
-        background-color: #0F0F0F;
-        border-radius: 5px;
-        box-shadow: 0px 2px 5px rgba(255,101,47,.2);
-        transition: all .5s ease-in-out;
-    }
+.menu-btn__burger::before, .menu-btn__burger::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 3px;
+    background-color: #0F0F0F;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(255,101,47,.2);
+    transition: all .5s ease-in-out;
+}
 
     .menu-btn__burger::before {
         transform: translateY(-16px);
@@ -158,48 +157,58 @@
         transform: translateY(16px);
     }
 
-/* animation */
 
 
+
+.line {
+    width: 80%;
+    margin-left: 10px;
+    margin-top: 20px;
+    border-top: 1px solid #46140c;
+}
+
+
+
+/*Animations */    
 .menu-btn.open .menu-btn__burger {
     background: transparent;
     transform: translateX(-50px);
     box-shadow: none;
 }
 
-    .menu-btn.open .menu-btn__burger::before {
-        transform: rotate(45deg) translate(35px, -35px);
-        background-color: #fff;
-    }
+.menu-btn.open .menu-btn__burger::before {
+    transform: rotate(45deg) translate(35px, -35px);
+    background-color: #fff;
+}
 
-    .menu-btn.open .menu-btn__burger::after {
-        transform: rotate(-45deg) translate(35px, 35px);
-        background-color: #fff;
-    }
+.menu-btn.open .menu-btn__burger::after {
+transform: rotate(-45deg) translate(35px, 35px);
+    background-color: #fff;
+}
 
 
-@media screen and (max-width: 1200px) {
-    .c-main {
+
+/* Media Querries */
+@media screen and (max-width: 1450px) {
+    .y-content {
         width: 100%;
     }
 
-    .c-header {
-       
-        position:fixed;
-        transform: translate(-200px,0);
+    .y-sidebar {
+        display: none;
         z-index: 99;
-        width: 280px;
     }
 
-        .c-header.show {
-            transform: translate(0px,0);
-        }
+ .y-sidebar.show {
+     display:block;
+     transform: translate(0px,0);
+ }
 
-    .menu-btn {
-        display: block;
-        top: 20px;
-        transform: translate(0,0);
-    }
+.menu-btn {
+    display: block;
+    top: 20px;
+    transform: translate(0,0);
+}
     
 }
 
@@ -208,23 +217,4 @@
 
 
 
-.cizgi {
-    width: 70%;
-    margin-top: 30px;
-    border-top: 1px solid #46140c;
-}
 
-.ortala {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.custom-p1 {
-    font-size: x-large;
-}
-
-.custom-p2 {
-    font-size: small;
-}

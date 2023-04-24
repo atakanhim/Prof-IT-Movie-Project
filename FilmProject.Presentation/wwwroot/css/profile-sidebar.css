@@ -1,0 +1,174 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.y-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.y-sidebar {
+    height: 100vh;
+    min-width: 300px;
+
+    background-color: red;
+}
+
+.y-content {
+    width: 100%;
+    transition: all ease-in-out 0.3s;
+}
+
+/*Sidebar*/
+.sidebar {
+    background-color: #0F0F0F;
+    color: gray;
+    height: 100vh;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.sidebar__custom-header {
+    font-size: 1.6rem;
+    margin-left: 10px;
+}
+
+.sidebar p {
+    margin-left: 20px;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    border-left: 3px solid transparent;
+    transition: all ease-in-out 0.3s;
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+}
+
+    .sidebar ul li a {
+        margin-left: 15px;
+        font-size: 1rem;
+    }
+
+    .sidebar ul li:hover {
+        border-left: 3px solid red;
+        cursor: pointer;
+        color: whitesmoke;
+    }
+
+
+/*Sidebar Header*/
+.sidebar__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+}
+
+.header__logo {
+    font-size: 2rem;
+}
+
+/*Sidebar Features*/
+.header__features {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+/*Sidebar Categories*/
+.sidebar__categories {
+    /*    margin-top: -55px;*/
+    width: 90%;
+}
+
+.sidebar__bottom {
+    color: white;
+    font-size: 1rem;
+}
+
+
+/*header bottom*/
+.header-bottom form {
+    width: 50%;
+    display: flex;
+    padding: 10px 5px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    transition: all ease-in-out 0.3s;
+    font-size: small;
+}
+
+.header__bio {
+    display: none;
+}
+
+.header__bio * {
+    color: white;
+}
+
+.sidebar__bottom:hover {
+    color: whitesmoke;
+}
+
+
+
+
+
+.line {
+    width: 80%;
+    margin-left: 10px;
+    margin-top: 20px;
+    border-top: 1px solid #46140c;
+}
+
+.header__text h1,h2,p{
+    color:white;
+
+}
+
+.header__text h1,h2{
+    font-weight: bold;
+}
+
+
+
+
+/* Media Querries */
+@media screen and (max-width: 1450px) {
+/*    .y-content {
+        width: 100%;
+    }*/
+    .header__bio{
+        display:block;
+    }
+
+    .header__image{
+        display:none;
+    }
+
+    .y-sidebar {
+        display: none;
+    }
+
+ .y-sidebar.show {
+     display: block;
+     transform: translate(0px,0);
+ }
+
+    .y-sidebar{
+        flex-direction:column;
+    }
+
+
+}
