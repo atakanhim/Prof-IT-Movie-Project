@@ -21,9 +21,12 @@ namespace FilmProject.Application.Services
             _mapper = mapper;
             _categoryRepository = categoryRepository;
         }
-        public Task<List<CategoryDto>> GetAllAsync()
+        public async Task<List<CategoryDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var categories = await _categoryRepository.GetListAsync();
+            List<CategoryDto> categoryDto = _mapper.Map<List<Category>, List<CategoryDto>>(categories);
+
+            return categoryDto;
         }
 
         public void AddCategory(CategoryDto categoryDto)

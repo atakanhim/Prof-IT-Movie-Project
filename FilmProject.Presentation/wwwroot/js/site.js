@@ -9,6 +9,11 @@ $(document).ready(function () {
     const menubtn = $(".menu-btn");
     let menuOpen = false;
 
+    var cateUrl = "/Category/Categories";
+    $.get(cateUrl, null, function (data) {
+        console.log(data);
+        $("#renderCategories").html(data);
+    });
 
     menubtn.click(function () {
         if (!menuOpen) {
@@ -28,20 +33,9 @@ $(document).ready(function () {
     });
 
 
-    $('#last_uploadedMovies').click(function () {
-        var url = "/Movie/GetLastMovies/1"; // son yuklenen filmler listeleniyors
-        $.get(url, null, function (data) {
-            console.log(data);
-            $("#movieRender").html(data);
 
-        });
-    });
-    $('#headerLogoClick').click(function () {
-        var url = "/Movie/MoviesWithCategory"; // anasayfa normal listeleniyor  
-        $.get(url, null, function (data) {
-            console.log(data);
-            $("#movieRender").html(data);
 
-        });
-    });
+
+
+
 });

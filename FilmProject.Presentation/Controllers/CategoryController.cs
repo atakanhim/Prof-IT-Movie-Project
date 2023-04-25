@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FilmProject.Application.Contracts.Movie;
 using FilmProject.Application.Interfaces;
+using FilmProject.Application.Services;
 using FilmProject.Domain.Entities;
 using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -22,6 +23,9 @@ namespace FilmProject.Presentation.Controllers
         {
             return View();
         }
+
+
+
         [HttpPost]
         [Route("CreateCategory")]
         //[Authorize(Roles = "Admin")]
@@ -40,7 +44,17 @@ namespace FilmProject.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet]
+        [Route("Categories")]
+        //[Authorize(Roles ="Admin")]
+        public async Task<IActionResult> GetMoviesWithCategoryAsync(string category) // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
+        {
+            IEnumerable<CategoryDto> categories = await _categoryService.GetAllAsync();
+            IEnumerable<CategoryViewModel> categoryViewModel = _mapper.Map<IEnumerable<CategoryDto>, IEnumerable<CategoryViewModel>>(categories);
 
+
+            return PartialView(@"~/Views/Home/_RenderCategories.cshtml", categoryViewModel);
+        }
         [HttpPost]
         [Route("UpdateCategory")]
         //[Authorize(Roles = "Admin")]

@@ -30,19 +30,25 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             throw new NotImplementedException();
         }
 
-        public async Task<List<Movie>> GetLastMovieAsync(int number)
+     
+
+        public async Task<List<Movie>> GetListWithCategoryAsync(string category)
         {
+            if(category != "" && category != null)
+            {
+                 List<Movie> movies = new List<Movie>();
+                var model = await _context.Categories.Include(x => x.MovieCategories).ThenInclude(xa=>xa.Movie).Where(a=>a.CategoryName == category).ToListAsync();   
+                foreach(var movie in model[0].MovieCategories)
+                {
+                    Movie moviedata = await _context.Movies.Include(y => y.Comments).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).Where(i=>i.Id == movie.MovieId).FirstOrDefaultAsync();
 
-            return  await _context.Movies.Include(y => y.Comments).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).OrderByDescending(x => x.Created).Take(number).ToListAsync();
+                    movies.Add(moviedata);
+                }
 
-        }
+                return movies;
+            }
 
-        public async Task<List<Movie>> GetListWithCategoryAsync()
-        {
-
-
-            return await _context.Movies.Include(y=>y.Comments).Include(x=>x.MovieCategories).ThenInclude(xc=>xc.Category).ToListAsync();
-         
+            return await _context.Movies.Include(y => y.Comments).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).ToListAsync();
         }
 
         public async Task<List<string>> GetAllLanguagesAsync()

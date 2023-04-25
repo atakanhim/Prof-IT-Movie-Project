@@ -16,9 +16,8 @@ namespace FilmProject.Application.Interfaces
         Task<IEnumerable<MovieDto>> GetAllAsync(Expression<Func<Movie, bool>>? filter = null); // tum filmleri doner
 
 
-        Task<IEnumerable<MovieDto>> GetLastMoviesAsync(int number); // son eklenen filmler doner
         Task<int> GetMovieCountAsync(); // toplam film sayısı
-        Task<IEnumerable<MovieDto>> GetListWithCategoryAsync(); // category ile map edip dondurdum
+        Task<IEnumerable<MovieDto>> GetListWithCategoryAsync(string category = ""); // category ile map edip dondurdum
 
         void Add(MovieDto movie); // film ekleme
         void Update(MovieDto movie); // film gncelleme
