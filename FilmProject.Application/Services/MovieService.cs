@@ -67,18 +67,9 @@ namespace FilmProject.Application.Services
        
         }
 
-        public async Task<IEnumerable<MovieDto>> GetLastMoviesAsync(int number)
+        public async Task<IEnumerable<MovieDto>> GetListWithCategoryAsync(string category)//
         {
-            var movies = await _repository.GetLastMovieAsync(number);
-            List<MovieDto> moviesDto = _mapper.Map<List<Movie>, List<MovieDto>>(movies);
-
-            return moviesDto;
-
-        }
-
-        public async Task<IEnumerable<MovieDto>> GetListWithCategoryAsync()//
-        {
-            var movies = await _repository.GetListWithCategoryAsync();
+            var movies = await _repository.GetListWithCategoryAsync(category);
 
             List<MovieDto> moviesDto = _mapper.Map<List<Movie>, List<MovieDto>>(movies);
 
