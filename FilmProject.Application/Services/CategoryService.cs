@@ -29,20 +29,20 @@ namespace FilmProject.Application.Services
             return categoryDto;
         }
 
-        public void AddCategory(CategoryDto categoryDto)
+        public async Task<bool> AddCategory(CategoryDto categoryDto)
         {
             Category category = _mapper.Map<CategoryDto, Category>(categoryDto);
 
             // validation kontrolleri yapılacak.
 
             // Veritabanında bu isimle bir kategori var mı kontrolü yapıldı.
-            if (_categoryRepository.isExist(category.CategoryName))
+            if (await _categoryRepository.isExist(category.CategoryName))
             {
-                throw new InvalidOperationException("This category is already exists.");
+                throw new InvalidOperationException("Bu kategori zaten mevcut.");
             }
             else 
             {
-                _categoryRepository.Add(category);
+               return await _categoryRepository.AddAsync(category);
             }
  
         }
@@ -53,7 +53,7 @@ namespace FilmProject.Application.Services
             // Bu id değerine sahip kategori kontrolü yapıldı.
             Category oldCategory = await _categoryRepository.GetAsync(x => x.Id == NewCategory.Id);
 
-            bool exists = _categoryRepository.isExist(categoryDto.CategoryName);
+            bool exists = await _categoryRepository.isExist(categoryDto.CategoryName);
             if (oldCategory == null || exists)
             {
                 // Kategori bulunmuyorsa hata mesajı dönüldü

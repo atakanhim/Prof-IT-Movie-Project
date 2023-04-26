@@ -9,6 +9,7 @@ namespace FilmProject.Infrastructure.Repository.Abstract
 {
     public interface ICategoryRepository : IEntityRepository<Category>
     {
-        bool isExist(string CategoryName);
+        Task<bool> isExist(string CategoryName);
+        Task<bool> AddAsync(Category category);
     }
 }
