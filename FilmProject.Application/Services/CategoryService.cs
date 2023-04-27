@@ -36,7 +36,7 @@ namespace FilmProject.Application.Services
             // validation kontrolleri yapılacak.
 
             // Veritabanında bu isimle bir kategori var mı kontrolü yapıldı.
-            if (await _categoryRepository.isExist(category.CategoryName))
+            if (await _categoryRepository.isExistAsync(category.CategoryName))
             {
                 throw new InvalidOperationException("Bu kategori zaten mevcut.");
             }
@@ -53,7 +53,7 @@ namespace FilmProject.Application.Services
             // Bu id değerine sahip kategori kontrolü yapıldı.
             Category oldCategory = await _categoryRepository.GetAsync(x => x.Id == NewCategory.Id);
 
-            bool exists = await _categoryRepository.isExist(categoryDto.CategoryName);
+            bool exists = await _categoryRepository.isExistAsync(categoryDto.CategoryName);
             if (oldCategory == null)
             {
                 // Kategori bulunmuyorsa hata mesajı dönüldü

@@ -16,7 +16,7 @@ namespace FilmProject.Presentation.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IValidator<CategoryViewModel> _validator;
         private IMapper _mapper;
-        public CategoryController(ICategoryService categoryService,IMapper mapper, IValidator<CategoryViewModel> validator)
+        public CategoryController(ICategoryService categoryService, IMapper mapper, IValidator<CategoryViewModel> validator)
         {
 
             _mapper = mapper;
@@ -47,7 +47,7 @@ namespace FilmProject.Presentation.Controllers
                 await _categoryService.AddCategory(category);
                 return Json(new { success = true });
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 //Loglama yapılabilir.
                 Console.WriteLine(ex);
@@ -61,7 +61,7 @@ namespace FilmProject.Presentation.Controllers
         public async Task<IActionResult> GetCategories() // film sayısı
         {
             var Liste = await _categoryService.GetAllAsync();
-        
+
             return Json(Liste);
         }
 
@@ -107,48 +107,48 @@ namespace FilmProject.Presentation.Controllers
 
                 return Ok(categoryViewModel);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return BadRequest();
             }
-            
-
-        [HttpPost]
-        [Route("Delete")]
-        //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteCategory(int id)
-        {
-            try
-            {
-                await _categoryService.DeleteCategoryAsync(id);
-                return Json(new { success = true });
-            }
-            catch (Exception ex)
-            {
-                //Loglama yapılabilir.
-                Console.WriteLine(ex);
-                return BadRequest(ex.Message);
-            }
         }
 
-        [HttpPost]
-        [Route("Update")]
-        //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateCategory([FromBody] CategoryViewModel categoryViewModel)
-        {
-            CategoryDto category = _mapper.Map<CategoryViewModel, CategoryDto>(categoryViewModel);
-            try
+            [HttpPost]
+            [Route("Delete")]
+            //[Authorize(Roles = "Admin")]
+            public async Task<IActionResult> DeleteCategory(int id)
             {
-                await _categoryService.UpdateCategoryAsync(category);
-                return Json(new { success = true });
-            }
-            catch (Exception ex)
-            {
-                //Loglama yapılabilir.
-                Console.WriteLine(ex);
-                return BadRequest(ex.Message);
+                try
+                {
+                    await _categoryService.DeleteCategoryAsync(id);
+                    return Json(new { success = true });
+                }
+                catch (Exception ex)
+                {
+                    //Loglama yapılabilir.
+                    Console.WriteLine(ex);
+                    return BadRequest(ex.Message);
+                }
             }
 
+            [HttpPost]
+            [Route("Update")]
+            //[Authorize(Roles = "Admin")]
+            public async Task<IActionResult> UpdateCategory([FromBody] CategoryViewModel categoryViewModel)
+            {
+                CategoryDto category = _mapper.Map<CategoryViewModel, CategoryDto>(categoryViewModel);
+                try
+                {
+                    await _categoryService.UpdateCategoryAsync(category);
+                    return Json(new { success = true });
+                }
+                catch (Exception ex)
+                {
+                    //Loglama yapılabilir.
+                    Console.WriteLine(ex);
+                    return BadRequest(ex.Message);
+                }
+
+            }
         }
-    }
-}
+    } 
