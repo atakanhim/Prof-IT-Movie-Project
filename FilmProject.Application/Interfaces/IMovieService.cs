@@ -19,11 +19,11 @@ namespace FilmProject.Application.Interfaces
         Task<int> GetMovieCountAsync(); // toplam film sayısı
         Task<IEnumerable<MovieDto>> GetListWithCategoryAsync(string category = ""); // category ile map edip dondurdum
 
-        void Add(MovieDto movie); // film ekleme
+        int Add(MovieDto movie); // film ekleme
         void Update(MovieDto movie); // film gncelleme
 
         Task<IEnumerable<string>> GetAllLanguagesAsync(); // kayıtlı filmlerin dillerini listeler
         Task<IEnumerable<MovieDto>> GetMovieByLanguageAsync(string language);
-
+        
     }
 }

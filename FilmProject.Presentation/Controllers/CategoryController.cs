@@ -93,6 +93,26 @@ namespace FilmProject.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("AllCategories")]
+        //[Authorize(Roles ="Admin")]
+        public async Task<IActionResult> GetAllCategoriesAsync()
+        {
+            try
+            {
+                IEnumerable<CategoryDto> categories = await _categoryService.GetAllAsync();
+                IEnumerable<CategoryViewModel> categoryViewModel = _mapper.Map<IEnumerable<CategoryDto>, IEnumerable<CategoryViewModel>>(categories);
+
+
+                return Ok(categoryViewModel);
+            }
+            catch (Exception ex) 
+            {
+                return BadRequest();
+            }
+            
+
         [HttpPost]
         [Route("Delete")]
         //[Authorize(Roles = "Admin")]
@@ -128,6 +148,7 @@ namespace FilmProject.Presentation.Controllers
                 Console.WriteLine(ex);
                 return BadRequest(ex.Message);
             }
+
         }
     }
 }

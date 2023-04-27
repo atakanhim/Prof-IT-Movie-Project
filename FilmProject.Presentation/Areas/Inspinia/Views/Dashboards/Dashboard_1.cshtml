@@ -533,6 +533,12 @@
 
 
 
+@section Styles {
+    <environment names="Development,Staging,Productio">
+        <link rel="stylesheet" href="~/lib/sweetalert/dist/sweetalert.css" />
+    </environment>
+}
+    
 
 @section Scripts {
 
@@ -547,6 +553,8 @@
         <script src="~/lib/sparkline/jquery.sparkline.min.js"></script>
         <script src="~/lib/chartJs/Chart.min.js"></script>
         <script src="~/lib/peity/jquery.peity.js"></script>
+        <script src="~/lib/sweetalert/dist/sweetalert-dev.js"></script>
+        
 
     </environment>
     <environment names="Staging,Production">
@@ -559,7 +567,31 @@
         <script src="~/lib/sparkline/jquery.sparkline.min.js"></script>
         <script src="~/lib/chartJs/Chart.min.js"></script>
         <script src="~/lib/peity/jquery.peity.min.js"></script>
+        <script src="~/lib/sweetalert/dist/sweetalert.min.js"></script>
+        
     </environment>
+
+     @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            sweetAlert(
+                'Başarılı!',
+                '@TempData["SuccessMessage"] isimli film eklendi!',
+                'success'
+            )
+        </script>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <script>
+            sweetAlert(
+                'Hata!',
+                '@TempData["ErrorMessage"] isimli film eklenirken bir hata meydana geldi!',
+                'error'
+            )
+        </script>
+    }
+
 
     <script type="text/javascript">
         $(document).ready(function () {

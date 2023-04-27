@@ -30,5 +30,10 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         {
             return await _context.Categories.AnyAsync(c => c.CategoryName == CategoryName);
         }
+
+        public bool isExistById(int CategoryId)
+        {
+            return _context.Categories.Any(c => c.Id == CategoryId);
+        }
     }
 }

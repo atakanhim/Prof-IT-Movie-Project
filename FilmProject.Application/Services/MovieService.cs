@@ -24,7 +24,7 @@ namespace FilmProject.Application.Services
             _repository = repository;
         }
 
-        public void Add(MovieDto movieDto)
+        public int Add(MovieDto movieDto)
         {
             // Veritabanında bu isimle bir film var mı kontrolü yapıldı.
             Movie movie = _mapper.Map<MovieDto, Movie>(movieDto);
@@ -35,7 +35,8 @@ namespace FilmProject.Application.Services
             }
             else
             {          
-                _repository.Add(movie);              
+                var SavedMovie = _repository.Add(movie); 
+                return SavedMovie.Id;
             }
         }
         public void Update(MovieDto movieDto)
@@ -91,6 +92,8 @@ namespace FilmProject.Application.Services
         {
             return await _repository.GetMovieCountAsync();
         }
+
+        
 
 
     }

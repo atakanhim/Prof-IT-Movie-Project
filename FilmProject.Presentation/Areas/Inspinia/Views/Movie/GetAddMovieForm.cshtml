@@ -1,0 +1,100 @@
+﻿@using FilmProject.Presentation.Models;
+@model PostMovieViewModel
+@{
+}
+<style>
+		.category-list{
+			margin-bottom: 10px;
+		}
+		.category-item{
+			margin-right: 5px;
+		}
+	</style>
+<br/><div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form asp-controller="Movie" asp-action="CreateMovie" method="post"  enctype="multipart/form-data">
+        <div class="form-group">
+          <label asp-for="MovieName">Movie Name</label>
+          <input asp-for="MovieName" type="text" class="form-control" id="movieName" placeholder="Enter movie name">
+        </div>
+        <div class="form-group">
+          <label asp-for="MovieSummary">Movie Summary</label>
+          <textarea asp-for="MovieSummary" class="form-control" id="movieSummary" rows="3" placeholder="Enter movie summary"></textarea>
+        </div>
+        <div class="form-group">
+          <label asp-for="DirectorName">Director Name</label>
+          <input asp-for="DirectorName" type="text" class="form-control" id="directorName" placeholder="Enter director name">
+        </div>
+        <div class="form-group">
+          <label asp-for="RatingAge">Rating Age</label>
+          <select asp-for="RatingAge" class="form-control" id="ratingAge">
+            <option value="0">Genel İzleyici</option>
+            <option value="1">Yetişkin İzleyici</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label asp-for="PublishYear">Publish Year</label>
+          <input asp-for="PublishYear" type="date" class="form-control" id="publishYear">
+        </div>
+        <div class="form-group">
+          <label asp-for="Photo">Photo Path</label>
+          <input asp-for="Photo" type="file" class="form-control-file" id="photoPath">
+        </div>
+        <div class="form-group">
+          <label asp-for="ImdbUrl">IMDB URL</label>
+          <input asp-for="ImdbUrl" type="url" class="form-control" id="imdbUrl" placeholder="Enter IMDB URL">
+        </div>
+        <div class="form-group">
+          <label asp-for="MovieLanguage">Movie Language</label>
+          <input asp-for="MovieLanguage" type="text" class="form-control" id="movieLanguage" placeholder="Enter movie language">
+        </div>
+        <div class="form-group">
+		
+		
+            <label class="font-normal">Kategori Seçimi</label>
+            <div>
+                <select asp-for="CategoriesId" data-placeholder="Kategori Seçin" class="chosen-select" multiple tabindex="4">         
+                </select>
+            </div>
+        
+        
+	    </div>
+        <br /><br/>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+@section Styles {
+    
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap-chosen@1.4.2/bootstrap-chosen.min.css" rel="stylesheet">
+    
+}
+
+@section scripts
+{
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js" ></script>
+    <script>
+        
+        $(document).ready(function(){
+            $.get( "https://localhost:7269/Category/AllCategories", function( data ) {
+                var select = $(".chosen-select");
+            
+                $.each(data, function(index, category) {
+                    select.append('<option value="' + category.id + '">' + category.categoryName + '</option>');
+                });
+                select.trigger("chosen:updated");
+            });
+
+
+            $('.chosen-select').chosen();
+
+        });
+     
+        
+
+    </script>
+}
