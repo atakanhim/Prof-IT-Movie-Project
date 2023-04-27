@@ -12,8 +12,7 @@ namespace FilmProject.Infrastructure.Repository.Abstract
     {
         bool ChangeOneCikar(int id);
         Task<int> GetMovieCountAsync();
-        Task<List<Movie>> GetListWithCategoryAsync();
-        Task<List<Movie>> GetLastMovieAsync(int number);
+        Task<List<Movie>> GetListWithCategoryAsync(string category);
         Task<List<string>> GetAllLanguagesAsync();
 
         bool isExist(string MovieName);

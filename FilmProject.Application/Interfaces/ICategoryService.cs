@@ -11,7 +11,9 @@ namespace FilmProject.Application.Interfaces
     public interface ICategoryService
     {
         Task<List<CategoryDto>> GetAllAsync();
-        void AddCategory(CategoryDto Category);
+        Task<bool> AddCategory(CategoryDto Category);
         Task UpdateCategoryAsync(CategoryDto category);
+
+        Task DeleteCategoryAsync(int id);
     }
 }

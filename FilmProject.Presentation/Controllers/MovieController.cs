@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using NuGet.Versioning;
 using System.Collections;
 
 namespace FilmProject.Presentation.Controllers
@@ -21,6 +22,7 @@ namespace FilmProject.Presentation.Controllers
         private readonly IMovieCategoryMapService _movieCategoryMapService;
         private readonly IFileService _fileService;
         private IMapper _mapper;
+
         public MovieController(IMovieService movieService,IMapper mapper, IFileService fileService, IMovieCategoryMapService movieCategoryMapService)
         {
             _mapper = mapper;
@@ -43,16 +45,20 @@ namespace FilmProject.Presentation.Controllers
             return Json(result);
         }
         [HttpGet]
-        [Route("GetMostPopular")]
+        [Route("GetMostPopular/{id?}")]
         //[Authorize(Roles ="Admin")]
-        public async Task<IActionResult> GetMostPopularMovieAsync() // en yuksek puana sahip filmi çeken kod
+        public async Task<IActionResult> GetMostPopularMovieAsync(int id = 0) // en yuksek puana(begeni) sahip filmi çeken kod
         {
             try
             {
-                var movies = await _movieService.GetAllAsync();
-                var topRatedMovie = movies.OrderByDescending(m => m.MoviePoint).FirstOrDefault();
+                IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync();
+                IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
+                if (id > 0)
+                    movieViewModel = movieViewModel.OrderByDescending(m => m.Ortalama).Take(id);
+                else
+                    movieViewModel = movieViewModel.OrderByDescending(m => m.Ortalama);
+                return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
 
-                return Json(topRatedMovie);
             }
             catch
             {
@@ -64,42 +70,33 @@ namespace FilmProject.Presentation.Controllers
         }
 
         [HttpGet]
-        [Route("GetMostCommentedMovie")]
+        [Route("GetMostCommentedMovie/{number?}")]
         //[Authorize(Roles ="Admin")]
-        public async Task<IActionResult> GetMostCommentedMovieAsync() // en çok yoruma sahip filmi çeken fonksiyon.
+        public async Task<IActionResult> GetMostCommentedMovieAsync(int number=0) // en çok yoruma sahip filmi çeken fonksiyon.
         {
-            try
-            {
-                var movies = await _movieService.GetListWithCategoryAsync();
-                var topRatedMovie = movies.OrderByDescending(m => m.Comments.Count).FirstOrDefault();
 
-                var settings = new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                };
-                var json = JsonConvert.SerializeObject(topRatedMovie, settings);
-
-                return Ok(json);
-            }
-            catch
-            {
-                return Ok(new
-                {
-                    mesaj = "Geçersiz Sorgu "
-                });
-            }
+            IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync();
+            IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
+            if (number > 0)
+                movieViewModel = movieViewModel.OrderByDescending(m => m.Comments.Count).Take(number);
+            else
+                movieViewModel = movieViewModel.OrderByDescending(m => m.Comments.Count);
+            return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
+          
         }
+      
         [HttpGet]
         [Route("Movie/{id}")]
         //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetMovieAsync(int id) // tek bir film , id ile . Detay sayfası için 
         {
-            // burda include yapmadan çekiyoruz categorisiz, Yorumsuz ,favorileri alanlar hariç listeleniyor 
+
             // daha sonra istersek bu id le o listelerde filtreleme yapabilriz.
             try
             {
-                var movies = await _movieService.GetAsync(x => x.Id == id);
-        
+                var movies = await _movieService.GetListWithCategoryAsync();
+                var topRatedMovie = movies.OrderByDescending(m => m.Id).FirstOrDefault();
+
                 return Json(movies);
             }
             catch
@@ -121,12 +118,14 @@ namespace FilmProject.Presentation.Controllers
             return Json(movies);
         }
         [HttpGet]
-        [Route("MoviesWithCategory")]
+        [Route("MoviesWithCategory/{category?}")]
         //[Authorize(Roles ="Admin")]
-        public async Task<IActionResult> GetMoviesWithCategoryAsync() // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
+        public async Task<IActionResult> GetMoviesWithCategoryAsync(string category) // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
         {
-            IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync();
-            IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);        
+            IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync(category);
+            IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
+           
+
             return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
         }
         [HttpGet]
@@ -134,11 +133,11 @@ namespace FilmProject.Presentation.Controllers
         //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetMoviesWithCategoryJsonAsync() // tum filmler , categoriler ile birlikte doner bunu json olarak gonderir.
         {
-          
+
             IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync();
 
             IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
-         
+
             var settings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -150,17 +149,18 @@ namespace FilmProject.Presentation.Controllers
 
         }
         [HttpGet]
-        [Route("GetLastMovies/{number}")]
+        [Route("GetLastMovies/{number?}")]
 
-        public async Task<IActionResult> GetLastMoviesAsync(int number=1) // son yuklenen 
+        public async Task<IActionResult> GetLastMoviesAsync(int number = 0) // son yuklenen 
         {
 
             IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync();
-            movies = movies.OrderByDescending(x => x.Created).Take(number);
             IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
+            if (number > 0)
+                movieViewModel = movieViewModel.OrderByDescending(m => m.Created).Take(number);
+            else
+                movieViewModel = movieViewModel.OrderByDescending(m => m.Created);
             return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
-           
-
         }
 
         [HttpGet]
@@ -171,7 +171,7 @@ namespace FilmProject.Presentation.Controllers
             var languages = await _movieService.GetAllLanguagesAsync();
             var result = new { LanguagesList = languages };
             return Json(result);
-        } 
+        }
         [HttpGet]
         [Route("GetLanguage/{language?}")]
         public async Task<IActionResult> GetMovieByLanguageAsync(string language)
@@ -194,6 +194,7 @@ namespace FilmProject.Presentation.Controllers
         [Route("Create")]
         public IActionResult CreateMovie([FromForm] PostMovieViewModel postMovieViewModel) // Film Ekleme fonksiyonu 
         {
+
             try 
             {
                 var result = _fileService.SaveImage(postMovieViewModel.Photo);

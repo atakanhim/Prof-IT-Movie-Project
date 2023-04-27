@@ -47,16 +47,16 @@
                             <p class="sidebar__custom-header" >@localizer["features_header"]</p>
                             <div class="line"></div>
                                 <ul>
-                                    <li>
+                                    <li id="most_popularMovies">
                                         <a class="custom-p2">@localizer["top_rated"] </a>  <i class="fa fa-heart" aria-hidden="true"></i>
                                     </li>
 
-                                    <li>
+                                    <li id="most_commentedMovies">
                                         <a class="custom-p2">@localizer["most_commented"] </a>    <i class="fa fa-film" aria-hidden="true"></i>
                                     </li>
 
-                                     <li>
-                                        <a class="custom-p2" id="last_uploadedMovies">@localizer["last_uploaded"]</a>  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                     <li id="last_uploadedMovies">
+                                        <a class="custom-p2" >@localizer["last_uploaded"]</a>  <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </li>
                                 </ul>
                                 
@@ -68,23 +68,11 @@
                         
                         <p class="sidebar__custom-header">@localizer["category_header"]</p>
                         <div class="line"></div>
-                            <ul>
-                                <li>
-                                <a class="custom-p2">@localizer["category_horror"] </a>  <i class="fa-sharp fa-light fa-house"></i>
-                            </li>
-                                  <li>
-                                <a class="custom-p2">@localizer["category_dram"] </a>  <i class="fa-sharp fa-light fa-house"></i>
-                                </li>
-                                  <li>
-                                <a class="custom-p2">@localizer["category_sci-fi"]</a>  <i class="fa-sharp fa-light fa-house"></i>
-                                </li>
-                                  <li>
-                                <a class="custom-p2">@localizer["category_action"]</a>  <i class="fa-sharp fa-light fa-house"></i>
-                                </li>
-                            </ul>
-                      
-                     
-                        </div>
+                         <div id="renderCategories"></div>
+                    @*    @Html.Partial("_RenderCategories")*@
+
+                            
+                   </div>
 
                     
                     <div class="header-bottom">
