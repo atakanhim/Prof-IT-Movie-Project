@@ -3,195 +3,157 @@
 
 
 @inject IStringLocalizer<SharedResource> localizer;
-   <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
-    <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> @localizer["home"]</a>
-                        <a href="#"> @Model.MovieCategories.First().CategoryName</a>
-                        <span>@Model.MovieName</span>
-                    </div>
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="./index.html"><i class="fa fa-home"></i> @localizer["home"]</a>
+                    @*<a href="#"> @Model.MovieCategories.First().CategoryName</a>*@
+                    <span>@Model.MovieName</span>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Breadcrumb End -->
-    <!-- Anime Section Begin -->
-    <section class="anime-details spad">
-        <div class="container">
-            <div class="anime__details__content">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg" data-setbg=@Model.PhotoPath>
-   @*                         <div class="comment"><i class="fa fa-comments"></i> </div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>*@
-                        </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Anime Section Begin -->
+<section class="anime-details spad">
+    <div class="container">
+        <div class="anime__details__content">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="anime__details__pic set-bg" data-setbg=@Model.PhotoPath>
+                        @*                         <div class="comment"><i class="fa fa-comments"></i> </div>
+                        <div class="view"><i class="fa fa-eye"></i> 9141</div>*@
                     </div>
-                    <div class="col-lg-9">
-                        <div class="anime__details__text">
-                            <div class="anime__details__title">
-                                <h3>@Model.MovieName</h3>
-                                <span>@Model.DirectorName</span>
+                </div>
+                <div class="col-lg-9">
+                    <div class="anime__details__text">
+                        <div class="anime__details__title">
+                            <h3>@Model.MovieName</h3>
+                            <span>@Model.DirectorName</span>
+                        </div>
+                        <div class="anime__details__rating">
+                            <div class="rating">
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star-half-o"></i></a>
                             </div>
-                            <div class="anime__details__rating">
-                                <div class="rating">
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star-half-o"></i></a>
-                                </div>
                             <span> @Model.MoviePointCounter @localizer["votes"]</span>
-                            </div>
-                            <p>
-                                @Model.MovieSummary
-                            </p>
-                            <div class="anime__details__widget">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6">
-                                        <ul>
+                        </div>
+                        <p>
+                            @Model.MovieSummary
+                        </p>
+                        <div class="anime__details__widget">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
                                         <li><span>@localizer["aired_day"]:</span> @Model.PublishYear.ToShortDateString() </li>
-                                            <li><span>@localizer["movie_rating_age"]:</span> @Model.RatingAge</li>
-                                            <li><span>@localizer["movie_language"]:</span> @Model.MovieLanguage</li>
+                                        <li><span>@localizer["movie_rating_age"]:</span> @Model.RatingAge</li>
+                                        <li><span>@localizer["movie_language"]:</span> @Model.MovieLanguage</li>
                                         <li>
                                             <span>@localizer["movie_categories"]:</span> @foreach (var item in Model.MovieCategories)
                                             {
                                                 @item.CategoryName
                                                 <text> </text>
                                             }
-                                             
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
                                         <li><span>@localizer["movie_scores"]:</span> @Model.Ortalama</li>
                                         <li><span>@localizer["movie_duration"]:</span> 1.30 @localizer["minute"]</li>
                                         <li><span>@localizer["movie_quality"]:</span> HD</li>
                                         <li><span>@localizer["movie_upload_date"]:</span> @Model.Created.ToShortDateString()</li>
-                                        </ul>
-                                    </div>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="anime__details__btn">
-                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> @localizer["add_my_list"]</a>
-                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-md-8">
-                    <div class="anime__details__review">
-                        <div class="section-title">
-                        <h5>@Model.Comments.Count @localizer["reviews"] </h5>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="img/anime/review-1.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                <p>
-                                    whachikan Just noticed that someone categorized this as belonging to the genre
-                                    "demons" LOL
-                                </p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="img/anime/review-2.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                <p>Finally it came out ages ago</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="img/anime/review-3.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                <p>Where is the episode 15 ? Slow update! Tch</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="img/anime/review-4.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                <p>
-                                    whachikan Just noticed that someone categorized this as belonging to the genre
-                                    "demons" LOL
-                                </p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="img/anime/review-5.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                <p>Finally it came out ages ago</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="img/anime/review-6.jpg" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                <p>Where is the episode 15 ? Slow update! Tch</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="anime__details__form">
-                        <div class="section-title">
-                            <h5>@localizer["write_comment"]</h5>
-                        </div>
-                        <form action="#">
-                            <textarea placeholder= @(localizer["comment_placeholder"])></textarea>
-                            <button type="submit"><i class="fa fa-location-arrow"></i> @localizer["sent_comment"]</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="anime__details__sidebar">
-                        <div class="section-title">
-                        <h5>@localizer["movie_recommendation"]</h5>
-                        </div>
-                        <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-1.jpg">
-                            <div class="ep">18 / ?</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                        </div>
-                        <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-2.jpg">
-                            <div class="ep">18 / ?</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                        </div>
-                        <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-3.jpg">
-                            <div class="ep">18 / ?</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="#">Sword art online alicization war of underworld</a></h5>
-                        </div>
-                        <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-4.jpg">
-                            <div class="ep">18 / ?</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
+                        <div class="anime__details__btn">
+                            <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> @localizer["add_my_list"]</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Anime Section End -->
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="anime__details__review">
+                    <div class="section-title">
+                    @if (Model.Comments.FirstOrDefault() == null)
+                    {
+                        <h5>@localizer["no_comment"]</h5>
+                    }
+                    else
+                    {    
+                        <h5>@Model.Comments.Count @localizer["reviews"] </h5>
+                    }
+                    </div>
+
+                    @foreach (var item in Model.Comments)
+                    {
+                        <div class="anime__review__item">
+                            <div class="anime__review__item__pic">
+                                <img src="img/anime/review-1.jpg" alt="">
+                            </div>
+                            <div class="anime__review__item__text">
+                                <h6>@base.User.Identity.Name - <span>@item.Created.ToShortDateString()</span></h6>
+                                <p>
+                                    @item.Content
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="anime__details__form">
+                    <div class="section-title">
+                        <h5>@localizer["write_comment"]</h5>
+                    </div>
+                    <form action="#">
+                        <textarea placeholder=@(localizer["comment_placeholder"])></textarea>
+                        <button type="submit"><i class="fa fa-location-arrow"></i> @localizer["sent_comment"]</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="anime__details__sidebar">
+                    <div class="section-title">
+                        <h5>@localizer["movie_recommendation"]</h5>
+                    </div>
+                    <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-1.jpg">
+                        <div class="ep">18 / ?</div>
+                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                        <h5><a href="#">Boruto: Naruto next generations</a></h5>
+                    </div>
+                    <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-2.jpg">
+                        <div class="ep">18 / ?</div>
+                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                    </div>
+                    <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-3.jpg">
+                        <div class="ep">18 / ?</div>
+                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                        <h5><a href="#">Sword art online alicization war of underworld</a></h5>
+                    </div>
+                    <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-4.jpg">
+                        <div class="ep">18 / ?</div>
+                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                        <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Anime Section End -->

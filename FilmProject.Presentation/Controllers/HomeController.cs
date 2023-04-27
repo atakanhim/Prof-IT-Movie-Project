@@ -32,8 +32,6 @@ namespace FilmProject.Presentation.Controllers
 
         public async Task<IActionResult> Detail(int id)
         {
-
-
             MovieDto movieDto = await _movieService.GetWithCategoryAsync(m => m.Id == id);
             MovieViewModel movie = _mapper.Map< MovieDto, MovieViewModel>(movieDto);
             return View(movie);
@@ -41,7 +39,6 @@ namespace FilmProject.Presentation.Controllers
 
         public async Task<IActionResult> Profil()
         {
-
             return View();
         }
 

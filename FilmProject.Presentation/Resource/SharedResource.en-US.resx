@@ -192,6 +192,9 @@
   <data name="movie_views" xml:space="preserve">
     <value>Views</value>
   </data>
+  <data name="no_comment" xml:space="preserve">
+    <value>no comments yet</value>
+  </data>
   <data name="rent_movie" xml:space="preserve">
     <value>Rent</value>
   </data>
