@@ -1,0 +1,59 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="wrapper wrapper-content animated fadeInRight">
+     <div class="row">
+        <div class="col-lg-3">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h5 class="m-b-md">En çok beğenilen film</h5>
+                        <h2 class="text-navy">
+                            <i class="fa fa-heart"></i><span id="mostPopulerMovie"></span>
+                        </h2>
+                        <small>8.5/10</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="ibox">
+                    <div class="ibox-content ">
+                        <h5 class="m-b-md">En çok yorum alan film</h5>
+                        <h2 class="text-navy">
+                            <i class="fa fa-film"></i> <span id="encokyorumasahipfilm"></span>
+                        </h2>
+                        <small>90 yorum</small>
+                    </div>
+                </div>
+            </div>
+         <div class="col-lg-3">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h5 class="m-b-md">Toplam film sayisi</h5>
+                        <h2 class="text-navy">
+                            <i class="fa fa-shopping-bag"></i> <span id="totalComment"></span>
+                        </h2>
+                        <small>son 1 ayda 30 yeni film</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="ibox">
+                    <div class="ibox-content ">
+                        <h5 class="m-b-md">Toplam Yorum</h5>
+                        <h2 class="text-navy">
+                            <i class="fa fa-comment"></i> 1000 yorum
+                        </h2>
+                      <small>Son 1 ayda 120 tane</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+@section Scripts{   
+       <script src="~/js/AdminMetrics.js" asp-append-version="true"></script>  
+}
