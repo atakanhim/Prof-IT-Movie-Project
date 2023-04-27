@@ -144,6 +144,9 @@
   <data name="features_header" xml:space="preserve">
     <value>Özellikler</value>
   </data>
+  <data name="home" xml:space="preserve">
+    <value>Anasayfa</value>
+  </data>
   <data name="last_uploaded" xml:space="preserve">
     <value>En Son Yüklenen Filmler</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="log_out" xml:space="preserve">
     <value>Çıkış Yap</value>
+  </data>
+  <data name="minute" xml:space="preserve">
+    <value>Dakika</value>
   </data>
   <data name="most_commented" xml:space="preserve">
     <value>En Çok Yorum Alan Filmler</value>
@@ -179,6 +185,9 @@
   </data>
   <data name="movie_scores" xml:space="preserve">
     <value>Puan</value>
+  </data>
+  <data name="movie_upload_date" xml:space="preserve">
+    <value>Yüklenme Tarihi</value>
   </data>
   <data name="movie_views" xml:space="preserve">
     <value>İzlenme</value>

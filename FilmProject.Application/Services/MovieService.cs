@@ -24,6 +24,8 @@ namespace FilmProject.Application.Services
             _repository = repository;
         }
 
+        
+
         public void Add(MovieDto movieDto)
         {
             // Veritabanında bu isimle bir film var mı kontrolü yapıldı.
@@ -92,6 +94,11 @@ namespace FilmProject.Application.Services
             return await _repository.GetMovieCountAsync();
         }
 
-
+        public async Task<MovieDto?> GetWithCategoryAsync(Expression<Func<Movie, bool>> filter)
+        {
+           Movie model = await _repository.GetWithCategoryAsync(filter);
+           MovieDto movie = _mapper.Map<Movie, MovieDto>(model);
+           return movie;
+        }
     }
 }

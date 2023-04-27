@@ -144,6 +144,9 @@
   <data name="features_header" xml:space="preserve">
     <value>Features</value>
   </data>
+  <data name="home" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="last_uploaded" xml:space="preserve">
     <value>Last Uploaded</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="log_out" xml:space="preserve">
     <value>LOG OUT</value>
+  </data>
+  <data name="minute" xml:space="preserve">
+    <value>Minutes</value>
   </data>
   <data name="most_commented" xml:space="preserve">
     <value>Most Commented</value>
@@ -179,6 +185,9 @@
   </data>
   <data name="movie_scores" xml:space="preserve">
     <value>Scores</value>
+  </data>
+  <data name="movie_upload_date" xml:space="preserve">
+    <value>Upload Date</value>
   </data>
   <data name="movie_views" xml:space="preserve">
     <value>Views</value>

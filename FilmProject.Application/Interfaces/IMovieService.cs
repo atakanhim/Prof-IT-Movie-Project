@@ -13,6 +13,8 @@ namespace FilmProject.Application.Interfaces
     {
         Task<MovieDto?> GetAsync(Expression<Func<Movie, bool>> filter);
 
+        Task<MovieDto?> GetWithCategoryAsync(Expression<Func<Movie, bool>> filter);
+
         Task<IEnumerable<MovieDto>> GetAllAsync(Expression<Func<Movie, bool>>? filter = null); // tum filmleri doner
 
 
