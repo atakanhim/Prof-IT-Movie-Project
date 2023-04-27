@@ -54,10 +54,18 @@ namespace FilmProject.Application.Services
             Category oldCategory = await _categoryRepository.GetAsync(x => x.Id == NewCategory.Id);
 
             bool exists = await _categoryRepository.isExist(categoryDto.CategoryName);
-            if (oldCategory == null || exists)
+            if (oldCategory == null)
             {
                 // Kategori bulunmuyorsa hata mesajı dönüldü
-                throw new InvalidOperationException("There is no category with this id or there is a category with the same name.");
+                throw new InvalidOperationException("Kategori Bulunamadı.");
+            }
+            else if (categoryDto.CategoryName == oldCategory.CategoryName)
+            {
+                throw new InvalidOperationException("Degisiklik Yapılmadı.");
+            }
+            else if (exists)
+            {
+                throw new InvalidOperationException("Aynı isimde category eklenemez.");
             }
             else 
             {
@@ -66,6 +74,24 @@ namespace FilmProject.Application.Services
                 _categoryRepository.Update(oldCategory);
             }
             
+        }
+
+        public async Task DeleteCategoryAsync(int id)
+        {
+            var category = await _categoryRepository.GetAsync(x=>x.Id==id);
+
+            // validation kontrolleri yapılacak.
+
+            // Veritabanında bu isimle bir kategori var mı kontrolü yapıldı.
+            if (category==null)
+            {
+                throw new InvalidOperationException("Bu kategori mevcut degil.");
+            }
+            else
+            {
+               
+                _categoryRepository.Delete(category);
+            }
         }
     }
 }

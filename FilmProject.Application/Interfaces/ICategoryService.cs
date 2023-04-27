@@ -13,5 +13,7 @@ namespace FilmProject.Application.Interfaces
         Task<List<CategoryDto>> GetAllAsync();
         Task<bool> AddCategory(CategoryDto Category);
         Task UpdateCategoryAsync(CategoryDto category);
+
+        Task DeleteCategoryAsync(int id);
     }
 }

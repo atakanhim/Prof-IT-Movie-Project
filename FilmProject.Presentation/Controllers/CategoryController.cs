@@ -54,6 +54,17 @@ namespace FilmProject.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("ListAll")]
+        //[Authorize(Roles ="Admin")]
+        public async Task<IActionResult> GetCategories() // film sayısı
+        {
+            var Liste = await _categoryService.GetAllAsync();
+        
+            return Json(Liste);
+        }
+
         [HttpGet]
         [Route("Categories")]
         //[Authorize(Roles ="Admin")]
@@ -68,7 +79,7 @@ namespace FilmProject.Presentation.Controllers
         [HttpPost]
         [Route("UpdateCategory")]
         //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateCategory([FromBody] CategoryViewModel categoryViewModel)
+        public async Task<IActionResult> UpdateCategoryy([FromBody] CategoryViewModel categoryViewModel)
         {
             CategoryDto category = _mapper.Map<CategoryViewModel, CategoryDto>(categoryViewModel);
             try
@@ -79,6 +90,42 @@ namespace FilmProject.Presentation.Controllers
             catch (Exception ex)
             {
                 //Loglama yapılabilir.
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("Delete")]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            try
+            {
+                await _categoryService.DeleteCategoryAsync(id);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                //Loglama yapılabilir.
+                Console.WriteLine(ex);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateCategory([FromBody] CategoryViewModel categoryViewModel)
+        {
+            CategoryDto category = _mapper.Map<CategoryViewModel, CategoryDto>(categoryViewModel);
+            try
+            {
+                await _categoryService.UpdateCategoryAsync(category);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                //Loglama yapılabilir.
+                Console.WriteLine(ex);
                 return BadRequest(ex.Message);
             }
         }
