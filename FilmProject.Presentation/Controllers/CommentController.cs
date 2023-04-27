@@ -30,7 +30,7 @@ namespace FilmProject.Presentation.Controllers
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetCountOfTotalComment() 
         {
-            var count = await _commentService.GetCountOfTotalComment();
+           var count = await _commentService.GetCountOfTotalComment();
             var result = new { Count = count };
             return Json(result);
         }

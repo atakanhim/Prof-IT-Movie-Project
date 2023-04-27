@@ -86,7 +86,16 @@ namespace FilmProject.Presentation.Controllers
             IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync();
             IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
             if (number > 0)
+            {
                 movieViewModel = movieViewModel.OrderByDescending(m => m.Comments.Count).Take(number);
+                var settings = new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                };
+                var json = JsonConvert.SerializeObject(movieViewModel, settings);
+                return Ok(json);
+            }
+               
             else
                 movieViewModel = movieViewModel.OrderByDescending(m => m.Comments.Count);
             return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
