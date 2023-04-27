@@ -20,7 +20,10 @@ using System.Globalization;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 using Microsoft.AspNetCore.Localization.Routing;
-
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using FilmProject.Presentation.Models;
+using FilmProject.Presentation.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -107,6 +110,11 @@ builder.Services.Configure<RequestLocalizationOptions>(opt =>
     //    };
 });
 #endregion
+
+
+// fluent vlaidation
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddTransient<IValidator<CategoryViewModel>,CategoryValidator>();
 
 var app = builder.Build();
 

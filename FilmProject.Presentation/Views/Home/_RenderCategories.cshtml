@@ -18,7 +18,7 @@
      @foreach (var item in Model)
             {
             <li class="custom__category">
-                 <a class="custom-p2">@localizer[@item.CategoryName] </a>  <i class="fa-sharp fa-light fa-house"></i>
+                 <a class="custom-p2" data-id="@item.CategoryName">@localizer[@item.CategoryName] </a>  <i class="fa-sharp fa-light fa-house"></i>
               </li>
             }
          @*<li class="custom__category">
