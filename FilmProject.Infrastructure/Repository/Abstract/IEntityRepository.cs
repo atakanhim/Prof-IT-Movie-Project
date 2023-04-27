@@ -18,7 +18,7 @@ namespace FilmProject.Infrastructure.Repository.Abstract
 
 
         // post islemleri
-        void Add(T entity);
+        T Add(T entity);
         void Update(T entity);
         void Delete(T entity);
 

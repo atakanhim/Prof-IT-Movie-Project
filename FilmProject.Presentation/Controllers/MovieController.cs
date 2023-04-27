@@ -3,8 +3,10 @@ using FilmProject.Application.Contracts.Movie;
 using FilmProject.Application.Interfaces;
 using FilmProject.Application.Services;
 using FilmProject.Domain.Entities;
+using FilmProject.Infrastructure.Migrations;
 using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -16,11 +18,15 @@ namespace FilmProject.Presentation.Controllers
     public class MovieController : Controller
     {
         private readonly IMovieService _movieService;
+        private readonly IMovieCategoryMapService _movieCategoryMapService;
+        private readonly IFileService _fileService;
         private IMapper _mapper;
-        public MovieController(IMovieService movieService,IMapper mapper)
+        public MovieController(IMovieService movieService,IMapper mapper, IFileService fileService, IMovieCategoryMapService movieCategoryMapService)
         {
             _mapper = mapper;
             _movieService = movieService;
+            _fileService = fileService;
+            _movieCategoryMapService = movieCategoryMapService;
         }
         public IActionResult Index()
         {
@@ -186,13 +192,30 @@ namespace FilmProject.Presentation.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public IActionResult CreateMovie([FromBody] MovieViewModel movieViewModel) // Film Ekleme fonksiyonu 
+        public IActionResult CreateMovie([FromForm] PostMovieViewModel postMovieViewModel) // Film Ekleme fonksiyonu 
         {
-             MovieDto movie = _mapper.Map<MovieViewModel, MovieDto>(movieViewModel);
+            try 
+            {
+                var result = _fileService.SaveImage(postMovieViewModel.Photo);
+                if (result.Item1 == 1)
+                {
+                    postMovieViewModel.PhotoPath = result.Item2;
+                }
+                
+                MovieDto movie = _mapper.Map<PostMovieViewModel, MovieDto>(postMovieViewModel);
 
-            _movieService.Add(movie);
+                var movieId = _movieService.Add(movie);
+                _movieCategoryMapService.AddMovieToCategory(movieId, postMovieViewModel.CategoriesId);
+                TempData["SuccessMessage"] = movie.MovieName;
 
-            return Ok(movie);
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = postMovieViewModel.MovieName;
+            }
+            
+            return RedirectToAction("Index","Inspinia");
+            
         }
 
         [HttpPut]

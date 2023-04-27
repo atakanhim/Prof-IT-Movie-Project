@@ -21,5 +21,10 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         {
             return _context.Categories.Any(c => c.CategoryName == CategoryName);
         }
+
+        public bool isExistById(int CategoryId)
+        {
+            return _context.Categories.Any(c => c.Id == CategoryId);
+        }
     }
 }
