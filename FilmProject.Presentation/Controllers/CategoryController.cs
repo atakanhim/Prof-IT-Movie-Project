@@ -58,13 +58,21 @@ namespace FilmProject.Presentation.Controllers
         [HttpGet]
         [Route("ListAll")]
         //[Authorize(Roles ="Admin")]
-        public async Task<IActionResult> GetCategories() // film sayısı
+        public async Task<IActionResult> GetCategories() // kategoriler listeleniyor sayısı
         {
             var Liste = await _categoryService.GetAllAsync();
 
             return Json(Liste);
         }
+        [HttpGet]
+        [Route("GetCount")]
+        //[Authorize(Roles ="Admin")]
+        public async Task<IActionResult> GetCategoryCount() // kategoriler listeleniyor sayısı
+        {
+            var count = await _categoryService.CountAsync();
 
+            return Json(count);
+        }
         [HttpGet]
         [Route("Categories")]
         //[Authorize(Roles ="Admin")]
