@@ -11,8 +11,8 @@
 		}
 	</style>
 <br/><div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
+  <div class="row justify-content-center" >
+        <div class="col-md-8 mb-5">
       <form asp-controller="Movie" asp-action="CreateMovie" method="post"  enctype="multipart/form-data">
         <div class="form-group">
           <label asp-for="MovieName">Movie Name</label>
@@ -60,6 +60,7 @@
 	    </div>
            <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
+        <br/>
          </div>
       </form>
     </div>

@@ -24,6 +24,7 @@ namespace FilmProject.Presentation.Controllers
         private readonly IMapper _mapper;
         private readonly IEmailService _emailService;
         private readonly IUserService _userService;
+   
 
         public HomeController(ILogger<HomeController> logger, IMovieService movieService, IEmailService emailService, IUserService userService,IMapper mapper)
         {
