@@ -68,7 +68,7 @@ namespace FilmProject.Infrastructure.Repository.Concrete
 
         public async Task<Movie> GetWithCategoryAsync(Expression<Func<Movie, bool>> filter)
         {
-            return await _context.Movies.Include(y => y.Comments).ThenInclude(y => y.AppUser).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).Where(filter).FirstOrDefaultAsync();
+            return await _context.Movies.Include(y => y.WhoFavorited).Include(y => y.Comments).ThenInclude(y => y.AppUser).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).Where(filter).FirstOrDefaultAsync();
         }
     }
 }

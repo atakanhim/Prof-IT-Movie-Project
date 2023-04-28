@@ -25,13 +25,13 @@ namespace FilmProject.Presentation.Controllers
         private readonly IEmailService _emailService;
         private readonly IUserService _userService;
 
-        public HomeController(ILogger<HomeController> logger, IMovieService movieService, IEmailService emailService, IUserService userService)
+        public HomeController(ILogger<HomeController> logger, IMovieService movieService, IEmailService emailService, IUserService userService,IMapper mapper)
         {
             _logger = logger;
             _movieService = movieService;
             _emailService = emailService;
             _userService = userService;
-
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
