@@ -41,6 +41,7 @@
             data: commentModel,
             success: function (response) {
                 console.log("Yorum ekleme başarılı");
+                window.location.href = "/Home/Detail?id=" + movieId;
             },
             error: function (xhr, status, error) {
               

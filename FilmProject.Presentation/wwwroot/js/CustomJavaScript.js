@@ -25,7 +25,9 @@ $('#most_commentedMovies').unbind().click(function () {
     });
 });
 $('#headerLogoClick').unbind().click(function () {
+    window.location.href = "/Home"; 
     var url = "/Movie/MoviesWithCategory"; // anasayfa normal listeleniyor  
+
     $.get(url, null, function (data) {
         console.log(data);
         $("#movieRender").html(data);
