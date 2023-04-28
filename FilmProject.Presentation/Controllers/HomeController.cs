@@ -42,7 +42,6 @@ namespace FilmProject.Presentation.Controllers
             return Ok();
         }
 
- 
 
         public async Task<IActionResult> Profil()
         {

@@ -1,4 +1,5 @@
-﻿.stars i {
+﻿/*Rating Stars*/ 
+.stars i {
     color: #e6e6e6;
     font-size: 24px;
     cursor: pointer;
@@ -12,3 +13,24 @@
     .stars i.active {
         color: #ff9c1a;
     }
+
+
+/*address my list*/
+.anime__details__btn .add-list-btn {
+    font-size: 13px;
+    color: #ffffff;
+    background: #e53637;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    border-radius: 4px;
+    margin-right: 11px;
+    border:none;
+}
+
+
+.anime__details__btn .add-list-btn--added {
+    background: grey;
+}
