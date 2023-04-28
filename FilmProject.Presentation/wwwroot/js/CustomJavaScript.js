@@ -32,6 +32,7 @@ $('#headerLogoClick').unbind().click(function () {
     });
 });
 
+
 // categort map
 $('.custom__category a').unbind().click(function () {
  

@@ -21,10 +21,13 @@
                 </div>
             </li>
             <li class="@Html.IsSelected(controller: "Movie")">
-                <a href="@Url.ActionWithArea("GetAddMovieForm", "Movie")"><i class="fa fa-diamond"></i> <span class="nav-label" data-i18n="nav.layouts">Add Movie</span></a>
+                <a href="@Url.ActionWithArea("GetAddMovieForm", "Movie")"><i class="fa fa-film"></i> <span class="nav-label" data-i18n="nav.layouts">Film Ekle</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "AdminCategory")">
-                <a href="@Url.ActionWithArea("CategoryAdd", "AdminCategory")"><i class="fa fa-diamond"></i> <span class="nav-label" data-i18n="nav.layouts">Add Category</span></a>
+                <a href="@Url.ActionWithArea("CategoryAdd", "AdminCategory")"><i class="fa fa-list-alt"></i> <span class="nav-label" data-i18n="nav.layouts">Kategori Ekle</span></a>
+            </li>
+               <li class="@Html.IsSelected(controller: "AdminMetrics")">
+                <a href="@Url.ActionWithArea("Metrics", "AdminMetrics")"><i class="fa fa-pie-chart"></i> <span class="nav-label" data-i18n="nav.layouts">İstatistikler</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "Dashboards")">
                 <a href="@Url.ActionWithArea("Dashboard_1", "Dashboards")"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.dashboard">Dashboards</span> <span class="fa arrow"></span></a>

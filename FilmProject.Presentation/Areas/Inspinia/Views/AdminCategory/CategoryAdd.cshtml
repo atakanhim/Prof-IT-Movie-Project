@@ -60,46 +60,45 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
-                <div class="ibox-title">
-                    <h5>Basic Data Tables example with responsive plugin</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li>
-                                <a href="#" class="dropdown-item">Config option 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-item">Config option 2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
+                    <div class="ibox-title">
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li>
+                                        <a href="#" class="dropdown-item">Config option 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="dropdown-item">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
                     </div>
-                </div>
-                <div class="ibox-content">
+                    <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover dataTables-example" id="categories-datatable">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                 <th>Category Name</th>
-                                  <th>Created</th>
-                                     <th style="width:100px;">*</th>
-                            </tr>
-                        </thead>
-                        <tbody style="transition:all ease-in-out 0.3s;">
+                        <table class="table table-striped table-bordered table-hover " id="categories-datatable">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                     <th>Category Name</th>
+                                      <th>Created</th>
+                                         <th style="width:100px;">*</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                           
-                        </tbody>
+                            </tbody>
                    
-                    </table>
+                        </table>
 
-                </div>
+                    </div>
             </div>
         </div>
       </div>
@@ -113,216 +112,7 @@
 
 @section Scripts{
          <script src="~/lib/dataTables/datatables.min.js"></script>
-        <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
-
-    <script>
-            
-        $(document).ready(function () {
-             var table = $('#categories-datatable');
-              $.ajax({
-                  url: '/Category/ListAll',
-                  type: 'GET',
-                  dataType: 'json',
-                  success: function(data) {
-                        // Pre-process the data if necessary
-                        var preProcessedData = data;
-                        console.log(data);
-                        // Pass the pre-processed data to the DataTable
-                          table = $('#categories-datatable').DataTable({
-                          data: preProcessedData,
-                          pageLength: 25,
-                          dom: '<"html5buttons"B>lTfgitp',
-                          buttons: [
-                            { extend: 'copy' },
-                            { extend: 'csv' },
-                            { extend: 'excel', title: 'ExampleFile' },
-                            { extend: 'pdf', title: 'ExampleFile' },
-                            {
-                              extend: 'print',
-                              customize: function (win) {
-                                $(win.document.body).addClass('white-bg');
-                                $(win.document.body).css('font-size', '10px');
-                                $(win.document.body).find('table')
-                                  .addClass('compact')
-                                  .css('font-size', 'inherit');
-                              }
-                            }
-                          ],
-                          columns: [
-                                    { data: "id" },
-                                     { data: "categoryName" },
-                                      { data: "created" },
-                                        {
-                                            "data": null,
-                                           "defaultContent": "<div class='d-flex  justify-content-between '><button class='btn btn-primary edit-button'>Edit</button><button class='btn btn-danger delete-button'>Delete</button></div>"
-                                        }
-                                
-                                ]
-                        });
-                         },
-                  error: function(xhr, status, error) {
-                    // Handle the error if necessary
-                  }
-                 });
-
-                     // Delete button click event
-                        $('#categories-datatable tbody').on('click', '.delete-button', function() {
-                     
-                            var data = table.row($(this).parents('tr')).data();
-                            var id = data.id; // Assuming the "id" field is in your JSON data
-
-                               $.ajax({
-                                    url: '/Category/Delete',
-                                    method: 'POST',
-                                    data: { id: id },
-                                    success: function(response) {
-                                           Swal.fire({
-                                                position: 'top-end',
-                                                icon: "success",
-                                                title: "Kategori Silme İşlemi Başarılı",
-                                                showConfirmButton: false,
-                                                timer: 2500
-                                            })    
-                                            $.get('/Category/ListAll', function (data) {
-                                                  // DataTable'i yenile
-                                                  table.clear();
-                                                  table.rows.add(data);
-                                                  table.draw();
-                                                });
-
-                                    },
-                                    error: function(xhr, status, error) {
-                                          var text = jqXHR.responseTexts;
-                                          Swal.fire({
-                                                position: 'top-end',
-                                                icon: "error",
-                                                title: text,
-                                                showConfirmButton: false,
-                                                timer: 2500
-                                            })
-                                    }
-                                });
-  
-                        });
-                           // kategori update modal open
-                                                       // Edit butonuna tıklandığında, modal penceresindeki formu doldur
-                            $('#categories-datatable tbody').on('click', '.edit-button', function () {
-                           
-                                var data = table.row($(this).parents('tr')).data();
-                                console.log(data);
-                                $('#EditId').val(data.id);
-                                $('#EditCategoryName').val(data.categoryName);
-                                $('#editModal').modal('show');
-                            });
-
-
-                            ///
-
-
-                                $('#editForm').submit(function (event) {
-                                        event.preventDefault();
-                                      
-                                               
-                                            var categoryId = $('#EditId').val();
-                                            var categoryName = $('#EditCategoryName').val();
-
-                                          var viewmodel = {
-                                                   Id:categoryId,
-                                                   CategoryName:categoryName,
-                                                };
-
-                                        console.log(viewmodel);
-                                        $.ajax({
-                                            url: '/Category/Update',
-                                            type: 'POST',
-                                            contentType: "application/json; charset=utf-8",
-                                            dataType: "json",
-                                            data: JSON.stringify(viewmodel),
-
-                                            success: function (response) {
-                                                console.log(response);
-                                                if (response.success) {
-
-                                                    $('#editModal').modal('hide');
-                                                              Swal.fire({
-                                                        position: 'top-end',
-                                                        icon: "success",
-                                                        title: "Kategori Update İşlemi Başarılı",
-                                                        showConfirmButton: false,
-                                                        timer: 2500
-                                                    })   
-                                                       $.get('/Category/ListAll', function (data) {
-                                                              // DataTable'i yenile
-                                                              table.clear();
-                                                              table.rows.add(data);
-                                                              table.draw();
-                                                            });
-                                                   
-                                                }
-                                            },
-                                            error: function (xhr, status, error) {
-                                         
-                                                 var text = xhr.responseText;
-                                            
-                                                  Swal.fire({
-                                                        position: 'top-end',
-                                                        icon: "error",
-                                                        title: text,
-                                                        showConfirmButton: false,
-                                                        timer: 2500
-                                                     })
-                                            }
-                                        });
-                               
-                                    });
-                        // kategoir ekleme
-
-                       $("#myForm2").submit(function (event) {
-                              event.preventDefault();
-                              var ctname= $("#category__name");
-                           var viewmodel = {
-                               CategoryName: ctname.val(),
-                            };
-
-                           $.ajax({
-                               url: "/Category/CreateCategory",
-                               type: "POST",
-                               contentType: "application/json; charset=utf-8",
-                               dataType: "json",
-                               data: JSON.stringify(viewmodel),
-                               success: function(data) {
-                                     
-                                     Swal.fire({
-                                        position: 'top-end',
-                                        icon: "success",
-                                        title: "Kategori Ekleme İşlemi Başarılı",
-                                        showConfirmButton: false,
-                                        timer: 2500
-                                    });
-                                       $.get('/Category/ListAll', function (data) {
-                                                              // DataTable'i yenile
-                                                              table.clear();
-                                                              table.rows.add(data);
-                                                              table.draw();
-                                                            });
-                                    ctname.val("");
-                               },
-                               error: function(jqXHR, textStatus, errorThrown) {
-                                   var text = jqXHR.responseText
-
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: "error",
-                                        title: text,
-                                        showConfirmButton: false,
-                                        timer: 2500
-                                    })
-                               }
-                            });
-         
-                        });
-  
-
-});
-    </script>
+         <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
+         <script src="~/js/AdminCategory.js" asp-append-version="true"></script>
+    
 }

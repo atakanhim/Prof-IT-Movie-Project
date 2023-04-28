@@ -11,6 +11,7 @@ namespace FilmProject.Infrastructure.Repository.Abstract
     public interface IMovieRepository : IEntityRepository<Movie>
     {
         bool ChangeOneCikar(int id);
+        Task<Movie> GetWithCategoryAsync(Expression<Func<Movie, bool>> filter);
         Task<int> GetMovieCountAsync();
         Task<List<Movie>> GetListWithCategoryAsync(string category);
         Task<List<string>> GetAllLanguagesAsync();

@@ -1,29 +1,44 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @using FilmProject.Presentation.Models
 @model IEnumerable<MovieViewModel>
 
- @foreach (var item in Model)
-{
-     <div class="col-lg-4 col-md-6 col-sm-6">
-                   <div class="product__item">
-                                        <div class="product__item__pic set-bg" style="background-image:url('/Uploads/@item.PhotoPath')">
-                                            <div class="ep">@item.Ortalama</div>
-                                            <div class="comment"><i class="fa fa-comments"></i> @item.Comments.Count</div>
-                                            <div class="view"><i class="fa fa-heart"></i>0</div>     @*Buraya kaç kişi bunu favorilerine eklemiş o listenebilir*@
-                                       
-                                        </div>
-                                        <div class="product__item__text">
-                                            <ul>
-                                                @foreach (var x in item.MovieCategories){
-                                                    <li>@x.CategoryName</li>
-                                                }
-                                            </ul>
-                                            <h5><a href="#">@item.MovieName</a></h5>
-                                        </div>
+
+
+<body>
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="product__item product__item__custom">
+                <div id="movieId" class="d-none">@item.Id</div>
+                <div class="product__item__pic set-bg" style="background-image:url('/Uploads/@item.PhotoPath')">
+                    <div class="ep">@item.Ortalama</div>
+                    <div class="comment"><i class="fa fa-comments"></i> @item.Comments.Count</div>
+                    <div class="view"><i class="fa fa-heart"></i>0</div>     @*Buraya kaç kişi bunu favorilerine eklemiş o listenebilir*@
+                 
                 </div>
-     </div>
- }
+                <div class="product__item__text">
+                    <ul>
+                        @foreach (var x in item.MovieCategories)
+                        {
+                            <li>@x.CategoryName</li>
+                        }
+                    </ul>
+                    <h5><a href="#">@item.MovieName</a></h5>
+
+                </div>
+            </div>
+        </div>
+    }
+
+    <script>
+
+        $(function () {
+            $(".product__item").click(function () {
+
+                let movieId = $(this).children().first().text();
+                console.log(movieId);
+                location.href = '/Home/Detail?id=' + movieId;
+            });
+        });
+    </script>
+</body>
 

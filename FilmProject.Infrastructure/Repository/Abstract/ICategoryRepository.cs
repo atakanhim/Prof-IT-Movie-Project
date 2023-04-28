@@ -16,5 +16,7 @@ namespace FilmProject.Infrastructure.Repository.Abstract
         Task<bool> isExistAsync(string CategoryName);
         Task<bool> AddAsync(Category category);
 
+        Task<int> CountAsync();
+
     }
 }

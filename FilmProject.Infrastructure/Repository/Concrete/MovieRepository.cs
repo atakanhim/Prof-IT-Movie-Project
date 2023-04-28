@@ -30,17 +30,17 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             throw new NotImplementedException();
         }
 
-     
+
 
         public async Task<List<Movie>> GetListWithCategoryAsync(string category)
         {
-            if(category != "" && category != null)
+            if (category != "" && category != null)
             {
-                 List<Movie> movies = new List<Movie>();
-                var model = await _context.Categories.Include(x => x.MovieCategories).ThenInclude(xa=>xa.Movie).Where(a=>a.CategoryName == category).ToListAsync();   
-                foreach(var movie in model[0].MovieCategories)
+                List<Movie> movies = new List<Movie>();
+                var model = await _context.Categories.Include(x => x.MovieCategories).ThenInclude(xa => xa.Movie).Where(a => a.CategoryName == category).ToListAsync();
+                foreach (var movie in model[0].MovieCategories)
                 {
-                    Movie moviedata = await _context.Movies.Include(y => y.Comments).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).Where(i=>i.Id == movie.MovieId).FirstOrDefaultAsync();
+                    Movie moviedata = await _context.Movies.Include(y => y.Comments).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).Where(i => i.Id == movie.MovieId).FirstOrDefaultAsync();
 
                     movies.Add(moviedata);
                 }
@@ -64,6 +64,11 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         public bool isExistById(int MovieId)
         {
             return _context.Movies.Any(c => c.Id == MovieId);
+        }
+
+        public async Task<Movie> GetWithCategoryAsync(Expression<Func<Movie, bool>> filter)
+        {
+            return await _context.Movies.Include(y => y.WhoFavorited).Include(y => y.Comments).ThenInclude(y => y.AppUser).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).Where(filter).FirstOrDefaultAsync();
         }
     }
 }

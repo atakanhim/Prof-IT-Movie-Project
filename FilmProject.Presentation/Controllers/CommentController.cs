@@ -6,6 +6,7 @@ using FilmProject.Domain.Entities;
 using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FilmProject.Presentation.Controllers
 {
@@ -30,7 +31,7 @@ namespace FilmProject.Presentation.Controllers
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetCountOfTotalComment() 
         {
-            var count = await _commentService.GetCountOfTotalComment();
+           var count = await _commentService.GetCountOfTotalComment();
             var result = new { Count = count };
             return Json(result);
         }
@@ -60,12 +61,13 @@ namespace FilmProject.Presentation.Controllers
         [Route("Create")]
         public IActionResult CreateComment([FromBody] CommentViewModel commentViewModel) // Yorum Ekleme fonksiyonu 
         {
-
+            commentViewModel.userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             CommentDto comment = _mapper.Map<CommentViewModel, CommentDto>(commentViewModel);
 
             _commentService.Add(comment);
             return Json(comment);
         }
+
         [HttpPut]
         [Route("Delete/{id}")]
         public async Task<IActionResult> DeleteComment(int id) // Yorum Delete Statusu Degistirme fonksiyonu 
