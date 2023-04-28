@@ -23,8 +23,8 @@ namespace FilmProject.Application.Services
         }
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var mail = "FilmProject45@gmail.com";
-            var pw = "ProfITFilm45!";
+            var mail = "FilmProje@outlook.com";
+            var pw = "Cinema45";
             var client = new SmtpClient("smtp-mail.outlook.com", 587)
             {
                 EnableSsl = true,
@@ -56,8 +56,8 @@ namespace FilmProject.Application.Services
 
         public async Task SendNewMovieEmail(List<string> emails, Movie movie)
         {
-            var mail = "FilmProject45@gmail.com";
-            var pw = "ProfITFilm45!";
+            var mail = "FilmProject45@outlook.com";
+            var pw = "Cinema45";
             var client = new SmtpClient("smtp-mail.outlook.com", 587)
             {
                 EnableSsl = true,
