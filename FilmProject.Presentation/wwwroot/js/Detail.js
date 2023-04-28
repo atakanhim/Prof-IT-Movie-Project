@@ -21,8 +21,6 @@
         var commentContent = $("#commentContent").val();
         var movieId = $("#movieHeader").attr("data-id");
         //$.post("/Comment/Create", { Content: commentContent, MovieId: movieId });
-        //console.log("Yorum Ekle");
-
 
 
         console.log("comment content:" + commentContent);
