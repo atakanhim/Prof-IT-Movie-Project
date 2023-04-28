@@ -33,7 +33,16 @@ $(document).ready(function () {
                 columns: [
                     { data: "id" },
                     { data: "categoryName" },
-                    { data: "created" },
+                    {
+                        data: "created", render: function (data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                var date = new Date(data);
+                                return date.toLocaleDateString('tr-TR');
+                            } else {
+                                return data;
+                            }
+                        }
+                    }, 
                     {
                         "data": null,
                         "defaultContent": "<div class='d-flex  justify-content-between '><button class='btn btn-primary edit-button'>Edit</button><button class='btn btn-danger delete-button'>Delete</button></div>"

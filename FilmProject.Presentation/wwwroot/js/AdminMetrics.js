@@ -1,4 +1,66 @@
 ﻿$(document).ready(function () {
+    var table = $('#metrics-datatable');
+    $.ajax({
+        url: '/Movie/GetLastMovies/5',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            // Pre-process the data if necessary
+            var preProcessedData = data;
+
+            // Pass the pre-processed data to the DataTable
+            table = $('#metrics-datatable').DataTable({
+                data: preProcessedData,
+                pageLength: 25,
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [
+                    { extend: 'copy' },
+                    { extend: 'csv' },
+                    { extend: 'excel', title: 'ExampleFile' },
+                    { extend: 'pdf', title: 'ExampleFile' },
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+                columns: [
+                    { data: "MovieName" },
+                    { data: "DirectorName" },
+                    { data: "MovieLanguage" },
+                    { data: "Ortalama" },
+                    {
+                        data: "Created", render: function (data, type, row) {
+                            if (type === 'display' || type === 'filter') {
+                                var date = new Date(data);
+                                return date.toLocaleDateString('tr-TR');
+                            } else {
+                                return data;
+                            }
+                        }
+                    },
+                  
+                ]
+            });
+        },
+        error: function (xhr, status, error) {
+            let text = xhr.responseText
+            let icon = "error";
+            showErrorToast(text, icon);
+        }
+    });
+
+
+
+
+
+
 
     // toplam yorum sayisi
     $.get('/Comment/TotalCommentCount', function (data) {
