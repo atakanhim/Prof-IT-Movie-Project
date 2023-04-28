@@ -55,7 +55,7 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("InspiniaPolicy", policy =>
     {
-        policy.RequireAuthenticatedUser();
+        policy.RequireRole("Admin");
         
     });
 });

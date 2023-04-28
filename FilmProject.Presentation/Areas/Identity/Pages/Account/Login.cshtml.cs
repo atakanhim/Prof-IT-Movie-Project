@@ -21,11 +21,13 @@ namespace FilmProject.Presentation.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -117,8 +119,21 @@ namespace FilmProject.Presentation.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+
+                    if (user != null)
+                    {
+                        var roles = await _userManager.GetRolesAsync(user);
+
+                        if (roles.Contains("Admin"))
+                        {
+                            return Redirect("/Inspinia");
+                        }
+                        else if (roles.Contains("User"))
+                        {
+                            return Redirect("/");
+                        }
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {
