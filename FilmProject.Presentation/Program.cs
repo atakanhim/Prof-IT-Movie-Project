@@ -158,7 +158,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapAreaControllerRoute(
      name: "Inspinia",
      areaName: "Inspinia",
-     pattern: "Inspinia/{controller=Dashboards}/{action=Dashboard_1}"
+     pattern: "Inspinia/{controller=AdminMetrics}/{action=Metrics}"
  ).RequireAuthorization("InspiniaPolicy"); ;
 });
 app.MapRazorPages();
