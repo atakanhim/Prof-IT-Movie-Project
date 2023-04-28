@@ -50,11 +50,8 @@ namespace FilmProject.Application.Services
         }
 
         public async Task<int> NumberOfFavoritesAsync(int movieId)
-        {
-           
+        {  
             return await _repository.NumberOfFavoritesAsync(movieId);
-            
-            
         }
     }
 }

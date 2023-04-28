@@ -1027,10 +1027,14 @@ ol {
 }
 
     .anime__details__rating .rating i {
-        font-size: 24px;
-        color: #e89f12;
+        color: #e6e6e6;
+        font-size: 60px;
+        cursor: pointer;
+        transition: color 0.2s ease;
         display: inline-block;
     }
+
+
 
     .anime__details__rating span {
         display: block;
@@ -1038,9 +1042,27 @@ ol {
         color: #b7b7b7;
     }
 
-.anime__details__widget {
-    margin-bottom: 15px;
-}
+    .stars i {
+        color: #e6e6e6;
+        font-size: 25px;
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+
+        .stars i {
+        color: #e6e6e6;
+        font-size: 25px;
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+
+        .anime__details__rating .stars i.active {
+            color: #ff9c1a;
+        }
+
+        .anime__details__widget {
+            margin-bottom: 15px;
+        }
 
     .anime__details__widget ul {
         margin-bottom: 20px;
