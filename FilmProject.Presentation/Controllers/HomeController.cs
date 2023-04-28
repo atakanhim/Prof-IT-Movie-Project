@@ -1,6 +1,11 @@
+
 ﻿using AutoMapper;
 using FilmProject.Application.Contracts.Movie;
 using FilmProject.Application.Interfaces;
+
+﻿using FilmProject.Application.Interfaces;
+using FilmProject.Application.Services;
+
 using FilmProject.Domain.Entities;
 using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Identity;
@@ -10,22 +15,37 @@ using System.Linq.Expressions;
 
 namespace FilmProject.Presentation.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMovieService _movieService;
+
         private readonly IMapper _mapper;
-        public HomeController(ILogger<HomeController> logger, IMovieService movieService, IMapper mapper)
+        private readonly IEmailService _emailService;
+        private readonly IUserService _userService;
+
+        public HomeController(ILogger<HomeController> logger, IMovieService movieService, IEmailService emailService, IUserService userService)
         {
             _logger = logger;
             _movieService = movieService;
-            _mapper = mapper;
+            _emailService = emailService;
+            _userService = userService;
+
         }
 
         public async Task<IActionResult> Index()
         {
             return View();
         }
+        [HttpGet]
+        [Route("Home/GetUserCount")]
+        public async Task<IActionResult> GetUserCountAsync()
+        {
+            int userCount = await _userService.GetUserCountAsync();
+            return Json(userCount);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Detail(int id)

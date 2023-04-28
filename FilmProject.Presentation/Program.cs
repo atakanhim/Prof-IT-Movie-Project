@@ -20,7 +20,10 @@ using System.Globalization;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 using Microsoft.AspNetCore.Localization.Routing;
-
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using FilmProject.Presentation.Models;
+using FilmProject.Presentation.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,11 +66,15 @@ builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IFavoriteService, FavoriteService>();
-    //repositories
+builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IMovieCategoryMapService, MovieCategoryMapService>();
+builder.Services.AddScoped<IUserService, UserService>();
+//repositories
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
+builder.Services.AddScoped<IMovieCategoryMapRepository, MovieCategoryMapRepository>();
 builder.Services.AddScoped<IEmailService, EmailSender>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddSingleton(new QRCodeService(new QRCodeGenerator()));
@@ -107,6 +114,11 @@ builder.Services.Configure<RequestLocalizationOptions>(opt =>
     //    };
 });
 #endregion
+
+
+// fluent vlaidation
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddTransient<IValidator<CategoryViewModel>,CategoryValidator>();
 
 var app = builder.Build();
 

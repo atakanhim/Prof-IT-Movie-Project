@@ -18,10 +18,11 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         {
             context = dbContext;
         }
-        public void Add(T entity)
+        public T Add(T entity)
         {
                 context.Add(entity);
                 context.SaveChanges();
+            return entity;
            
         }
 

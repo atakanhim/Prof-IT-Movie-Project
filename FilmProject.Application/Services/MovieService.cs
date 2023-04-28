@@ -24,9 +24,8 @@ namespace FilmProject.Application.Services
             _repository = repository;
         }
 
-        
 
-        public void Add(MovieDto movieDto)
+        public int Add(MovieDto movieDto)
         {
             // Veritabanında bu isimle bir film var mı kontrolü yapıldı.
             Movie movie = _mapper.Map<MovieDto, Movie>(movieDto);
@@ -37,7 +36,8 @@ namespace FilmProject.Application.Services
             }
             else
             {          
-                _repository.Add(movie);              
+                var SavedMovie = _repository.Add(movie); 
+                return SavedMovie.Id;
             }
         }
         public void Update(MovieDto movieDto)
@@ -48,7 +48,7 @@ namespace FilmProject.Application.Services
 
         public async Task<IEnumerable<MovieDto>> GetAllAsync(Expression<Func<Movie, bool>>? filter = null)
         {
-            var movies = await _repository.GetListAsync();
+            var movies = await _repository.GetListAsync(filter);
             List<MovieDto> moviesDto = _mapper.Map<List<Movie>, List<MovieDto>>(movies);
 
             return moviesDto;
@@ -94,11 +94,13 @@ namespace FilmProject.Application.Services
             return await _repository.GetMovieCountAsync();
         }
 
+
         public async Task<MovieDto?> GetWithCategoryAsync(Expression<Func<Movie, bool>> filter)
         {
            Movie model = await _repository.GetWithCategoryAsync(filter);
            MovieDto movie = _mapper.Map<Movie, MovieDto>(model);
            return movie;
         }
+
     }
 }
