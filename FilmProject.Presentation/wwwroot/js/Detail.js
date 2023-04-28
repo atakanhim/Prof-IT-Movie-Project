@@ -19,7 +19,6 @@
     let addMyListButton = $("#btnAddMyList")
     if (true) {
         addMyListButton.addClass("add-list-btn--added");
-        addMyListButton.html('<span> <i class="fa fa-trash"></i> Discard</span>');
     } 
 
 
@@ -57,11 +56,9 @@
         
         if (key == 0) {
             addMyListButton.removeClass("add-list-btn--added");
-            addMyListButton.html('<span> <i class="fa fa-heart"></i> Add My List</span>');
             key = 1;
         } else {
             addMyListButton.addClass("add-list-btn--added");
-            addMyListButton.html('<span> <i class="fa fa-trash"></i> Discard</span>');
             key = 0;
         }
 
