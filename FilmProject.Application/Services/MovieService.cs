@@ -47,7 +47,7 @@ namespace FilmProject.Application.Services
 
         public async Task<IEnumerable<MovieDto>> GetAllAsync(Expression<Func<Movie, bool>>? filter = null)
         {
-            var movies = await _repository.GetListAsync();
+            var movies = await _repository.GetListAsync(filter);
             List<MovieDto> moviesDto = _mapper.Map<List<Movie>, List<MovieDto>>(movies);
 
             return moviesDto;

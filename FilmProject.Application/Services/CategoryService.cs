@@ -93,5 +93,10 @@ namespace FilmProject.Application.Services
                 _categoryRepository.Delete(category);
             }
         }
+
+        public async Task<int> CountAsync()
+        {
+            return await _categoryRepository.CountAsync();
+        }
     }
 }

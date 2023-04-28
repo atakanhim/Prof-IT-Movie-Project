@@ -3,6 +3,7 @@ using FilmProject.Application.Contracts.Movie;
 using FilmProject.Application.Interfaces;
 using FilmProject.Application.Services;
 using FilmProject.Domain.Entities;
+using FilmProject.Domain.Enums;
 using FilmProject.Infrastructure.Migrations;
 using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -131,7 +132,6 @@ namespace FilmProject.Presentation.Controllers
         public async Task<IActionResult> GetMoviesAsync() // tum filmler 
         {
             var movies = await _movieService.GetAllAsync();
-
             return Json(movies);
         }
         [HttpGet]
@@ -186,8 +186,43 @@ namespace FilmProject.Presentation.Controllers
         public async Task<IActionResult> GetAllLanguagesAsync()// veritabanında kayıtlı filmlere ait diller
         {
             var languages = await _movieService.GetAllLanguagesAsync();
-            var result = new { LanguagesList = languages };
-            return Json(result);
+            var arrayList =new ArrayList();
+            foreach (var language in languages)
+            {
+                var movies = await _movieService.GetAllAsync(x => x.MovieLanguage == language);
+                var arrayListItem = new
+                {
+                    language = language,
+                    count = movies.Count()
+                };
+                arrayList.Add(arrayListItem);
+
+            }
+            return Json(arrayList);
+        }
+        [HttpGet]
+        [Route("GetRatingAge")]
+
+        public async Task<IActionResult> GetRatingAgeAsync()// veritabanında kayıtlı filmlere ait diller
+        {
+             
+           
+            var arrayList = new ArrayList();
+            for (int i = 0; i < Enum.GetValues(typeof(MovieRatings)).Length; i++)
+            {
+                var rating = (MovieRatings)i;
+                var ratingAgeList = await _movieService.GetAllAsync(x => x.RatingAge == rating);
+
+                var arrayListItem = new
+                {
+                    ratingAge = rating.ToString(),
+                    count = ratingAgeList.Count()
+                };
+
+                arrayList.Add(arrayListItem);
+            }
+
+            return Json(arrayList);
         }
         [HttpGet]
         [Route("GetLanguage/{language?}")]

@@ -15,5 +15,7 @@ namespace FilmProject.Application.Interfaces
         Task UpdateCategoryAsync(CategoryDto category);
 
         Task DeleteCategoryAsync(int id);
+
+        Task<int> CountAsync();
     }
 }

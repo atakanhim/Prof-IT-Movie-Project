@@ -51,9 +51,66 @@
             </div>
 
         </div>
+        <div class="row">
+                <div class="col-lg-6">
+                          <div class="row">
+                                     <div class="col-lg-6">
+                                        <div class="ibox">
+                                            <div class="ibox-content">
+                                                <h5 class="m-b-md">Toplam kategori sayisi</h5>
+                                                <h2 class="text-navy">
+                                                    <i class="fa fa-list-alt"></i><span id="categoryCount"></span>
+                                                </h2>
+                                                <small>.</small> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-lg-6">
+                                        <div class="ibox">
+                                              <div class="ibox-content">
+                                                <h5 class="m-b-md">Toplam kullanici sayisi</h5>
+                                                <h2 class="text-navy">
+                                                    <i class="fa fa-user"></i><span id="userCount"></span>
+                                                </h2>
+                                                <small>.</small> 
+                                            </div>
+                                        </div>
+                                    </div>
+                              </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                         <div class="col-lg-6">
+                                  <div class="ibox">
+                                      <div class="ibox-content">
+                                        <h5 id="languageH5"></h5>
+                                        <h2 id="languageOran"></h2>
+                                        <div class="text-center">
+                                            <div id="sparkline1"></div>
+                                        </div>
+                                    </div>
+                                  </div>
+
+                             </div>
+                             <div class="col-lg-6">
+                                  <div class="ibox">
+                                      <div class="ibox-content">
+                                        <h5 id="ratingAgeH5"></h5>
+                                        <h2 id="ratingAgeOran"></h2>
+                                        <div class="text-center">
+                                            <div id="sparkline2"></div>
+                                        </div>
+                                    </div>
+                                  </div>
+
+                             </div>
+                    </div>                  
+               </div>
+       </div>
     </div>
 
 
 @section Scripts{   
        <script src="~/js/AdminMetrics.js" asp-append-version="true"></script>  
+        <script src="~/lib/sparkline/jquery.sparkline.min.js"></script>
 }

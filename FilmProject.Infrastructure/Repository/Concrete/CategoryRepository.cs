@@ -26,6 +26,11 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             return true;
         }
 
+        public async Task<int> CountAsync()
+        {
+            return await _context.Categories.CountAsync();
+        }
+
         public bool isExist(string CategoryName)
         {
             return _context.Categories.Any(c => c.CategoryName == CategoryName);
