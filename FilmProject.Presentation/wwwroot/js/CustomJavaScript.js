@@ -17,6 +17,7 @@ $('#most_popularMovies').unbind().click(function () {
 });
 $('#most_commentedMovies').unbind().click(function () {
     var url = "/Movie/GetMostCommentedMovie"; // en cok yorum alan filmler
+    //$("#MovieRenderTitle").val("En Çok Yorum Alan Filmler");
     $.get(url, null, function (data) {
         console.log(data);
         $("#movieRender").html(data);
