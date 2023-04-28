@@ -15,6 +15,7 @@ namespace FilmProject.Application.Services
     {
         private readonly ICategoryRepository _categoryRepository;
         private IMapper _mapper;
+      
 
         public CategoryService(ICategoryRepository categoryRepository ,IMapper mapper)
         {

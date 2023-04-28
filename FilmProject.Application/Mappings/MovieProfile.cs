@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using FilmProject.Application.Contracts.Movie;
+using FilmProject.Application.Contracts.Role;
+using FilmProject.Application.Contracts.UserRole;
 using FilmProject.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +26,9 @@ namespace FilmProject.Application.Mappings
             CreateMap<Comment, CommentDto>().ReverseMap();
             CreateMap<MovieCategoryMap, MovieCategoryMapDto>().ReverseMap();
             CreateMap<MovieDto, Movie>();
+            CreateMap<RoleDto, IdentityRole>().ReverseMap();
+            
+            
         }
     }
 }

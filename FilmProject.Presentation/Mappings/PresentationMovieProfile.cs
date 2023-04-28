@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using FilmProject.Application.Contracts.Movie;
+using FilmProject.Application.Contracts.Role;
+using FilmProject.Application.Contracts.UserRole;
 using FilmProject.Presentation.Models;
 
 namespace FilmProject.Presentation.Mappings
@@ -12,6 +14,8 @@ namespace FilmProject.Presentation.Mappings
             CreateMap<CategoryViewModel, CategoryDto>().ReverseMap();
             CreateMap<FavoriteViewModel, FavoriteDto>().ReverseMap();
             CreateMap<PostMovieViewModel, MovieDto>().ReverseMap();
+            CreateMap<RoleViewModel, RoleDto>().ReverseMap();
+            CreateMap<RegisterByAdminViewModel, RegisterModelDto>().ReverseMap();
         }
 
     }

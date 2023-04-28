@@ -1,0 +1,99 @@
+﻿@{
+}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <form>
+        <div class="form-group">
+          <label for="username"><i class="fa fa-user"></i> Kullanıcı Adı:</label>
+          <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="birthdate"><i class="fa fa-calendar"></i> Doğum Tarihi:</label>
+            <input type="date" class="form-control" id="birthdate" name="birthdate" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="role"><i class="fa fa-lock"></i> Yetki:</label>
+            <select class="form-control" id="role" name="role" required>
+              <option value="">Seçiniz</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email"><i class="fa fa-envelope"></i> Email:</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password"><i class="fa fa-lock"></i> Şifre:</label>
+          <input type="password" class="form-control" id="password" name="password" minlength="6" maxlength="100" required>
+        </div>
+        <div class="form-group">
+          <label for="confirm-password"><i class="fa fa-lock"></i> Şifre Tekrarı:</label>
+          <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
+        </div>
+        
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary">Giriş Yap</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/lib/sweetalert/dist/sweetalert-dev.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/sweetalert/dist/sweetalert.min.js"></script>
+    </environment>
+    <script>
+        $.get( "https://localhost:7269/Inspinia/Admin/GetRoles", function( data ) {
+            var select = $("#role");
+            
+            $.each(data, function(index, role) {
+                select.append('<option data-id="' + role.id + '">' + role.name + '</option>');
+            });
+        });
+
+        $('form').submit(function(event) {
+            // Form submit olayını önle
+            event.preventDefault();
+
+            // Form verilerini topla
+            var formData = {
+              UserName: $('#username').val(),
+              BirthDate: $('#birthdate').val(),
+              RoleId: $('#role').val(),
+              Email: $('#email').val(),
+              Password: $('#password').val(),
+              ConfirmPassword: $('#confirm-password').val(),
+              
+            };
+
+            // AJAX isteği gönder
+            $.ajax({
+              type: 'POST',
+              url: 'https://localhost:7269/Inspinia/Admin/AddUserByAdmin', 
+              contentType: "application/json; charset=utf-8",
+              data: JSON.stringify(formData),
+              success: function(data) {
+                $('#username').val('');
+                $('#birthdate').val('');
+                $('#role').val('');
+                $('#email').val('');
+                $('#password').val('');
+                $('#confirm-password').val('');
+              },
+              error: function() {
+                console.log("error");
+              }
+            });
+        });
+    </script>
+    
+
+
+}
