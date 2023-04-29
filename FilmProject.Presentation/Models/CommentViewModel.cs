@@ -11,8 +11,10 @@ namespace FilmProject.Presentation.Models
         public bool IsDeleted { get; set; } = false;
 
         public int MovieId { get; set; }
-     
+        public MovieDto Movie { get; set; }
+
         public string userId { get; set; }
+        public ApplicationUser AppUser { get; set; }
 
     }
 }

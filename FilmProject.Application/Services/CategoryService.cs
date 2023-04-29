@@ -3,6 +3,7 @@ using FilmProject.Application.Contracts.Movie;
 using FilmProject.Application.Interfaces;
 using FilmProject.Domain.Entities;
 using FilmProject.Infrastructure.Repository.Abstract;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +63,7 @@ namespace FilmProject.Application.Services
             }
             else if (categoryDto.CategoryName == oldCategory.CategoryName)
             {
-                throw new InvalidOperationException("Degisiklik Yapılmadı.");
+               // aynı isim varsa hic error dondurmuyoruz ama update de yapmamıza gereken yok
             }
             else if (exists)
             {

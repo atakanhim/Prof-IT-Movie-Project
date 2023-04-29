@@ -28,14 +28,15 @@ namespace FilmProject.Presentation.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserStore<ApplicationUser> _userStore;
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
-        
-       
+
+        private readonly RoleManager<IdentityRole> _roleManager;
+
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
-
+            RoleManager<IdentityRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
             
             IEmailSender emailSender)
@@ -44,7 +45,7 @@ namespace FilmProject.Presentation.Areas.Identity.Pages.Account
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
-           
+            _roleManager = roleManager;
             _emailSender = emailSender;
         }
 
@@ -123,8 +124,15 @@ namespace FilmProject.Presentation.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    // eğer user rolu yoksa once onu olusturuyor
+                    if (!await _roleManager.RoleExistsAsync("User"))
+                    {
+                        var role = new IdentityRole("User");
+                        await _roleManager.CreateAsync(role);
+                    }
 
                     await _userManager.AddToRoleAsync(user, "User");
+
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

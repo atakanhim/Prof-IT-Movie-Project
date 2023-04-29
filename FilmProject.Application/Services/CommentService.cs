@@ -23,14 +23,14 @@ namespace FilmProject.Application.Services
             _commentRepository = commentRepository;
         }
 
-        
+
         public void Add(CommentDto commentDto)
         {
             // Veritabanında bu isimle bir film var mı kontrolü yapıldı.
             Comment comment = _mapper.Map<CommentDto, Comment>(commentDto);
 
-            _commentRepository.Add(comment);              
-            
+            _commentRepository.Add(comment);
+
         }
         public void Update(CommentDto commentDto)
         {
@@ -61,6 +61,15 @@ namespace FilmProject.Application.Services
             return await _commentRepository.GetCountOfTotalComment();
         }
 
- 
+        public async Task<IEnumerable<CommentDto>> GetListWithAppUser(Expression<Func<Comment, bool>>? filter = null)
+        {
+            List<Comment> comment = await _commentRepository.GetListWithAppUser(filter);
+
+            List<CommentDto> commentsDto = _mapper.Map<List<Comment>, List<CommentDto>>(comment);
+
+            return commentsDto;
+
+
+        }
     }
 }

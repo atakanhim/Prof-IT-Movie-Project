@@ -15,7 +15,7 @@ namespace FilmProject.Application.Interfaces
         Task<IEnumerable<CommentDto>> GetAllAsync(Expression<Func<Comment, bool>>? filter = null); // tum filmleri doner
    
         Task<int> GetCountOfTotalComment();
-
+        Task<IEnumerable<CommentDto>> GetListWithAppUser(Expression<Func<Comment, bool>>? filter = null);
 
         void Add(CommentDto comment);
         void Update(CommentDto comment);

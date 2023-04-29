@@ -1,5 +1,10 @@
 ﻿$(function () {
+    var movieId = $("#movieHeader").attr("data-id");
     var key = 0;
+
+    // yorumlar listeleniyor
+    refreshComments();
+
     //Puanlama Yıldızları
     const stars = document.querySelectorAll(".stars i");
     console.log(stars);
@@ -28,7 +33,6 @@
     //Yorumun Getirilip post edilmesi
     $("#btnSentComment").click(function () {
         var commentContent = $("#commentContent").val();
-        var movieId = $("#movieHeader").attr("data-id");
         //$.post("/Comment/Create", { Content: commentContent, MovieId: movieId });
 
 
@@ -40,13 +44,10 @@
             contentType: "application/json; charset=utf-8",
             data: commentModel,
             success: function (response) {
-                console.log("Yorum ekleme başarılı");
-                window.location.href = "/Home/Detail?id=" + movieId;
+                refreshComments();
             },
             error: function (xhr, status, error) {
-              
-                console.log("hata: " + error);
-               
+                alertify.error(xhr.responseText);
             }
         });
     });
@@ -66,7 +67,7 @@
         }
 
 
-        var movieId = $("#movieHeader").attr("data-id");
+
 
         var model = { MovieId: movieId};
         var commentModel = JSON.stringify(model);
@@ -87,9 +88,22 @@
     })
 
 
+    // refresh comments
+    function refreshComments() {
+        $("#loadingComments").show();
+        $.get('/Comment/List/' + movieId, function (data) {          
+            $("#loadingComments").hide();
+            $("#commentRender").html(data);
+        });
+        $.get('/Comment/Count/' + movieId, function (data) {
+            if (data > 0)
+                $("#commentCount").html(data + " " + localizer.reviews);
+            else 
+                $("#commentCount").html(localizer.noComment);
+        });
 
-  
 
+    }
 });
 
 
