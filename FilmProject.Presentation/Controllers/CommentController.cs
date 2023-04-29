@@ -25,6 +25,17 @@ namespace FilmProject.Presentation.Controllers
         {
             return View();
         }
+        [HttpGet]
+        [Route("List/{id}")]
+        public async Task<IActionResult> GetCommentsWithMovieIdAsync(int id) // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
+        {
+            IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUser(x=>x.MovieId == id);
+
+            IEnumerable<CommentViewModel> commentViewModels = _mapper.Map<IEnumerable<CommentDto>, IEnumerable<CommentViewModel>>(comments);
+
+
+            return PartialView(@"~/Views/Home/_RenderComments.cshtml", commentViewModels);
+        }
 
         [HttpGet]
         [Route("TotalCommentCount")]
@@ -62,6 +73,13 @@ namespace FilmProject.Presentation.Controllers
         public IActionResult CreateComment([FromBody] CommentViewModel commentViewModel) // Yorum Ekleme fonksiyonu 
         {
             commentViewModel.userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+
+            var user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (user == null)
+            {
+                return BadRequest("Lütfen önce giriş yapınız");
+            }
             CommentDto comment = _mapper.Map<CommentViewModel, CommentDto>(commentViewModel);
 
             _commentService.Add(comment);

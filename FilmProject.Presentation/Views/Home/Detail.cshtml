@@ -15,7 +15,11 @@
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
                     <a href="/Home"><i class="fa fa-home"></i> @localizer["home"]</a>
-                    <a href="#"> @Model.MovieCategories.First().CategoryName</a>
+                    @if (!string.IsNullOrEmpty(Model.MovieCategories?.FirstOrDefault()?.CategoryName))
+                        {
+                            <a href="#">@Model.MovieCategories.First().CategoryName</a>
+                        }
+                       
                     <span>@Model.MovieName</span>
                 </div>
             </div>
@@ -90,6 +94,7 @@
             <div class="col-lg-12 col-md-12">
                 <div class="anime__details__review">
                     <div class="section-title">
+                  
                     @if (Model.Comments.FirstOrDefault() == null)
                     {
                         <h5>@localizer["no_comment"]</h5>
@@ -99,8 +104,12 @@
                         <h5>@Model.Comments.Count @localizer["reviews"] </h5>
                     }
                     </div>
-
-                    @foreach (var item in Model.Comments)
+                        @*  yorumlar listelenmesi*@
+                             <div class="row" id="loadingComments"> <div class="col-lg-12 d-flex justify-content-center ">@Html.Partial("_Loading")</div></div>
+                        <div id="commentRender">
+                            <!-- comment listelenyior -->
+                        </div>
+                @*    @foreach (var item in Model.Comments)
                     {
                         <div class="anime__review__item">
                             <div class="anime__review__item__pic">
@@ -114,7 +123,7 @@
                                 <div class="comment text-right" style="color:white"><i class="fa fa-arrow-up"></i>  @item.LikeCount  <i class="fa fa-arrow-down"></i></div>
                             </div>
                         </div>
-                    }
+                    }*@
 
                 </div>
                 <div class="anime__details__form">

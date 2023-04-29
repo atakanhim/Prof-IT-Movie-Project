@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@using FilmProject.Presentation.Models
+@model IEnumerable<CommentViewModel>
+  @foreach (var item in Model)
+  {
+
+                       <div class="anime__review__item ">
+                                            <div class="anime__review__item__pic">
+                                                <img src="/img/user-profile.jpg" alt="">
+                                            </div>
+                                            <div class="anime__review__item__text">
+                                                <h6>@item.AppUser.UserName <span>@item.Created.ToShortDateString()</span></h6>
+                                                <p>
+                                                    @item.Content
+                                                </p>
+                                                <div class="comment text-right" style="color:white"><i class="fa fa-arrow-up"></i>  @item.LikeCount  <i class="fa fa-arrow-down"></i></div>
+                                            </div>
+                      </div>
+              
+    }
