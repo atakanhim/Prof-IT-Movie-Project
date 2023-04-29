@@ -136,7 +136,8 @@ $(document).ready(function () {
 
                 }
             },
-            error: function (xhr, status, error) {  
+            error: function (xhr, status, error) {
+                console.log(xhr);
                 $("#categoryUpdateError").html(xhr.responseText);
             }
         });
