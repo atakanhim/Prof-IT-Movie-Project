@@ -34,6 +34,10 @@
             <li class="@Html.IsSelected(controller: "Admin")">
                 <a href="@Url.ActionWithArea("AddUserForm", "Admin")"><i class="fa fa-pie-chart"></i> <span class="nav-label" data-i18n="nav.layouts">Kullanıcı Ekle</span></a>
             </li>
+
+            <li class="@Html.IsSelected(controller: "AdminVerifyComment")">
+                <a href="@Url.ActionWithArea("ListComments", "AdminVerifyComment")"><i class="fa fa-pie-chart"></i> <span class="nav-label" data-i18n="nav.layouts">Yorum Onayla</span></a>
+            </li>
             
             
         </ul>
