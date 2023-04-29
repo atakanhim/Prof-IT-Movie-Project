@@ -9,11 +9,18 @@ $(document).ready(function () {
     const menubtn = $(".menu-btn");
     let menuOpen = false;
 
+
+
+    $("#loadingCategories").show();
+
     var cateUrl = "/Category/Categories";
     $.get(cateUrl, null, function (data) {
-        console.log(data);
         $("#renderCategories").html(data);
+        $("#loadingCategories").hide();
+   
     });
+
+    
 
     menubtn.click(function () {
         if (!menuOpen) {

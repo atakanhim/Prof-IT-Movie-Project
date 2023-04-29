@@ -64,23 +64,30 @@ $(document).ready(function () {
         let data = table.row($(this).parents('tr')).data();
         let id = data.id; // Assuming the "id" field is in your JSON data
 
-        $.ajax({
-            url: '/Category/Delete',
-            method: 'POST',
-            data: { id: id },
-            success: function (response) {
-
-                let text = "Kategori silme islemi başarılı.";
-                let icon = "success";
-
-                showErrorToast(text, icon);
-                refreshDataTable(table);
-
-            },
-            error: function (xhr, status, error) {
-                let text = xhr.responseText
-                let icon = "error";
-                showErrorToast(text, icon);
+        Swal.fire({
+            title: 'Kategoriyi silmek istediğinize emin misiniz?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Evet, sil',
+            cancelButtonText: 'Hayır, vazgeç'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/Category/Delete',
+                    method: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        let text = "Kategori silme işlemi başarılı.";
+                        let icon = "success";
+                        showErrorToast(text, icon);
+                        refreshDataTable(table);
+                    },
+                    error: function (xhr, status, error) {
+                        let text = xhr.responseText
+                        let icon = "error";
+                        showErrorToast(text, icon);
+                    }
+                });
             }
         });
 
@@ -123,17 +130,14 @@ $(document).ready(function () {
 
                     let text = "Kategori update islemi başarılı.";
                     let icon = "success";
-
+                   
                     showErrorToast(text, icon);
                     refreshDataTable(table);
 
                 }
             },
-            error: function (xhr, status, error) {
-
-                let text = xhr.responseText
-                let icon = "error";
-                showErrorToast(text, icon);
+            error: function (xhr, status, error) {  
+                $("#categoryUpdateError").html(xhr.responseText);
             }
         });
 
@@ -180,7 +184,7 @@ $(document).ready(function () {
     // sweet alert fonksiyonu
 function showErrorToast(text,icon) {
     Swal.fire({
-        position: 'top-end',
+        position: 'middle',
         icon: icon,
         title: text,
         showConfirmButton: false,

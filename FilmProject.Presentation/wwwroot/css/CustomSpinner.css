@@ -1,0 +1,24 @@
+﻿.crabbly_spinner {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    -webkit-animation: crabbly_spinner infinite .75s linear;
+    -moz-animation: crabbly_spinner infinite .75s linear;
+    -o-animation: crabbly_spinner infinite .75s linear;
+    animation: crabbly_spinner infinite .75s linear;
+    border: 2px solid rgba(125, 125, 125, 0.9);
+    border-top-color: rgba(0, 0, 0, .1);
+    border-right-color: rgba(0, 0, 0, .1);
+    border-bottom-color: rgba(0, 0, 0, .1);
+    border-radius: 100%;
+}
+
+@keyframes crabbly_spinner {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

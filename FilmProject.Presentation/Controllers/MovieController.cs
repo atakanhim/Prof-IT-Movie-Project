@@ -198,9 +198,23 @@ namespace FilmProject.Presentation.Controllers
             foreach (var language in languages)
             {
                 var movies = await _movieService.GetAllAsync(x => x.MovieLanguage == language);
+                var languageName = "";
+                switch (language)
+                {
+                    case "tr-TR":
+                        languageName = "Türkçe";
+                        break;
+                    case "en-US":
+                        languageName = "İngilizce";
+                        break;
+                    default:
+                        languageName = language;
+                        break;
+                }
+
                 var arrayListItem = new
                 {
-                    language = language,
+                    language = languageName,
                     count = movies.Count()
                 };
                 arrayList.Add(arrayListItem);

@@ -1,50 +1,44 @@
 ﻿
-$('#last_uploadedMovies').unbind().click(function () {
-    var url = "/Movie/GetLastMovies"; // son yuklenen filmler listeleniyors
-    $.get(url, null, function (data) {
-        console.log(data);
-        $("#movieRender").html(data);
-
-    });
-});
-$('#most_popularMovies').unbind().click(function () {
-    var url = "/Movie/GetMostPopular"; // en cok begeni alan filmler
-    $.get(url, null, function (data) {
-        console.log(data);
-        $("#movieRender").html(data);
-
-    });
-});
-$('#most_commentedMovies').unbind().click(function () {
-    var url = "/Movie/GetMostCommentedMovie"; // en cok yorum alan filmler
-    //$("#MovieRenderTitle").val("En Çok Yorum Alan Filmler");
-    $.get(url, null, function (data) {
-        console.log(data);
-        $("#movieRender").html(data);
-
-    });
-});
 $('#headerLogoClick').unbind().click(function () {
-    window.location.href = "/Home"; 
-    var url = "/Movie/MoviesWithCategory"; // anasayfa normal listeleniyor  
-
-    $.get(url, null, function (data) {
-        console.log(data);
-        $("#movieRender").html(data);
-
-    });
+    window.location.href = "/Home";   
 });
-
 
 // categort map
-$('.custom__category a').unbind().click(function () {
- 
-    /*var text = $(this)[0].innerText;*/
-    var text = $(this).data("id");  
-    var url = "/Movie/MoviesWithCategory/" + text + "";
+$('.custom__category').unbind().click(function () {
+    $("#loadingMovies").show();
+    $('.custom__category').removeClass('active');
+
+    var url = "";
+    var text = $(this).find("a").data("id");
+
+    if (text == "GetLastMovies" || text == "GetMostPopular" || text == "GetMostCommentedMovie") {
+        url = "/Movie/" + text;
+        switch (text) {
+            case "GetLastMovies":
+                text = "En Son Yüklenen Filmler";
+                break;
+            case "GetMostPopular":
+                text = "En Çok Beğenilen Filmler";
+                break;
+            case "GetMostCommentedMovie":
+                text = "En Çok Yorum Alan Filmler";
+                break;
+            default:
+                break;
+        }
+    }
+    else {
+        url = "/Movie/MoviesWithCategory/" + text;
+        text += " Kategorisindeki Filmler"
+    }
+
     $.get(url, null, function (data) {
-        console.log(data);
+        $("#loadingMovies").hide();
+        $("#movieRenderTitle").html(text);
         $("#movieRender").html(data);
 
     });
+
+    // Tıklanan öğeye active sınıfını ekle
+    $(this).addClass('active');
 });
