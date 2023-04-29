@@ -3,8 +3,6 @@ $('#headerLogoClick').unbind().click(function () {
     window.location.href = "/Home";   
 });
 
-
-
 // categort map
 $('.custom__category').unbind().click(function () {
     $("#loadingMovies").show();

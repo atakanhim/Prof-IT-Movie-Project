@@ -36,7 +36,13 @@ namespace FilmProject.Presentation.Controllers
 
             return PartialView(@"~/Views/Home/_RenderComments.cshtml", commentViewModels);
         }
-
+        [HttpGet]
+        [Route("Count/{id}")]
+        public async Task<IActionResult> GetCommentCount(int id) // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
+        {
+            IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUser(x => x.MovieId == id);
+            return Json(comments.Count());
+        }
         [HttpGet]
         [Route("TotalCommentCount")]
         //[Authorize(Roles = "Admin")]

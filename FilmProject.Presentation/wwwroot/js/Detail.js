@@ -47,7 +47,8 @@
                 refreshComments();
             },
             error: function (xhr, status, error) {
-               alertify.error(xhr.responseText);         }
+                alertify.error(xhr.responseText);
+            }
         });
     });
 
@@ -90,10 +91,18 @@
     // refresh comments
     function refreshComments() {
         $("#loadingComments").show();
-        $.get('/Comment/List/' + movieId, function (data) {
+        $.get('/Comment/List/' + movieId, function (data) {          
             $("#loadingComments").hide();
             $("#commentRender").html(data);
         });
+        $.get('/Comment/Count/' + movieId, function (data) {
+            if (data > 0)
+                $("#commentCount").html(data + " " + localizer.reviews);
+            else 
+                $("#commentCount").html(localizer.noComment);
+        });
+
+
     }
 });
 
