@@ -1,6 +1,22 @@
 ﻿$(function () {
     var movieId = $("#movieHeader").attr("data-id");
-    var key = 0;
+    var favoriteStatue;
+    let addMyListButton = $("#btnAddMyList")
+    var key;
+
+
+
+    //Favoriye eklenme kontrolü
+    $.get('/Favorite/IsMyFavorite', { MovieId: movieId }, function (data, textStatus, jqXHR) {
+        favoriteStatue = data;
+        if (favoriteStatue == false) {
+            addMyListButton.addClass("add-list-btn--added");
+            key = false;
+        } else {
+            key = true;
+        }
+    });
+
 
     // yorumlar listeleniyor
     refreshComments();
@@ -39,14 +55,6 @@
     });
 
 
-    //Add My List Button
-    let addMyListButton = $("#btnAddMyList")
-    if (true) {
-        addMyListButton.addClass("add-list-btn--added");
-    }
-
-
-
 
     //Yorumun Getirilip post edilmesi
     $("#btnSentComment").click(function () {
@@ -76,16 +84,13 @@
     //Favorilere Ekleme Silme
     $("#btnAddMyList").click(function () {
 
-        if (key == 0) {
+        if (key == false) {
             addMyListButton.removeClass("add-list-btn--added");
-            key = 1;
+            key = true;
         } else {
             addMyListButton.addClass("add-list-btn--added");
-            key = 0;
+            key = false;
         }
-
-
-
 
         var favoriModel = { MovieId: movieId };
         favoriModel = JSON.stringify(favoriModel);
