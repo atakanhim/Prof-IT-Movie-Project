@@ -11,6 +11,6 @@ namespace FilmProject.Application.Contracts.Movie
     public class CategoryDto:BaseEntity
     {
         public string CategoryName { get; set; }
-
+        public bool isDeleted { get; set; }
     }
 }

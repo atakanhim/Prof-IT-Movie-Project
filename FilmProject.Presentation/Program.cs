@@ -56,7 +56,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("InspiniaPolicy", policy =>
     {
         policy.RequireRole("Admin");
-        
+
     });
 });
 
@@ -68,8 +68,8 @@ builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IFavoriteService, FavoriteService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IMovieCategoryMapService, MovieCategoryMapService>();
+builder.Services.AddScoped<IMovieLikeService, MovieLikeService>();
 builder.Services.AddScoped<IUserService, UserService>();
-
 builder.Services.AddScoped<IRoleService, RoleService>();
 
 //repositories
@@ -78,6 +78,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
 builder.Services.AddScoped<IMovieCategoryMapRepository, MovieCategoryMapRepository>();
+builder.Services.AddScoped<IMovieLikeRepository, MovieLikeRepository>();
 builder.Services.AddScoped<IEmailService, EmailSender>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddSingleton(new QRCodeService(new QRCodeGenerator()));
@@ -121,7 +122,7 @@ builder.Services.Configure<RequestLocalizationOptions>(opt =>
 
 // fluent vlaidation
 builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddTransient<IValidator<CategoryViewModel>,CategoryValidator>();
+builder.Services.AddTransient<IValidator<CategoryViewModel>, CategoryValidator>();
 
 var app = builder.Build();
 
@@ -150,7 +151,7 @@ app.UseRequestLocalization(options.Value);
 
 app.UseEndpoints(endpoints =>
 {
-   
+
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");

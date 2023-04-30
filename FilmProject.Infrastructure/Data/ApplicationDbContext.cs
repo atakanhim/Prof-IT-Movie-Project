@@ -15,6 +15,8 @@ namespace FilmProject.Infrastructure.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<MovieCategoryMap> MovieCategoryMaps { get; set; }
         public DbSet<Favorite> Favorite { get; set; }
+        public DbSet<CommentLike> CommentLikes { get; set; }
+        public DbSet<MovieLike> MovieLikes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +33,32 @@ namespace FilmProject.Infrastructure.Data
                 .HasOne<ApplicationUser>(o => o.AppUser)
                 .WithMany()
                 .HasForeignKey(b => b.userId);
+
+
+
+            modelBuilder.Entity<CommentLike>()
+               .HasOne<Comment>(o => o.Comment)
+               .WithMany(c => c.CommentLikes)
+               .HasForeignKey(b => b.CommentId)
+                .OnDelete(DeleteBehavior.NoAction); ;
+
+            modelBuilder.Entity<CommentLike>()
+                .HasOne<ApplicationUser>(o => o.AppUser)
+                .WithMany()
+                .HasForeignKey(b => b.userId);
+
+
+            modelBuilder.Entity<MovieLike>()
+                 .HasOne<Movie>(o => o.Movie)
+                 .WithMany(c => c.MovieLikes)
+                 .HasForeignKey(b => b.MovieId);
+
+            modelBuilder.Entity<MovieLike>()
+                .HasOne<ApplicationUser>(o => o.AppUser)
+                .WithMany()
+                .HasForeignKey(b => b.userId);
+
+
 
             modelBuilder.Entity<MovieCategoryMap>()
                         .HasKey(bc => new { bc.MovieId, bc.CategoryId });

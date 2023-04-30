@@ -4,15 +4,25 @@
 
     // yorumlar listeleniyor
     refreshComments();
-
+    refreshMovieLike()
     //Puanlama Yıldızları
     const stars = document.querySelectorAll(".stars i");
-    console.log(stars);
+
     let counter = 0;
     stars.forEach((star, index1) => {
         star.addEventListener("click", () => {
             counter = index1;
-            $.post("/Home/GivePoint", { Score: ++counter});
+            $.post("/Home/GivePoint", { Score: ++counter })
+                .done(function (data) {
+                    // işlem başarılı oldu
+                    refreshMovieLike();
+                    alertify.success("Puan verdiğiniz için teşekkürler");
+                   
+                })
+                .fail(function (xhr) {
+                    // işlem başarısız oldu
+                    alertify.error(xhr.responseText);
+                });                ;
             stars.forEach((star, index2) => {
                 index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
             });
@@ -44,6 +54,8 @@
             data: commentModel,
             success: function (response) {
                 refreshComments();
+                alertify.success("Puan verdiğiniz için teşekkürler");
+
             },
             error: function (xhr, status, error) {
                 alertify.error(xhr.responseText);
@@ -77,9 +89,8 @@
                 console.log("Listeme ekleme başarılı");
             },
             error: function (xhr, status, error) {
-
+                alertify.success(xhr.responseText);
                 console.log("hata: " + error);
-
             }
         });
     })
@@ -100,6 +111,16 @@
         });
 
 
+    }
+
+    function refreshMovieLike() {
+
+        $.get('/Movie/LikeAvarage/' + movieId, function (data) {     
+                $("#movieScore").html(data);    
+        });
+        $.get('/Movie/LikeCount/' + movieId, function (data) {
+            $("#movieLikeCount").html(data);
+        });
     }
 });
 

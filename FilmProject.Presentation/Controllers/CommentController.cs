@@ -69,7 +69,7 @@ namespace FilmProject.Presentation.Controllers
         public async Task<IActionResult> MostLikedComment() // en çok begenilen yorum listeleniyor
         {
             var comments = await _commentService.GetAllAsync();
-            var result = comments.OrderByDescending(x => x.LikeCount).FirstOrDefault();
+            var result = comments.OrderByDescending(x => x.CommentLikes.Count).FirstOrDefault();
 
             return Json(result);
         }
