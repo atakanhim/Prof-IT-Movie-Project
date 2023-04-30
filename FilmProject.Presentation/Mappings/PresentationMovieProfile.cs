@@ -8,14 +8,27 @@ namespace FilmProject.Presentation.Mappings
 {
     public class PresentationMovieProfile : Profile
     {
-        public PresentationMovieProfile() {
-            CreateMap<MovieViewModel, MovieDto>().ReverseMap().ForMember(dest => dest.Ortalama, opt => opt.MapFrom(src => src.MoviePointCounter == 0 ? 1 : Math.Round((float)src.MoviePoint / src.MoviePointCounter, 1)));
+        public PresentationMovieProfile()
+        {
+            CreateMap<MovieDto, MovieViewModel>()
+               .ForMember(dest => dest.Ortalama,
+                 opt => opt.MapFrom(src => src.MovieLikes.Count > 0
+                                         ? Math.Round(src.MovieLikes.Average(l => l.Point), 1)
+                                         : 0))
+               .ForMember(dest => dest.MovieLanguage, opt => opt.MapFrom(src => src.MovieLanguage == "tr-TR" ? "Türkçe" : "İngilizce"))
+              .ReverseMap();
+
+
+
             CreateMap<CommentViewModel, CommentDto>().ReverseMap();
             CreateMap<CategoryViewModel, CategoryDto>().ReverseMap();
             CreateMap<FavoriteViewModel, FavoriteDto>().ReverseMap();
             CreateMap<PostMovieViewModel, MovieDto>().ReverseMap();
             CreateMap<RoleViewModel, RoleDto>().ReverseMap();
             CreateMap<RegisterByAdminViewModel, RegisterModelDto>().ReverseMap();
+
+            CreateMap<MovieLikeDto, MovieLikeViewModel>().ReverseMap();
+            CreateMap<CommentLikeDto, CommentLikeViewModel>().ReverseMap();
         }
 
     }

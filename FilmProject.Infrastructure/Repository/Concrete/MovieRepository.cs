@@ -40,7 +40,7 @@ namespace FilmProject.Infrastructure.Repository.Concrete
                 var model = await _context.Categories.Include(x => x.MovieCategories).ThenInclude(xa => xa.Movie).Where(a => a.CategoryName == category).ToListAsync();
                 foreach (var movie in model[0].MovieCategories)
                 {
-                    Movie moviedata = await _context.Movies.Include(y => y.Comments).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).Where(i => i.Id == movie.MovieId).FirstOrDefaultAsync();
+                    Movie moviedata = await _context.Movies.Include(u => u.MovieLikes).Include(y => y.Comments).ThenInclude(yu => yu.CommentLikes).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).Where(i => i.Id == movie.MovieId).FirstOrDefaultAsync();
 
                     movies.Add(moviedata);
                 }
@@ -48,7 +48,7 @@ namespace FilmProject.Infrastructure.Repository.Concrete
                 return movies;
             }
 
-            return await _context.Movies.Include(y => y.Comments).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).ToListAsync();
+            return await _context.Movies.Include(u=>u.MovieLikes).Include(y => y.Comments).ThenInclude(yu=>yu.CommentLikes).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).ToListAsync();
         }
 
         public async Task<List<string>> GetAllLanguagesAsync()
@@ -68,7 +68,14 @@ namespace FilmProject.Infrastructure.Repository.Concrete
 
         public async Task<Movie> GetWithCategoryAsync(Expression<Func<Movie, bool>> filter)
         {
-            return await _context.Movies.Include(y => y.WhoFavorited).Include(y => y.Comments).ThenInclude(y => y.AppUser).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).Where(filter).FirstOrDefaultAsync();
+#pragma warning disable CS8603 // Possible null reference return.
+            return await _context.Movies.Include(u => u.MovieLikes)
+                .Include(y => y.WhoFavorited)
+                .Include(a => a.Comments).ThenInclude(ax => ax.AppUser)
+                .Include(v => v.Comments).ThenInclude(vx => vx.CommentLikes)
+                .Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).
+                Where(filter).FirstOrDefaultAsync();
+#pragma warning restore CS8603 // Possible null reference return.
         }
     }
 }

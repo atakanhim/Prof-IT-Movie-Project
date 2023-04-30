@@ -52,7 +52,8 @@
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
                             </div>
-                            <span> @Model.MoviePointCounter @localizer["votes"]</span>
+                            @*jquery ile gelcek*@
+                            <span><span id="movieLikeCount"></span> @localizer["votes"]</span>
                         </div>
                         <p>
                             @Model.MovieSummary
@@ -75,7 +76,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <ul>
-                                        <li><span>@localizer["movie_scores"]:</span> @Model.Ortalama</li>
+                                        <li><span>@localizer["movie_scores"]:</span> <span id="movieScore"></spanid> </li>
                                         <li><span>@localizer["movie_duration"]:</span> 1.30 @localizer["minute"]</li>
                                         <li><span>@localizer["movie_quality"]:</span> HD</li>
                                         <li><span>@localizer["movie_upload_date"]:</span> @Model.Created.ToShortDateString()</li>

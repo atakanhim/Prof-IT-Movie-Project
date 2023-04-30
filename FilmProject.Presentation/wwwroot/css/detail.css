@@ -1,13 +1,18 @@
-﻿/*Rating Stars*/ 
+﻿/*Rating Stars*/
+.stars{
+    width:200px;
+    height:50px;
+}
 .stars i {
     color: #e6e6e6;
     font-size: 24px;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: color 0.8s ease-in,transform 0.5s ease-in-out;
+    transform-origin: center center;
 }
 
     .stars i:hover {
-        font-size: 26px;
+        transform: scale(1.3);
     }
 
     .stars i.active {

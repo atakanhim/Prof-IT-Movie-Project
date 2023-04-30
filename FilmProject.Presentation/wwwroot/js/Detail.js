@@ -4,19 +4,38 @@
 
     // yorumlar listeleniyor
     refreshComments();
-
+    refreshMovieLike()
     //Puanlama Yıldızları
     const stars = document.querySelectorAll(".stars i");
-    console.log(stars);
+
     let counter = 0;
+
     stars.forEach((star, index1) => {
         star.addEventListener("click", () => {
             counter = index1;
-            $.post("/Home/GivePoint", { Score: ++counter});
-            stars.forEach((star, index2) => {
-                index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
+            let viewmodel = {
+                MovieId: movieId,
+                Point: ++counter,
+            };
+            viewmodel = JSON.stringify(viewmodel);
+            $.ajax({
+                url: '/MovieLike/GivePoint',
+                method: 'POST',
+                contentType: "application/json; charset=utf-8",
+                data: viewmodel,
+                success: function (response) {
+                    refreshMovieLike();
+                    alertify.success(response);
+                    starLight(counter);
+                },
+                error: function (xhr, status, error) {
+                    alertify.error(xhr.responseText);
+                }
             });
+
+           
         });
+    
     });
 
 
@@ -24,7 +43,7 @@
     let addMyListButton = $("#btnAddMyList")
     if (true) {
         addMyListButton.addClass("add-list-btn--added");
-    } 
+    }
 
 
 
@@ -44,6 +63,8 @@
             data: commentModel,
             success: function (response) {
                 refreshComments();
+                alertify.success("Yorum attığınız için teşekkürler");
+
             },
             error: function (xhr, status, error) {
                 alertify.error(xhr.responseText);
@@ -54,7 +75,7 @@
 
     //Favorilere Ekleme Silme
     $("#btnAddMyList").click(function () {
-        
+
         if (key == 0) {
             addMyListButton.removeClass("add-list-btn--added");
             key = 1;
@@ -66,40 +87,58 @@
 
 
 
-        var model = { MovieId: movieId};
-        var commentModel = JSON.stringify(model);
+        var favoriModel = { MovieId: movieId };
+        favoriModel = JSON.stringify(favoriModel);
         $.ajax({
             url: '/Favorite/ChangeFavorite',
             method: 'POST',
             contentType: "application/json; charset=utf-8",
-            data: commentModel,
+            data: favoriModel,
             success: function (response) {
                 console.log("Listeme ekleme başarılı");
             },
             error: function (xhr, status, error) {
-
-                console.log("hata: " + error);
-
+                alertify.error(xhr.responseText);
             }
         });
     })
-
+    function starLight(value) {
+        value = value - 1;
+        stars.forEach((star, index2) => {
+            value >= index2 ? star.classList.add("active") : star.classList.remove("active");
+        });
+    }
 
     // refresh comments
     function refreshComments() {
         $("#loadingComments").show();
-        $.get('/Comment/List/' + movieId, function (data) {          
+        $.get('/Comment/List/' + movieId, function (data) {
             $("#loadingComments").hide();
             $("#commentRender").html(data);
         });
         $.get('/Comment/Count/' + movieId, function (data) {
             if (data > 0)
                 $("#commentCount").html(data + " " + localizer.reviews);
-            else 
+            else
                 $("#commentCount").html(localizer.noComment);
         });
 
 
+    }
+
+    function refreshMovieLike() {
+
+        $.get('/Movie/LikeAvarage/' + movieId, function (data) {
+            $("#movieScore").html(data);
+        });
+        $.get('/Movie/LikeCount/' + movieId, function (data) {
+            $("#movieLikeCount").html(data);
+        });
+        $.get('/MovieLike/GetPoint/' + movieId, function (data) {
+           starLight(data);
+        });
+       
+      
     }
 });
 

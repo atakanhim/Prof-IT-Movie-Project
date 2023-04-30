@@ -10,8 +10,6 @@ namespace FilmProject.Presentation.Models
         public string DirectorName { get; set; }
         public MovieRatings RatingAge { get; set; }
         public DateTime PublishYear { get; set; }
-        public int MoviePoint { get; set; } = 0;
-        public int MoviePointCounter { get; set; } = 0;
         public IFormFile Photo{ get; set; }
         public string PhotoPath { get; set; }
         public bool IsHighLighted { get; set; } = false;

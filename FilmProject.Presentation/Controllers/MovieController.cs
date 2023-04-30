@@ -4,7 +4,7 @@ using FilmProject.Application.Interfaces;
 using FilmProject.Application.Services;
 using FilmProject.Domain.Entities;
 using FilmProject.Domain.Enums;
-using FilmProject.Infrastructure.Migrations;
+
 using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -46,6 +46,24 @@ namespace FilmProject.Presentation.Controllers
             return Json(result);
         }
         [HttpGet]
+        [Route("LikeAvarage/{id?}")]
+        //[Authorize(Roles ="Admin")]
+        public async Task<IActionResult> GetLikeAvarage(int id) // id si gelen filmin Like Ortalamasını doner
+        {
+            MovieDto movieDto = await _movieService.GetWithCategoryAsync(m => m.Id == id);
+            MovieViewModel movie = _mapper.Map<MovieDto, MovieViewModel>(movieDto);
+            return Json(movie.Ortalama);
+        }
+        [HttpGet]
+        [Route("LikeCount/{id?}")]
+        //[Authorize(Roles ="Admin")]
+        public async Task<IActionResult> GetLikeCount(int id) // id si gelen filme kaç kişi oy kullanmis
+        {
+            MovieDto movieDto = await _movieService.GetWithCategoryAsync(m => m.Id == id);
+            MovieViewModel movie = _mapper.Map<MovieDto, MovieViewModel>(movieDto);
+            return Json(movie.MovieLikes.Count);
+        }
+        [HttpGet]
         [Route("GetMostPopular/{id?}")]
         //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetMostPopularMovieAsync(int id = 0) // en yuksek puana(begeni) sahip filmi çeken kod
@@ -56,7 +74,7 @@ namespace FilmProject.Presentation.Controllers
                 IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
                 if (id > 0)
                 {
-                    movieViewModel = movieViewModel.OrderByDescending(m => m.Ortalama).Take(id).ToList();
+                    movieViewModel = movieViewModel.OrderByDescending(m => m.MovieLikes.Count).Take(id).ToList();
                     var settings = new JsonSerializerSettings
                     {
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -65,7 +83,7 @@ namespace FilmProject.Presentation.Controllers
                     return Ok(json);
                 }
                 else
-                    movieViewModel = movieViewModel.OrderByDescending(m => m.Ortalama);
+                    movieViewModel = movieViewModel.OrderByDescending(m => m.MovieLikes.Count);
                 return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
 
             }
