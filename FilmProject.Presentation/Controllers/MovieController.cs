@@ -57,7 +57,7 @@ namespace FilmProject.Presentation.Controllers
         [HttpGet]
         [Route("LikeCount/{id?}")]
         //[Authorize(Roles ="Admin")]
-        public async Task<IActionResult> GetLikeCount(int id) // id si gelen filmin Like Ortalamasını doner
+        public async Task<IActionResult> GetLikeCount(int id) // id si gelen filme kaç kişi oy kullanmis
         {
             MovieDto movieDto = await _movieService.GetWithCategoryAsync(m => m.Id == id);
             MovieViewModel movie = _mapper.Map<MovieDto, MovieViewModel>(movieDto);

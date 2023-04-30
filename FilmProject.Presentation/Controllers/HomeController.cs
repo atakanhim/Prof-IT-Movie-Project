@@ -19,19 +19,15 @@ namespace FilmProject.Presentation.Controllers
         private readonly IMovieService _movieService;
 
         private readonly IMapper _mapper;
-        private readonly IEmailService _emailService;
         private readonly IUserService _userService;
 
-        private readonly IMovieLikeService _movieLikeService;
    
 
-        public HomeController(ILogger<HomeController> logger, IMovieLikeService movieLikeService,IMovieService movieService, IEmailService emailService, IUserService userService,IMapper mapper)
+        public HomeController(ILogger<HomeController> logger,IMovieService movieService, IEmailService emailService, IUserService userService,IMapper mapper)
         {
             _logger = logger;
             _movieService = movieService;
-            _emailService = emailService;
             _userService = userService;
-            _movieLikeService = movieLikeService;
             _mapper = mapper;
         }
 
@@ -57,35 +53,7 @@ namespace FilmProject.Presentation.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> GivePoint(int score)
-        {
-            var currentUser = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (currentUser == null)
-            {
-                // movieLike ekleme yapılcak
-                return BadRequest("Lütfen oy kullanmak için giriş yapınız");
-            }
-            // burada score yanı sıra movieId de gelmesi lazım ki 2 veriyi gönderelim
-            // movieId geldi var sayıyorum.
-
-            var movieId = 1;
-            
-
-            MovieLikeDto model = await _movieLikeService.GetAsync(x=>x.userId == currentUser && x.MovieId==movieId);
-            if (model == null)
-            {
-                // movieLike ekleme yapılcak
-             
-            }
-            else
-            {
-                model.Point = score;  
-                _movieLikeService.Update(model);
-            }
-
-            return Ok();
-        }
+        
 
 
         public async Task<IActionResult> Profil()

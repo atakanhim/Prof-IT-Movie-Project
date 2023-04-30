@@ -21,9 +21,10 @@ namespace FilmProject.Application.Services
             _mapper = mapper;
             _repository = repository;
         }
-        public void Add(MovieLikeDto movieLike)
+        public void Add(MovieLikeDto movieLikeDto)
         {
-            throw new NotImplementedException();
+            MovieLike movieLike = _mapper.Map<MovieLikeDto, MovieLike>(movieLikeDto);
+                _repository.Add(movieLike);
         }
 
         public async Task<IEnumerable<MovieLikeDto>> GetAllAsync(Expression<Func<MovieLike, bool>>? filter = null)
