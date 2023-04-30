@@ -132,7 +132,7 @@
             $("#movieScore").html(data);
         });
         $.get('/Movie/LikeCount/' + movieId, function (data) {
-            $("#movieLikeCount").html(data);
+            $("#movieLikeCount").html(data + " " + localizer.vote);
         });
         $.get('/MovieLike/GetPoint/' + movieId, function (data) {
            starLight(data);
