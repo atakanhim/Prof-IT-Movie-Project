@@ -32,10 +32,15 @@
     padding: 14px 20px;
     border-radius: 4px;
     margin-right: 11px;
-    border:none;
+    border: none;
+    transition: background-color 0.4s ease-in,transform 0.2s ease-in-out;
 }
 
+    .anime__details__btn .add-list-btn:hover {
+        cursor:pointer;
+    }
 
-.anime__details__btn .add-list-btn--added {
-    background: grey;
-}
+
+    .anime__details__btn .add-list-btn--added {
+        background: grey;
+    }

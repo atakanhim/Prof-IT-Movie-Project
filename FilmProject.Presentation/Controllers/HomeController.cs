@@ -20,19 +20,22 @@ namespace FilmProject.Presentation.Controllers
 
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-   
 
-        public HomeController(ILogger<HomeController> logger,IMovieService movieService, IEmailService emailService, IUserService userService,IMapper mapper)
+
+        public HomeController(ILogger<HomeController> logger,IMovieService movieService, IEmailService emailService, IUserService userService,IMapper mapper, RoleManager<IdentityRole> roleManager)
         {
             _logger = logger;
             _movieService = movieService;
             _userService = userService;
             _mapper = mapper;
+            _roleManager = roleManager;
         }
 
         public async Task<IActionResult> Index()
         {
+            var result = await _roleManager.CreateAsync(new IdentityRole("Admin"));
             return View();
         }
         [HttpGet]
@@ -52,8 +55,6 @@ namespace FilmProject.Presentation.Controllers
             return View(movie);
         }
 
-
-        
 
 
         public async Task<IActionResult> Profil()
