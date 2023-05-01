@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using FilmProject.Application.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace FilmProject.Presentation.Areas.Inspinia.Controllers
 {
@@ -10,7 +8,6 @@ namespace FilmProject.Presentation.Areas.Inspinia.Controllers
 
         public async Task<IActionResult> ListComments()
         {
-
             return View();
         }
 

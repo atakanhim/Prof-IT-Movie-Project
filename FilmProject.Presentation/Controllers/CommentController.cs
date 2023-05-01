@@ -31,11 +31,24 @@ namespace FilmProject.Presentation.Controllers
         [Route("AllComments")]
         public async Task<IActionResult> GetAllCommentsAsync()//Tüm Yorumları Döndürür
         {
+            try
+            {
+                IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUser(x => x.IsConfirm == false);
+                IEnumerable<CommentViewModel> commentViewModels = _mapper.Map<IEnumerable<CommentDto>, IEnumerable<CommentViewModel>>(comments);
 
-            IEnumerable<CommentDto> comments = await _commentService.GetAllAsync(x=>x.IsConfirm == false);
-            IEnumerable<CommentViewModel> commentViewModels = _mapper.Map<IEnumerable<CommentDto>, IEnumerable<CommentViewModel>>(comments);
+                //return Json(commentViewModels);
+                return PartialView(@"~/Views/Home/_RenderAdminComments.cshtml", commentViewModels);
+            }
+            catch
+            {
+                return Ok(new
+                {
+                    mesaj = "Sistemde Herhangi bir yorum bulunamadı"
+                }) ;
+            }
 
-            return Json(commentViewModels);
+
+
         }
 
 
