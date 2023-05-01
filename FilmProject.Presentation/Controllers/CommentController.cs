@@ -25,6 +25,29 @@ namespace FilmProject.Presentation.Controllers
         {
             return View();
         }
+
+
+        [HttpGet]
+        [Route("AllComments")]
+        public async Task<IActionResult> GetAllCommentsAsync()//Tüm Yorumları Döndürür
+        {
+            try
+            {
+                IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUserAndMovie(x => x.IsConfirm == false);
+                IEnumerable<AdminCommentViewModel> commentViewModels = _mapper.Map<IEnumerable<CommentDto>, IEnumerable<AdminCommentViewModel>>(comments);
+
+                return PartialView(@"~/Views/Home/_RenderAdminComments.cshtml", commentViewModels);
+        }
+            catch
+            {
+                return Ok(new
+                {
+                    mesaj = "Sistemde Herhangi bir yorum bulunamadı"
+                });
+            }
+        }
+
+
         [HttpGet]
         [Route("List/{id}")]
         public async Task<IActionResult> GetCommentsWithMovieIdAsync(int id) // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.

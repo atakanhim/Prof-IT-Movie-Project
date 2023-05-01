@@ -12,5 +12,6 @@ namespace FilmProject.Infrastructure.Repository.Abstract
     {
         Task<int> GetCountOfTotalComment();
         Task<List<Comment>> GetListWithAppUser(Expression<Func<Comment, bool>>? filter = null);
+        Task<List<Comment>> GetListWithAppUserAndMovie(Expression<Func<Comment, bool>>? filter = null);//Admin comment listelmek için
     }
 }
