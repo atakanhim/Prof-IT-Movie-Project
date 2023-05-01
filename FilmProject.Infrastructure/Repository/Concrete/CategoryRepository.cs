@@ -31,6 +31,12 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             return await _context.Categories.CountAsync();
         }
 
+        public async Task<bool> isDeletedStatus(string CategoryName)
+        {
+           var status =  await _context.Categories.Where(x=>x.isDeleted==true).AnyAsync(c => c.CategoryName == CategoryName);
+            return status;
+        }
+
         public bool isExist(string CategoryName)
         {
             return _context.Categories.Any(c => c.CategoryName == CategoryName);

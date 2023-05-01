@@ -9,7 +9,7 @@ namespace FilmProject.Infrastructure.Repository.Abstract
 {
     public interface ICategoryRepository : IEntityRepository<Category>
     {
-
+        Task<bool> isDeletedStatus(string CategoryName);
         bool isExist(string CategoryName);
         bool isExistById(int CategoryId);
 
@@ -17,6 +17,9 @@ namespace FilmProject.Infrastructure.Repository.Abstract
         Task<bool> AddAsync(Category category);
 
         Task<int> CountAsync();
+
+
+
 
     }
 }
