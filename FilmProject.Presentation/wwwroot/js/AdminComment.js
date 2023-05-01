@@ -1,9 +1,6 @@
 ﻿$(function () {
-    console.log("JS DOSYASI TEST");
-    $.get('/Comment/AllComments',  // url
-        function (data, textStatus, jqXHR) {  // success callback
-            console.log("ADMİN JQUERY RUNNED");
+    $.get('/Comment/AllComments', 
+        function (data, textStatus, jqXHR) { 
             $("#allComments").html(data);
-            console.log(data);
         });
 });

@@ -1,17 +1,17 @@
 ﻿@using FilmProject.Presentation.Models
-@model IEnumerable<CommentViewModel>
+@model IEnumerable<AdminCommentViewModel>
 
 @foreach (var item in Model)
 {
     <tr>
-        <td class="desc">
+        <td class="w-75">
             <h3>
                 <a href="#" class="text-navy">
                     @item.AppUser.UserName
                 </a>
             </h3>
             <h3 class="text-grey">
-                @item.MovieId
+                @item.Movie.MovieName
             </h3>
 
             <p class="small text-grey">
@@ -22,7 +22,7 @@
                 @item.Content
             </p>
         </td>
-        <td class="text-right">
+        <td class="w-25">
             <div class="d-flex flex-column">
                 <button id="btn-test" class="btn btn-primary btn-block"><i class="fa fa-check"></i> Verify Comment</button>
                 <button class="btn btn-secondary btn-block"><i class="fa fa-trash"></i> Delete Comment</button>

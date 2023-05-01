@@ -33,22 +33,18 @@ namespace FilmProject.Presentation.Controllers
         {
             try
             {
-                IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUser(x => x.IsConfirm == false);
-                IEnumerable<CommentViewModel> commentViewModels = _mapper.Map<IEnumerable<CommentDto>, IEnumerable<CommentViewModel>>(comments);
+                IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUserAndMovie(x => x.IsConfirm == false);
+                IEnumerable<AdminCommentViewModel> commentViewModels = _mapper.Map<IEnumerable<CommentDto>, IEnumerable<AdminCommentViewModel>>(comments);
 
-                //return Json(commentViewModels);
                 return PartialView(@"~/Views/Home/_RenderAdminComments.cshtml", commentViewModels);
-            }
+        }
             catch
             {
                 return Ok(new
                 {
                     mesaj = "Sistemde Herhangi bir yorum bulunamadı"
-                }) ;
+                });
             }
-
-
-
         }
 
 
