@@ -1,13 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using FilmProject.Application.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FilmProject.Presentation.Areas.Inspinia.Controllers
 {
     [Area("Inspinia")]
     public class AdminVerifyComment : Controller
     {
-        public IActionResult ListComments()
+
+        public async Task<IActionResult> ListComments()
         {
+
             return View();
         }
+
     }
 }

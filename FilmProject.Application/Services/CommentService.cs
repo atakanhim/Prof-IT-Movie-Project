@@ -41,7 +41,7 @@ namespace FilmProject.Application.Services
         public async Task<IEnumerable<CommentDto>> GetAllAsync(Expression<Func<Comment, bool>>? filter = null)
         {
 
-            var comments = await _commentRepository.GetListAsync();
+            var comments = await _commentRepository.GetListAsync(filter);//filter parametre olarak eklendi 
             List<CommentDto> commentsDto = _mapper.Map<List<Comment>, List<CommentDto>>(comments);
 
             return commentsDto;
