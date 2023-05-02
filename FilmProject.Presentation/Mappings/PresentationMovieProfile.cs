@@ -15,7 +15,7 @@ namespace FilmProject.Presentation.Mappings
                  opt => opt.MapFrom(src => src.MovieLikes.Count > 0
                                          ? Math.Round(src.MovieLikes.Average(l => l.Point), 1)
                                          : 0))
-               .ForMember(dest => dest.MovieLanguage, opt => opt.MapFrom(src => src.MovieLanguage == "tr-TR" ? "Türkçe" : "İngilizce"))
+               .ForMember(dest => dest.MovieLanguage, opt => opt.ConvertUsing<LanguageCodeToNameConverter, string>())
               .ReverseMap();
 
 

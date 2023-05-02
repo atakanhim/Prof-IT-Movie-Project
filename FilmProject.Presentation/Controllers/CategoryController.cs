@@ -60,7 +60,7 @@ namespace FilmProject.Presentation.Controllers
         //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetCategories() // kategoriler listeleniyor sayısı
         {
-            var Liste = await _categoryService.GetAllAsync();
+            var Liste = await _categoryService.GetAllAsync(x=>x.isDeleted==false);
 
             return Json(Liste);
         }
