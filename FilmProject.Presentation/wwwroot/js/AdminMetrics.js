@@ -103,12 +103,15 @@
 
     // tanımlı dil ve sayısını doner
     $.get('/Movie/GetLanguages', function (data) {
-        
-        $('#languageH5').html(data[0].language + " / " + data[1].language + " Diline Sahip Filmler");
-        $('#languageOran').html(data[0].count + " / " + data[1].count);
+
+        var cdata1 = data[0] ? data[0] : { language: "Türkçe", count: 0 };
+        var cdata2 = data[1] ? data[1] : { language: cdata1.language.trim() == "İngilizce" ? "Türkçe" : "İngilizce" , count: 0 };
+  
+        $('#languageH5').html(cdata1.language + " / " + cdata2.language  + " Diline Sahip Filmler");
+        $('#languageOran').html(cdata1.count + " / " + cdata2.count);
 
         // sparkline
-        $("#sparkline1").sparkline([data[0].count, data[1].count], {
+        $("#sparkline1").sparkline([cdata1.count, cdata2.count], {
             type: 'pie',
             height: '140',
             sliceColors: ['#1ab394', '#F5F5F5']

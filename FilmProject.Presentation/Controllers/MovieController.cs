@@ -211,6 +211,7 @@ namespace FilmProject.Presentation.Controllers
 
         public async Task<IActionResult> GetAllLanguagesAsync()// veritabanında kayıtlı filmlere ait diller
         {
+            // bu kod veritabanına çıkarılacak
             var languages = await _movieService.GetAllLanguagesAsync();
             var arrayList =new ArrayList();
             foreach (var language in languages)
