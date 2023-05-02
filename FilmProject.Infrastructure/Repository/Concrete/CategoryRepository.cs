@@ -44,7 +44,7 @@ namespace FilmProject.Infrastructure.Repository.Concrete
 
         public async Task<bool> isExistAsync(string CategoryName)
         {
-            return await _context.Categories.AnyAsync(c => c.CategoryName == CategoryName);
+            return await _context.Categories.AnyAsync(c => c.CategoryName == CategoryName && c.isDeleted==false);
         }
 
         public bool isExistById(int CategoryId)

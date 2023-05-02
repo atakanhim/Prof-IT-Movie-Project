@@ -14,14 +14,16 @@ namespace FilmProject.Presentation.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
+        private readonly IMovieCategoryMapService _movieCategoryMapService;
         private readonly IValidator<CategoryViewModel> _validator;
         private IMapper _mapper;
-        public CategoryController(ICategoryService categoryService, IMapper mapper, IValidator<CategoryViewModel> validator)
+        public CategoryController(ICategoryService categoryService, IMovieCategoryMapService movieCategoryMapService, IMapper mapper, IValidator<CategoryViewModel> validator)
         {
 
             _mapper = mapper;
             _categoryService = categoryService;
             _validator = validator;
+            _movieCategoryMapService = movieCategoryMapService;
         }
         public IActionResult Index()
         {
@@ -78,7 +80,7 @@ namespace FilmProject.Presentation.Controllers
         //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetMoviesWithCategoryAsync(string category) // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
         {
-            IEnumerable<CategoryDto> categories = await _categoryService.GetAllAsync();
+            IEnumerable<CategoryDto> categories = await _categoryService.GetAllAsync(x=>x.isDeleted==false);
             IEnumerable<CategoryViewModel> categoryViewModel = _mapper.Map<IEnumerable<CategoryDto>, IEnumerable<CategoryViewModel>>(categories);
 
 
@@ -109,7 +111,7 @@ namespace FilmProject.Presentation.Controllers
         {
             try
             {
-                IEnumerable<CategoryDto> categories = await _categoryService.GetAllAsync();
+                IEnumerable<CategoryDto> categories = await _categoryService.GetAllAsync(x=>x.isDeleted==false);
                 IEnumerable<CategoryViewModel> categoryViewModel = _mapper.Map<IEnumerable<CategoryDto>, IEnumerable<CategoryViewModel>>(categories);
 
 

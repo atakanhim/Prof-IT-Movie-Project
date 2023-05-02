@@ -4,6 +4,7 @@ using FilmProject.Infrastructure.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,13 +26,13 @@ namespace FilmProject.Application.Services
             var movie = _movieRepository.isExistById(MovieId);
             if (!movie)
             {
-                throw new InvalidOperationException("There is no movie with this id.");
+                throw new InvalidOperationException("Bu film bulunamadı");
             }
             foreach (var category in IdOfCategories)
             {
                 if (!_categoryRepository.isExistById(category))
                 {
-                    throw new InvalidOperationException("There is no category with this id : " + category);
+                    throw new InvalidOperationException("Bu id de bir film bulunamadı : " + category);
                 }
                 else {
                     var NewMap = new MovieCategoryMap();
@@ -41,6 +42,15 @@ namespace FilmProject.Application.Services
                 }
             }
             
+        }
+
+        public async Task<bool?> AnyMoviesInThisCategory(Expression<Func<MovieCategoryMap, bool>> filter)
+        {
+            var model = await _repository.GetListAsync(filter);
+            if(model == null || model.Count==0)
+                return false;
+
+            return true;
         }
     }
 }

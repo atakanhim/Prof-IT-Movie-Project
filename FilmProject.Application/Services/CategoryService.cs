@@ -35,14 +35,6 @@ namespace FilmProject.Application.Services
             // Veritabanında bu isimle bir kategori var mı kontrolü yapıldı.
             if (await _categoryRepository.isExistAsync(category.CategoryName))
             {
-                Category c = await _categoryRepository.GetAsync(x => x.CategoryName == category.CategoryName);
-                if (c.isDeleted)
-                {
-                    c.isDeleted = false;
-                    _categoryRepository.Update(c);
-                    return true;
-                }
-                else
                     throw new InvalidOperationException("Bu kategori zaten mevcut.");
                 
             }
@@ -57,15 +49,16 @@ namespace FilmProject.Application.Services
         {
            
             Category NewCategory = _mapper.Map<CategoryDto, Category>(categoryDto);
-            // Bu id değerine sahip kategori kontrolü yapıldı.
-            Category oldCategory = await _categoryRepository.GetAsync(x => x.Id == NewCategory.Id);
 
+            // Bu id değerine sahip kategori kontrolü yapıldı.
+            Category oldCategory = await _categoryRepository.GetAsync(x => x.Id == NewCategory.Id && x.isDeleted==false);
+
+            // kategoriler sadece false ise gez
 
 
             bool exists = await _categoryRepository.isExistAsync(categoryDto.CategoryName);
             if (oldCategory == null)
             {
-                // Kategori bulunmuyorsa hata mesajı dönüldü
                 throw new InvalidOperationException("Kategori Bulunamadı.");
             }
             else if (categoryDto.CategoryName == oldCategory.CategoryName)
@@ -73,13 +66,8 @@ namespace FilmProject.Application.Services
                 // aynı isim varsa hic error dondurmuyoruz ama update de yapmamıza gereken yok
             }
             else if (exists)
-            {
-                if (await _categoryRepository.isDeletedStatus(categoryDto.CategoryName))
-                    throw new InvalidOperationException("Bu isimde category var ,tekrar ekleyerek aktif edebilirsiniz.");
-                throw new InvalidOperationException("Bu isimde category var.");
-
-
-
+            {          
+               throw new InvalidOperationException("Bu isimde category var.");
             }
             else
             {
