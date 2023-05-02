@@ -52,7 +52,8 @@
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
                             </div>
-                            <span> @Model.MoviePointCounter @localizer["votes"]</span>
+                            @*jquery ile gelcek*@
+                            <span id="movieLikeCount" class="text-white"></span>
                         </div>
                         <p>
                             @Model.MovieSummary
@@ -75,7 +76,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <ul>
-                                        <li><span>@localizer["movie_scores"]:</span> @Model.Ortalama</li>
+                                        <li><span>@localizer["movie_scores"]:</span> <span class="text-white" id="movieScore"></span> </li>
                                         <li><span>@localizer["movie_duration"]:</span> 1.30 @localizer["minute"]</li>
                                         <li><span>@localizer["movie_quality"]:</span> HD</li>
                                         <li><span>@localizer["movie_upload_date"]:</span> @Model.Created.ToShortDateString()</li>
@@ -114,7 +115,7 @@
                     </div>
                     <form>
                         <textarea id="commentContent" placeholder=@(localizer["comment_placeholder"])></textarea>
-                        <button id="btnSentComment" type="button"><i class="fa fa-location-arrow"></i> @localizer["sent_comment"]</button>
+                        <button class="sentButton" id="btnSentComment" type="button"><i class="fa fa-location-arrow"></i> @localizer["sent_comment"]</button>
                     </form>
                 </div>
             </div>
@@ -128,6 +129,7 @@
             var localizer = {
                 reviews:"@localizer["reviews"]",
                 noComment:"@localizer["no_comment"]",
+                vote: "@localizer["votes"]",
             };
         </script>
     <script src="~/js/Detail.js"></script>

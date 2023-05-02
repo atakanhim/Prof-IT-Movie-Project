@@ -7,19 +7,13 @@ using System.Threading.Tasks;
 
 namespace FilmProject.Application.Contracts.Movie
 {
-    public class CommentDto:BaseDto
+    public class MovieLikeDto:BaseDto
     {
-        public string Content { get; set; }
-        public bool IsConfirm { get; set; } = true;
-        public bool IsDeleted { get; set; } = false;
-
+        public int Point { get; set; }
         public int MovieId { get; set; }
         public MovieDto Movie { get; set; }
 
         public string userId { get; set; }
         public ApplicationUser AppUser { get; set; }
-
-
-        public ICollection<CommentLikeDto> CommentLikes { get; set; }
     }
 }

@@ -1215,10 +1215,9 @@ ol {
 /*---------------------
   Anime Watching
 -----------------------*/
-
-.anime__video__player {
-    margin-bottom: 70px;
-}
+    .anime__video__player {
+        margin-bottom: 70px;
+    }
 
     .anime__video__player .plyr--video {
         border-radius: 5px;

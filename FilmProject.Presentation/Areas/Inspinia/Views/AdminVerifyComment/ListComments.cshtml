@@ -10,44 +10,12 @@
                     <tr>
                         <th>Order ID</th>
                         <th class="text-right">Action</th>
-
                     </tr>
                 </thead>
-                <tbody>
-
-                    <tr>
-                        <td class="desc">
-                            <h3>
-                                <a href="#" class="text-navy">
-                                    Kullanıcı Adı
-                                </a>
-                            </h3>
-                            <h3 class="text-grey">
-                                Film Adı
-                            </h3>
-
-                            <p class="small text-grey">
-                                4/29/2023
-                            </p>
-
-                            <p class="small ">
-                                It is a long established fact that a reader will be distracted by the readable
-                                content of a page when looking at its layout. The point of using Lorem Ipsum is
-                            </p>
-                        </td>   
-                        <td class="text-right">
-                            <div class="d-flex flex-column">
-                                <button class="btn btn-primary btn-block"><i class="fa fa-check"></i> Verify Comment</button>
-                                <button class="btn btn-secondary btn-block"><i class="fa fa-trash"></i> Delete Comment</button>
-                            </div>
-                        </td>
-
-                    </tr>
+                <tbody id ="allComments">
                 </tbody>
-
-
-
             </table>
+
         </div>
     </div>
 </div>
@@ -55,6 +23,7 @@
 @section Scripts{
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"> </script>
+    <script src="~/js/AdminComment.js" asp-append-version="true"></script>
     <script>
 
         $(document).ready(function () { $('#example').DataTable(); });

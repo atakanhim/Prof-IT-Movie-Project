@@ -1,0 +1,34 @@
+﻿@using FilmProject.Presentation.Models
+@model IEnumerable<AdminCommentViewModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td class="w-75">
+            <h3>
+                <a href="#" class="text-navy">
+                    @item.AppUser.UserName
+                </a>
+            </h3>
+            <h3 class="text-grey">
+                @item.Movie.MovieName
+            </h3>
+
+            <p class="small text-grey">
+                @item.Created
+            </p>
+
+            <p class="small ">
+                @item.Content
+            </p>
+        </td>
+        <td class="w-25">
+            <div class="d-flex flex-column">
+                <button id="btn-test" class="btn btn-primary btn-block"><i class="fa fa-check"></i> Verify Comment</button>
+                <button class="btn btn-secondary btn-block"><i class="fa fa-trash"></i> Delete Comment</button>
+            </div>
+        </td>
+
+    </tr>
+
+}

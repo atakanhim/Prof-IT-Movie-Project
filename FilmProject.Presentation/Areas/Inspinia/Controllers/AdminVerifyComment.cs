@@ -5,9 +5,11 @@ namespace FilmProject.Presentation.Areas.Inspinia.Controllers
     [Area("Inspinia")]
     public class AdminVerifyComment : Controller
     {
-        public IActionResult ListComments()
+
+        public async Task<IActionResult> ListComments()
         {
             return View();
         }
+
     }
 }

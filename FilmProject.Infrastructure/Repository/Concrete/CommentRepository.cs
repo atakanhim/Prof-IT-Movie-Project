@@ -27,5 +27,10 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         {
             return await _context.Comments.Include(y => y.AppUser).Where(filter).ToListAsync();
         }
+
+        public async Task<List<Comment>> GetListWithAppUserAndMovie(Expression<Func<Comment, bool>>? filter = null)// Admin comment listeleme
+        {
+            return await _context.Comments.Include(y => y.AppUser).Include(x => x.Movie).Where(filter).ToListAsync();
+        }
     }
 }

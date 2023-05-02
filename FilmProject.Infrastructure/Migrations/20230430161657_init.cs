@@ -56,6 +56,7 @@ namespace FilmProject.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -74,12 +75,11 @@ namespace FilmProject.Infrastructure.Migrations
                     DirectorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RatingAge = table.Column<int>(type: "int", nullable: false),
                     PublishYear = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MoviePoint = table.Column<int>(type: "int", nullable: false),
-                    MoviePointCounter = table.Column<int>(type: "int", nullable: false),
                     PhotoPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsHighLighted = table.Column<bool>(type: "bit", nullable: false),
                     ImdbUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MovieLanguage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -200,7 +200,6 @@ namespace FilmProject.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LikeCount = table.Column<int>(type: "int", nullable: false),
                     IsConfirm = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     MovieId = table.Column<int>(type: "int", nullable: false),
@@ -272,6 +271,60 @@ namespace FilmProject.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "MovieLikes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Point = table.Column<int>(type: "int", nullable: false),
+                    MovieId = table.Column<int>(type: "int", nullable: false),
+                    userId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MovieLikes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MovieLikes_AspNetUsers_userId",
+                        column: x => x.userId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MovieLikes_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CommentLikes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommentId = table.Column<int>(type: "int", nullable: false),
+                    userId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CommentLikes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CommentLikes_AspNetUsers_userId",
+                        column: x => x.userId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CommentLikes_Comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -312,6 +365,16 @@ namespace FilmProject.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CommentLikes_CommentId",
+                table: "CommentLikes",
+                column: "CommentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CommentLikes_userId",
+                table: "CommentLikes",
+                column: "userId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_MovieId",
                 table: "Comments",
                 column: "MovieId");
@@ -330,6 +393,16 @@ namespace FilmProject.Infrastructure.Migrations
                 name: "IX_MovieCategoryMaps_CategoryId",
                 table: "MovieCategoryMaps",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MovieLikes_MovieId",
+                table: "MovieLikes",
+                column: "MovieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MovieLikes_userId",
+                table: "MovieLikes",
+                column: "userId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -350,7 +423,7 @@ namespace FilmProject.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "CommentLikes");
 
             migrationBuilder.DropTable(
                 name: "Favorite");
@@ -359,13 +432,19 @@ namespace FilmProject.Infrastructure.Migrations
                 name: "MovieCategoryMaps");
 
             migrationBuilder.DropTable(
+                name: "MovieLikes");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Movies");

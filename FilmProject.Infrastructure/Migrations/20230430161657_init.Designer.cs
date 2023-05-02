@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230422185143_init")]
+    [Migration("20230430161657_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,6 +107,9 @@ namespace FilmProject.Infrastructure.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
@@ -133,9 +136,6 @@ namespace FilmProject.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("LikeCount")
-                        .HasColumnType("int");
-
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
@@ -150,6 +150,33 @@ namespace FilmProject.Infrastructure.Migrations
                     b.HasIndex("userId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("FilmProject.Domain.Entities.CommentLike", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("userId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("CommentLikes");
                 });
 
             modelBuilder.Entity("FilmProject.Domain.Entities.Favorite", b =>
@@ -197,12 +224,6 @@ namespace FilmProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MoviePoint")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MoviePointCounter")
-                        .HasColumnType("int");
-
                     b.Property<string>("MovieSummary")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -216,6 +237,9 @@ namespace FilmProject.Infrastructure.Migrations
 
                     b.Property<int>("RatingAge")
                         .HasColumnType("int");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -235,6 +259,36 @@ namespace FilmProject.Infrastructure.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("MovieCategoryMaps");
+                });
+
+            modelBuilder.Entity("FilmProject.Domain.Entities.MovieLike", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Point")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("MovieLikes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -389,6 +443,25 @@ namespace FilmProject.Infrastructure.Migrations
                     b.Navigation("Movie");
                 });
 
+            modelBuilder.Entity("FilmProject.Domain.Entities.CommentLike", b =>
+                {
+                    b.HasOne("FilmProject.Domain.Entities.Comment", "Comment")
+                        .WithMany("CommentLikes")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("FilmProject.Domain.Entities.ApplicationUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Comment");
+                });
+
             modelBuilder.Entity("FilmProject.Domain.Entities.Favorite", b =>
                 {
                     b.HasOne("FilmProject.Domain.Entities.Movie", "Movie")
@@ -423,6 +496,25 @@ namespace FilmProject.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("FilmProject.Domain.Entities.MovieLike", b =>
+                {
+                    b.HasOne("FilmProject.Domain.Entities.Movie", "Movie")
+                        .WithMany("MovieLikes")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FilmProject.Domain.Entities.ApplicationUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Movie");
                 });
@@ -488,11 +580,18 @@ namespace FilmProject.Infrastructure.Migrations
                     b.Navigation("MovieCategories");
                 });
 
+            modelBuilder.Entity("FilmProject.Domain.Entities.Comment", b =>
+                {
+                    b.Navigation("CommentLikes");
+                });
+
             modelBuilder.Entity("FilmProject.Domain.Entities.Movie", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("MovieCategories");
+
+                    b.Navigation("MovieLikes");
 
                     b.Navigation("WhoFavorited");
                 });
