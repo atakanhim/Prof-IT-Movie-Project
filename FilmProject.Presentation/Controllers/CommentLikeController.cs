@@ -5,10 +5,11 @@ using FilmProject.Domain.Entities;
 using FilmProject.Presentation.Models;
 using FilmProject.Application.Contracts.Movie;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FilmProject.Presentation.Controllers
 {
-
+    [Route("[controller]")]
     public class CommentLikeController : Controller
     {
         private readonly ICommentLikeService _commentLikeService;
@@ -22,11 +23,8 @@ namespace FilmProject.Presentation.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        [HttpGet]
+        [Route("IsLiked")]
         public async Task<bool> IsCommentLiked(int commentId)
         {
             try
@@ -45,8 +43,9 @@ namespace FilmProject.Presentation.Controllers
                 return false;
             }
         }
-
-        public async Task<int> CountOfCommentLike(int commentId)
+        [HttpGet]
+        [Route("LikeCount")]
+        public async Task<int> NumberOfCommentLike(int commentId)
         {
             try
             {
@@ -61,13 +60,15 @@ namespace FilmProject.Presentation.Controllers
         }
 
         [HttpPost]
+        [Route("ChangeLike")]
+        [Authorize]
         public async Task<IActionResult> ChangeCommentLikeStatue(CommentLikeViewModel commentLike)
         {
             try
             {
                 CommentLikeDto newCommentLike = _mapper.Map<CommentLikeViewModel, CommentLikeDto>(commentLike);
 
-                //newCommentLike.userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                newCommentLike.userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 await _commentLikeService.ChangeCommentLikeStatue(newCommentLike);
                 return Ok();
             }

@@ -28,7 +28,6 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             {
                 _context.Add(commentLike);
             }
-
            await _context.SaveChangesAsync();
         }
 
