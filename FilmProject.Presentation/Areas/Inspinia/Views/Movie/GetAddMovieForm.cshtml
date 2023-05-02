@@ -13,50 +13,55 @@
 <br/><div class="container">
   <div class="row justify-content-center" >
         <div class="col-md-8 mb-5">
-      <form asp-controller="Movie" asp-action="CreateMovie" method="post"  enctype="multipart/form-data">
+      <form asp-controller="Movie" id="movieForm" asp-action="CreateMovie" method="post"  enctype="multipart/form-data">
         <div class="form-group">
           <label asp-for="MovieName">Movie Name</label>
-          <input asp-for="MovieName" type="text" class="form-control" id="movieName" placeholder="Enter movie name">
+          <input asp-for="MovieName" name="MovieName" type="text" class="form-control" id="movieName" placeholder="Enter movie name">
         </div>
         <div class="form-group">
           <label asp-for="MovieSummary">Movie Summary</label>
-          <textarea asp-for="MovieSummary" class="form-control" id="movieSummary" rows="3" placeholder="Enter movie summary"></textarea>
+          <textarea asp-for="MovieSummary" name="MovieSummary" class="form-control" id="movieSummary" rows="3" placeholder="Enter movie summary"></textarea>
         </div>
         <div class="form-group">
           <label asp-for="DirectorName">Director Name</label>
-          <input asp-for="DirectorName" type="text" class="form-control" id="directorName" placeholder="Enter director name">
+          <input asp-for="DirectorName"name="DirectorName" type="text" class="form-control" id="directorName" placeholder="Enter director name">
         </div>
         <div class="form-group">
           <label asp-for="RatingAge">Rating Age</label>
-          <select asp-for="RatingAge" class="form-control" id="ratingAge">
+          <select asp-for="RatingAge" name="RatingAge" class="form-control" id="ratingAge">
+            <option value="">Kitle seçin</option>
             <option value="0">Genel İzleyici</option>
             <option value="1">Yetişkin İzleyici</option>
           </select>
         </div>
         <div class="form-group">
           <label asp-for="PublishYear">Publish Year</label>
-          <input asp-for="PublishYear" type="date" class="form-control" id="publishYear">
+          <input asp-for="PublishYear" name="PublishYear" type="date" class="form-control" id="publishYear">
         </div>
         <div class="form-group">
           <label asp-for="Photo">Photo Path</label>
-          <input asp-for="Photo" type="file" class="form-control-file" id="photoPath">
+          <input asp-for="Photo"name="Photo" type="file" class="form-control-file" id="photoPath">
         </div>
+
+
         <div class="form-group">
           <label asp-for="ImdbUrl">IMDB URL</label>
-          <input asp-for="ImdbUrl" type="url" class="form-control" id="imdbUrl" placeholder="Enter IMDB URL">
+          <input asp-for="ImdbUrl" name="ImdbUrl" type="url" class="form-control" id="imdbUrl" placeholder="Enter IMDB URL">
         </div>
         <div class="form-group">
           <label asp-for="MovieLanguage">Movie Language</label>
-          <input asp-for="MovieLanguage" type="text" class="form-control" id="movieLanguage" placeholder="Enter movie language">
+          <input asp-for="MovieLanguage" name="MovieLanguage" type="text" class="form-control" id="movieLanguage" placeholder="Enter movie language">
         </div>
         <div class="form-group">
 		
 		
             <label class="font-normal">Kategori Seçimi</label>
             <div>
-                <select asp-for="CategoriesId" data-placeholder="Kategori Seçin" class="chosen-select" multiple tabindex="4">         
+                <select asp-for="CategoriesId" name="CategoriesId" data-placeholder="Kategori seçin"  class="chosen-select" multiple tabindex="4">   
+                    
                 </select>
             </div>   
+            <small id="errorSelect"></small>
 	    </div>
            <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -70,13 +75,16 @@
 @section Styles {
     
      <link href="https://cdn.jsdelivr.net/npm/bootstrap-chosen@1.4.2/bootstrap-chosen.min.css" rel="stylesheet">
-    
+    <link rel="stylesheet" href="/css/AddMovie.css" />
 }
 
 @section scripts
 {
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js" integrity="sha512-6S5LYNn3ZJCIm0f9L6BCerqFlQ4f5MwNKq+EthDXabtaJvg3TuFLhpno9pcm+5Ynm6jdA9xfpQoMz2fcjVMk9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <script>
         
         $(document).ready(function(){
@@ -88,11 +96,88 @@
                 });
                 select.trigger("chosen:updated");
             });
-
-
             $('.chosen-select').chosen();
+            $("#movieForm").validate({
+                errorClass: "text-danger",
+        rules: {
+            "MovieName": {
+                required: true
+            },
+            "MovieSummary": {
+                required: true
+            },
+            "DirectorName": {
+                required: true
+            },
+            "RatingAge": {
+                required: true
+            },
+            "PublishYear": {
+                required: true
+            },
+            "Photo": {
+                required: true
+            },
+            "ImdbUrl": {
+                required: true,
+                url: true
+            },
+            "MovieLanguage": {
+                required: true
+            },
+            "CategoriesId": {
+                required: true,
+                minlength: 1
+            }
+        },
+        messages: {
+            "MovieName": {
+                required: "Lütfen film ismi girin."
+            },
+            "MovieSummary": {
+                required: "Lütfen film özeti girin."
+            },
+            "DirectorName": {
+                required: "Lütfen filmin yönetmen bilgisini girin."
+            },
+            "RatingAge": {
+                required: "Lütfen filmin kitlesini seçin."
+            },
+            "PublishYear": {
+                required: "Lütfen filmin çıkış tarihini girin."
+            },
+            "Photo": {
+                required: "Lütfen filmin afişini yükleyin."
+            },
+            "ImdbUrl": {
+                required: "Lütfen filmin IMDB adresini girin.",
+                url: "Lütfen geçerli bir adres bilgisi girin."
+            },
+            "MovieLanguage": {
+                required: "Lütfen filmin dilini girin."
+            },
+            "CategoriesId": {
+                required: "Lütfen kategori ekleyiniz.",
+                minlength: "Lütfen kategori ekleyiniz."
+            }
+        }
+    });
+        
+
+            
+        $("form").on("submit", function(e){
+            if(Array.from(document.querySelectorAll('select[name="CategoriesId"] option:checked')).map(option => option.value).length == 0)
+            {
+                e.preventDefault();
+                $("#errorSelect").text("Lütfen kategori bilgisi girin.");
+            }
+        });
+            
+        
+        
 
         });
+
      
         
 

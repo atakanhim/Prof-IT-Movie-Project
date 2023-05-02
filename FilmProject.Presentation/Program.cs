@@ -122,6 +122,7 @@ builder.Services.Configure<RequestLocalizationOptions>(opt =>
 // fluent vlaidation
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddTransient<IValidator<CategoryViewModel>,CategoryValidator>();
+builder.Services.AddTransient<IValidator<RegisterByAdminViewModel>,RegisterViewModelValidator>();
 
 var app = builder.Build();
 
