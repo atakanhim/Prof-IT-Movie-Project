@@ -60,10 +60,10 @@ namespace FilmProject.Presentation.Controllers
         [HttpGet]
         [Route("ListAll")]
         //[Authorize(Roles ="Admin")]
-        public async Task<IActionResult> GetCategories() // kategoriler listeleniyor sayısı
+        public async Task<IActionResult> GetCategoriesAsync() // kategoriler listeleniyor sayısı
         {
             var Liste = await _categoryService.GetAllAsync(x=>x.isDeleted==false);
-
+          
             return Json(Liste);
         }
         [HttpGet]
@@ -78,12 +78,21 @@ namespace FilmProject.Presentation.Controllers
         [HttpGet]
         [Route("Categories")]
         //[Authorize(Roles ="Admin")]
-        public async Task<IActionResult> GetMoviesWithCategoryAsync(string category) // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
+        public async Task<IActionResult> GetCategoriesReturnPartial() // tum KategorileriDondurur
         {
             IEnumerable<CategoryDto> categories = await _categoryService.GetAllAsync(x=>x.isDeleted==false);
-            IEnumerable<CategoryViewModel> categoryViewModel = _mapper.Map<IEnumerable<CategoryDto>, IEnumerable<CategoryViewModel>>(categories);
+          
+            List<CategoryDto> onlyconntectedCategories = new List<CategoryDto>(); // mapper da en az 1 filme sahip kategoriler
+            foreach (var cate in categories)
+            {
+                var result = await _movieCategoryMapService.AnyMoviesInThisCategory(x => x.CategoryId == cate.Id);
+                if (result == true)
+                {
+                    onlyconntectedCategories.Add(cate);
+                }
 
-
+            }
+            IEnumerable<CategoryViewModel> categoryViewModel = _mapper.Map<IEnumerable<CategoryDto>, IEnumerable<CategoryViewModel>>(onlyconntectedCategories);
             return PartialView(@"~/Views/Home/_RenderCategories.cshtml", categoryViewModel);
         }
         [HttpPost]
