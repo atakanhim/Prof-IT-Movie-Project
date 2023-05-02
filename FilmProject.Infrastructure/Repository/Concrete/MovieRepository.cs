@@ -40,7 +40,12 @@ namespace FilmProject.Infrastructure.Repository.Concrete
                 var model = await _context.Categories.Include(x => x.MovieCategories).ThenInclude(xa => xa.Movie).Where(a => a.CategoryName == category).ToListAsync();
                 foreach (var movie in model[0].MovieCategories)
                 {
-                    Movie moviedata = await _context.Movies.Include(u => u.MovieLikes).Include(y => y.Comments).ThenInclude(yu => yu.CommentLikes).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).Where(i => i.Id == movie.MovieId).FirstOrDefaultAsync();
+                    Movie moviedata = await _context.Movies.
+                        Include(u => u.MovieLikes)
+                        .Include(y => y.Comments).ThenInclude(yu => yu.CommentLikes)
+                        .Include(x => x.MovieCategories).ThenInclude(xc => xc.Category)
+                        .Where(i => i.Id == movie.MovieId)
+                        .FirstOrDefaultAsync();
 
                     movies.Add(moviedata);
                 }
@@ -48,7 +53,7 @@ namespace FilmProject.Infrastructure.Repository.Concrete
                 return movies;
             }
 
-            return await _context.Movies.Include(u=>u.MovieLikes).Include(y => y.Comments).ThenInclude(yu=>yu.CommentLikes).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).ToListAsync();
+            return await _context.Movies.Include(u => u.MovieLikes).Include(y => y.Comments).ThenInclude(yu => yu.CommentLikes).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).ToListAsync();
         }
 
         public async Task<List<string>> GetAllLanguagesAsync()

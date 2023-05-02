@@ -62,34 +62,59 @@ $(document).ready(function () {
     $('#categories-datatable tbody').on('click', '.delete-button', function () {
 
         let data = table.row($(this).parents('tr')).data();
-        let id = data.id; // Assuming the "id" field is in your JSON data
+        let id = data.id;
+ 
+        $.ajax({
+            url: '/MovieCategoryMap/AnyMoviesInThis/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data2) {
+                console.log(data2);
 
-        Swal.fire({
-            title: 'Kategoriyi silmek istediğinize emin misiniz?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Evet, sil',
-            cancelButtonText: 'Hayır, vazgeç'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '/Category/Delete',
-                    method: 'POST',
-                    data: { id: id },
-                    success: function (response) {
-                        let text = "Kategori silme işlemi başarılı.";
-                        let icon = "success";
-                        showErrorToast(text, icon);
-                        refreshDataTable(table);
-                    },
-                    error: function (xhr, status, error) {
-                        let text = xhr.responseText
-                        let icon = "error";
-                        showErrorToast(text, icon);
-                    }
-                });
+                if (data2 == true) {
+                    let text = "Bu Kategoriye Sahip filmler olduğu için bu kategori silinemez.";
+                    showErrorToast(text, "error");
+                }
+                else {
+                    Swal.fire({
+                        title: 'Kategoriyi silmek istediğinize emin misiniz?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Evet, sil',
+                        cancelButtonText: 'Hayır, vazgeç'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '/Category/Delete',
+                                method: 'POST',
+                                data: { id: id },
+                                success: function (response) {
+                                    let text = "Kategori silme işlemi başarılı.";
+                                    let icon = "success";
+                                    showErrorToast(text, icon);
+                                    refreshDataTable(table);
+                                },
+                                error: function (xhr, status, error) {
+                                    let text = xhr.responseText
+                                    let icon = "error";
+                                    showErrorToast(text, icon);
+                                }
+                            });
+                        }
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                let text = xhr.responseText;
+                let icon = "error";
+                showErrorToast(text, icon);
             }
         });
+
+
+    
+
+       
 
     });
 
@@ -101,6 +126,7 @@ $(document).ready(function () {
         $('#EditId').val(data.id);
         $('#EditCategoryName').val(data.categoryName);
         $('#editModal').modal('show');
+        $("#categoryUpdateError").html("");
     });
 
 
