@@ -9,6 +9,8 @@ namespace FilmProject.Infrastructure.Repository.Abstract
 {
     public interface ICommentLikeRepository : IEntityRepository<CommentLike>
     {
-        Task<bool> IsCommentLikedAsync(string userId, int CommentId);
+        Task<CommentLike> IsCommentLikedAsync(string userId, int CommentId);
+        Task<int> NumberOfCommentLikeAsync(int CommentId);
+        Task ChangeCommentLikeStatueAsync(CommentLike commentLike);
     }
 }

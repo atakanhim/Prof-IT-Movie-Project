@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using FilmProject.Application.Contracts.Movie;
 using FilmProject.Application.Interfaces;
+using FilmProject.Domain.Entities;
 using FilmProject.Infrastructure.Repository.Abstract;
+using FilmProject.Infrastructure.Repository.Concrete;
 
 namespace FilmProject.Application.Services
 {
@@ -20,9 +24,36 @@ namespace FilmProject.Application.Services
             _mapper = mapper;
         }
 
+        public async Task ChangeCommentLikeStatue(CommentLikeDto commentLike)
+        {
+            CommentLike newCommentLike = _mapper.Map<CommentLikeDto,CommentLike>(commentLike);
+            await _commentLikeRepository.ChangeCommentLikeStatueAsync(newCommentLike);
+        }
+
+        public async Task<CommentLikeDto> GetAsync(Expression<Func<CommentLike, bool>> filter)
+        {
+            var model = await _commentLikeRepository.GetAsync(filter);
+            CommentLikeDto newCommentLike = _mapper.Map< CommentLike, CommentLikeDto>(model);
+            return newCommentLike;
+        }
+
         public async Task<bool> IsCommentLike(string userId, int CommentId)
         {
-            return await _commentLikeRepository.IsCommentLikedAsync(userId, CommentId);
+            var model = await _commentLikeRepository.IsCommentLikedAsync(userId, CommentId);
+            if(model != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+           
+        }
+
+        public async Task<int> NumberofCommentLike(int CommentId)
+        {
+            return await _commentLikeRepository.NumberOfCommentLikeAsync(CommentId);
         }
     }
 }

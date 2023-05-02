@@ -18,9 +18,30 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             _context = dbContext;
         }
 
-        public async Task<bool> IsCommentLikedAsync(string userId, int CommentId)
+        public async Task ChangeCommentLikeStatueAsync(CommentLike commentLike)
         {
-            return await _context.CommentLikes.AnyAsync(l => l.userId == userId && l.CommentId == CommentId);
+            var result = await this.IsCommentLikedAsync(commentLike.userId, commentLike.CommentId);
+           if (result != null){
+                _context.Remove(result);
+            }
+            else
+            {
+                _context.Add(commentLike);
+            }
+
+           await _context.SaveChangesAsync();
+        }
+
+        public async Task<CommentLike> IsCommentLikedAsync(string userId, int CommentId)
+        {
+            var model =  await _context.CommentLikes.Where(l => l.userId == userId && l.CommentId == CommentId).FirstOrDefaultAsync();
+            return model;
+
+        }
+
+        public async Task<int> NumberOfCommentLikeAsync(int CommentId)
+        {
+            return await _context.CommentLikes.CountAsync(l => l.CommentId == CommentId);
         }
     }
 }
