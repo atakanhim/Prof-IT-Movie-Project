@@ -155,7 +155,7 @@ namespace FilmProject.Presentation.Controllers
         [HttpGet]
         [Route("MoviesWithCategory/{category?}")]
         //[Authorize(Roles ="Admin")]
-        public async Task<IActionResult> GetMoviesWithCategoryAsync(string category) // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
+        public async Task<IActionResult> GetMoviesWithCategoryAsync(string category) // tum filmler yada category ile ,viewmodel olarak gonderir.
         {
             IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync(category);
             IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
@@ -163,6 +163,18 @@ namespace FilmProject.Presentation.Controllers
 
             return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
         }
+        [HttpGet]
+        [Route("MoviesWithCategoryForAdmin/{category?}")]
+        //[Authorize(Roles ="Admin")]
+        public async Task<IActionResult> GetMoviesWithCategoryForAdminAsync(string category) // tum filmler yada category ile, admin için
+        {
+            IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync(category);
+            IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
+
+
+            return PartialView(@"~/Areas/Inspinia/Views/Shared/_RenderMoviesForAdmin.cshtml");
+        }
+
         [HttpGet]
         [Route("MoviesWithCategoryJson")]
         //[Authorize(Roles ="Admin")]

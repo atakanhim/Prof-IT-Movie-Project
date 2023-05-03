@@ -3,16 +3,25 @@
 *@
 @{
 }
+     
 <div class="container border border-primary">
         <div class="class="wrapper wrapper-content animated fadeInRight">
              <div class="row">
                  <div class="col-lg-12">
                      <h1> FİLMLER </h1>
                  </div>
-                 <div class="col-lg-12">
-                     
-                 </div>
-                
               </div>
-         </div>
+             <div class="row" id="loadingMoviesForAdmin"> <div class="col-lg-12 d-flex justify-content-center ">@Html.Partial("_Loading")</div></div>
+             <div class="row" id="MovieListRender">
+                 @* movie render*@
+                  
+
+
+             </div> @*row 2 bitiş*@
+
+         </div> @*wrapper bitiş*@
 </div>
+
+@section Scripts {
+    <script src="~/js/AdminMovieList.js" asp-append-version="true"></script>
+}
