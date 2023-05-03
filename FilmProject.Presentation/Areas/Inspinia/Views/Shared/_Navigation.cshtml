@@ -23,10 +23,10 @@
             <li class="@Html.IsSelected(controller: "AdminMetrics")">
                 <a href="@Url.ActionWithArea("Metrics", "AdminMetrics")"><i class="fa fa-pie-chart"></i> <span class="nav-label" data-i18n="nav.layouts">İstatistikler</span></a>
             </li>
-            <li class="@Html.IsSelected(controller: "Movie")">
+            <li class="@Html.IsSelected(controller: "Movie",action:"GetAddMovieForm")">
                 <a href="@Url.ActionWithArea("GetAddMovieForm", "Movie")"><i class="fa fa-film"></i> <span class="nav-label" data-i18n="nav.layouts">Film Ekle</span></a>
             </li>
-            <li class="@Html.IsSelected(controller: "Movie")">
+            <li class="@Html.IsSelected(controller: "Movie",action:"GetMovieList")">
                 <a href="@Url.ActionWithArea("GetMovieList", "Movie")"><i class="fa fa-film"></i> <span class="nav-label" data-i18n="nav.layouts">Film Listele</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "AdminCategory")">
