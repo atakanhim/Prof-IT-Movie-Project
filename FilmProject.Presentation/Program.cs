@@ -163,7 +163,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapAreaControllerRoute(
      name: "Inspinia",
      areaName: "Inspinia",
-     pattern: "Inspinia/{controller=AdminMetrics}/{action=Metrics}"
+     pattern: "Inspinia/{controller=AdminMetrics}/{action=Metrics}/{id?}"
  ).RequireAuthorization("InspiniaPolicy"); ;
 });
 app.MapRazorPages();

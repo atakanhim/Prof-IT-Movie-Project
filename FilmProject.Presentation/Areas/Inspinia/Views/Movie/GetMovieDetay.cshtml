@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "ProductDetail";
+}
+@using FilmProject.Presentation.Models
+@model MovieViewModel
+
+<div class="row wrapper border-bottom white-bg page-heading">
+     <div class="col-lg-10">
+                    <h2>Film Detay</h2>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="@Url.ActionWithArea("GetMovieList", "Movie")"> <span class="nav-label" data-i18n="nav.layouts">Filmleri Listele</span></a>
+                        </li>
+                            <li class="active breadcrumb-item">
+                            <a href="#"> <span class="nav-label" data-i18n="nav.layouts">Detay Film @Model.MovieName </span></a>
+                        </li>
+                    </ol>
+     </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="ibox product-detail">
+                <div class="ibox-content">
+
+                            <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="product-images">
+
+      
+                                                <div>
+                                                    <div class="product-imitation2" style="background-image: url('/Uploads/@Model.PhotoPath')">
+                                    
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="product-imitation2" style="background-image: url('/Uploads/@Model.PhotoPath')">
+                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-7">
+
+                                            <h2 class="font-bold m-b-xs">
+                                                @Model.MovieName
+                                            </h2>                        
+                                            <hr>
+                                            <div>
+                                                <button class="btn btn-primary float-right">Güncelle</button>
+                                                <h1 class="product-main-price">$406,602 <small class="text-muted">Gişe</small> </h1>
+                                            </div>
+                                            <hr>
+                                            <h4>Film Açıklaması</h4>
+
+                                            <div class="small text-muted">
+                                              @Model.MovieSummary
+                                            </div>
+                                            <dl class="row m-t-md small">
+                                                <dt class="col-md-4 text-right">Film Yönetmeni</dt>
+                                                <dd class="col-md-8">@Model.DirectorName</dd>
+                                                 <dt class="col-md-4 text-right">Film Yayımlanma Tarihi</dt>
+                                                <dd class="col-md-8">@Model.PublishYear.ToString("dd/MM/yyyy")</dd>
+                                                <dt class="col-md-4 text-right">Film Dili</dt>
+                                                <dd class="col-md-8">@Model.MovieLanguage</dd>
+                                                <dt class="col-md-4 text-right">Filme Verilen Ortalama Puan</dt>
+                                                <dd class="col-md-8">@Model.Ortalama</dd>
+                                                <dt class="col-md-4 text-right">Filme Oy Atan Kullanıcı Sayısı</dt>
+                                                <dd class="col-md-8">@Model.MovieLikes.Count</dd>
+                                            </dl>
+                                            <div class="text-right">
+                                                <div class="btn-group">
+                                                    <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Filmi Öne Çıkar  </button>
+                                                    <button class="btn btn-white btn-sm"><i class="fa fa-archive"></i> Filmi Rafa Kaldır </button>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                              </div>@* row kapanıs*@
+
+                      </div>
+                          <div class="ibox-footer mb-5">
+                                <span class="float-right">
+                                    Film Eklenme Tarihi - <i class="fa fa-clock-o"></i> @Model.Created.ToString("dd/MM/yyyy")
+                                </span>
+                            </div>
+                </div>
+                  
+            </div>
+      </div>
+ </div>
+
+
+
+
+
+@section Styles {
+    <environment names="Development,Staging,Production">
+        <link rel="stylesheet" href="~/lib/slick-carousel/slick/slick.css" />
+        <link rel="stylesheet" href="~/lib/slick-carousel/slick/slick-theme.css" />
+    </environment>
+}
+
+@section Scripts {
+    <environment names="Development">
+        <script src="~/lib/slick-carousel/slick/slick.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/slick-carousel/slick/slick.min.js"></script>
+    </environment>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $('.product-images').slick({
+                dots: true
+            });
+
+        });
+    </script>
+}
+

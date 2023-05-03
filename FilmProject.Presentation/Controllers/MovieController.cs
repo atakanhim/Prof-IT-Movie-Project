@@ -171,8 +171,8 @@ namespace FilmProject.Presentation.Controllers
             IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync(category);
             IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
 
-
-            return PartialView(@"~/Areas/Inspinia/Views/Shared/_RenderMoviesForAdmin.cshtml");
+            return PartialView(@"~/Views/Shared/_RenderMoviesForAdmin.cshtml", movieViewModel);
+ 
         }
 
         [HttpGet]

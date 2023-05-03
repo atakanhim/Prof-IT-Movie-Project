@@ -3,14 +3,23 @@
 *@
 @{
 }
-     
-<div class="container border border-primary">
-        <div class="class="wrapper wrapper-content animated fadeInRight">
-             <div class="row">
-                 <div class="col-lg-12">
-                     <h1> FİLMLER </h1>
-                 </div>
+      <div class="row wrapper border-bottom white-bg page-heading">
+
+                <div class="col-lg-10">
+                    <h2>Filmler</h2>
+                    <ol class="breadcrumb">
+                        <li class="active breadcrumb-item">
+                            <a href="@Url.ActionWithArea("GetMovieList", "Movie")"> <span class="nav-label" data-i18n="nav.layouts">Filmleri Listele</span></a>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
               </div>
+        </div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+     
              <div class="row" id="loadingMoviesForAdmin"> <div class="col-lg-12 d-flex justify-content-center ">@Html.Partial("_Loading")</div></div>
              <div class="row" id="MovieListRender">
                  @* movie render*@
@@ -20,8 +29,9 @@
              </div> @*row 2 bitiş*@
 
          </div> @*wrapper bitiş*@
-</div>
 
+
+</div>
 @section Scripts {
     <script src="~/js/AdminMovieList.js" asp-append-version="true"></script>
 }
