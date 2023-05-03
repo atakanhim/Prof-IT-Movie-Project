@@ -77,8 +77,9 @@
                                             </dl>
                                             <div class="text-right">
                                                 <div class="btn-group">
-                                                    <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Filmi Öne Çıkar  </button>
-                                                    <button class="btn btn-white btn-sm"><i class="fa fa-archive"></i> Filmi Rafa Kaldır </button>
+  
+                                                    <button class="btn btn-white btn-sm" id="isHighLighted" > </button>
+                                                    <button class="btn btn-white btn-sm"><i class="fa fa-archive" style='color:green'></i> Filmi Rafa Kaldır </button>
                                                 </div>
                                             </div>
 
@@ -116,16 +117,10 @@
     <environment names="Staging,Production">
         <script src="~/lib/slick-carousel/slick/slick.min.js"></script>
     </environment>
+        <script src="~/js/AdminMovieDetail.js" asp-append-version="true"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-
-
-            $('.product-images').slick({
-                dots: true
-            });
-
-        });
+                 var movieId=@Model.Id;
     </script>
 }
 

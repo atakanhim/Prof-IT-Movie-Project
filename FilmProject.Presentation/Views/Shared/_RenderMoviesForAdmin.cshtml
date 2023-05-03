@@ -27,8 +27,15 @@
 
 
 
-                                        <div class="small m-t-xs">
-                                           @item.MovieSummary
+                                      <div class="small m-t-xs">
+                                            @if (item.MovieSummary.Length > 20)
+                                            {
+                                                <p style="overflow:hidden">@item.MovieSummary.Substring(0, 40)...</p>
+                                            }
+                                            else
+                                            {
+                                                <p>@item.MovieSummary</p>
+                                            }
                                         </div>
                                         <div class="m-t text-righ">
                                          <a href="/Inspinia/Movie/GetMovieDetay/@item.Id" class="btn btn-xs btn-outline btn-primary">Detay <i class="fa fa-edit"></i> </a>
