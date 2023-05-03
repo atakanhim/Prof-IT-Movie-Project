@@ -3,17 +3,21 @@
 @foreach (var item in Model)
 {
 
-    <div class="anime__review__item ">
-        <div class="anime__review__item__pic">
+    <div class="anime__review__item like-test">
+        <div  class="anime__review__item__pic">
             <img src="/img/user-profile.jpg" alt="">
         </div>
         <div class="anime__review__item__text">
             <h6>@item.AppUser.UserName <span>@item.Created.ToShortDateString()</span></h6>
             <p>
-                @item.Content
+                @item.Content 
             </p>
-            <div class="comment text-right" style="color:white"><i class="fa fa-heart like-button"></i><div><small> @item.CommentLikes.Count likes</small></div>  </div>
+            <div class="comment text-right " style="color:white"><i class="fa fa-heart like-button" data-itemid=@item.Id></i><div><small> @item.CommentLikes.Count likes</small></div>  </div>
         </div>
     </div>
 
 }
+
+
+
+<script src="~/js/CommentPartial.js"></script>

@@ -4,6 +4,8 @@
     let addMyListButton = $("#btnAddMyList")
     var key;
 
+
+
     //  ||Favori
 
     //Favoriye eklenme kontrolü
@@ -49,8 +51,6 @@
             value >= index2 ? star.classList.add("active") : star.classList.remove("active");
         });
     }
-
-    //  ||Yorum Like
 
 
     //  ||Yorumlar ve Movie Score

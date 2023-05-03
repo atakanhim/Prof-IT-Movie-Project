@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FilmProject.Presentation.Controllers
 {
-    [Route("[controller]")]
+  
     public class CommentLikeController : Controller
     {
         private readonly ICommentLikeService _commentLikeService;
@@ -60,9 +60,9 @@ namespace FilmProject.Presentation.Controllers
         }
 
         [HttpPost]
-        [Route("ChangeLike")]
-        [Authorize]
-        public async Task<IActionResult> ChangeCommentLikeStatue(CommentLikeViewModel commentLike)
+        //[Route("ChangeLike")]
+        //[Authorize]
+        public async Task<IActionResult> ChangeCommentLikeStatue([FromBody]CommentLikeViewModel commentLike)
         {
             try
             {
@@ -78,6 +78,12 @@ namespace FilmProject.Presentation.Controllers
                 return BadRequest();
             }
 
+        }
+
+        [HttpPost]
+        public IActionResult Test([FromBody]CommentLikeViewModel commentLikeViewModel)
+        {
+            return Ok();
         }
     }
 }
