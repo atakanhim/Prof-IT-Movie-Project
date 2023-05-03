@@ -164,9 +164,32 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/lib/dataTables/datatables.min.css" />
+    <link rel="stylesheet" href="~/lib/sweetalert/dist/sweetalert.css" />
 }
 
 @section Scripts{
+    <script src="~/lib/sweetalert/dist/sweetalert.min.js"></script>
+     @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            swal(
+                'Başarılı!',
+                '@TempData["SuccessMessage"] isimli filmi ekleme işlemi başarılı!',
+                'success'
+            )
+        </script>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <script>
+            swal(
+                'Hata!',
+                '@TempData["ErrorMessage"] isimli filmi ekleme işlemi sırasında bir hata meydana geldi!',
+                'error'
+            )
+        </script>
+    }
+
     <script src="~/lib/dataTables/datatables.min.js"></script>
     <script src="~/lib/dataTables/dataTables.bootstrap4.min.js"></script>
     <script src="~/js/AdminMetrics.js" asp-append-version="true"></script>
