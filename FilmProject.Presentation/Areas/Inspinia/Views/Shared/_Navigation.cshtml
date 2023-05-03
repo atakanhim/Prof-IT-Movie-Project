@@ -26,10 +26,13 @@
             <li class="@Html.IsSelected(controller: "Movie")">
                 <a href="@Url.ActionWithArea("GetAddMovieForm", "Movie")"><i class="fa fa-film"></i> <span class="nav-label" data-i18n="nav.layouts">Film Ekle</span></a>
             </li>
+            <li class="@Html.IsSelected(controller: "Movie")">
+                <a href="@Url.ActionWithArea("GetMovieList", "Movie")"><i class="fa fa-film"></i> <span class="nav-label" data-i18n="nav.layouts">Film Listele</span></a>
+            </li>
             <li class="@Html.IsSelected(controller: "AdminCategory")">
                 <a href="@Url.ActionWithArea("CategoryAdd", "AdminCategory")"><i class="fa fa-list-alt"></i> <span class="nav-label" data-i18n="nav.layouts">Kategori Ekle</span></a>
             </li>
-               
+        
             
             <li class="@Html.IsSelected(controller: "Admin")">
                 <a href="@Url.ActionWithArea("AddUserForm", "Admin")"><i class="fa fa-pie-chart"></i> <span class="nav-label" data-i18n="nav.layouts">Kullanıcı Ekle</span></a>

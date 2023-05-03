@@ -9,5 +9,9 @@ namespace ASPNET_Core_2_1.Controllers
         public IActionResult GetAddMovieForm() { 
             return View();
         }
+        public IActionResult GetMovieList()
+        {
+            return View();
+        }
     }
 }

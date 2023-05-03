@@ -28,7 +28,7 @@ namespace FilmProject.Presentation.Areas.Inspinia.Controllers
             
             return View();
         }
-
+      
         [HttpPost]
         //[Authorize("Admin")]
         public async Task<IActionResult> AddUserByAdmin([FromBody] RegisterByAdminViewModel RegisterViewModel)
