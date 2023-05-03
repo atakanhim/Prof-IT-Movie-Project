@@ -44,7 +44,7 @@ namespace FilmProject.Presentation.Controllers
             }
         }
         [HttpGet]
-        [Route("LikeCount")]
+        //[Route("LikeCount")]
         public async Task<int> NumberOfCommentLike(int commentId)
         {
             try

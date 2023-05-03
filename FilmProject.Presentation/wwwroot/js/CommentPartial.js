@@ -1,13 +1,15 @@
 ﻿$(function(){
     $(".like-button").click(function () {
+        let currentComment = $(this).parent().find("small")
         let commentIdValue = $(this).parent().data("itemid");
+       
         refreshCommentLike();
 
         var commentLikeModel = {
             CommentId: commentIdValue,
             userId: "0d161a0c-d0ce-414a-8bc6-02926d70d560"
         };
-        console.log(commentLikeModel);
+        
         var model = JSON.stringify(commentLikeModel);
         $.ajax({
             url: '/CommentLike/ChangeCommentLikeStatue',
@@ -16,6 +18,11 @@
             data: model,
             success: function (response) {
                 console.log("Listeme ekleme başarılı");
+                
+                $.get('/CommentLike/NumberOfCommentLike', { commentId: commentIdValue }, function (data, textStatus, jqXHR) {
+                    commentLikeCount = data;
+                    currentComment.text(commentLikeCount + " " + "likes");
+                })
                 refreshCommentLike();
             },
             error: function (xhr, status, error) {
@@ -36,22 +43,33 @@
             let commentLikeId = ($(this).data("itemid"));
             $.get('/CommentLike/IsCommentLiked', { commentId: commentLikeId }, function (data, textStatus, jqXHR) {
                 let commentLikeStatue = data;
-                console.log(commentLikeId + "   " +data)
                 if (commentLikeStatue == true) {
                     commentLikeSection.find("i").addClass("like-button--active");
-                } else {
-                    console.log("HEYYO")
+                } else {  
                     commentLikeSection.find("i").removeClass("like-button--active");
                 }
-                //console.log(commentLikeStatue);
-            });
 
-            console.log($(this))
+            });
+            $.get('/CommentLike/NumberOfCommentLike', { commentId: commentLikeId }, function (data, textStatus, jqXHR) {
+                commentLikeCount = data;
+                commentLikeSection.find("small").text(commentLikeCount + " " + "likes");
+            })
         })
     }
 
+    function CalculateCommentLike(commentIdValue) {
+        let commentLikeCount;
+        $.get('/CommentLike/NumberOfCommentLike', { commentId: commentIdValue }, function (data, textStatus, jqXHR) {
+            commentLikeCount = data;
+            
+        }).done(function () {
+            console.log("test1 : " + commentLikeCount);
+            return commentLikeCount;
+        })
+        return commentLikeCount;
+    }
 
-
+    
 
 
 
