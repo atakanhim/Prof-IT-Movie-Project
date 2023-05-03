@@ -7889,10 +7889,25 @@ del {
 
 .product-imitation {
     text-align: center;
-    padding: 90px 0;
-    background-color: #f8f8f9;
+    padding: 20px;
     color: #bebec3;
+    height: 250px;
     font-weight: 600;
+
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.product-imitation2 {
+    text-align: center;
+    padding: 20px;
+
+    color: #bebec3;
+    height: 500px;
+    font-weight: 600;
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
 }
 
 .cart-product-imitation {

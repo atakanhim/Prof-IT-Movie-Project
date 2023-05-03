@@ -1,0 +1,49 @@
+﻿
+@using FilmProject.Presentation.Models
+@model IEnumerable<MovieViewModel>
+
+
+    @foreach(var item in Model)
+    {
+         <div class="col-sm-6 col-md-4 col-lg-3 ">
+                            <div class="ibox">
+                                <div class="ibox-content product-box">
+
+                                    <div class="product-imitation" style="background-image: url('/Uploads/@item.PhotoPath')">
+                                    
+                                    </div>
+                                    <div class="product-desc">
+                                        <span class="product-price">
+                                           @item.Ortalama / 5 
+                                        </span>
+                                        <small class="text-muted"> 
+                                            @foreach (var x in item.MovieCategories)
+                                            {
+                                               <span>@x.CategoryName /</span>
+
+                                            }
+                                       </small>
+                                        <a href="#" class="product-name">@item.MovieName </a>
+
+
+
+                                      <div class="small m-t-xs">
+                                            @if (item.MovieSummary.Length > 20)
+                                            {
+                                                <p style="overflow:hidden">@item.MovieSummary.Substring(0, 40)...</p>
+                                            }
+                                            else
+                                            {
+                                                <p>@item.MovieSummary</p>
+                                            }
+                                        </div>
+                                        <div class="m-t text-righ">
+                                         <a href="/Inspinia/Movie/GetMovieDetay/@item.Id" class="btn btn-xs btn-outline btn-primary">Detay <i class="fa fa-edit"></i> </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        </div>
+                        
+    }
+      
