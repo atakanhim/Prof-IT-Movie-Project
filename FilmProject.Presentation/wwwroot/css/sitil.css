@@ -660,6 +660,10 @@ ol {
     margin-bottom: 30px;
 }
 
+.product__item:hover {
+    border: 20px solid red !important;
+}
+
 
 .product__item__pic {
     height: 325px;

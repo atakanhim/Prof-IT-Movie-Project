@@ -40,17 +40,26 @@ namespace FilmProject.Application.Services
                 body = body.Replace("{verificationLink}", htmlMessage);
 
                 // E-posta gönderimi
-                await client.SendMailAsync(
+                try
+                {
+                    await client.SendMailAsync(
                     new MailMessage(
-                            from: mail,
-                            to: email,
-                            subject,
-                            body
-                        )
+                    from: mail,
+                    to: email,
+                    subject,
+                    body
+                )
                     {
-                        IsBodyHtml = true
+                       IsBodyHtml = true
                     }
-                );
+            );
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
             }
         }
 

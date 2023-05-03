@@ -6,6 +6,8 @@
 
 
 
+    //  ||Favori
+
     //Favoriye eklenme kontrolü
     $.get('/Favorite/IsMyFavorite', { MovieId: movieId }, function (data, textStatus, jqXHR) {
         favoriteStatue = data;
@@ -17,6 +19,41 @@
         }
     });
 
+    //Favorilere Ekleme Silme
+    $("#btnAddMyList").click(function () {
+
+        if (key == false) {
+            addMyListButton.removeClass("add-list-btn--added");
+            key = true;
+        } else {
+            addMyListButton.addClass("add-list-btn--added");
+            key = false;
+        }
+
+        var favoriModel = { MovieId: movieId };
+        favoriModel = JSON.stringify(favoriModel);
+        $.ajax({
+            url: '/Favorite/ChangeFavorite',
+            method: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: favoriModel,
+            success: function (response) {
+                console.log("Listeme ekleme başarılı");
+            },
+            error: function (xhr, status, error) {
+                alertify.error(xhr.responseText);
+            }
+        });
+    })
+    function starLight(value) {
+        value = value - 1;
+        stars.forEach((star, index2) => {
+            value >= index2 ? star.classList.add("active") : star.classList.remove("active");
+        });
+    }
+
+
+    //  ||Yorumlar ve Movie Score
 
     // yorumlar listeleniyor
     refreshComments();
@@ -81,38 +118,7 @@
     });
 
 
-    //Favorilere Ekleme Silme
-    $("#btnAddMyList").click(function () {
 
-        if (key == false) {
-            addMyListButton.removeClass("add-list-btn--added");
-            key = true;
-        } else {
-            addMyListButton.addClass("add-list-btn--added");
-            key = false;
-        }
-
-        var favoriModel = { MovieId: movieId };
-        favoriModel = JSON.stringify(favoriModel);
-        $.ajax({
-            url: '/Favorite/ChangeFavorite',
-            method: 'POST',
-            contentType: "application/json; charset=utf-8",
-            data: favoriModel,
-            success: function (response) {
-                console.log("Listeme ekleme başarılı");
-            },
-            error: function (xhr, status, error) {
-                alertify.error(xhr.responseText);
-            }
-        });
-    })
-    function starLight(value) {
-        value = value - 1;
-        stars.forEach((star, index2) => {
-            value >= index2 ? star.classList.add("active") : star.classList.remove("active");
-        });
-    }
 
     // refresh comments
     function refreshComments() {
