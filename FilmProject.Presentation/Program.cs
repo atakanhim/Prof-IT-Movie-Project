@@ -124,6 +124,7 @@ builder.Services.Configure<RequestLocalizationOptions>(opt =>
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddTransient<IValidator<CategoryViewModel>,CategoryValidator>();
 builder.Services.AddTransient<IValidator<RegisterByAdminViewModel>,RegisterViewModelValidator>();
+builder.Services.AddTransient<IValidator<PostMovieViewModel>,PostMovieViewModelValidator>();
 
 var app = builder.Build();
 

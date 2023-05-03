@@ -42,7 +42,7 @@ namespace FilmProject.Presentation.Areas.Inspinia.Controllers
             try
             {
                 ValidationResult result = await _validator.ValidateAsync(RegisterViewModel);
-                if (!result.IsValid)
+                if (result.IsValid)
                 {
                     RegisterModelDto NewUser = _mapper.Map<RegisterByAdminViewModel, RegisterModelDto>(RegisterViewModel);
                     await _userService.AddUserByAdmin(NewUser);
@@ -56,7 +56,7 @@ namespace FilmProject.Presentation.Areas.Inspinia.Controllers
                 
             } catch (Exception ex)
             { 
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
             
             

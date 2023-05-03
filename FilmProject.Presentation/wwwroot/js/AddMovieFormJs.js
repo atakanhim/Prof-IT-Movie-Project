@@ -11,6 +11,7 @@ $(document).ready(function () {
     $('.chosen-select').chosen();
     $("#movieForm").validate({
         errorClass: "text-danger",
+        errorElement: "small",
         rules: {
             "MovieName": {
                 required: true
@@ -44,33 +45,33 @@ $(document).ready(function () {
         },
         messages: {
             "MovieName": {
-                required: "Film ismi zorunludur."
+                required: "Bu alan zorunludur."
             },
             "MovieSummary": {
-                required: "Film özeti zorunludur."
+                required: "Bu alan zorunludur."
             },
             "DirectorName": {
-                required: "Filmin yönetmen bilgisi zorunludur."
+                required: "Bu alan zorunludur."
             },
             "RatingAge": {
-                required: "Filmin izleyici kitle bilgisi zorunludur."
+                required: "Bu alan zorunludur."
             },
             "PublishYear": {
-                required: "Filmin tarih bilgisi zorunludur."
+                required: "Bu alan zorunludur."
             },
             "Photo": {
-                required: "Filmin afiþini yükleyin."
+                required: "Bu alan zorunludur."
             },
             "ImdbUrl": {
-                required: "Filmin IMDB adresini girin.",
-                url: "Geçerli bir adres bilgisi girilmelidir."
+                required: "Bu alan zorunludur.",
+                url: "Adres bilgisi uygun formatta girilmelidir."
             },
             "MovieLanguage": {
-                required: "Lütfen filmin dilini girin."
+                required: "Bu alan zorunludur."
             },
             "CategoriesId": {
-                required: "Lütfen kategori ekleyiniz.",
-                minlength: "Lütfen kategori ekleyiniz."
+                required: "Bu alan zorunludur.",
+                minlength: "Bu alan zorunludur."
             }
         }
     });
@@ -80,7 +81,7 @@ $(document).ready(function () {
     $("form").on("submit", function (e) {
         if (Array.from(document.querySelectorAll('select[name="CategoriesId"] option:checked')).map(option => option.value).length == 0) {
             e.preventDefault();
-            $("#errorSelect").text("Lütfen kategori bilgisi girin.");
+            $("#errorSelect").text("Bu alan zorunludur.");
         }
     });
 
@@ -88,4 +89,8 @@ $(document).ready(function () {
 
 
 });
+
+
+
+
 

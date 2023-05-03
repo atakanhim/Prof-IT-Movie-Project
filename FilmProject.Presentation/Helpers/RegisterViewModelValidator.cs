@@ -28,6 +28,7 @@ namespace FilmProject.Presentation.Helpers
 
             RuleFor(x => x.ConfirmPassword)
                 .Equal(x => x.Password).WithMessage("Parola ve parola tekrarı eşleşmiyor.");
+
         }
 
         
