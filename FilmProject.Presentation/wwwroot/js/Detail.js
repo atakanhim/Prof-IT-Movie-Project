@@ -11,6 +11,7 @@
         favoriteStatue = data;
         if (favoriteStatue == false) {
             addMyListButton.addClass("add-list-btn--added");
+            
             key = false;
         } else {
             key = true;

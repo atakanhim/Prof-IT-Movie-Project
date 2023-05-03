@@ -36,21 +36,15 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         {
             if (category != "" && category != null)
             {
-                List<Movie> movies = new List<Movie>();
-                var model = await _context.Categories.Include(x => x.MovieCategories).ThenInclude(xa => xa.Movie).Where(a => a.CategoryName == category).ToListAsync();
-                foreach (var movie in model[0].MovieCategories)
-                {
-                    Movie moviedata = await _context.Movies.
-                        Include(u => u.MovieLikes)
-                        .Include(y => y.Comments).ThenInclude(yu => yu.CommentLikes)
-                        .Include(x => x.MovieCategories).ThenInclude(xc => xc.Category)
-                        .Where(i => i.Id == movie.MovieId)
-                        .FirstOrDefaultAsync();
+                var model = await _context.MovieCategoryMaps
+                    .Include(a => a.Category)
+                    .Include(b => b.Movie)
+                    .Include(b => b.Movie.MovieLikes) 
+                    .Include(b => b.Movie.Comments).ThenInclude(yu => yu.CommentLikes)
+                    .Include(b => b.Movie.MovieCategories).ThenInclude(yu => yu.Category)
+                    .Where(c => c.Category.CategoryName == category).Select(m => m.Movie).ToListAsync();
 
-                    movies.Add(moviedata);
-                }
-
-                return movies;
+                return model;
             }
 
             return await _context.Movies.Include(u => u.MovieLikes).Include(y => y.Comments).ThenInclude(yu => yu.CommentLikes).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).ToListAsync();
