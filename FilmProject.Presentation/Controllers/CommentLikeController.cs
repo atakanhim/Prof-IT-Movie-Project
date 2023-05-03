@@ -24,7 +24,7 @@ namespace FilmProject.Presentation.Controllers
         }
 
         [HttpGet]
-        [Route("IsLiked")]
+
         public async Task<bool> IsCommentLiked(int commentId)
         {
             try
