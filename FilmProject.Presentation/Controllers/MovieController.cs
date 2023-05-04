@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using NuGet.Versioning;
 using System.Collections;
+using System.Security.Claims;
 
 namespace FilmProject.Presentation.Controllers
 {
@@ -353,6 +354,24 @@ namespace FilmProject.Presentation.Controllers
                 });
             }
             return Ok(oldmovie);
+        }
+
+        [HttpPost]
+        [Route("ChangeIsHighLighted")]
+        [Authorize]
+        public async Task<IActionResult> ChangeIsHighLightedAsync([FromBody] MovieViewModel movieModel)
+        {
+            try
+            {
+                var result= await _movieService.ChangeIsHighlighted(movieModel.Id);
+                
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
     }
 }

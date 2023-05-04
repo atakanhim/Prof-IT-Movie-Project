@@ -4,16 +4,18 @@
     $('.product-images').slick({
         dots: true
     });
-    refreshDataTable();
+    refreshIsHigLighted(); 
     $('#isHighLighted').unbind().click(function () {     
-            var favoriModel = { MovieId: movieId };
+            var favoriModel = { Id: movieId };
             favoriModel = JSON.stringify(favoriModel);
             $.ajax({
-                url: '/Favorite/ChangeFavorite',
+                url: '/Movie/ChangeIsHighLighted',
                 method: 'POST',
                 contentType: "application/json; charset=utf-8",
                 data: favoriModel,
                 success: function (response) {
+
+                    refreshIsHigLighted(); 
                     console.log("Favoriye ekleme başarılı");
                 },
                 error: function (xhr, status, error) {
@@ -41,7 +43,7 @@ function showErrorToast(text, icon) {
 
 
 // datatable refresh fonksiyonu
-function refreshDataTable() {
+function refreshIsHigLighted() {
     
     let url = "/Inspinia/Movie/IsHighLighted/" + movieId;
     $.get(url, null, function (data) {
