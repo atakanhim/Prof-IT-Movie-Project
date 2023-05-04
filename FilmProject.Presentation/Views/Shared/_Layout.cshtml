@@ -24,9 +24,9 @@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FilmProject.Presentation.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/sitil.css" type="text/css">
+    <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
 
     <!-- alertify css -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
@@ -53,21 +53,21 @@
                             <ul>
                                 <li class="custom__category">
                                     <span class="d-flex justify-content-between w-75">
-                                        <a class="custom-p2" data-id="GetMostPopular">@localizer["top_rated"] </a>
+                                        <a class="sidebar-category" href="#sectionFilters" class="custom-p2" data-id="GetMostPopular">@localizer["top_rated"] </a>
                                         <i class="fa fa-heart" aria-hidden="true"></i>
                                     </span>
 
                                 </li>
                                 <li class="custom__category">
                                     <span class="d-flex justify-content-between w-75">
-                                    <a class="custom-p2" data-id="GetMostCommentedMovie">@localizer["most_commented"] </a>    
-                                    <i class="fa fa-film" aria-hidden="true"></i>
+                                        <a href="#sectionFilters" class="custom-p2" data-id="GetMostCommentedMovie">@localizer["most_commented"] </a>
+                                        <i class="fa fa-film" aria-hidden="true"></i>
                                     </span>
                                 </li>
                                 <li class="custom__category">
                                     <span class="d-flex justify-content-between w-75">
-                                    <a class="custom-p2" data-id="GetLastMovies">@localizer["last_uploaded"]</a>  
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <a href="#sectionFilters" class="custom-p2" data-id="GetLastMovies">@localizer["last_uploaded"]</a>
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </span>
                                 </li>
                             </ul>

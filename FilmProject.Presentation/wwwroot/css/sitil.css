@@ -37,6 +37,7 @@ body {
     font-family: "Mulish", sans-serif;
     -webkit-font-smoothing: antialiased;
     /*background: #0b0c2a;*/
+    scroll-behavior: smooth;
     background: #111;
 }
 
@@ -96,12 +97,16 @@ textarea:focus {
     outline: none;
 }
 
-a:hover,
-a:focus {
-    text-decoration: none;
-    outline: none;
-    color: #ffffff;
+a{
+    color:gray;
 }
+
+    a:hover, focus {
+        text-decoration: none;
+        outline: none;
+        color: #ffffff;
+    }
+
 
 ul,
 ol {
