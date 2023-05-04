@@ -17,7 +17,7 @@
                     <a href="/Home"><i class="fa fa-home"></i> @localizer["home"]</a>
                     @if (!string.IsNullOrEmpty(Model.MovieCategories?.FirstOrDefault()?.CategoryName))
                         {
-                            <a href="#">@Model.MovieCategories.First().CategoryName</a>
+                        <a class="text-white" id="CategoryNameTest">@Model.MovieCategories.First().CategoryName</a>
                         }
                        
                     <span>@Model.MovieName</span>
