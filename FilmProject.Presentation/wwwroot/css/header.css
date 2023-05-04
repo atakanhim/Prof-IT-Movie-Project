@@ -6,19 +6,18 @@
 
 .y-container {
     display: flex;
-    /*height:100vh;*/
-    background-color: black;
+    min-height: 100vh;
 }
 /*max-height*/
 .y-sidebar {
     height: 100vh;
-    width: 300px;
-    background-color: red;
+    width: 270px;
     transition: all ease-in-out 0.3s;
 }
 
 .y-content {
     width: 100%;
+    background-color: #111;
     transition: all ease-in-out 0.3s;
 }
 

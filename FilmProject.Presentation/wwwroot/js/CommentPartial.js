@@ -1,4 +1,4 @@
-﻿$(function(){
+﻿$(function () {
     $(".like-button").click(function () {
         let currentComment = $(this).parent().find("small")
         let commentIdValue = $(this).parent().data("itemid");
@@ -7,7 +7,6 @@
 
         var commentLikeModel = {
             CommentId: commentIdValue,
-            userId: "0d161a0c-d0ce-414a-8bc6-02926d70d560"
         };
         
         var model = JSON.stringify(commentLikeModel);
@@ -17,7 +16,6 @@
             contentType: "application/json; charset=utf-8",
             data: model,
             success: function (response) {
-                console.log("Listeme ekleme başarılı");
                 
                 $.get('/CommentLike/NumberOfCommentLike', { commentId: commentIdValue }, function (data, textStatus, jqXHR) {
                     commentLikeCount = data;
@@ -56,21 +54,6 @@
             })
         })
     }
-
-    function CalculateCommentLike(commentIdValue) {
-        let commentLikeCount;
-        $.get('/CommentLike/NumberOfCommentLike', { commentId: commentIdValue }, function (data, textStatus, jqXHR) {
-            commentLikeCount = data;
-            
-        }).done(function () {
-            console.log("test1 : " + commentLikeCount);
-            return commentLikeCount;
-        })
-        return commentLikeCount;
-    }
-
-    
-
 
 
 });

@@ -5,6 +5,7 @@
     let addMyListButton = $("#btnAddMyList")
     var key;
 
+
     "use strict";
 
     var connection = new signalR.HubConnectionBuilder().withUrl("/commentHub").build();
@@ -28,6 +29,7 @@
         return console.error(err.toString());
     });
 
+
     //  ||Favori
 
     //Favoriye eklenme kontrolü
@@ -35,7 +37,6 @@
         favoriteStatue = data;
         if (favoriteStatue == false) {
             addMyListButton.addClass("add-list-btn--added");
-            
             key = false;
         } else {
             key = true;
@@ -64,7 +65,13 @@
                 console.log("Listeme ekleme başarılı");
             },
             error: function (xhr, status, error) {
-                alertify.error(xhr.responseText);
+                if (xhr.status == 401) {
+                    alertify.error("Listenize eklemek için giriş yapmanız gerekmeketedir");
+                } else{
+                    alertify.error("Bir bağlantı hatası oluştu");
+                }
+         
+             
             }
         });
     })
@@ -158,7 +165,7 @@
                 $("#commentCount").html(localizer.noComment);
         });
 
-
+        
     }
 
     function refreshMovieLike() {

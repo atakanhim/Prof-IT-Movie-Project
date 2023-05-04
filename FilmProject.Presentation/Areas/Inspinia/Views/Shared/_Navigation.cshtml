@@ -5,15 +5,21 @@
                 <div class="dropdown profile-element">
                     <img alt="image" class="rounded-circle" src="~/Images/profile_small.jpg" />
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="block m-t-xs font-bold">Welcome Admin</span>
-                        <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                        <span class="block m-t-xs font-bold">Admin</span>
+                        <span class="text-muted text-xs block">Director <b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs" style="position: absolute; top: 91px; left: 0px; will-change: top, left;">
                         <li><a class="dropdown-item" href="@Url.ActionWithArea("Profile", "AppViews")">Profile</a></li>
                         <li><a class="dropdown-item" href="@Url.ActionWithArea("Contacts", "AppViews")">Contacts</a></li>
                         <li><a class="dropdown-item" href="@Url.ActionWithArea("Inbox", "Mailbox")">Mailbox</a></li>
                         <li class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="@Url.ActionWithArea("Login", "Pages")">Logout</a></li>
+                        <li>
+                            l
+                                <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                </form>  
+
+                        </li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -23,10 +29,10 @@
             <li class="@Html.IsSelected(controller: "AdminMetrics")">
                 <a href="@Url.ActionWithArea("Metrics", "AdminMetrics")"><i class="fa fa-pie-chart"></i> <span class="nav-label" data-i18n="nav.layouts">İstatistikler</span></a>
             </li>
-            <li class="@Html.IsSelected(controller: "Movie")">
+            <li class="@Html.IsSelected(controller: "Movie",action:"GetAddMovieForm")">
                 <a href="@Url.ActionWithArea("GetAddMovieForm", "Movie")"><i class="fa fa-film"></i> <span class="nav-label" data-i18n="nav.layouts">Film Ekle</span></a>
             </li>
-            <li class="@Html.IsSelected(controller: "Movie")">
+            <li class="@Html.IsSelected(controller: "Movie",action:"GetMovieList")">
                 <a href="@Url.ActionWithArea("GetMovieList", "Movie")"><i class="fa fa-film"></i> <span class="nav-label" data-i18n="nav.layouts">Film Listele</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "AdminCategory")">

@@ -58,7 +58,7 @@ namespace FilmProject.Presentation.Controllers
                 return 0;
             }
         }
-
+         
         [HttpPost]
         //[Route("ChangeLike")]
         //[Authorize]
@@ -68,7 +68,14 @@ namespace FilmProject.Presentation.Controllers
             {
                 CommentLikeDto newCommentLike = _mapper.Map<CommentLikeViewModel, CommentLikeDto>(commentLike);
 
-                newCommentLike.userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                
+                if (userId == null)
+                {
+                    return BadRequest("Yorum Beğenmek İçin Önce Giriş Yapmalısınız");
+                }
+
+                newCommentLike.userId = userId;
                 await _commentLikeService.ChangeCommentLikeStatue(newCommentLike);
                 return Ok();
             }

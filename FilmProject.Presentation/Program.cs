@@ -127,6 +127,7 @@ builder.Services.Configure<RequestLocalizationOptions>(opt =>
 // fluent vlaidation
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddTransient<IValidator<CategoryViewModel>,CategoryValidator>();
+builder.Services.AddTransient<IValidator<CommentCreateViewModel>,CommentViewModelValidator>();
 builder.Services.AddTransient<IValidator<RegisterByAdminViewModel>,RegisterViewModelValidator>();
 builder.Services.AddTransient<IValidator<PostMovieViewModel>,PostMovieViewModelValidator>();
 builder.Services.AddSignalR();
@@ -166,7 +167,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapAreaControllerRoute(
      name: "Inspinia",
      areaName: "Inspinia",
-     pattern: "Inspinia/{controller=AdminMetrics}/{action=Metrics}"
+     pattern: "Inspinia/{controller=AdminMetrics}/{action=Metrics}/{id?}"
  ).RequireAuthorization("InspiniaPolicy"); ;
 });
 app.UseEndpoints(endpoints => { endpoints.MapHub<CommentHub>("/commentHub"); });
