@@ -93,7 +93,34 @@ namespace FilmProject.Application.Services
         {
             return await _repository.GetMovieCountAsync();
         }
+        public async Task<bool> ChangeIsHighlighted(int id) 
+        {
+            Movie model = await _repository.GetAsync(x => x.Id == id);
 
+            if (model == null)
+            {
+                return false;   
+
+            }
+            else
+            {
+                if (model.IsHighLighted== true)
+                {
+                    model.IsHighLighted = false;
+                    _repository.Update(model);
+
+                }
+                else if (model.IsHighLighted == false)
+                {
+                    model.IsHighLighted = true;
+                    _repository.Update(model);
+
+                }
+            }
+
+
+            return true;
+        }
 
         public async Task<MovieDto?> GetWithCategoryAsync(Expression<Func<Movie, bool>> filter)
         {
