@@ -140,7 +140,7 @@
                 $("#commentCount").html(localizer.noComment);
         });
 
-
+        
     }
 
     function refreshMovieLike() {
