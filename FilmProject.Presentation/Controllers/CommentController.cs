@@ -99,16 +99,37 @@ namespace FilmProject.Presentation.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public IActionResult CreateComment([FromBody] CommentViewModel commentViewModel) // Yorum Ekleme fonksiyonu 
+        public IActionResult CreateComment([FromBody] CommentCreateViewModel commentCreateViewModel) // Yorum Ekleme fonksiyonu 
         {
+            
+
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                Exception ex = new Exception(
+                        message: "Lutfen Yorum Giriniz"
+                        );
+                return BadRequest(ex.Message);
+
+
+
+            }
+            CommentViewModel commentViewModel = new CommentViewModel();
+            commentViewModel.Content = commentCreateViewModel.Content;
+            commentViewModel.MovieId = commentCreateViewModel.MovieId;
             commentViewModel.userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
+
+           
 
             var user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (user == null)
             {
                 return BadRequest("Lütfen önce giriş yapınız");
             }
+
+            
+
             CommentDto comment = _mapper.Map<CommentViewModel, CommentDto>(commentViewModel);
 
             _commentService.Add(comment);
