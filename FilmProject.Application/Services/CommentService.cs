@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
 using FilmProject.Application.Contracts.Movie;
+using FilmProject.Application.Hubs;
 using FilmProject.Application.Interfaces;
 using FilmProject.Domain.Entities;
 using FilmProject.Infrastructure.Repository.Abstract;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,21 +19,42 @@ namespace FilmProject.Application.Services
     public class CommentService : ICommentService
     {
         private readonly ICommentRepository _commentRepository;
+        private readonly IHubContext<CommentHub> _hubContext;
+        private readonly UserManager<ApplicationUser> _userManager;
         private IMapper _mapper;
 
-        public CommentService(ICommentRepository commentRepository, IMapper mapper)
+        public CommentService(ICommentRepository commentRepository, IMapper mapper, IHubContext<CommentHub> hubContext, UserManager<ApplicationUser> userManager)
         {
             _mapper = mapper;
             _commentRepository = commentRepository;
+            _hubContext = hubContext;
+            _userManager = userManager;
         }
 
 
-        public void Add(CommentDto commentDto)
+        public async Task Add(CommentDto commentDto)
         {
             // Veritabanında bu isimle bir film var mı kontrolü yapıldı.
             Comment comment = _mapper.Map<CommentDto, Comment>(commentDto);
 
             _commentRepository.Add(comment);
+
+            var user = await _userManager.FindByIdAsync(comment.userId);
+            if (user == null)
+            {
+                throw new InvalidOperationException("Kullanıcı bulunamadı.");
+            }
+
+            var newComment = new SignalNewCommentDto
+            {
+                UserName = user.UserName,
+                Text = comment.Content,
+                Date = comment.Created.ToShortDateString(),
+                LikeCount = 0
+            };
+            var serializedComment = JsonConvert.SerializeObject(newComment);
+            
+            await _hubContext.Clients.Group(commentDto.MovieId.ToString()).SendAsync("ReceiveComment", newComment);
 
         }
         public void Update(CommentDto commentDto)
