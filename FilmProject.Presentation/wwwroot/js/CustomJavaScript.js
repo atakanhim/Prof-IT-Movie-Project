@@ -7,6 +7,7 @@ $('#headerLogoClick').unbind().click(function () {
 $('.custom__category').unbind().click(function () {
     $("#loadingMovies").show();
     $('.custom__category').removeClass('active');
+    $('.custom__category').removeClass('left');
 
     var url = "";
     var text = $(this).find("a").data("id");
@@ -41,4 +42,5 @@ $('.custom__category').unbind().click(function () {
 
     // Tıklanan öğeye active sınıfını ekle
     $(this).addClass('active');
+    $(this).addClass('left');
 });

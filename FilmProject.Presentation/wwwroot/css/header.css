@@ -21,6 +21,7 @@
     transition: all ease-in-out 0.3s;
 }
 
+
 /*Sidebar*/
 .sidebar {
     background-color: #0F0F0F;
@@ -46,9 +47,13 @@
     cursor: pointer;
     color: antiquewhite;
 }
-.custom__category.active {
-    border-left: 3px solid red;
+.custom__category.active * {
     color: indianred;
+    transition: all ease-in-out 0.3s;
+}
+.custom__category.left {
+    border-left: 3px solid red;
+    transition: all ease-in-out 0.3s;
 }
 
 .sidebar ul li {
@@ -208,7 +213,7 @@
     }
 
     .sidebar {
-        width: 310px;
+        width: 300px;
     }
         .sidebar ul li a {
             font-size: 1.2rem;
