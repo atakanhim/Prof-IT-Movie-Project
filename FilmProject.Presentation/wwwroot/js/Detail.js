@@ -13,7 +13,6 @@
         favoriteStatue = data;
         if (favoriteStatue == false) {
             addMyListButton.addClass("add-list-btn--added");
-            
             key = false;
         } else {
             key = true;
@@ -24,7 +23,6 @@
     $("#btnAddMyList").click(function () {
 
         if (key == false) {
-            alertify.error("TEST ALERIFY");
             addMyListButton.removeClass("add-list-btn--added");
             key = true;
         } else {
@@ -43,7 +41,13 @@
                 console.log("Listeme ekleme başarılı");
             },
             error: function (xhr, status, error) {
-                alertify.error(xhr.responseText);
+                if (xhr.status == 401) {
+                    alertify.error("Listenize eklemek için giriş yapmanız gerekmeketedir");
+                } else{
+                    alertify.error("Bir bağlantı hatası oluştu");
+                }
+         
+             
             }
         });
     })
