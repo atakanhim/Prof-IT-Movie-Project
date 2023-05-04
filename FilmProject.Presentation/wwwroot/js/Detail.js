@@ -35,11 +35,12 @@
     //Favoriye eklenme kontrolü
     $.get('/Favorite/IsMyFavorite', { MovieId: movieId }, function (data, textStatus, jqXHR) {
         favoriteStatue = data;
+        console.log("data: " + data);
         if (favoriteStatue == false) {
-            addMyListButton.addClass("add-list-btn--added");
             key = false;
         } else {
             key = true;
+            addMyListButton.addClass("add-list-btn--added");
         }
     });
 
@@ -47,10 +48,10 @@
     $("#btnAddMyList").click(function () {
 
         if (key == false) {
-            addMyListButton.removeClass("add-list-btn--added");
+            addMyListButton.addClass("add-list-btn--added");
             key = true;
         } else {
-            addMyListButton.addClass("add-list-btn--added");
+            addMyListButton.removeClass("add-list-btn--added");
             key = false;
         }
 
