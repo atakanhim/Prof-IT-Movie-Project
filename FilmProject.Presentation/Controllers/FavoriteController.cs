@@ -35,8 +35,8 @@ namespace FilmProject.Presentation.Controllers
             {
                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-                var favorites = await _favoriteService.GetMyFavoritesAsync(userId);
 
+                var favorites = await _favoriteService.GetMyFavoritesAsync(userId);
                 IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(favorites);
 
                 var settings = new JsonSerializerSettings
@@ -101,7 +101,7 @@ namespace FilmProject.Presentation.Controllers
             try
             {
                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                
+
                 favoriteViewModel.UserId = userId;
                 FavoriteDto NewFavorite = _mapper.Map<FavoriteViewModel, FavoriteDto>(favoriteViewModel);
                 await _favoriteService.ChangeFavoriteAsync(NewFavorite);
