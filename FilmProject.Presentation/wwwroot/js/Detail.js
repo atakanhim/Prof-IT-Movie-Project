@@ -4,7 +4,7 @@
     let addMyListButton = $("#btnAddMyList")
     var key;
 
-
+    
 
     //  ||Favori
 
@@ -24,6 +24,7 @@
     $("#btnAddMyList").click(function () {
 
         if (key == false) {
+            alertify.error("TEST ALERIFY");
             addMyListButton.removeClass("add-list-btn--added");
             key = true;
         } else {
