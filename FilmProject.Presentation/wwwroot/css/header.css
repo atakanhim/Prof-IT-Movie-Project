@@ -6,7 +6,7 @@
 
 .y-container {
     display: flex;
-    background-color: black;
+
 }
 /*max-height*/
 .y-sidebar {
@@ -17,6 +17,7 @@
 
 .y-content {
     width: 100%;
+    background-color: #111;
     transition: all ease-in-out 0.3s;
 }
 

@@ -85,7 +85,7 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button class="btn btn-link sidebar__bottom" type="submit">@localizer["log_out"] </button> <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                <button class="btn btn-link sidebar__bottom" type="submit">@localizer["log_out"]  <i class="fa fa-sign-out" aria-hidden="true"></i></button>
                              </form>
                             
                         }
