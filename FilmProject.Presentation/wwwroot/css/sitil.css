@@ -660,8 +660,23 @@ ol {
     margin-bottom: 30px;
 }
 
-.product__item:hover {
-    border: 20px solid red !important;
+.film-card {
+    border-radius: 5px;
+    transition: all 0.2s ease-in;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.40);
+    border-radius: 5px;
+    padding-bottom: 5px;
+}
+
+    .film-card:hover {
+        cursor: pointer;
+        box-shadow: 0px 15px 26px rgba(128, 128, 128, 0.50);
+        transition: all 0.2s ease-in;
+        transform: translateY(-10px) scale(1.005);
+    }
+
+.film-card__text{
+    padding-left: 10px;
 }
 
 
