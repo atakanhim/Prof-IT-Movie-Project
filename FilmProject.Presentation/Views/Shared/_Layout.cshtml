@@ -12,8 +12,8 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-      <!-- Anasayfa Font -->
+          rel="stylesheet">
+    <!-- Anasayfa Font -->
     <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="~/css/plyr.css" type="text/css">
@@ -24,93 +24,100 @@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FilmProject.Presentation.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/sitil.css" type="text/css">
 
-     <!-- alertify css -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- alertify css -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
 
 </head>
 <body>
-     
-      <div class="menu-btn">
-               <div class="menu-btn__burger">
-              </div>
-       </div>
+
+    <div class="menu-btn">
+        <div class="menu-btn__burger">
+        </div>
+    </div>
 
     <div class="y-container">
         <!-- Sidebar  -->
-            <div class="y-sidebar">
-                <div class="position-fixed">
-                    <div class="sidebar">
-  
-                        <div class="sidebar__header">
+        <div class="y-sidebar">
+            <div class="position-fixed">
+                <div class="sidebar">
+
+                    <div class="sidebar__header">
                         <div class="header__logo logo" id="headerLogoClick">L O G O</div>
                         <div class="header__features">
-                            <p class="sidebar__custom-header" >@localizer["features_header"]</p>
+                            <p class="sidebar__custom-header">@localizer["features_header"]</p>
                             <div class="line"></div>
-                                <ul>
-                                    <li class="custom__category">
-                                        <a class="custom-p2" data-id="GetMostPopular">@localizer["top_rated"] </a>  <i class="fa fa-heart" aria-hidden="true"></i>
-                                    </li>
-                                   <li class="custom__category">
-                                        <a class="custom-p2" data-id="GetMostCommentedMovie">@localizer["most_commented"] </a>    <i class="fa fa-film" aria-hidden="true"></i>
-                                   </li>
-                                   <li class="custom__category">
-                                        <a class="custom-p2" data-id="GetLastMovies">@localizer["last_uploaded"]</a>  <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    </li>
-                                </ul>
-                                
-                            </div>
-                       
+                            <ul>
+                                <li class="custom__category">
+                                    <span class="d-flex justify-content-between w-75">
+                                        <a class="custom-p2" data-id="GetMostPopular">@localizer["top_rated"] </a>
+                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </span>
+
+                                </li>
+                                <li class="custom__category">
+                                    <span class="d-flex justify-content-between w-75">
+                                    <a class="custom-p2" data-id="GetMostCommentedMovie">@localizer["most_commented"] </a>    
+                                    <i class="fa fa-film" aria-hidden="true"></i>
+                                    </span>
+                                </li>
+                                <li class="custom__category">
+                                    <span class="d-flex justify-content-between w-75">
+                                    <a class="custom-p2" data-id="GetLastMovies">@localizer["last_uploaded"]</a>  
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    </span>
+                                </li>
+                            </ul>
+
                         </div>
 
+                    </div>
+
                     <div class="sidebar__categories">
-                        
+
                         <p class="sidebar__custom-header">@localizer["category_header"]</p>
                         <div class="line"></div>
-           
-                             <div class="row" id="loadingCategories"> <div class="col-lg-12 d-flex justify-content-center ">@Html.Partial("_Loading")</div></div>
-                         <div id="renderCategories">
-                                  
-                         </div>
-                    @*    @Html.Partial("_RenderCategories")*@
 
-                            
-                   </div>
+                        <div class="row" id="loadingCategories"> <div class="col-lg-12 d-flex justify-content-center ">@Html.Partial("_Loading")</div></div>
+                        <div id="renderCategories">
+                        </div>
+                        @*    @Html.Partial("_RenderCategories")*@
 
-                    
+
+                    </div>
+
+
                     <div class="header-bottom">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                 <button class="btn btn-link sidebar__bottom" type="submit">@localizer["log_out"]  <i class="fa fa-sign-out" aria-hidden="true"></i></button>
-                             </form>
-                            
+                            </form>
+
                         }
                         else
                         {
-                            <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                 <button class="btn btn-link sidebar__bottom" type="submit">@localizer["log_in"] <i class="fa fa-sign-in" aria-hidden="true"></i></button>
                             </form>
-                            
+
                         }
-                        
-                        </div>
+
                     </div>
                 </div>
             </div>
-            <!-- Header Bitiş -->
-
-
-             <!-- Main -->
-            <div class=" y-content">
-                <main role="main">
+        </div>
+        <!-- Header Bitiş -->
+        <!-- Main -->
+        <div class=" y-content">
+            <main role="main">
                 @RenderBody()
-                </main>
-            </div>
-             <!-- Main Bitiş -->
+            </main>
+        </div>
+        <!-- Main Bitiş -->
 
 
     </div>
@@ -124,7 +131,7 @@
     <script src="~/js/jquery.nice-select.min.js"></script>
     <script src="~/js/main.js" asp-append-version="true"></script>
 
-@*    alertify js *@
+    @*    alertify js *@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 
