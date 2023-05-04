@@ -24,6 +24,8 @@ using FluentValidation.AspNetCore;
 using FluentValidation;
 using FilmProject.Presentation.Models;
 using FilmProject.Presentation.Helpers;
+using FilmProject.Application.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -127,6 +129,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddTransient<IValidator<CategoryViewModel>,CategoryValidator>();
 builder.Services.AddTransient<IValidator<RegisterByAdminViewModel>,RegisterViewModelValidator>();
 builder.Services.AddTransient<IValidator<PostMovieViewModel>,PostMovieViewModelValidator>();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -166,6 +169,8 @@ app.UseEndpoints(endpoints =>
      pattern: "Inspinia/{controller=AdminMetrics}/{action=Metrics}"
  ).RequireAuthorization("InspiniaPolicy"); ;
 });
+app.UseEndpoints(endpoints => { endpoints.MapHub<CommentHub>("/commentHub"); });
+
 app.MapRazorPages();
 
 app.Run();

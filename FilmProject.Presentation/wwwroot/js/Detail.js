@@ -1,10 +1,32 @@
 ﻿$(function () {
     var movieId = $("#movieHeader").attr("data-id");
+    console.log(movieId);
     var favoriteStatue;
     let addMyListButton = $("#btnAddMyList")
     var key;
 
+    "use strict";
 
+    var connection = new signalR.HubConnectionBuilder().withUrl("/commentHub").build();
+    var filmIdString = $("#movieHeader").attr("data-id");
+ 
+    connection.on("ReceiveComment", function (comment) {
+        debugger;
+        console.log(comment);
+        
+        console.log("Veri geldi");
+        refreshComments();
+        
+    });
+
+    connection.start().then(function () {
+        connection.invoke("JoinFilmGroup", filmIdString).catch(function (err) {
+            return console.error(err.toString());
+        });
+        console.log("Bağlantı kuruldu.");
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
 
     //  ||Favori
 
@@ -110,6 +132,7 @@
             success: function (response) {
                 refreshComments();
                 alertify.success("Yorum attığınız için teşekkürler");
+                //connection.invoke("AddComment", movieId, commentContent);
 
             },
             error: function (xhr, status, error) {
