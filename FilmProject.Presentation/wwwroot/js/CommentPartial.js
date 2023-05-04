@@ -1,5 +1,4 @@
-﻿alertify.error("TEST ALERIFY");
-$(function () {
+﻿$(function () {
     $(".like-button").click(function () {
         let currentComment = $(this).parent().find("small")
         let commentIdValue = $(this).parent().data("itemid");
