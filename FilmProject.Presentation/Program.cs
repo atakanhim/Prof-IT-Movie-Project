@@ -34,6 +34,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+
 //Serilog Configuration has been added
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
