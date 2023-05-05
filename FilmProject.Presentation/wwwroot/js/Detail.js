@@ -40,6 +40,7 @@
             key = false;
         } else {
             key = true;
+            addMyListButton.html('<i class="fa fa-trash"></i> Discard');
             addMyListButton.addClass("add-list-btn--added");
         }
     });
@@ -49,9 +50,12 @@
 
         if (key == false) {
             addMyListButton.addClass("add-list-btn--added");
+            
+            addMyListButton.html('<i class="fa fa-trash"></i> Discard');
             key = true;
         } else {
             addMyListButton.removeClass("add-list-btn--added");
+            addMyListButton.html('<i class="fa fa-heart-o"></i> <span>Add My List</span>');
             key = false;
         }
 
