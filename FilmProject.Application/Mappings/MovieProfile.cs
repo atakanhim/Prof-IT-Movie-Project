@@ -29,8 +29,10 @@ namespace FilmProject.Application.Mappings
             CreateMap<Comment, CommentDto>().ReverseMap();
             CreateMap<MovieCategoryMap, MovieCategoryMapDto>().ReverseMap();
             CreateMap<RoleDto, IdentityRole>().ReverseMap();
-            
-            
+            CreateMap<ApplicationUser, ApplicationUserDto>()
+            .ForMember(dest => dest.IsTwoFactorEnabled, opt => opt.MapFrom(src => src.TwoFactorEnabled));
+
+
         }
     }
 }

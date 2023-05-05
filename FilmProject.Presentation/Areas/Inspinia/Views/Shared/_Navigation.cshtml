@@ -40,12 +40,15 @@
             </li>
         
             
-            <li class="@Html.IsSelected(controller: "Admin")">
-                <a href="@Url.ActionWithArea("AddUserForm", "Admin")"><i class="fa fa-pie-chart"></i> <span class="nav-label" data-i18n="nav.layouts">Kullanıcı Ekle</span></a>
+            <li class="@Html.IsSelected(controller: "Admin", action:"AddUserForm")">
+                <a href="@Url.ActionWithArea("AddUserForm", "Admin")"><i class="fa fa-user-plus"></i> <span class="nav-label" data-i18n="nav.layouts">Kullanıcı Ekle</span></a>
             </li>
 
             <li class="@Html.IsSelected(controller: "AdminVerifyComment")">
-                <a href="@Url.ActionWithArea("ListComments", "AdminVerifyComment")"><i class="fa fa-pie-chart"></i> <span class="nav-label" data-i18n="nav.layouts">Yorum Onayla</span></a>
+                <a href="@Url.ActionWithArea("ListComments", "AdminVerifyComment")"><i class="fa fa-user-plus"></i> <span class="nav-label" data-i18n="nav.layouts">Yorum Onayla</span></a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Admin", action: "GetUsers")">
+                <a href="@Url.ActionWithArea("GetUsers", "Admin")"><i class="fa fa-users"></i> <span class="nav-label" data-i18n="nav.layouts">Kullanıcı Bilgileri</span></a>
             </li>
             
             

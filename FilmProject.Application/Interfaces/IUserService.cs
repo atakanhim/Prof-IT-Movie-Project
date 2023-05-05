@@ -14,6 +14,7 @@ namespace FilmProject.Application.Interfaces
         Task<int> GetUserCountAsync();
 
         public Task AddUserByAdmin(RegisterModelDto model);
+        Task<List<ApplicationUserDto>> GetAllUsers();
 
     }
 }
