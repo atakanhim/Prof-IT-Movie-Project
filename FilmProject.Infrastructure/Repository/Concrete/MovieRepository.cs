@@ -40,7 +40,7 @@ namespace FilmProject.Infrastructure.Repository.Concrete
                     .Include(a => a.Category)
                     .Include(b => b.Movie)
                     .Include(b => b.Movie.MovieLikes) 
-                    .Include(b => b.Movie.Comments).ThenInclude(yu => yu.CommentLikes)
+                    .Include(b => b.Movie.Comments.Where(d => d.IsDeleted == false)).ThenInclude(yu => yu.CommentLikes)
                     .Include(b => b.Movie.MovieCategories).ThenInclude(yu => yu.Category)
                     .Where(c => c.Category.CategoryName == category).Select(m => m.Movie).ToListAsync();
 
