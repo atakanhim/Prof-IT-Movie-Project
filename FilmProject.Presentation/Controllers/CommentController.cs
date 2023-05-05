@@ -52,7 +52,7 @@ namespace FilmProject.Presentation.Controllers
         [Route("List/{id}")]
         public async Task<IActionResult> GetCommentsWithMovieIdAsync(int id) // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
         {
-            IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUser(x=>x.MovieId == id && x.IsConfirm==true);
+            IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUser(x=>x.MovieId == id && x.IsConfirm==true && x.IsDeleted==false);
             comments = comments.OrderBy(x=>x.Created).ToList();
 
             IEnumerable<CommentViewModel> commentViewModels = _mapper.Map<IEnumerable<CommentDto>, IEnumerable<CommentViewModel>>(comments);
