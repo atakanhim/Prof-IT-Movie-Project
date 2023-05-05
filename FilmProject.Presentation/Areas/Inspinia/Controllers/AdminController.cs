@@ -30,11 +30,11 @@ namespace FilmProject.Presentation.Areas.Inspinia.Controllers
         }
         public async Task<IActionResult> AddUserForm()
         {
-            
-            
+
+
             return View();
         }
-      
+
         [HttpPost]
         //[Authorize("Admin")]
         public async Task<IActionResult> AddUserByAdmin([FromBody] RegisterByAdminViewModel RegisterViewModel)
@@ -48,24 +48,24 @@ namespace FilmProject.Presentation.Areas.Inspinia.Controllers
                     await _userService.AddUserByAdmin(NewUser);
                     return Ok();
                 }
-                else 
+                else
                 {
                     Console.WriteLine(result.Errors.ToArray().ToString());
                     throw new InvalidOperationException(result.Errors.ToArray().ToString());
                 }
-                
+
             } catch (Exception ex)
-            { 
+            {
                 return BadRequest(ex.Message);
             }
-            
-            
+
+
 
         }
 
         public IActionResult GetRoles()
         {
-            try 
+            try
             {
                 var RoleList = _roleService.GetAllRoles();
                 List<RoleViewModel> roles = _mapper.Map<List<RoleDto>, List<RoleViewModel>>(RoleList);
@@ -75,7 +75,30 @@ namespace FilmProject.Presentation.Areas.Inspinia.Controllers
             {
                 return BadRequest(ex.Message);
             }
+
+        }
+
+        public async Task<IActionResult> GetUsers()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetUsersList() 
+        {
+            try 
+            {
+                var userListDto = await _userService.GetAllUsers();
+                List<ApplicationUserViewModel> userViewModelList = _mapper.Map<List<ApplicationUserDto>, List<ApplicationUserViewModel>>(userListDto);
+                return Ok(userViewModelList);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
             
+
         }
     }
 }

@@ -83,6 +83,19 @@ namespace FilmProject.Presentation.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            [Required]
+            [StringLength(100, ErrorMessage = "Şifre en az 4 karakter uzunluğunda olmalıdır.", MinimumLength = 4)]
+            [Display(Name = "Kullanıcı Adı")]
+            public string UserName { get; set; }
+
+            [Required]
+            [Display(Name = "Doğum Tarih")]
+            public DateTime BirthDate { get; set; }
+
+            [Required]
+            [Display(Name = "Telefon Numarası")]
+            public string PhoneNumber { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -90,7 +103,7 @@ namespace FilmProject.Presentation.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Şifre")]
             public string Password { get; set; }
 
             /// <summary>
@@ -98,7 +111,7 @@ namespace FilmProject.Presentation.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Şifre Tekrar")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
@@ -117,8 +130,9 @@ namespace FilmProject.Presentation.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                user.BirthDate = Input.BirthDate;
+                user.PhoneNumber = Input.PhoneNumber;
+                await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

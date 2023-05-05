@@ -1,5 +1,6 @@
 
-﻿using FilmProject.Application.Contracts.UserRole;
+using AutoMapper;
+using FilmProject.Application.Contracts.UserRole;
 using FilmProject.Application.Interfaces;
 
 using FilmProject.Domain.Entities;
@@ -19,10 +20,12 @@ namespace FilmProject.Application.Services
     public class UserService : IUserService
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private IMapper _mapper;
 
-        public UserService(UserManager<ApplicationUser> userManager)
+        public UserService(UserManager<ApplicationUser> userManager, IMapper mapper)
         {
             _userManager = userManager;
+            _mapper = mapper;
 
         }
 
@@ -54,6 +57,25 @@ namespace FilmProject.Application.Services
                 throw new InvalidOperationException(ex.Message);
             }
        
+
+        }
+
+        public async Task<List<ApplicationUserDto>> GetAllUsers() {
+            var users = await _userManager.Users.ToListAsync();
+            //var roles = await _userManager.GetRolesAsync(user);
+            //var userDto = _mapper.Map<List<ApplicationUser>, List<ApplicationUserDto>>(users);
+            //string rolesString = string.Join(",", roles);
+            List<ApplicationUserDto> result = new List<ApplicationUserDto>();
+
+            foreach (var user in users) 
+            { 
+                ApplicationUserDto userItem = _mapper.Map<ApplicationUser, ApplicationUserDto>(user);
+                var roles = await _userManager.GetRolesAsync(user);
+                string rolesString = string.Join(",", roles);
+                userItem.Roles = rolesString;
+                result.Add(userItem);
+            }
+            return result;
 
         }
 

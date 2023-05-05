@@ -30,6 +30,9 @@ namespace FilmProject.Presentation.Mappings
 
             CreateMap<MovieLikeDto, MovieLikeViewModel>().ReverseMap();
             CreateMap<CommentLikeDto, CommentLikeViewModel>().ReverseMap();
+            CreateMap<ApplicationUserDto, ApplicationUserViewModel>()
+                .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate.ToShortDateString()))
+                .ReverseMap();
         }
 
     }
