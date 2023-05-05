@@ -157,6 +157,8 @@
 
     // refresh comments
     function refreshComments() {
+    
+        $("#commentContent").val("");
         $("#loadingComments").show();
         $.get('/Comment/List/' + movieId, function (data) {
             $("#loadingComments").hide();
