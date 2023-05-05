@@ -142,7 +142,7 @@
             success: function (response) {
                 refreshComments();
                 alertify.success("Yorum attığınız için teşekkürler");
-                //connection.invoke("AddComment", movieId, commentContent);
+                connection.invoke("AddComment", movieId, commentContent);
 
             },
             error: function (xhr, status, error) {
