@@ -52,11 +52,13 @@
                             </div>
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
-                            <br>
-                        <p>
-                            <a asp-page="./Login">Do you already have an account</a>
-                        </p>
+                        <button id="registerSubmit" type="submit" class="site-btn">Register</button>
+                        <br/>
+
                     </form>
+                    <p class="mt-4">
+                        <a asp-page="./Login">Do you already have an account?</a>
+                    </p>
                 </div>
             </div>
 
