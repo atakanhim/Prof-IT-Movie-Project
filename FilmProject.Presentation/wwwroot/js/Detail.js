@@ -12,7 +12,6 @@
     var filmIdString = $("#movieHeader").attr("data-id");
  
     connection.on("ReceiveComment", function (comment) {
-        debugger;
         console.log(comment);
         
         console.log("Veri geldi");
