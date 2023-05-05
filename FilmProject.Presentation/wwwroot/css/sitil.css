@@ -1986,6 +1986,104 @@ ol {
         }
 
 /*---------------------
+  Identity
+-----------------------*/
+
+.Identity {
+    padding-top: 130px;
+    padding-bottom: 120px;
+}
+
+.Identity__form {
+    position: relative;
+}
+
+
+    .Identity__form h3 {
+        color: #ffffff;
+        font-weight: 700;
+        font-family: "Oswald", sans-serif;
+        margin-bottom: 30px;
+    }
+
+    .Identity__form form .input__item {
+        position: relative;
+        /*width: 370px;*/
+        margin-bottom: 5px !important;
+    }
+
+        .Identity__form form .input__item:before {
+            position: absolute;
+            left: 50px;
+            top: 10px;
+            height: 30px;
+            width: 1px;
+            background: #b7b7b7;
+            content: "";
+        }
+
+        .Identity__form form .input__item input {
+            height: 50px;
+            width: 100%;
+            font-size: 15px;
+            color: #b7b7b7;
+            background: #ffffff;
+            border: none;
+            padding-left: 76px;
+        }
+
+            .Identity__form form .input__item input::-webkit-input-placeholder {
+                color: #b7b7b7;
+            }
+
+            .Identity__form form .input__item input::-moz-placeholder {
+                color: #b7b7b7;
+            }
+
+            .Identity__form form .input__item input:-ms-input-placeholder {
+                color: #b7b7b7;
+            }
+
+            .Identity__form form .input__item input::-ms-input-placeholder {
+                color: #b7b7b7;
+            }
+
+            .Identity__form form .input__item input::placeholder {
+                color: #b7b7b7;
+            }
+
+        .Identity__form form .input__item span {
+            color: #b7b7b7;
+            font-size: 20px;
+            position: absolute;
+            left: 15px;
+            top: 13px;
+        }
+
+.login__form form .input__item span {
+    color: #b7b7b7;
+    font-size: 20px;
+    position: absolute;
+    left: 15px;
+    top: 13px;
+}
+
+    .Identity__form form button {
+        border-radius: 0;
+        margin-top: 10px;
+    }
+
+    .Identity__form .forget_pass {
+        font-size: 15px;
+        color: #ffffff;
+        display: inline-block;
+        position: absolute;
+        right: 60px;
+        bottom: 12px;
+    }
+
+
+/*---------------------
   Footer
 -----------------------*/
 

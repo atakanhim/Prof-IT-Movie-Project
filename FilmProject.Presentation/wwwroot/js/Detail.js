@@ -35,7 +35,6 @@
     //Favoriye eklenme kontrolü
     $.get('/Favorite/IsMyFavorite', { MovieId: movieId }, function (data, textStatus, jqXHR) {
         favoriteStatue = data;
-        console.log("data: " + data);
         if (favoriteStatue == false) {
             key = false;
         } else {
