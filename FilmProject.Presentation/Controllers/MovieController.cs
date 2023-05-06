@@ -75,7 +75,7 @@ namespace FilmProject.Presentation.Controllers
                 IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
                 if (id > 0)
                 {
-                    movieViewModel = movieViewModel.OrderByDescending(m => m.MovieLikes.Count).Take(id).ToList();
+                    movieViewModel = movieViewModel.OrderByDescending(m => m.Ortalama).Take(id).ToList();
                     var settings = new JsonSerializerSettings
                     {
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -84,7 +84,7 @@ namespace FilmProject.Presentation.Controllers
                     return Ok(json);
                 }
                 else
-                    movieViewModel = movieViewModel.OrderByDescending(m => m.MovieLikes.Count);
+                    movieViewModel = movieViewModel.OrderByDescending(m => m.Ortalama);
                 return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
 
             }

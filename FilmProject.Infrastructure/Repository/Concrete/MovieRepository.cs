@@ -47,7 +47,7 @@ namespace FilmProject.Infrastructure.Repository.Concrete
                 return model;
             }
 
-            return await _context.Movies.Include(u => u.MovieLikes).Include(y => y.Comments).ThenInclude(yu => yu.CommentLikes).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).ToListAsync();
+            return await _context.Movies.Include(u => u.MovieLikes).Include(y => y.Comments.Where(d=>d.IsDeleted==false)).ThenInclude(yu => yu.CommentLikes).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).ToListAsync();
         }
 
         public async Task<List<string>> GetAllLanguagesAsync()
