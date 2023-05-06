@@ -33,7 +33,7 @@ namespace FilmProject.Presentation.Controllers
         {
             try
             {
-                IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUserAndMovie(x =>x.IsConfirm == true);
+                IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUserAndMovie();
                 IEnumerable<AdminCommentViewModel> commentViewModels = _mapper.Map<IEnumerable<CommentDto>, IEnumerable<AdminCommentViewModel>>(comments);
 
                 return PartialView(@"~/Views/Home/_RenderAdminComments.cshtml", commentViewModels);
