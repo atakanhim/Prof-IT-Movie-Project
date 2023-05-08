@@ -21,7 +21,7 @@ namespace FilmProject.Presentation.Mappings
 
 
             CreateMap<CommentViewModel, CommentDto>().ReverseMap();
-            CreateMap<AdminCommentViewModel, CommentDto>().ReverseMap();
+            CreateMap<AdminCommentViewModel, AdminCommentDto>().ReverseMap();
             CreateMap<CategoryViewModel, CategoryDto>().ReverseMap();
             CreateMap<FavoriteViewModel, FavoriteDto>().ReverseMap();
             CreateMap<PostMovieViewModel, MovieDto>().ReverseMap();

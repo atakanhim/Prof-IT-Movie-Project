@@ -7,6 +7,8 @@ using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace FilmProject.Presentation.Controllers
 {
@@ -33,11 +35,12 @@ namespace FilmProject.Presentation.Controllers
         {
             try
             {
-                IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUserAndMovie();
-                IEnumerable<AdminCommentViewModel> commentViewModels = _mapper.Map<IEnumerable<CommentDto>, IEnumerable<AdminCommentViewModel>>(comments);
+                IEnumerable<AdminCommentDto> comments = await _commentService.GetListWithAppUserAndMovie();
+                IEnumerable<AdminCommentViewModel> commentViewModels = _mapper.Map<IEnumerable<AdminCommentDto>, IEnumerable<AdminCommentViewModel>>(comments);
 
-                return PartialView(@"~/Views/Home/_RenderAdminComments.cshtml", commentViewModels);
-        }
+                return Json(new { data = commentViewModels });
+                //return PartialView(@"~/Views/Home/_RenderAdminComments.cshtml", commentViewModels);
+            }
             catch
             {
                 return Ok(new
