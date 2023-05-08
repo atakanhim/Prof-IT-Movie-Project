@@ -11,21 +11,26 @@ using Microsoft.AspNetCore.Hosting;
 using FilmProject.Domain.Entities;
 using System.Xml.Linq;
 using static QRCoder.PayloadGenerator;
+using Microsoft.Extensions.Configuration;
 
 namespace FilmProject.Application.Services
 {
     public class EmailSender : IEmailSender, IEmailService
     {
         private readonly IWebHostEnvironment _env;
-        public EmailSender(IWebHostEnvironment env)
+        private readonly IConfiguration _configuration;
+        public EmailSender(IWebHostEnvironment env, IConfiguration configuration)
         {
             _env = env;
+            _configuration = configuration;
         }
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var mail = "FilminAdresi45@outlook.com";
-            var pw = "FilmBurada45";
-            var client = new SmtpClient("smtp-mail.outlook.com", 587)
+            var mail = _configuration["EmailService:EmailAddress"];
+            var pw = _configuration["EmailService:EmailPassword"];
+            var host = _configuration["EmailService:EmailHostAdress"];
+            var port = _configuration["EmailService:EmailHostPort"];
+            var client = new SmtpClient(host, int.Parse(port))
             {
                 EnableSsl = true,
                 Credentials = new NetworkCredential(mail, pw)
@@ -65,9 +70,11 @@ namespace FilmProject.Application.Services
 
         public async Task SendNewMovieEmail(List<string> emails, Movie movie)
         {
-            var mail = "FilminAdresi45@outlook.com";
-            var pw = "FilmBurada45";
-            var client = new SmtpClient("smtp-mail.outlook.com", 587)
+            var mail = _configuration["EmailService:EmailAddress"];
+            var pw = _configuration["EmailService:EmailPassword"];
+            var host = _configuration["EmailService:EmailHostAdress"];
+            var port = _configuration["EmailService:EmailHostPort"];
+            var client = new SmtpClient(host, int.Parse(port))
             {
                 EnableSsl = true,
                 Credentials = new NetworkCredential(mail, pw)
