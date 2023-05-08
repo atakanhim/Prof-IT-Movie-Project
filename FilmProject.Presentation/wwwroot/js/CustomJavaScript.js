@@ -1,9 +1,4 @@
-﻿
-$('#headerLogoClick').unbind().click(function () {
-    window.location.href = "/Home";   
-});
-
-// categort map
+﻿// categort map
 $('.custom__category').unbind().click(function () {
     $("#loadingMovies").show();
     $('.custom__category').removeClass('active');

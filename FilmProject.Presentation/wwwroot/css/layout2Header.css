@@ -1,0 +1,45 @@
+﻿
+.btnDefault {
+    padding:0;
+    margin:0;
+    border:none;
+    outline:none;
+    background-color:transparent;
+    color:gray;
+
+}
+.dropdown-menu2 {
+    position: absolute;
+    z-index: 1;
+    display: none;
+    width: 200px;
+    top: 20px;
+    left: -135px;
+    padding: 20px;
+}
+.btn {
+    transition: all ease-in-out 0.3s;
+}
+.btn-group:hover .btn {
+    border-color: #3B71CA;
+}
+.btn-group:hover .dropdown-menu2 {
+    display: block;
+  
+}
+
+
+.dropdown-menu2 li {
+    border-bottom: 1px solid #3B71CA;
+    border-radius: 10%;
+    display: block;
+    padding: 5px;
+    margin: 10px;
+
+}
+
+    .dropdown-menu2 li:hover .dropdownMenuItem {
+        color: #3B71CA;
+    }
+
+
