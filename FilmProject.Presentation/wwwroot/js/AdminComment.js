@@ -31,14 +31,33 @@
                 console.log("Bir hata oluştu: " + xhr.status + " - " + xhr.responseText);
             }
         },
-       
+
         "columns": [
             { "data": "content" },
-            { "data": "isConfirm" },
             { "data": "movieName" },
             { "data": "userName" },
-            { "data": "userId" },
-            { "data": "created" },
+            //{ "data": "userId" },
+            {
+                data: "created", render: function (data, type, row) {
+                    if (type === 'display' || type === 'filter') {
+                        var date = new Date(data);
+                        return date.toLocaleDateString('tr-TR');
+                    } else {
+                        return data;
+                    }
+                }
+            },
+            {
+                data: "isConfirm", render: function (data, type, row){
+                    if (data == true) {
+                        return "<button class='btn btn-danger edit-button  w-100'>Ban</button>"
+                    } else {
+                        return "<button class='btn btn-primary w-100'>Verify</button>"
+                    }
+                }
+            },
+
+ 
         ]
     });
 
