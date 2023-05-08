@@ -54,7 +54,7 @@ namespace FilmProject.Application.Services
             };
             var serializedComment = JsonConvert.SerializeObject(newComment);
             
-            //await _hubContext.Clients.Group(commentDto.MovieId.ToString()).SendAsync("ReceiveComment", newComment);
+            await _hubContext.Clients.Group(commentDto.MovieId.ToString()).SendAsync("ReceiveComment", newComment);
 
         }
         public void Update(CommentDto commentDto)
