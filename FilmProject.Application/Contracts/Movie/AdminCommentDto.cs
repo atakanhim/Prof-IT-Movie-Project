@@ -1,8 +1,13 @@
 ﻿using FilmProject.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace FilmProject.Presentation.Models
+namespace FilmProject.Application.Contracts.Movie
 {
-    public class AdminCommentViewModel:BaseModel
+    public class AdminCommentDto
     {
         public int Id { get; set; }
         public string Content { get; set; }
@@ -11,5 +16,6 @@ namespace FilmProject.Presentation.Models
         public string UserId { get; set; }
         public string UserName { get; set; }
         public DateTime Created { get; set; }
+
     }
 }

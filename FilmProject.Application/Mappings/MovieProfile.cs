@@ -22,6 +22,10 @@ namespace FilmProject.Application.Mappings
             .ForMember(dest => dest.WhoFavorited, opt => opt.MapFrom(src => src.WhoFavorited));
 
             CreateMap<MovieDto, Movie>();
+            CreateMap<Comment, AdminCommentDto>()
+                .ForMember(dest => dest.MovieName, opt => opt.MapFrom(src => src.Movie.MovieName))
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.AppUser.Id))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.AppUser.UserName));
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<MovieLike, MovieLikeDto>().ReverseMap();
             CreateMap<CommentLike, CommentLikeDto>().ReverseMap();

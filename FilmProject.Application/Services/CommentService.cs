@@ -97,10 +97,10 @@ namespace FilmProject.Application.Services
 
         }
 
-        public async Task<IEnumerable<CommentDto>> GetListWithAppUserAndMovie(Expression<Func<Comment, bool>>? filter = null)
+        public async Task<IEnumerable<AdminCommentDto>> GetListWithAppUserAndMovie(Expression<Func<Comment, bool>>? filter = null)
         {
             List<Comment> comment = await _commentRepository.GetListWithAppUserAndMovie(filter);
-            List<CommentDto> commentsDto = _mapper.Map<List<Comment>, List<CommentDto>>(comment);
+            List<AdminCommentDto> commentsDto = _mapper.Map<List<Comment>, List<AdminCommentDto>>(comment);
             return commentsDto;
         }
     }

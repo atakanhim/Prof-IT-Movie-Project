@@ -16,7 +16,7 @@ namespace FilmProject.Application.Interfaces
    
         Task<int> GetCountOfTotalComment();
         Task<IEnumerable<CommentDto>> GetListWithAppUser(Expression<Func<Comment, bool>>? filter = null);
-        Task<IEnumerable<CommentDto>> GetListWithAppUserAndMovie(Expression<Func<Comment, bool>>? filter = null);//Admin comment listleme
+        Task<IEnumerable<AdminCommentDto>> GetListWithAppUserAndMovie(Expression<Func<Comment, bool>>? filter = null);//Admin comment listleme
 
         Task Add(CommentDto comment);
         void Update(CommentDto comment);
