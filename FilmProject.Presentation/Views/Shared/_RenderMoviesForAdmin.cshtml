@@ -12,6 +12,12 @@
                                     <div class="product-imitation" style="background-image: url('/Uploads/@item.PhotoPath')">
                                     
                                     </div>
+                                    @if(item.isDeleted==true){
+                                             <div class="isDeletedBadge">
+                                                <span class="badge badge-danger">Arşivde</span>
+                                            </div>
+                                    }
+                                  
                                     <div class="product-desc">
                                         <span class="product-price">
                                            @item.Ortalama / 5 

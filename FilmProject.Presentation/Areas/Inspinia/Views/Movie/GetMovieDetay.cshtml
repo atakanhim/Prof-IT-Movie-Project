@@ -78,8 +78,30 @@
                                             <div class="text-right">
                                                 <div class="btn-group">
   
-                                                    <button class="btn btn-white btn-sm" id="isHighLighted" > </button>
-                                                    <button class="btn btn-white btn-sm"><i class="fa fa-archive" style='color:green'></i> Filmi Rafa Kaldır </button>
+                                                    <button class="btn btn-white btn-sm" id="isHighLighted"  style="width:150px" >
+                                                          @if(Model.IsHighLighted == false)
+                                                            {
+                                                                <i class='fa fa-star-o' style='color:green'></i> <span>Filmi Öne Çıkar</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                 <i class='fa fa-star' style='color:green'></i> <span>Filmi Öne Çıkarma</span>
+                                                            }
+                                                           
+                                                    </button>
+                                                    <button class="btn btn-white btn-sm ml-3 " id="addToArchive" style="width:150px">
+                                                       
+                                                            @if(Model.isDeleted == false)
+                                                            {
+                                                                <i class='fa fa-file-archive-o' style='color:green'></i><span>Filmi Rafa Kaldır</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i class='fa fa-archive' style='color:green'></i> <span>Filmi Raftan çıkar</span>
+                                                            }
+                                                           
+
+                                                    </button>
                                                 </div>
                                             </div>
 

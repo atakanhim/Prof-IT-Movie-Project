@@ -11,7 +11,6 @@ namespace FilmProject.Application.Interfaces
 {
     public interface IMovieService
     {
-        Task<bool> ChangeIsHighlighted(int id);
         Task<MovieDto?> GetAsync(Expression<Func<Movie, bool>> filter);
 
         Task<MovieDto?> GetWithCategoryAsync(Expression<Func<Movie, bool>> filter);
