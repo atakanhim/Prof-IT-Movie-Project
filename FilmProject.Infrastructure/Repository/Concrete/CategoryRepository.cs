@@ -51,5 +51,17 @@ namespace FilmProject.Infrastructure.Repository.Concrete
         {
             return _context.Categories.Any(c => c.Id == CategoryId);
         }
+
+        public async Task<Category> GetMostPopularCategoryAsync()
+        {
+            
+            var categories = await _context.Categories
+                .Include(c => c.MovieCategories)
+                .ToListAsync();
+
+            return categories
+                .OrderByDescending(c => c.MovieCategories.Count)
+                .FirstOrDefault();   
+        }
     }
 }

@@ -112,5 +112,13 @@ namespace FilmProject.Application.Services
 
             return categoryDto;
         }
+
+        public async Task<PopularCategoryMetricDto> GetMostPopularCategoryAsync() 
+        { 
+            var popularCategory = await _categoryRepository.GetMostPopularCategoryAsync();
+            var result = _mapper.Map<Category, PopularCategoryMetricDto>(popularCategory);
+            return result;
+
+        }
     }
 }

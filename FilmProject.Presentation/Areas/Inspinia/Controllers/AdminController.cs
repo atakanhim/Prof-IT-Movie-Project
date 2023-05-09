@@ -100,5 +100,19 @@ namespace FilmProject.Presentation.Areas.Inspinia.Controllers
             
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUserCountInAdminRole()
+        {
+            try 
+            {
+                int count = await _userService.GetUserCountInRole("Admin");
+                return Json(new { adminCount = count });
+            }catch(Exception ex) 
+            {
+                return BadRequest(ex.Message);    
+            }
+            
+        }
     }
 }

@@ -35,7 +35,8 @@ namespace FilmProject.Application.Mappings
             CreateMap<RoleDto, IdentityRole>().ReverseMap();
             CreateMap<ApplicationUser, ApplicationUserDto>()
             .ForMember(dest => dest.IsTwoFactorEnabled, opt => opt.MapFrom(src => src.TwoFactorEnabled));
-
+            CreateMap<Category, PopularCategoryMetricDto>()
+    .ForMember(dest => dest.MovieCount, opt => opt.MapFrom(src => src.MovieCategories.Count));
 
         }
     }

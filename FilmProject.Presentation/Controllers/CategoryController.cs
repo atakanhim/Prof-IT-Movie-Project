@@ -169,5 +169,20 @@ namespace FilmProject.Presentation.Controllers
                 }
 
             }
+
+        [HttpGet]
+        [Route("MostPopularCategory")]
+        public async Task<IActionResult> GetMostPopularCategoryMetric()
+        {
+            try
+            {
+                var result = await _categoryService.GetMostPopularCategoryAsync();
+                return Json(new { Name = result.CategoryName, Count = result.MovieCount});
+            }
+            catch (Exception ex) 
+            { 
+                return BadRequest(ex.Message);
+            }
         }
-    } 
+    }
+} 

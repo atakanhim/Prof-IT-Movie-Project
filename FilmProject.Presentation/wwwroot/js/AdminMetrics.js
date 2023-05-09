@@ -78,6 +78,15 @@
     $.get('/Home/GetUserCount', function (data) {
         $('#userCount').html(" "+data);
     });
+    // toplam Admin rolündeki kullanıcı sayısını doner
+    $.get('https://localhost:7269/Inspinia/Admin/GetUserCountInAdminRole', function (data) {
+        $('#AdminCount').html(" " + data.adminCount);
+    });
+
+    $.get('/Category/MostPopularCategory', function (data) {
+        $('#MostPopularCategoryName').html(" " + data.name);
+        $('#PopularCategoryMovieCount').html(" " + data.count + " film");
+    });
 
     
     // en populer film
