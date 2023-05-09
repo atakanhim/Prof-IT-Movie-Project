@@ -163,5 +163,32 @@ namespace FilmProject.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost]
+       [Route("ChangeState/{id}")] // Yorum Confirm Statusu Degistirme fonksiyonu 
+        public async Task<IActionResult> ChangeCommentStatue(int id)
+        {
+            try
+            {
+                var comment = await _commentService.GetAsync(x => x.Id == id);
+                if(comment != null)
+                {
+                    comment.IsConfirm = !comment.IsConfirm;
+                    _commentService.Update(comment);
+                    return Json(comment);
+                }
+                else
+                {
+                    return Ok(new
+                    {
+                        mesaj = "Yorum bulunamadı"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

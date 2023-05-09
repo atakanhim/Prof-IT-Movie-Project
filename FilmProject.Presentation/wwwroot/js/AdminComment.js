@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    $("#comment-table").DataTable({
+    var table = $("#comment-table").DataTable({
         "pageLength": 25,
         "dom": '<"html5buttons"B>lTfgitp',
         "buttons": [
@@ -36,7 +36,7 @@
             { "data": "content" },
             { "data": "movieName" },
             { "data": "userName" },
-            //{ "data": "userId" },
+            { "data": "id", "visible": false },
             {
                 data: "created", render: function (data, type, row) {
                     if (type === 'display' || type === 'filter') {
@@ -50,28 +50,44 @@
             {
                 data: "isConfirm", render: function (data, type, row){
                     if (data == true) {
-                        return "<button class='btn btn-danger edit-button  w-100'>Ban</button>"
+                        return "<button class='btn btn-danger commentChangeStatue w-100'>Ban</button>"
                     } else {
-                        return "<button class='btn btn-primary w-100'>Verify</button>"
+                        return "<button class='btn btn-primary commentChangeStatue w-100'>Verify</button>"
                     }
                 }
             },
 
  
-        ]
+        ],
+        "initComplete": function (settings, json) {
+           /* var table = $("#comment-table").DataTable();*/
+            $(".commentChangeStatue").click(function () {
+                $(document).on("click", ".commentChangeStatue", function () {
+                    console.log("test");
+                    var data = $("#comment-table").DataTable().row($(this).closest("tr")).data();
+                    var commentId = data.id;
+
+                    console.log("Comment ID: " + commentId);
+                    $.ajax({
+                        url: 'https://localhost:7269/Comment/ChangeState/' + commentId,
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (result) {
+                            console.log(result);
+                            table.ajax.reload();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(jqXHR.responseText);
+                        }
+                    });
+                });
+            
+            })
+        }
     });
 
 
 
-    //var jqxhr = $.get("/comment/AllComments", function () {
-    //    console.log("success");
-    //}).done(function () {
-    //    console.log("second success");
-    //})
-    //    .fail(function () {
-    //        console.log("error");
-    //    })
-    //    .always(function () {
-    //        console.log("second finish");
-    //    });
 })
+
