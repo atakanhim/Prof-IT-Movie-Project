@@ -67,7 +67,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <ul>
                                         <li><span>@localizer["aired_day"]:</span> @Model.PublishYear.ToShortDateString() </li>
-                                        <li><span>@localizer["movie_rating_age"]:</span> @(Model.RatingAge == MovieRatings.GenelIzleyici ? "Genel izleyici" : "Yetişkin izleyici")</li>
+                                        <li><span>@localizer["movie_rating_age"]:</span> @localizer[(Model.RatingAge == MovieRatings.GenelIzleyici ? "general_audience" : "clearly_adult")]</li>
                                         <li><span>@localizer["movie_language"]:</span> @Model.MovieLanguage</li>
                                         <li>
                                             <span>@localizer["movie_categories"]:</span> @foreach (var item in Model.MovieCategories)

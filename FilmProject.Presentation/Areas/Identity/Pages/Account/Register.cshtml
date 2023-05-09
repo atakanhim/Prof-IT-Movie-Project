@@ -9,8 +9,8 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="normal__breadcrumb__text">
-                    <h2>Kayıt Ol</h2>
-                    <p>Film sitemize hoş geldiniz.</p>
+                    <h2>@localizer["register"]</h2>
+                    <p>@localizer["welcome_message"]</p>
                 </div>
             </div>
         </div>
@@ -25,13 +25,13 @@
             <div class="col-lg-6">
                 <div class="login__form">
                     <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                        <h3>Yeni hesap oluştur.</h3>
+                        <h3>@localizer["create_new_account"]</h3>
                         <hr />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         <div class="form-floating" style="margin-bottom:20px">
                             <div class="input__item" style="margin-bottom:5px">
-                                <input asp-for="Input.UserName" class="form-control" aria-required="true" placeholder="Kullanıcı Adınız"/>
+                                <input asp-for="Input.UserName" class="form-control" aria-required="true" placeholder="@localizer["user_name"]"/>
                                 <span class=""><i class="fa fa-user"></i></span>
                             </div>
                             <span asp-validation-for="Input.UserName" class="text-danger"></span>
@@ -39,7 +39,7 @@
                         
                         <div class="form-floating" style="margin-bottom:20px">
                             <div class="input__item" style="margin-bottom:5px">
-                                <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder="Telefon Numaranız"/>
+                                <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder=@localizer["phone_number"]/>
                                  <span class="icon_phone"></span>
                             </div>
                             <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
@@ -47,7 +47,7 @@
 
                         <div class="form-floating" style="margin-bottom:20px">
                             <div class="input__item" style="margin-bottom:5px">
-                                <input type="date" asp-for="Input.BirthDate" class="form-control" aria-required="true" placeholder="Doğum Tarhiniz"/>
+                                <input type="date" asp-for="Input.BirthDate" class="form-control" aria-required="true" placeholder=@localizer["birth_day"]/>
                                      <span class=""><i class="fa fa-calendar"></i></span>
                             </div>
                             <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
@@ -56,7 +56,7 @@
 
                         <div class="form-floating" style="margin-bottom:20px">
                             <div class="input__item" style="margin-bottom:5px">
-                                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Mail Adresiniz"/>
+                                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="@localizer["mail_address"]"/>
                                 <span class="icon_mail"></span>
                             </div>
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
@@ -64,7 +64,7 @@
 
                         <div class="form-floating" style="margin-bottom:20px">
                             <div class="input__item" style="margin-bottom:5px">
-                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Şifre"/>
+                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder=@localizer["password"]/>
                                 <span class="icon_lock"></span>
                             </div>
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
@@ -72,29 +72,29 @@
 
                         <div class="form-floating" style="margin-bottom:20px">
                             <div class="input__item" style="margin-bottom:5px">
-                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Şifre Tekrar" />
+                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder=@localizer["check_password"]/>
                                 <span class="icon_lock"></span>
                             </div>
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
-                        <button id="registerSubmit" type="submit" class="site-btn">Register</button>
+                        <button id="registerSubmit" type="submit" class="site-btn">@localizer["register"]</button>
                         <br/>
 
                     </form>
                     <p class="mt-4">
-                        <a asp-page="./Login">Do you already have an account?</a>
+                        <a asp-page="./Login">@localizer["do_you_already_have_an_account"]</a>
                     </p>
                 </div>
             </div>
 
             <div class="col-lg-6">
                 <div class="login__social__links">
-                    <h3>Login With:</h3>
+                    <h3>@localizer["login_with"]Login With:</h3>
                         <hr />
                     <ul>
-                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i> Sign in With Facebook</a></li>
-                        <li><a href="#" class="google"><i class="fa fa-google"></i> Sign in With Google</a></li>
-                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i> Sign in With Twitter</a></li>
+                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i>@localizer["sign_in_with_facebook"] </a></li>
+                        <li><a href="#" class="google"><i class="fa fa-google"></i> @localizer["sign_in_with_google"]</a></li>
+                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i> @localizer["sign_in_with_twitter"]</a></li>
                     </ul>
                 </div>
             </div>
@@ -105,35 +105,3 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
-
-
-@*<div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>*@

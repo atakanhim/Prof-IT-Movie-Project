@@ -1,7 +1,7 @@
 ﻿@page
 @model ResendEmailConfirmationModel
 @{
-    ViewData["Title"] = "Resend email confirmation";
+    ViewData["Title"] = localizer["resend_email_confirmation"];
 }
 <section class="normal-breadcrumb set-bg" data-setbg="img/sidebar/tv-2.jpg">
     <div class="container">
@@ -9,7 +9,7 @@
             <div class="col-lg-12 text-center">
                 <div class="normal__breadcrumb__text">
                     <h2 class="text-white">@ViewData["Title"]</h2>
-                    <p class="text-white">Enter your email.</p>
+                    <p class="text-white">@localizer["enter_your_email"]</p>
                 </div>
             </div>
         </div>
@@ -32,12 +32,12 @@
 
                         <div style="margin-bottom:20px">
                             <div class="input__item" style="margin-bottom:5px">
-                                <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="Email address" />
+                                <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder=@localizer["mail_address"] />
                                 <span class="icon_mail mb-2"></span>
                             </div>
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
-                        <button type="submit" class="site-btn w-100">Resend</button>
+                        <button type="submit" class="site-btn w-100">@localizer["resend"]</button>
                     </form>
                 </div>
             </div>

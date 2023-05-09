@@ -123,6 +123,9 @@
   <data name="aired_day" xml:space="preserve">
     <value>Tarih</value>
   </data>
+  <data name="birth_day" xml:space="preserve">
+    <value>Doğum Tarihiniz</value>
+  </data>
   <data name="category_action" xml:space="preserve">
     <value>Aksiyon</value>
   </data>
@@ -138,11 +141,38 @@
   <data name="category_sci-fi" xml:space="preserve">
     <value>Bilim Kurgu</value>
   </data>
+  <data name="check_password" xml:space="preserve">
+    <value>Şifre Tekrar</value>
+  </data>
+  <data name="clearly_adult" xml:space="preserve">
+    <value>Yetişkin İzleyici</value>
+  </data>
+  <data name="click_here_logout" xml:space="preserve">
+    <value>Çıkış yapmak için buraya tıklayın</value>
+  </data>
   <data name="comment_placeholder" xml:space="preserve">
     <value>Sizin Yorumunuz</value>
   </data>
+  <data name="create_new_account" xml:space="preserve">
+    <value>Yeni hesap oluştur.</value>
+  </data>
+  <data name="do_not_have_account" xml:space="preserve">
+    <value>Hesabınız Yok Mu?</value>
+  </data>
+  <data name="do_you_already_have_an_account" xml:space="preserve">
+    <value>Zaten bir hesabınız var mı?</value>
+  </data>
+  <data name="enter_your_email" xml:space="preserve">
+    <value>E-mail Adresininzi Giriniz</value>
+  </data>
   <data name="features_header" xml:space="preserve">
     <value>Özellikler</value>
+  </data>
+  <data name="forgot_your_password" xml:space="preserve">
+    <value>Şifremi Unuttum</value>
+  </data>
+  <data name="general_audience" xml:space="preserve">
+    <value>Genel İzleyici</value>
   </data>
   <data name="home" xml:space="preserve">
     <value>Anasayfa</value>
@@ -153,11 +183,17 @@
   <data name="login" xml:space="preserve">
     <value>Giriş Yap</value>
   </data>
+  <data name="login_with" xml:space="preserve">
+    <value>Birlikte Giriş Yap:</value>
+  </data>
   <data name="log_in" xml:space="preserve">
     <value>Giriş Yap</value>
   </data>
   <data name="log_out" xml:space="preserve">
     <value>Çıkış Yap</value>
+  </data>
+  <data name="mail_address" xml:space="preserve">
+    <value>Mail Adresiniz</value>
   </data>
   <data name="minute" xml:space="preserve">
     <value>Dakika</value>
@@ -195,8 +231,35 @@
   <data name="no_comment" xml:space="preserve">
     <value>Henüz herhangi bir yorum yapılmamış</value>
   </data>
+  <data name="password" xml:space="preserve">
+    <value>Şifre</value>
+  </data>
+  <data name="phone_number" xml:space="preserve">
+    <value>Telefon Numaranız</value>
+  </data>
+  <data name="register" xml:space="preserve">
+    <value>Kayıt Ol</value>
+  </data>
+  <data name="Register_as_a_new_user" xml:space="preserve">
+    <value>Yeni Bir Hesap Oluştur</value>
+  </data>
+  <data name="register_confirmation" xml:space="preserve">
+    <value>Kayıt doğrulama</value>
+  </data>
+  <data name="register_confirmation_message" xml:space="preserve">
+    <value>Email adresinize doğrulama bağlantısı gönderilmiştir.</value>
+  </data>
   <data name="rent_movie" xml:space="preserve">
     <value>Kirala</value>
+  </data>
+  <data name="resend" xml:space="preserve">
+    <value>Tekrar Gönder</value>
+  </data>
+  <data name="resend_email_confirmation" xml:space="preserve">
+    <value>Doğrulama maili gönder</value>
+  </data>
+  <data name="reset_password" xml:space="preserve">
+    <value>Şifremi Yenile</value>
   </data>
   <data name="reviews" xml:space="preserve">
     <value>Yorumlar</value>
@@ -204,14 +267,35 @@
   <data name="sent_comment" xml:space="preserve">
     <value>Gönder</value>
   </data>
+  <data name="sign_in_with_facebook" xml:space="preserve">
+    <value>Facebook ile Giriş Yap</value>
+  </data>
+  <data name="sign_in_with_google" xml:space="preserve">
+    <value>Google ile Giriş Yap</value>
+  </data>
+  <data name="sign_in_with_twitter" xml:space="preserve">
+    <value>Twitter ile Giriş Yap</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value />
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="successfully_logged_out" xml:space="preserve">
+    <value>Uygulamadan başarılı bir şekilde çıkış yapıldı</value>
   </data>
   <data name="top_rated" xml:space="preserve">
     <value>En Çok Beğeni Alan Filmler</value>
   </data>
+  <data name="user_name" xml:space="preserve">
+    <value>Kullanıcı Adı</value>
+  </data>
   <data name="votes" xml:space="preserve">
     <value>Oy</value>
+  </data>
+  <data name="welcome_message" xml:space="preserve">
+    <value>Film Sitemize Hoşgeldiniz.</value>
   </data>
   <data name="write_comment" xml:space="preserve">
     <value>Yorum Ekle</value>
