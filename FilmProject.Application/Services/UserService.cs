@@ -79,5 +79,12 @@ namespace FilmProject.Application.Services
 
         }
 
+        public async Task<int> GetUserCountInRole(string roleName)
+        {
+            var userInRole = await _userManager.GetUsersInRoleAsync(roleName);
+            var userCount = userInRole.Count;
+            return userCount;
+        }
+
     }
 }

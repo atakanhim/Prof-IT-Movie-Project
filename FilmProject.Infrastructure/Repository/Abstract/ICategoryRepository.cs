@@ -18,7 +18,7 @@ namespace FilmProject.Infrastructure.Repository.Abstract
 
         Task<int> CountAsync();
 
-
+        Task<Category> GetMostPopularCategoryAsync();
 
 
     }

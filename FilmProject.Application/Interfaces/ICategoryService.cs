@@ -19,5 +19,6 @@ namespace FilmProject.Application.Interfaces
         Task DeleteCategoryAsync(int id);
 
         Task<int> CountAsync();
+        Task<PopularCategoryMetricDto> GetMostPopularCategoryAsync();
     }
 }
