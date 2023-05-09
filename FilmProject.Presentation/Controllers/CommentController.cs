@@ -43,10 +43,7 @@ namespace FilmProject.Presentation.Controllers
             }
             catch
             {
-                return Ok(new
-                {
-                    mesaj = "Sistemde Herhangi bir yorum bulunamadı"
-                });
+                return BadRequest("Yorum Bulunamadı.");
             }
         }
 
@@ -153,10 +150,7 @@ namespace FilmProject.Presentation.Controllers
                     _commentService.Update(comment);
                     return Json(comment);
                 }
-                return Ok(new
-                {
-                    mesaj = "Yorum Bulunamadı "
-                });
+                return BadRequest("Yorum Bulunamadı.");
             }
             catch (Exception ex)
             {

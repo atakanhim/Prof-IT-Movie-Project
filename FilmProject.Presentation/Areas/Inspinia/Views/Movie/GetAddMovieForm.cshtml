@@ -50,7 +50,11 @@
         </div>
         <div class="form-group">
           <label asp-for="MovieLanguage">Filmin Dili</label>
-          <input asp-for="MovieLanguage" name="MovieLanguage" type="text" class="form-control" id="movieLanguage" placeholder="Filmin dilini seçiniz.">
+           <select asp-for="MovieLanguage" name="MovieLanguage" class="form-control" id="movieLanguage">
+            <option value="">Dil seçin</option>
+            <option value="tr-TR">Türkçe</option>
+            <option value="en-US">İngilizce</option>
+          </select>
         </div>
         <div class="form-group">
 		

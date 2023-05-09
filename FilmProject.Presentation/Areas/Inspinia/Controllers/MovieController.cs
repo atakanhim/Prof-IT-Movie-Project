@@ -22,14 +22,7 @@ namespace ASPNET_Core_2_1.Controllers
             MovieDto movieDto = await _movieService.GetWithCategoryAsync(m => m.Id == id);
             MovieViewModel movie = _mapper.Map<MovieDto, MovieViewModel>(movieDto);
             return View(movie);
-        }
-        public async Task<IActionResult> IsHighLighted(int id)
-        {
-            MovieDto movieDto = await _movieService.GetWithCategoryAsync(m => m.Id == id);
-            MovieViewModel movie = _mapper.Map<MovieDto, MovieViewModel>(movieDto);
-
-            return Json(movie.IsHighLighted);
-        }
+        }   
         public IActionResult GetAddMovieForm() 
         { 
             return View();

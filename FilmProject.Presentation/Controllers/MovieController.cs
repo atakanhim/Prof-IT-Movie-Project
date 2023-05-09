@@ -138,7 +138,7 @@ namespace FilmProject.Presentation.Controllers
             }
             catch
             {
-                return Ok(new
+                return BadRequest(new
                 {
                     mesaj = "Geçersiz Id Değeri "
                 });
@@ -348,14 +348,32 @@ namespace FilmProject.Presentation.Controllers
             }
             else
             {
-                return Ok(new
-                {
-                    mesaj = "Film Bulunamadı "
-                });
+                return BadRequest("Film Bulunamadı.");
+
             }
             return Ok(oldmovie);
         }
+        [HttpPost]
+        [Route("AddToArchive")]
+        public async Task<IActionResult> AddToArchiveAsync([FromBody] MovieViewModel movieViewModel) // Film arşive ekleme fonksiyonu
+        {
+            try
+            {
+                MovieDto model = await _movieService.GetAsync(x=>x.Id == movieViewModel.Id);
+                if (model != null)
+                {
+                    model.isDeleted = !model.isDeleted;
+                    _movieService.Update(model);
 
+                    return Ok(model.isDeleted);
+                }
+                return BadRequest("Arşive ekleme/cikarma işlemi başarısız.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Arşive ekleme/cikarma işlemi başarısız.");
+            }
+        }
         [HttpPost]
         [Route("ChangeIsHighLighted")]
         [Authorize]
@@ -363,14 +381,19 @@ namespace FilmProject.Presentation.Controllers
         {
             try
             {
-                var result= await _movieService.ChangeIsHighlighted(movieModel.Id);
-                
+                MovieDto model = await _movieService.GetAsync(x => x.Id == movieModel.Id);
+                if (model != null)
+                {
+                    model.IsHighLighted = !model.IsHighLighted;
+                    _movieService.Update(model);
 
-                return Ok();
+                    return Ok(model.IsHighLighted);
+                }
+                return BadRequest("Model bulunamadı.");
             }
             catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest("Öne çıkarma/gerialama işlemi başarısız.");
             }
         }
     }

@@ -4,24 +4,38 @@
     $('.product-images').slick({
         dots: true
     });
-    refreshIsHigLighted(); 
-    $('#isHighLighted').unbind().click(function () {     
-            var favoriModel = { Id: movieId };
-            favoriModel = JSON.stringify(favoriModel);
-            $.ajax({
-                url: '/Movie/ChangeIsHighLighted',
-                method: 'POST',
-                contentType: "application/json; charset=utf-8",
-                data: favoriModel,
-                success: function (response) {
+    $('#isHighLighted').unbind().click(function () {
+        var favoriModel = { Id: movieId };
+        favoriModel = JSON.stringify(favoriModel);
+        $.ajax({
+            url: '/Movie/ChangeIsHighLighted',
+            method: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: favoriModel,
+            success: function (response) {
+                refreshIsHigLighted(response);
+            },
+            error: function (xhr, status, error) {
+                showErrorToast(xhr.responseText, "error")
+            }
 
-                    refreshIsHigLighted(); 
-                    console.log("Favoriye ekleme başarılı");
-                },
-                error: function (xhr, status, error) {
-                    alertify.error(xhr.responseText);
-                }
-          
+        })
+    });
+    $('#addToArchive').unbind().click(function () {
+        var favoriModel = { Id: movieId };
+        favoriModel = JSON.stringify(favoriModel);
+        $.ajax({
+            url: '/Movie/AddToArchive',
+            method: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: favoriModel,
+            success: function (response) {
+                refreshAddToArchive(response);
+            },
+            error: function (xhr, status, error) {
+                showErrorToast(xhr.responseText,"error")
+            }
+
         })
     });
 
@@ -43,16 +57,18 @@ function showErrorToast(text, icon) {
 
 
 // datatable refresh fonksiyonu
-function refreshIsHigLighted() {
-    
-    let url = "/Inspinia/Movie/IsHighLighted/" + movieId;
-    $.get(url, null, function (data) {
-        console.log(data);
-        if (data == false)
+function refreshIsHigLighted(response) {
+        if (response == false)
             $('#isHighLighted').html("<i class='fa fa-star-o' style='color:green'></i> Filmi Öne Çıkar");
         else
             $('#isHighLighted').html("<i class='fa fa-star' style='color:green'></i> Filmi Öne Çıkarma");
-    });
+}
 
+function refreshAddToArchive(response) {
+
+    if (response == false)
+        $('#addToArchive').html("<i class='fa fa-file-archive-o' style='color:green'></i> Filmi Rafa Kaldır ");
+    else
+        $('#addToArchive').html("<i class='fa fa-archive' style='color:green'></i> Filmi Raftan çıkar ");
 
 }
