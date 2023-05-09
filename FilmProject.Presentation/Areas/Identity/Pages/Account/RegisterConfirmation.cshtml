@@ -1,14 +1,14 @@
 ﻿@page
 @model RegisterConfirmationModel
 @{
-    ViewData["Title"] = "Register confirmation";
+    ViewData["Title"] = localizer["register_confirmation"];
 }
 
 <div class="container mt-4">
   <div class="alert alert-info text-center" role="alert">
     <div class="d-flex justify-content-center align-items-center">
       <span class="mr-2"><i class="fas fa-envelope"></i></span>
-      <span>Email adresinize doğrulama bağlantısı gönderilmiştir.</span>
+            <span>@localizer["register_confirmation_message"]</span>
     </div>
   </div>
 </div>
