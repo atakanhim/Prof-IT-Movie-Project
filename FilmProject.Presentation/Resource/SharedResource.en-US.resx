@@ -195,6 +195,9 @@
   <data name="last_uploaded" xml:space="preserve">
     <value>Last Uploaded</value>
   </data>
+  <data name="likes" xml:space="preserve">
+    <value>Likes</value>
+  </data>
   <data name="like_comment_required_signin" xml:space="preserve">
     <value>You must sign in to like a comment.</value>
   </data>

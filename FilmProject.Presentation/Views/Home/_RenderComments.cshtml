@@ -12,7 +12,7 @@
             <p>
                 @item.Content 
             </p>
-            <div data-itemid=@item.Id class="comment text-right comment-like-item" style="color:white"><i class="fa fa-heart like-button"></i><div><small> @item.CommentLikes.Count likes</small></div>  </div>
+            <div data-itemid=@item.Id class="comment text-right comment-like-item" style="color:white"><i class="fa fa-heart like-button"></i><div><small> @item.CommentLikes.Count @localizer["likes"] </small></div>  </div>
         </div>
     </div>
 

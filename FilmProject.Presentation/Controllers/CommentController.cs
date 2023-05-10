@@ -128,7 +128,7 @@ namespace FilmProject.Presentation.Controllers
             var user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (user == null)
             {
-                return BadRequest("Lütfen önce giriş yapınız");
+                return BadRequest(_localizer["write_comment_required_signin"].Value);
             }
 
             
