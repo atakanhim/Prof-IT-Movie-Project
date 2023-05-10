@@ -11,23 +11,22 @@
                     <h5>Kullanıcılar Tablosu</h5>
 
                     <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
+                        
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
+                            <i>Role göre filtrele</i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li>
-                                <a href="#" class="dropdown-item">Config option 1</a>
+                                <a href="#" class="dropdown-item" data-role="">Tümü</a>
                             </li>
                             <li>
-                                <a href="#" class="dropdown-item">Config option 2</a>
+                                <a href="#" class="dropdown-item" data-role="Admin">Admin</a>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-item" data-role="User">Kullanıcı</a>
                             </li>
                         </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
+                        
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -123,6 +122,23 @@
                 var filter = $(this).val();
                 usersTable.trigger('footable_filter', {filter: filter, column: 0});
             });
+
+            $('.dropdown-menu a').click(function(e) {
+    e.preventDefault();
+    var role = $(this).data('role');
+    if (!role) {
+        $('#users tr').show();
+    } else {
+        $('#users tr').each(function() {
+            var roles = $(this).find('td:nth-child(4)').text();
+            if (roles.indexOf(role) > -1) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+});
         });
     </script>
 }
