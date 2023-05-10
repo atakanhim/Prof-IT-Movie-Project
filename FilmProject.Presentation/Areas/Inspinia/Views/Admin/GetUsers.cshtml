@@ -1,6 +1,7 @@
 ﻿
 @{
 }
+
 <div class="wrapper wrapper-content animated fadeInRight">
 
     <div class="row">
@@ -30,7 +31,13 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="search-bar" placeholder="Kullanıcı adıyla ara...">
+                            </div>
+                        </div>
+                    </div>
                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
                         <thead>
                             <tr>
@@ -93,10 +100,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            var usersTable = $('.footable').footable();
 
-            $.get("https://localhost:7269/Inspinia/Admin/GetUsersList", function(data)
-            {
-                
+            $.get("https://localhost:7269/Inspinia/Admin/GetUsersList", function(data) {
                 $.each(data, function(index, value) {
                     var tr = $("<tr>");
                     tr.append($("<td>").text(value.userName));
@@ -109,9 +115,14 @@
                     tr.append($("<td>").html('<a href="#"><i class="fa fa-check text-navy"></i></a>'));
                     $("#users").append(tr);
                 });
-                $('.footable').footable();
+                usersTable.trigger('footable_redraw');
             });
-            
+
+            $('#search-bar').on('input', function(e) {
+                e.preventDefault();
+                var filter = $(this).val();
+                usersTable.trigger('footable_filter', {filter: filter, column: 0});
+            });
         });
     </script>
 }
