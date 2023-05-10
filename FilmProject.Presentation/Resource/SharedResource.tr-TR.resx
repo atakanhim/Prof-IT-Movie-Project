@@ -192,6 +192,9 @@
   <data name="last_uploaded" xml:space="preserve">
     <value>En Son Yüklenen Filmler</value>
   </data>
+  <data name="likes" xml:space="preserve">
+    <value>Beğeni</value>
+  </data>
   <data name="like_comment_required_signin" xml:space="preserve">
     <value>Yorum Beğenmek İçin Önce Giriş Yapmalısınız</value>
   </data>

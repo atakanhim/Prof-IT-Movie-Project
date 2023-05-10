@@ -36,7 +36,7 @@ namespace FilmProject.Presentation.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var result = await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            //var result = await _roleManager.CreateAsync(new IdentityRole("Admin"));
             return View();
         }
         [HttpGet]
