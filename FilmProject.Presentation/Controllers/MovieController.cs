@@ -85,6 +85,8 @@ namespace FilmProject.Presentation.Controllers
                 }
                 else
                     movieViewModel = movieViewModel.OrderByDescending(m => m.Ortalama);
+
+                movieViewModel = movieViewModel.Where(x => x.isDeleted == false);
                 return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
 
             }
@@ -118,6 +120,8 @@ namespace FilmProject.Presentation.Controllers
                
             else
                 movieViewModel = movieViewModel.OrderByDescending(m => m.Comments.Count);
+
+            movieViewModel = movieViewModel.Where(x => x.isDeleted == false);
             return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
           
         }
@@ -160,7 +164,7 @@ namespace FilmProject.Presentation.Controllers
         {
             IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync(category);
             IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
-           
+            movieViewModel = movieViewModel.Where(x => x.isDeleted == false);
 
             return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
         }
@@ -171,7 +175,7 @@ namespace FilmProject.Presentation.Controllers
         {
             IEnumerable<MovieDto> movies = await _movieService.GetListWithCategoryAsync(category);
             IEnumerable<MovieViewModel> movieViewModel = _mapper.Map<IEnumerable<MovieDto>, IEnumerable<MovieViewModel>>(movies);
-
+            movieViewModel=movieViewModel.OrderBy(x => x.isDeleted);
             return PartialView(@"~/Views/Shared/_RenderMoviesForAdmin.cshtml", movieViewModel);
  
         }
@@ -195,7 +199,9 @@ namespace FilmProject.Presentation.Controllers
 
             return Ok(json);
 
+
         }
+
         [HttpGet]
         [Route("GetLastMovies/{number?}")]
 
@@ -216,6 +222,9 @@ namespace FilmProject.Presentation.Controllers
             }    
             else
                 movieViewModel = movieViewModel.OrderByDescending(m => m.Created);
+
+
+            movieViewModel = movieViewModel.Where(x => x.isDeleted == false);
             return PartialView(@"~/Views/Home/_RenderMoviesPartialView.cshtml", movieViewModel);
         }
 
