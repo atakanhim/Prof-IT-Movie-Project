@@ -94,7 +94,7 @@
         data = JSON.parse(data);
        
         $('#mostPopulerMovieName').html(" "+data[0].MovieName);
-        $('#mostPopulerMovieOrtalama').html(" " +data[0].Ortalama + "/10");
+        $('#mostPopulerMovieOrtalama').html(" " +data[0].Ortalama + "/5");
 
     });
 
