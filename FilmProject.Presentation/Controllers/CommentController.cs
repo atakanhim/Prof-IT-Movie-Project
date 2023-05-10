@@ -64,7 +64,7 @@ namespace FilmProject.Presentation.Controllers
         [Route("Count/{id}")]
         public async Task<IActionResult> GetCommentCount(int id) // tum filmler , categoriler ile birlikte doner bunu viewmodel olarak gonderir.
         {
-            IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUser(x => x.MovieId == id);
+            IEnumerable<CommentDto> comments = await _commentService.GetListWithAppUser(x => x.MovieId == id && x.IsConfirm==true && x.IsDeleted==false);
             return Json(comments.Count());
         }
         [HttpGet]

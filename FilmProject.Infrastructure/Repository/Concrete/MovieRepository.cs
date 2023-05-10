@@ -40,14 +40,14 @@ namespace FilmProject.Infrastructure.Repository.Concrete
                     .Include(a => a.Category)
                     .Include(b => b.Movie)
                     .Include(b => b.Movie.MovieLikes) 
-                    .Include(b => b.Movie.Comments.Where(d => d.IsDeleted == false)).ThenInclude(yu => yu.CommentLikes)
+                    .Include(b => b.Movie.Comments.Where(d => d.IsDeleted == false && d.IsConfirm==true)).ThenInclude(yu => yu.CommentLikes)
                     .Include(b => b.Movie.MovieCategories).ThenInclude(yu => yu.Category)
                     .Where(c => c.Category.CategoryName == category).Select(m => m.Movie).ToListAsync();
 
                 return model;
             }
 
-            return await _context.Movies.Include(u => u.MovieLikes).Include(y => y.Comments.Where(d=>d.IsDeleted==false)).ThenInclude(yu => yu.CommentLikes).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).ToListAsync();
+            return await _context.Movies.Include(u => u.MovieLikes).Include(y => y.Comments.Where(d=>d.IsDeleted==false && d.IsConfirm == true)).ThenInclude(yu => yu.CommentLikes).Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).ToListAsync();
         }
 
         public async Task<List<string>> GetAllLanguagesAsync()
@@ -71,7 +71,7 @@ namespace FilmProject.Infrastructure.Repository.Concrete
             return await _context.Movies.Include(u => u.MovieLikes)
                 .Include(y => y.WhoFavorited)
                 .Include(a => a.Comments).ThenInclude(ax => ax.AppUser)
-                .Include(v => v.Comments).ThenInclude(vx => vx.CommentLikes)
+                .Include(v => v.Comments.Where(d => d.IsDeleted == false && d.IsConfirm == true)).ThenInclude(vx => vx.CommentLikes)
                 .Include(x => x.MovieCategories).ThenInclude(xc => xc.Category).
                 Where(filter).FirstOrDefaultAsync();
 #pragma warning restore CS8603 // Possible null reference return.
