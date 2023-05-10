@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="add_list_required_signin" xml:space="preserve">
+    <value>You must sign in to add your list.</value>
+  </data>
   <data name="add_my_list" xml:space="preserve">
     <value>Add My List</value>
   </data>
@@ -150,11 +153,17 @@
   <data name="click_here_logout" xml:space="preserve">
     <value>Click here to Logout</value>
   </data>
+  <data name="comment_empty_error" xml:space="preserve">
+    <value>This field cannot be left blank.</value>
+  </data>
   <data name="comment_placeholder" xml:space="preserve">
     <value>Your Comment</value>
   </data>
   <data name="confirm_email" xml:space="preserve">
     <value>Confirm E-mail</value>
+  </data>
+  <data name="connection_error" xml:space="preserve">
+    <value>A connection error was occured</value>
   </data>
   <data name="create_new_account" xml:space="preserve">
     <value>Create New Account</value>
@@ -177,11 +186,17 @@
   <data name="general_audience" xml:space="preserve">
     <value>General Audience</value>
   </data>
+  <data name="give_score_required_signin" xml:space="preserve">
+    <value>You must sign in to give score.</value>
+  </data>
   <data name="home" xml:space="preserve">
     <value>Home</value>
   </data>
   <data name="last_uploaded" xml:space="preserve">
     <value>Last Uploaded</value>
+  </data>
+  <data name="like_comment_required_signin" xml:space="preserve">
+    <value>You must sign in to like a comment.</value>
   </data>
   <data name="login" xml:space="preserve">
     <value>Login</value>
@@ -264,6 +279,9 @@
   <data name="reviews" xml:space="preserve">
     <value>Reviews</value>
   </data>
+  <data name="score_updated_message" xml:space="preserve">
+    <value>Your rating has changed.</value>
+  </data>
   <data name="sent_comment" xml:space="preserve">
     <value>Sent</value>
   </data>
@@ -282,6 +300,12 @@
   <data name="successfully_logged_out" xml:space="preserve">
     <value>You have successfully logged out of the application.</value>
   </data>
+  <data name="thanks_message_comment" xml:space="preserve">
+    <value>Thanks for commenting</value>
+  </data>
+  <data name="thanks_message_scoring" xml:space="preserve">
+    <value>Thank You For Rating This Film</value>
+  </data>
   <data name="top_rated" xml:space="preserve">
     <value>Top Rated Movies</value>
   </data>
@@ -296,5 +320,8 @@
   </data>
   <data name="write_comment" xml:space="preserve">
     <value>Write Comment</value>
+  </data>
+  <data name="write_comment_required_signin" xml:space="preserve">
+    <value>You must sign in to write comment.</value>
   </data>
 </root>

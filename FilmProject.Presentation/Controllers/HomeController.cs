@@ -5,6 +5,7 @@ using FilmProject.Application.Services;
 using FilmProject.Domain.Entities;
 using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Linq.Expressions;
@@ -55,6 +56,17 @@ namespace FilmProject.Presentation.Controllers
             return View(movie);
         }
 
+        public IActionResult SetLanguage(string culture)
+        {
+            // Set the selected language preference cookie
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(30) }
+            );
+
+            return RedirectToAction("Index");
+        }
 
 
         public async Task<IActionResult> Profil()

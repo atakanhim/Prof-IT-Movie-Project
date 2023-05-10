@@ -38,7 +38,7 @@
             key = false;
         } else {
             key = true;
-            addMyListButton.html('<i class="fa fa-trash"></i> Discard');
+            addMyListButton.html('<i class="fa fa-trash"></i> Remove from My List');
             addMyListButton.addClass("add-list-btn--added");
         }
     });
@@ -49,7 +49,7 @@
         if (key == false) {
             addMyListButton.addClass("add-list-btn--added");
             
-            addMyListButton.html('<i class="fa fa-trash"></i> Discard');
+            addMyListButton.html('<i class="fa fa-trash"></i> Remove from My List');
             key = true;
         } else {
             addMyListButton.removeClass("add-list-btn--added");
@@ -69,9 +69,9 @@
             },
             error: function (xhr, status, error) {
                 if (xhr.status == 401) {
-                    alertify.error("Listenize eklemek için giriş yapmanız gerekmeketedir");
+                    alertify.error(localizer.add_list_required_signin);
                 } else{
-                    alertify.error("Bir bağlantı hatası oluştu");
+                    alertify.error(localizer.connection_error);
                 }
          
              
@@ -141,7 +141,7 @@
             data: commentModel,
             success: function (response) {
                 refreshComments();
-                alertify.success("Yorum attığınız için teşekkürler");
+                alertify.success(localizer.thanks_message_comment);
                 //connection.invoke("AddComment", movieId, commentContent);
 
             },

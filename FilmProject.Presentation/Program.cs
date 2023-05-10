@@ -101,12 +101,16 @@ builder.Services.Configure<RequestLocalizationOptions>(opt =>
         new CultureInfo("tr-TR"),
     };
 
-    //Localization configurations were declared
-    opt.DefaultRequestCulture = new RequestCulture("tr-TR");
+    // Get the user's language preference from the cookie or session variable
+    var httpContextAccessor = builder.Services.BuildServiceProvider().GetService<IHttpContextAccessor>();
+    var userLanguage = httpContextAccessor.HttpContext?.Request.Cookies["selectedLanguage"] ?? "tr-TR";
+
+    // Set the default culture and UI culture to the user's language preference
+    opt.DefaultRequestCulture = new RequestCulture(userLanguage);
     opt.SupportedCultures = supportedCultures;
     opt.SupportedUICultures = supportedCultures;
 
-    //Localization passing ways were created
+    // Localization passing ways were created
     opt.RequestCultureProviders = new List<IRequestCultureProvider>
     {
         new QueryStringRequestCultureProvider(),

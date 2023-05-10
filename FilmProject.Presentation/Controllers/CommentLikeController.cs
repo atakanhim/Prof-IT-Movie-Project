@@ -6,6 +6,7 @@ using FilmProject.Presentation.Models;
 using FilmProject.Application.Contracts.Movie;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Localization;
 
 namespace FilmProject.Presentation.Controllers
 {
@@ -14,13 +15,15 @@ namespace FilmProject.Presentation.Controllers
     {
         private readonly ICommentLikeService _commentLikeService;
         private readonly ILogger<HomeController> _logger;
+        private readonly IStringLocalizer<SharedResource> _localizer;
         private IMapper _mapper;
 
-        public CommentLikeController(ICommentLikeService commentLikeService, ILogger<HomeController> logger, IMapper mapper)
+        public CommentLikeController(ICommentLikeService commentLikeService, ILogger<HomeController> logger, IMapper mapper, IStringLocalizer<SharedResource> localizer)
         {
             _commentLikeService = commentLikeService;
             _logger = logger;
             _mapper = mapper;
+            _localizer = localizer;
         }
 
         [HttpGet]
@@ -72,7 +75,7 @@ namespace FilmProject.Presentation.Controllers
                 
                 if (userId == null)
                 {
-                    return BadRequest("Yorum Beğenmek İçin Önce Giriş Yapmalısınız");
+                    return BadRequest(_localizer["like_comment_required_signin"].Value);
                 }
 
                 newCommentLike.userId = userId;

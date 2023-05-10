@@ -4,6 +4,7 @@ using FilmProject.Application.Interfaces;
 using FilmProject.Application.Services;
 using FilmProject.Presentation.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using System.Security.Claims;
 
 namespace FilmProject.Presentation.Controllers
@@ -14,12 +15,17 @@ namespace FilmProject.Presentation.Controllers
    
         private readonly IMovieLikeService _movieLikeService;
         private IMapper _mapper;
+        private readonly ILogger _logger;
+        private IStringLocalizer<SharedResource> _localizer;
 
-        public MovieLikeController(IMapper mapper, IMovieLikeService movieLikeService)
+        public MovieLikeController(IMapper mapper, IMovieLikeService movieLikeService, ILogger<MovieLikeController> logger,IStringLocalizer<SharedResource> localizer)
         {
             _mapper = mapper;
             _movieLikeService = movieLikeService;
-       
+            _localizer = localizer;
+            _logger = logger;
+
+
         }
         [HttpPost]
         [Route("GivePoint")]
@@ -27,7 +33,9 @@ namespace FilmProject.Presentation.Controllers
         {
             var currentUser = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (currentUser == null)
-                return BadRequest("Lütfen oy kullanmak için giriş yapınız");
+               
+                return BadRequest(_localizer["give_score_required_signin"].Value);
+                
 
             MovieLikeDto oldMovie = await _movieLikeService.GetAsync(x => x.userId == currentUser && x.MovieId == viewmodel.MovieId);
             if (oldMovie == null)
@@ -36,13 +44,13 @@ namespace FilmProject.Presentation.Controllers
                 viewmodel.userId = currentUser;
                 MovieLikeDto newMovie = _mapper.Map<MovieLikeViewModel, MovieLikeDto>(viewmodel);
                 _movieLikeService.Add(newMovie);
-                return Ok("Film Puanladığınız için teşekürler");
+                return Ok(_localizer["thanks_message_scoring"].Value);
             }
             else
             {
                 oldMovie.Point = viewmodel.Point;
                 _movieLikeService.Update(oldMovie);
-                return Ok("Puanınız guncellendi");
+                return Ok(_localizer["score_updated_message"].Value);
             }
 
 
