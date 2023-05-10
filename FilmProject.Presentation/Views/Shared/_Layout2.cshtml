@@ -35,47 +35,80 @@
 </head>
 <body>
 
-   <nav class="navbar navbar-dark  fixed-top justify-content-between" style="bSackground-color:#111111">
-      <a href="/" class="navbar-brand"> L O G O </a>
-      <div class="btn-group">
-          <a href="#" class="btn my-2 my-sm-0" ><i class="fa fa-user"></i></a>
-          <ul class="dropdown-menu2">
+    <nav class="navbar navbar-dark  fixed-top justify-content-between" style="background-color:#111111">
+        <a href="/" class="navbar-brand"> L O G O </a>
+        <div>
+            <div class="btn-group">
+                <button type="button" class="btn bg-transparent btn-outline-secondary dropdown-toggle text-grey" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Language
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item dropdownMenuItem" href="#" value="en-US">English</a>
+                    <a class="dropdown-item dropdownMenuItem" href="#" value="tr-TR">Türkçe</a>
+                </div>
+            </div>
+            <div class="btn-group">
+                <a href="#" class="btn my-2 my-sm-0"><i class="fa fa-user"></i></a>
+                <ul class="dropdown-menu2">
 
                     @if (SignInManager.IsSignedIn(User))
-                        {
-                           <li><a class="dropdownMenuItem" href="#">Profilim</a></li>
-                           <li> <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    {
+                        <li><a class="dropdownMenuItem" href="#">Profilim</a></li>
+                        <li>
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                 <button class="btnDefault dropdownMenuItem" type="submit">@localizer["log_out"]  <i class="fa fa-sign-out ml-4" aria-hidden="true"></i></button>
-                            </form></li>
+                            </form>
+                        </li>
 
-                        }
-                        else
-                        {
-                           <li> <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="dropdownMenuItem">
-                           @localizer["log_in"] <i class="fa fa-sign-in ml-4" aria-hidden="true"></i>
-                                </a></li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="dropdownMenuItem">
+                                @localizer["log_in"] <i class="fa fa-sign-in ml-4" aria-hidden="true"></i>
+                            </a>
+                        </li>
 
-                        }
+                    }
 
-         
-          </ul>
+
+                </ul>
+            </div>
         </div>
     </nav>
 
     <div class="container" style="margin-top:50px">
 
-       
+
         <!-- Header Bitiş -->
         <!-- Main -->
 
-            <main role="main">
-                @RenderBody()
-            </main>
+        <main role="main">
+            @RenderBody()
+        </main>
         <!-- Main Bitiş -->
 
 
     </div>
 
+
+    <script>
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const languageCode = item.getAttribute('value');
+
+                $.ajax({
+                    url: '/Home/SetLanguage',
+                    type: 'POST',
+                    data: { culture: languageCode },
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

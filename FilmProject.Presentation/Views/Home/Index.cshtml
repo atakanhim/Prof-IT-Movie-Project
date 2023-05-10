@@ -104,4 +104,24 @@
 
     <script src="~/js/anasayfa.js"></script>
     <script src="~/js/CustomJavaScript.js"></script>
+    <script>
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const languageCode = item.getAttribute('value');
+                // Do something with the selected language code
+            
+                $.ajax({
+                    url: '/Home/SetLanguage',
+                    type: 'POST',
+                    data: { culture: languageCode },
+                    success: function () {
+                        // reload the page to apply the new language preference
+                        location.reload();
+                    }
+                });
+            });
+        });
+
+    </script>
 }

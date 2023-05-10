@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Microsoft.Extensions.Localization;
 
 namespace FilmProject.Presentation.Controllers
 {
@@ -17,11 +18,13 @@ namespace FilmProject.Presentation.Controllers
     {
         private readonly ICommentService _commentService;
         private IMapper _mapper;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
-        public CommentController(ICommentService commentService, IMapper mapper)
+        public CommentController(ICommentService commentService, IMapper mapper, IStringLocalizer<SharedResource> localizer)
         {
             _mapper = mapper;
             _commentService = commentService;
+            _localizer = localizer;
         }
         public IActionResult Index()
         {
@@ -39,7 +42,6 @@ namespace FilmProject.Presentation.Controllers
                 IEnumerable<AdminCommentViewModel> commentViewModels = _mapper.Map<IEnumerable<AdminCommentDto>, IEnumerable<AdminCommentViewModel>>(comments);
 
                 return Json(new { data = commentViewModels });
-                //return PartialView(@"~/Views/Home/_RenderAdminComments.cshtml", commentViewModels);
             }
             catch
             {
@@ -108,7 +110,7 @@ namespace FilmProject.Presentation.Controllers
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors);
                 Exception ex = new Exception(
-                        message: "Lutfen Yorum Giriniz"
+                        message: _localizer["comment_empty_error"]
                         );
                 return BadRequest(ex.Message);
 
