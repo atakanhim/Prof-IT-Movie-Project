@@ -1,0 +1,28 @@
+﻿body {
+}
+.custom-card {
+    height: 550px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+    .custom-card > div {
+        display:flex;
+        align-items:center;
+        justify-content:center;  
+        padding:10px;
+    
+    }
+    .custom-card > div >img {
+        width:300px;
+        background-repeat:no-repeat;
+        background-size:cover;
+        border-radius:30px;
+  
+    }
+    .custom-card h1 {
+        color: #2F4050;
+        font: 200;
+    }

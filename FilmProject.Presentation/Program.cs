@@ -135,6 +135,7 @@ builder.Services.AddTransient<IValidator<CategoryViewModel>,CategoryValidator>()
 builder.Services.AddTransient<IValidator<CommentCreateViewModel>,CommentViewModelValidator>();
 builder.Services.AddTransient<IValidator<RegisterByAdminViewModel>,RegisterViewModelValidator>();
 builder.Services.AddTransient<IValidator<PostMovieViewModel>,PostMovieViewModelValidator>();
+builder.Services.AddTransient<IValidator<UpdateMovieViewModel>,UpdateViewModelValidator>();
 builder.Services.AddSignalR();
 
 var app = builder.Build();
@@ -164,16 +165,14 @@ app.UseRequestLocalization(options.Value);
 
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapAreaControllerRoute(
+     name: "Inspinia_default",
+     areaName: "Inspinia",
+     pattern: "Inspinia/{controller=AdminMetrics}/{action=Metrics}/{id?}").RequireAuthorization("InspiniaPolicy");
 
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
-
-    endpoints.MapAreaControllerRoute(
-     name: "Inspinia",
-     areaName: "Inspinia",
-     pattern: "Inspinia/{controller=AdminMetrics}/{action=Metrics}/{id?}"
- ).RequireAuthorization("InspiniaPolicy"); ;
 });
 app.UseEndpoints(endpoints => { endpoints.MapHub<CommentHub>("/commentHub"); });
 

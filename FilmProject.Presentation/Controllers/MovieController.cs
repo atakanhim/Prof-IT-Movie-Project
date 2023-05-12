@@ -334,34 +334,8 @@ namespace FilmProject.Presentation.Controllers
             
         }
 
-        [HttpPut]
-        [Route("Update")]
-        public async Task<IActionResult> UpdateMovie([FromBody] MovieViewModel MovieViewModel) // Film Ekleme fonksiyonu 
-        {
-            MovieDto newmovie = _mapper.Map<MovieViewModel, MovieDto>(MovieViewModel);
+   
 
-
-            MovieDto? oldmovie = await _movieService.GetAsync(x => x.Id == newmovie.Id);
-            if (oldmovie != null)
-            {
-                try
-                {
-                    oldmovie.MovieSummary = newmovie.MovieSummary;
-                    _movieService.Update(oldmovie);
-                }
-                catch (Exception ex)
-                {
-                    //Loglama yapılabilir.hee
-                    return BadRequest(ex.Message);
-                }
-            }
-            else
-            {
-                return BadRequest("Film Bulunamadı.");
-
-            }
-            return Ok(oldmovie);
-        }
         [HttpPost]
         [Route("AddToArchive")]
         public async Task<IActionResult> AddToArchiveAsync([FromBody] MovieViewModel movieViewModel) // Film arşive ekleme fonksiyonu

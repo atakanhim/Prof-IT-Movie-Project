@@ -1,0 +1,122 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using FilmProject.Presentation.Models
+@model UpdateMovieViewModel
+<div class="row justify-content-center">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="col-md-8 mb-5">
+        <form  id="movieForm2" asp-area="Inspinia" asp-controller="Movie" asp-action="UpdateMoviePage" method="post" enctype="multipart/form-data">
+            <div class="form-group d-none">
+                <label asp-for="Id">Film İsmi</label>
+                <input asp-for="Id" name="Id" type="text" class="form-control" id="id">
+            </div>
+            <div class="form-group d-none">
+                <label asp-for="Created">Film İsmi</label>
+                <input asp-for="Created" name="Created" type="text" class="form-control" id="created">
+            </div>
+            <div class="form-group d-none">
+                <label asp-for="PhotoPath">Film İsmi</label>
+                <input asp-for="PhotoPath" name="PhotoPath" type="text" class="form-control" id="photoPath">
+            </div> 
+            <div class="form-group d-none">
+                <label asp-for="isDeleted">Film İsmi</label>
+                <input asp-for="isDeleted" name="isDeleted" type="text" class="form-control" >
+            </div>
+            <div class="form-group d-none">
+                <label asp-for="IsHighLighted">Film İsmi</label>
+                <input asp-for="IsHighLighted" name="IsHighLighted" type="text" class="form-control" id="isHighLighted">
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieName">Film İsmi</label>
+                <input asp-for="MovieName" name="MovieName" type="text" class="form-control" id="movieName" placeholder="Filmin ismini giriniz.">
+                <span asp-validation-for="MovieName" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieSummary">Film Özeti</label>
+                <textarea asp-for="MovieSummary" name="MovieSummary" class="form-control" id="movieSummary" rows="3" placeholder="Filmin özetini giriniz."></textarea>
+                <span asp-validation-for="MovieSummary" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="DirectorName">Yönetmen Adı</label>
+                <input asp-for="DirectorName" name="DirectorName" type="text" class="form-control" id="directorName" placeholder="Yönetmenin ismini giriniz.">
+                <span asp-validation-for="DirectorName" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="RatingAge">İzleyici Kitlesi</label>
+                <select asp-for="RatingAge" name="RatingAge" class="form-control" id="ratingAge">
+                    <option value="">Kitle seçin</option>
+                    <option value="0">Genel İzleyici</option>
+                    <option value="1">Yetişkin İzleyici</option>
+                </select>
+
+                <span asp-validation-for="RatingAge" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="PublishYear">Çıkış Tarihi</label>
+                <input asp-for="PublishYear" name="PublishYear" type="date" class="form-control" id="publishYear">
+                <span asp-validation-for="PublishYear" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo">Film Afişi</label>
+                <input asp-for="Photo" name="Photo" type="file" class="form-control-file " >
+                <span asp-validation-for="Photo" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="ImdbUrl">IMDB Adresi</label>
+                <input asp-for="ImdbUrl" name="ImdbUrl" type="url" class="form-control" id="imdbUrl" placeholder="Filmin IMDB adresini giriniz.">
+                <span asp-validation-for="ImdbUrl" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieLanguage">Filmin Dili</label>
+                <select asp-for="MovieLanguage" name="MovieLanguage" class="form-control" id="movieLanguage">
+                    <option value="">Dil seçin</option>
+                    <option value="tr-TR">Türkçe</option>
+                    <option value="en-US">İngilizce</option>
+                </select>
+                <span asp-validation-for="MovieLanguage" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+
+
+                <label class="font-normal">Kategori Seçimi</label>
+                <div>
+                    <select asp-for="CategoriesId" name="CategoriesId" id="categoriesId" data-placeholder="Kategori seçin" class="chosen-select" multiple tabindex="4">
+                    </select>
+                </div>
+                <div class="text-danger">
+                    <small id="errorSelect"></small>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Ekle</button>
+                <br />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+                <div class="custom-card">
+                              
+                                      <div>
+                                            <img src='/Uploads/@Model.PhotoPath' />
+                                       </div>
+                                                     
+                                      <h1>Film Afişi</h1>                      
+                </div>
+         
+    </div>
+</div>
