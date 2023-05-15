@@ -9,5 +9,8 @@ namespace FilmProject.Infrastructure.Repository.Abstract
 {
     public interface IMovieCategoryMapRepository : IEntityRepository<MovieCategoryMap>
     {
+        Task<int[]> GetCategoriesWithMovieIdAsync(int id);
+        Task DeleteArray(int movieId, int[] categories);
+        Task<bool> isExistCategoryMap(int movieId, int categoryId);
     }
 }

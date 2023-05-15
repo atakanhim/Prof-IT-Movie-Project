@@ -3,15 +3,36 @@
 $(document).ready(function () {
 
     $("#loadingMovieUpdateRender").hide();
+    var id = $('#id').val();
+    console.log(id);
+    $.ajax({
+        url: '/MovieCategoryMap/GetCategoriesWithId/' + id,
+        type: 'GET',
+        success: function (data2) {     
 
-    $.get("https://localhost:7269/Category/AllCategories", function (data) {
-        var select = $(".chosen-select");
-        $.each(data, function (index, category) {
-            select.append('<option value="' + category.id + '">' + category.categoryName + '</option>');
-        });
-        select.trigger("chosen:updated");
+            $.get("/Category/AllCategories", function (data) {
+                var select = $(".chosen-select");
+                var existingCategoryIdArray = [1, 2, 3];
+
+                $.each(data, function (index, category) {
+                    select.append('<option value="' + category.id + '">' + category.categoryName + '</option>');
+                });
+                select.val(data2).trigger('chosen:updated');
+
+                select.trigger("chosen:updated");
+            });
+            $('.chosen-select').chosen();
+            
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+        }
     });
-    $('.chosen-select').chosen();
+
+
+
+
+
     $("#movieForm2").validate({
         errorClass: "text-danger",
         errorElement: "small",

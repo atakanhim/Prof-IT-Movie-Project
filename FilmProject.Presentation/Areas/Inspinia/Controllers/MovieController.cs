@@ -2,6 +2,7 @@
 using FilmProject.Application.Contracts.Movie;
 using FilmProject.Application.Interfaces;
 using FilmProject.Application.Services;
+using FilmProject.Domain.Entities;
 using FilmProject.Presentation.Models;
 using FluentValidation;
 using FluentValidation.Results;
@@ -15,11 +16,13 @@ namespace ASPNET_Core_2_1.Controllers
         private readonly IMovieService _movieService;
         private IMapper _mapper;
         private readonly IFileService _fileService;
+        private readonly IMovieCategoryMapService _movieCategoryMapService;
 
 
-        public MovieController(IMapper mapper,IMovieService movieService, IFileService fileService)
+        public MovieController(IMovieCategoryMapService movieCategoryMapService, IMapper mapper,IMovieService movieService, IFileService fileService)
         {
             _fileService = fileService;
+            _movieCategoryMapService = movieCategoryMapService;
 
             _movieService = movieService;
             _mapper = mapper;
@@ -42,6 +45,7 @@ namespace ASPNET_Core_2_1.Controllers
         {
             MovieDto movieDto = await _movieService.GetWithCategoryAsync(m => m.Id == id);
             UpdateMovieViewModel movie = _mapper.Map<MovieDto, UpdateMovieViewModel>(movieDto);
+            
             return View(movie);
 
         }
@@ -63,10 +67,9 @@ namespace ASPNET_Core_2_1.Controllers
                     }
                     // categoriler dışında update başarılı
                     MovieDto movie = _mapper.Map<UpdateMovieViewModel, MovieDto>(movieViewModel);
-
                     _movieService.Update(movie);
 
-
+                    await _movieCategoryMapService.UpdateMovieToCategoryAsync(movieViewModel.Id, movieViewModel.CategoriesId);
 
                 }
                 catch (Exception ex)
