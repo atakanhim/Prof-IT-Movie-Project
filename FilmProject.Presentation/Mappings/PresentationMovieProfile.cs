@@ -27,6 +27,7 @@ namespace FilmProject.Presentation.Mappings
             CreateMap<PostMovieViewModel, MovieDto>().ReverseMap();
             CreateMap<RoleViewModel, RoleDto>().ReverseMap();
             CreateMap<RegisterByAdminViewModel, RegisterModelDto>().ReverseMap();
+            CreateMap<UpdateUserRolesDto, UpdateUserRolesViewModel>().ReverseMap();
 
             CreateMap<MovieLikeDto, MovieLikeViewModel>().ReverseMap();
             CreateMap<CommentLikeDto, CommentLikeViewModel>().ReverseMap();

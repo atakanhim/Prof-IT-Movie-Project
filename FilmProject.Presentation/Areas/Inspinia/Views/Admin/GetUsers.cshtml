@@ -77,6 +77,51 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <div id="spinner" class="spinner">
+                    </div>  
+                    <!-- Modal -->
+                    <div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="roleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="roleModalLabel">Yetkilerini Seçiniz</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row">
+                                <h5><span id="updateRoleUsername"></span> kullanıcısı için rol seçin.</h5>
+                            </div>
+                            <br /><br />
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <label class="radio-inline">
+                                    <input type="radio" name="role" value="Admin"> Admin
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <label class="radio-inline">
+                                    <input type="radio" name="role" value="User"> User
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <input type="hidden" id="userId" value="">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                            <button type="button" class="btn btn-primary" id="saveRoleBtn" disabled>Kaydet</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal -->
+
+
 
                 </div>
             </div>
@@ -86,9 +131,12 @@
 @section Styles {
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/footable/css/footable.core.css" />
+        <link rel="stylesheet" href="~/css/CustomSpinner2.css" />
+        
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="~/lib/footable/css/footable.core.min.css" />
+        <link rel="stylesheet" href="~/css/CustomSpinner2.css" />
     </environment>
 }
 
@@ -97,48 +145,5 @@
         <script src="~/lib/footable/dist/footable.all.min.js"></script>
     </environment>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var usersTable = $('.footable').footable();
-
-            $.get("https://localhost:7269/Inspinia/Admin/GetUsersList", function(data) {
-                $.each(data, function(index, value) {
-                    var tr = $("<tr>");
-                    tr.append($("<td>").text(value.userName));
-                    tr.append($("<td>").text("Aktif"));
-                    tr.append($("<td>").text(value.email));
-                    tr.append($("<td>").text(value.roles));
-                    tr.append($("<td>").text(value.birthDate));
-                    tr.append($("<td>").text(value.phoneNumber));
-                    tr.append($("<td>").text(value.isTwoFactorEnabled ? "Açık" : "Kapalı"));
-                    tr.append($("<td>").html('<a href="#"><i class="fa fa-check text-navy"></i></a>'));
-                    $("#users").append(tr);
-                });
-                usersTable.trigger('footable_redraw');
-            });
-
-            $('#search-bar').on('input', function(e) {
-                e.preventDefault();
-                var filter = $(this).val();
-                usersTable.trigger('footable_filter', {filter: filter, column: 0});
-            });
-
-            $('.dropdown-menu a').click(function(e) {
-    e.preventDefault();
-    var role = $(this).data('role');
-    if (!role) {
-        $('#users tr').show();
-    } else {
-        $('#users tr').each(function() {
-            var roles = $(this).find('td:nth-child(4)').text();
-            if (roles.indexOf(role) > -1) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-    }
-});
-        });
-    </script>
+    <script type="text/javascript" src="~/js/GetUsersListForAdminJs.js" asp-append-version="true"></script>
 }

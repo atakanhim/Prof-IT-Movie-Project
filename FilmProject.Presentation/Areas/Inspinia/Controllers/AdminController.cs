@@ -85,9 +85,9 @@ namespace FilmProject.Presentation.Areas.Inspinia.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> GetUsersList() 
+        public async Task<IActionResult> GetUsersList()
         {
-            try 
+            try
             {
                 var userListDto = await _userService.GetAllUsers();
                 List<ApplicationUserViewModel> userViewModelList = _mapper.Map<List<ApplicationUserDto>, List<ApplicationUserViewModel>>(userListDto);
@@ -97,20 +97,36 @@ namespace FilmProject.Presentation.Areas.Inspinia.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            
+
 
         }
 
         [HttpGet]
         public async Task<IActionResult> GetUserCountInAdminRole()
         {
-            try 
+            try
             {
                 int count = await _userService.GetUserCountInRole("Admin");
                 return Json(new { adminCount = count });
-            }catch(Exception ex) 
+            } catch (Exception ex)
             {
-                return BadRequest(ex.Message);    
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUserRoles([FromBody] UpdateUserRolesViewModel UpdateRoleInfo)
+        {
+            try
+            {
+                var updateRoles = _mapper.Map<UpdateUserRolesViewModel, UpdateUserRolesDto>(UpdateRoleInfo);
+                await _userService.UpdateUserRolesAsync(updateRoles);
+                return Ok();
+            }
+            catch (Exception ex) 
+            {
+                return BadRequest(ex.Message);
             }
             
         }

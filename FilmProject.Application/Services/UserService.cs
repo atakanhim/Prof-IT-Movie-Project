@@ -86,5 +86,28 @@ namespace FilmProject.Application.Services
             return userCount;
         }
 
+        public async Task UpdateUserRolesAsync(UpdateUserRolesDto userRoles)
+        {
+            try 
+            {
+                var user = await _userManager.FindByIdAsync(userRoles.userId);
+                var currentRoles = await _userManager.GetRolesAsync(user);
+                var result = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                if (result.Succeeded) 
+                {
+                    foreach (var role in userRoles.roles)
+                    {
+                        await _userManager.AddToRoleAsync(user, role);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("İşlem sırasında bir hata meydana geldi");
+            }
+            
+        }
+
     }
 }
