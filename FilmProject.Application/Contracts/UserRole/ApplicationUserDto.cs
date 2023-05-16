@@ -8,6 +8,7 @@ namespace FilmProject.Application.Contracts.UserRole
 {
     public class ApplicationUserDto
     {
+        public string Id { get; set; }
         public DateTime BirthDate { get; set; }
         public string Roles { get; set; }
         public string Email { get; set; }
