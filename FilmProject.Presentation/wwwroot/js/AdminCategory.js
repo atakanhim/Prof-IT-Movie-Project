@@ -67,7 +67,7 @@ $(document).ready(function () {
         $.ajax({
             url: '/MovieCategoryMap/AnyMoviesInThis/' + id,
             type: 'GET',
-            dataType: 'json',
+            dataType: 'array',
             success: function (data2) {
                 console.log(data2);
 

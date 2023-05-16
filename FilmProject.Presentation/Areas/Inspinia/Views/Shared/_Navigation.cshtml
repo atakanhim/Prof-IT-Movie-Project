@@ -27,28 +27,28 @@
                 </div>
             </li>
             <li class="@Html.IsSelected(controller: "AdminMetrics")">
-                <a href="@Url.ActionWithArea("Metrics", "AdminMetrics")"><i class="fa fa-pie-chart"></i> <span class="nav-label" data-i18n="nav.layouts">İstatistikler</span></a>
+                <a href="@Url.Action("Metrics", "AdminMetrics")"><i class="fa fa-pie-chart"></i> <span class="nav-label" data-i18n="nav.layouts">İstatistikler</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "Movie",action:"GetAddMovieForm")">
-                <a href="@Url.ActionWithArea("GetAddMovieForm", "Movie")"><i class="fa fa-film"></i> <span class="nav-label" data-i18n="nav.layouts">Film Ekle</span></a>
+                <a href="@Url.Action("GetAddMovieForm", "Movie")"><i class="fa fa-film"></i> <span class="nav-label" data-i18n="nav.layouts">Film Ekle</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "Movie",action:"GetMovieList")">
-                <a href="@Url.ActionWithArea("GetMovieList", "Movie")"><i class="fa fa-film"></i> <span class="nav-label" data-i18n="nav.layouts">Film Listele</span></a>
+                <a href="@Url.Action("GetMovieList", "Movie")"><i class="fa fa-film"></i> <span class="nav-label" data-i18n="nav.layouts">Film Listele</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "AdminCategory")">
-                <a href="@Url.ActionWithArea("CategoryAdd", "AdminCategory")"><i class="fa fa-list-alt"></i> <span class="nav-label" data-i18n="nav.layouts">Kategori Ekle</span></a>
+                <a href="@Url.Action("CategoryAdd", "AdminCategory")"><i class="fa fa-list-alt"></i> <span class="nav-label" data-i18n="nav.layouts">Kategori Ekle</span></a>
             </li>
         
             
             <li class="@Html.IsSelected(controller: "Admin", action:"AddUserForm")">
-                <a href="@Url.ActionWithArea("AddUserForm", "Admin")"><i class="fa fa-user-plus"></i> <span class="nav-label" data-i18n="nav.layouts">Kullanıcı Ekle</span></a>
+                <a href="@Url.Action("AddUserForm", "Admin")"><i class="fa fa-user-plus"></i> <span class="nav-label" data-i18n="nav.layouts">Kullanıcı Ekle</span></a>
             </li>
 
             <li class="@Html.IsSelected(controller: "AdminVerifyComment")">
-                <a href="@Url.ActionWithArea("ListComments", "AdminVerifyComment")"><i class="fa fa-user-plus"></i> <span class="nav-label" data-i18n="nav.layouts">Yorum Onayla</span></a>
+                <a href="@Url.Action("ListComments", "AdminVerifyComment")"><i class="fa fa-user-plus"></i> <span class="nav-label" data-i18n="nav.layouts">Yorum Onayla</span></a>
             </li>
             <li class="@Html.IsSelected(controller: "Admin", action: "GetUsers")">
-                <a href="@Url.ActionWithArea("GetUsers", "Admin")"><i class="fa fa-users"></i> <span class="nav-label" data-i18n="nav.layouts">Kullanıcı Bilgileri</span></a>
+                <a href="@Url.Action("GetUsers", "Admin")"><i class="fa fa-users"></i> <span class="nav-label" data-i18n="nav.layouts">Kullanıcı Bilgileri</span></a>
             </li>
             
             

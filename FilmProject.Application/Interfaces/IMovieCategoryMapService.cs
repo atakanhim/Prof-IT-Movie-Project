@@ -11,6 +11,8 @@ namespace FilmProject.Application.Interfaces
 {
     public interface IMovieCategoryMapService
     {
+        Task<int[]> GetCategoriesWithMovieIdAsync(int id);
+        Task UpdateMovieToCategoryAsync(int MovieId, ICollection<int> IdOfCategories);
         Task<bool?> AnyMoviesInThisCategory(Expression<Func<MovieCategoryMap, bool>> filter);
 
         public Task AddMovieToCategory(int MovieId, ICollection<int> IdOfCategories);

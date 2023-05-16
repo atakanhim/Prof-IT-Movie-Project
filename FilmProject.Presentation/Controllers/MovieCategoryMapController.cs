@@ -28,5 +28,17 @@ namespace FilmProject.Presentation.Controllers
 
             return Json(result);
         }
+
+        [HttpGet]
+        [Route("GetCategoriesWithId/{id}")]
+        //[Authorize(Roles ="Admin")]
+        public async Task<IActionResult> GetCategoriesWithIdAsync(int id) // kategoriler listeleniyor sayısı
+        {
+
+            var result = await _movieCategoryMapService.GetCategoriesWithMovieIdAsync(id);
+
+
+            return Json(result);
+        }
     }
 }
