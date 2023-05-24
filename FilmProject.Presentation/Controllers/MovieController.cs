@@ -350,11 +350,11 @@ namespace FilmProject.Presentation.Controllers
 
                     return Ok(model.isDeleted);
                 }
-                return BadRequest("Arşive ekleme/cikarma işlemi başarısız.");
+                return BadRequest("Arşive ekleme/cikarma işlemi başarısız .");
             }
             catch (Exception ex)
             {
-                return BadRequest("Arşive ekleme/cikarma işlemi başarısız.");
+                return BadRequest("Arşive ekleme/cikarma işlemi başarısız .");
             }
         }
         [HttpPost]
