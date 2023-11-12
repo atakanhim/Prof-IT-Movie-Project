@@ -107,10 +107,6 @@ CommentLikeService.cs dosyası, yorumları beğenme işlemlerini yönetmek için
 - Admin sistemdeki filmleri listeyebilir ve bu filmler üzerinde değişiklik yapabilir
 
 
-## Katkıda Bulunma
-
-Her türlü katkıya açığız! Projenin Github sayfasında yer alan "Issues" kısmına gidebilir ve açık problemleri inceleyebilirsiniz. Ayrıca yeni özellikler ekleyebilir veya hataları düzeltebilirsiniz. Pull request yaparak katkıda bulunabilirsiniz.
-
 
 
 ## Lisans
